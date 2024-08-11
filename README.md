@@ -33,6 +33,11 @@
       </a>
     </td>
     <td align="center" style="border: none; padding: 10px;">
+      <a href="#-frequently-asked-questions" style="text-decoration: none; color: #FF0000; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+         ❓ FAQ
+      </a>
+    </td>
+    <td align="center" style="border: none; padding: 10px;">
       <a href="#-license" style="text-decoration: none; color: #00CC44; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
         📜 License
       </a>
@@ -61,8 +66,16 @@ The mod also adds two new types of weapons, Glaives and Scythes.
       <td style="padding: 10px; text-align: left; border: none;"><strong>Livingmetal</strong> and <strong>Biomass</strong> are two new materials.</td>
     </tr>
     <tr>
-      <td style="padding: 10px; text-align: left; border: none;"><strong>🏛️ Big Swords</strong></td>
-      <td style="padding: 10px; text-align: left; border: none;">Two <strong>Fallen Meteor Sites</strong> where you can find the new meteors and <em>lore</em>.</td>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>⚔️️ Big Swords</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;">Similar to swords. But <strong>BIGGER</strong>, they deal more damage but have lower attack speed.</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>⚔️️ Glaives</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;">New weapons that deal small damage, but are fast and have more range.</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>⚔️️ Scythes</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;">New weapons that are similar to hoes but <strong>BETTER</strong>, they hit mobs in a short area.</td>
     </tr>
   </tbody>
 </table>
@@ -74,6 +87,17 @@ In the upcoming updates I plan to add:
 
 - Better functionality and shields
 
+
+## ❓ Frequently Asked Questions
+
+**Q:** Will you port the mod to Fabric? \
+**A:** No.
+
+**Q:** Why? \
+**A:** Because I want to bring the good old mods back.
+
+**Q:** Why the new sword textures? \
+**A:** Because I find them way cooler than the old textures tbf and better look, but if you want an older look of the swords I made a 16x resourcepack (link in the beginning).
 
 ## 📜 License
 
