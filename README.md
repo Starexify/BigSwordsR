@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://github.com/Starexify/BigSwordsR/issues"><img alt="GitHub Issues" src="https://img.shields.io/github/issues/Starexify/BigSwordsR?style=for-the-badge&color=1B3193"></a>
-  <a href="https://github.com/Starexify/Cosmicore/blob/1.21/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/Starexify/Cosmicore?style=for-the-badge&color=1B3193"></a>
+  <a href="https://github.com/Starexify/BigSwordsR/blob/main/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/Starexify/BigSwordsR?style=for-the-badge&color=1B3193"></a>
 </p>
 
 
@@ -28,8 +28,8 @@
       </a>
     </td>
     <td align="center" style="border: none; padding: 10px;">
-      <a href="#-planned-updates" style="text-decoration: none; color: #FF9900; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        🚀 Planned Updates
+      <a href="#%EF%B8%8F-planned-updates" style="text-decoration: none; color: #FF9900; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
+         🗓️ Planned Updates
       </a>
     </td>
     <td align="center" style="border: none; padding: 10px;">
@@ -41,16 +41,15 @@
 </table>
 
 
-# Cosmicore
+# Big Swords R
 
-⚠️**Please note that this is just an alpha version, so expect that features may be buggy or not fully implemented yet.
-We would appreciate your feedback and ideas as we work on this project!**
+⚠️**Please note that the mod is based on the series of mods, Asgard Shields, and this is just a hobby project and I do not plan to monetize it, therefore content may be different from originals.**
 
 
 ## ℹ️ About
 
-Cosmicore is a brand-new meteors mod for minecraft, inspired by the nostalgia of the old Falling Meteors mod, but with a
-whole lot more content.
+Big Swords R (Remembered or Reboot or Remake, etc.) adds Big Swords in the game, they deal more damage than regular swords but the attack speed is lowered.
+The mod also adds two new types of weapons, Glaives and Scythes.
 
 
 ## ✨ Features
@@ -58,33 +57,22 @@ whole lot more content.
 <table align="center" style="border-collapse: collapse;">
   <tbody>
     <tr>
-      <td style="padding: 10px; text-align: left; border: none;"><strong>🏛️ Structures</strong></td>
-      <td style="padding: 10px; text-align: left; border: none;">Two <strong>Fallen Meteor Sites</strong> where you can find the new meteors and <em>lore</em>.</td>
-    </tr>
-    <tr>
       <td style="padding: 10px; text-align: left; border: none;"><strong>🪨 New Materials</strong></td>
-      <td style="padding: 10px; text-align: left; border: none;"><strong>Titanium</strong> and <strong>Infernium</strong> are two new materials.</td>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>Livingmetal</strong> and <strong>Biomass</strong> are two new materials.</td>
     </tr>
     <tr>
-      <td style="padding: 10px; text-align: left; border: none;"><strong>⚙️ Machines</strong></td>
-      <td style="padding: 10px; text-align: left; border: none;"><strong>Two New Crushing Machines</strong> are added to crush the meteors to a crust.</td>
-    </tr>
-    <tr>
-      <td style="padding: 10px; text-align: left; border: none;"><strong>☄️ METEORS!!</strong></td>
-      <td style="padding: 10px; text-align: left; border: none;">Three new types of meteors: <strong>Achnorite</strong>, <strong>Meteorite</strong>, and <strong>Pallasite</strong>.</td>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>🏛️ Big Swords</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;">Two <strong>Fallen Meteor Sites</strong> where you can find the new meteors and <em>lore</em>.</td>
     </tr>
   </tbody>
 </table>
 
 
-## 🚀 Planned Updates
+## 🗓️ Planned Updates
 
 In the upcoming updates I plan to add:
 
-- ☄️ **MORE METEORS!!** and **FALLING METEORS** _(not the mod)_
-- Even more structures
-- Even more materials
-- More new machines
+- Better functionality and shields
 
 
 ## 📜 License
