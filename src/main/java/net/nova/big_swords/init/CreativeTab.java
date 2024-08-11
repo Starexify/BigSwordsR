@@ -24,6 +24,8 @@ public class CreativeTab {
             // Big Swords
             output.accept(BSItems.WOODEN_BIG_SWORD);
             output.accept(BSItems.STONE_BIG_SWORD);
+            output.accept(BSItems.IRON_BIG_SWORD);
+            output.accept(BSItems.GOLDEN_BIG_SWORD);
         });
 
         builder.icon(() -> new ItemStack(BSItems.WOODEN_BIG_SWORD.asItem()));

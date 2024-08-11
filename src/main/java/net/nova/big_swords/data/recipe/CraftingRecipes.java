@@ -24,5 +24,7 @@ public class CraftingRecipes extends BSRecipeProvider {
         // Big Swords
         basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), ItemTags.PLANKS, BSItems.WOODEN_BIG_SWORD);
         basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), ItemTags.STONE_TOOL_MATERIALS, BSItems.STONE_BIG_SWORD);
+        basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), Items.IRON_INGOT, BSItems.IRON_BIG_SWORD);
+        basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), Items.GOLD_INGOT, BSItems.GOLDEN_BIG_SWORD);
     }
 }

@@ -21,6 +21,9 @@ public class BSItemModelProvider extends ItemModelProvider {
 
         // Big Swords
         handheldItem(BSItems.WOODEN_BIG_SWORD.get());
+        handheldItem(BSItems.STONE_BIG_SWORD.get());
+        handheldItem(BSItems.IRON_BIG_SWORD.get());
+        handheldItem(BSItems.GOLDEN_BIG_SWORD.get());
     }
 
     private void handheldItem(Item item) {

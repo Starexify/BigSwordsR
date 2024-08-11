@@ -21,4 +21,10 @@ public class BSItems {
 
     public static DeferredItem<Item> STONE_BIG_SWORD = ITEMS.register("stone_big_sword",
             () -> new BigSwordItem(Tiers.STONE, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.STONE, 5, -3F))));
+
+    public static DeferredItem<Item> IRON_BIG_SWORD = ITEMS.register("iron_big_sword",
+            () -> new BigSwordItem(Tiers.IRON, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.IRON, 5, -3F))));
+
+    public static DeferredItem<Item> GOLDEN_BIG_SWORD = ITEMS.register("golden_big_sword",
+            () -> new BigSwordItem(Tiers.GOLD, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.GOLD, 5, -3F))));
 }

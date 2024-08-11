@@ -28,6 +28,7 @@ public class BSRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
         new CraftingRecipes(output, lookupProvider, recipeOutput).build();
+        new FurnaceRecipes(output, lookupProvider, recipeOutput).build();
     }
 
     // Recipes
@@ -38,6 +39,17 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("###")
                 .pattern("## ")
                 .unlockedBy("has_" + getItemName(stick), has(stick))
+                .save(recipeOutput);
+    }
+
+    protected static void basicBigSword(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', handle)
+                .define('X', material)
+                .pattern(" XX")
+                .pattern("XXX")
+                .pattern("#X ")
+                .unlockedBy("has_" + getItemName(handle), has(handle))
                 .save(recipeOutput);
     }
 
