@@ -20,13 +20,10 @@ public class CraftingRecipes extends BSRecipeProvider {
     }
 
     public void build() {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.WOODEN_BIG_SWORD)
-                .define('#', BSItems.GIANT_WOODEN_STICK)
-                .define('X', ItemTags.PLANKS)
-                .pattern(" XX")
-                .pattern("XXX")
-                .pattern("#X ")
-                .unlockedBy("has_giant_wooden_stick", has(BSItems.GIANT_WOODEN_STICK))
-                .save(recipeOutput);
+        // Sticks
+        basicGiantStick(recipeOutput, Items.STICK, BSItems.GIANT_WOODEN_STICK);
+
+        // Big Swords
+        basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), ItemTags.PLANKS, BSItems.WOODEN_BIG_SWORD);
     }
 }

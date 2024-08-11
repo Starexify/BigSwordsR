@@ -16,6 +16,10 @@ public class BSItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        // Sticks
+        basicItem(BSItems.GIANT_WOODEN_STICK.get());
+
+        // Big Swords
         handheldItem(BSItems.WOODEN_BIG_SWORD.get());
     }
 

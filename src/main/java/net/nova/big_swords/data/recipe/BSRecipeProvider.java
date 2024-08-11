@@ -2,8 +2,15 @@ package net.nova.big_swords.data.recipe;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.registries.DeferredItem;
+import net.nova.big_swords.init.BSItems;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -26,4 +33,24 @@ public class BSRecipeProvider extends RecipeProvider {
     }
 
     // Recipes
+    protected static void basicGiantStick(RecipeOutput recipeOutput, Item stick, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', stick)
+                .pattern(" ##")
+                .pattern("###")
+                .pattern("## ")
+                .unlockedBy("has_" + getItemName(stick), has(stick))
+                .save(recipeOutput);
+    }
+
+    protected static void basicBigSword(RecipeOutput recipeOutput, Item handle, TagKey<Item> material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', handle)
+                .define('X', material)
+                .pattern(" XX")
+                .pattern("XXX")
+                .pattern("#X ")
+                .unlockedBy("has_" + getItemName(handle), has(handle))
+                .save(recipeOutput);
+    }
 }
