@@ -1,17 +1,12 @@
 package net.nova.big_swords;
 
+import net.minecraft.resources.ResourceLocation;
+import net.nova.big_swords.data.DataGenerators;
+import net.nova.big_swords.init.BSItems;
 import org.slf4j.Logger;
 
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.LoggerFactory;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
@@ -22,26 +17,12 @@ public class BigSwordsR {
     public static final Logger logger = LoggerFactory.getLogger(BigSwordsR.class);
 
     public BigSwordsR(IEventBus bus) {
-        bus.addListener(this::commonSetup);
+        BSItems.ITEMS.register(bus);
 
-        NeoForge.EVENT_BUS.register(this);
-
-        bus.addListener(this::addCreative);
+        bus.addListener(DataGenerators::gatherData);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event) {
-
-    }
-
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-
-    }
-
-    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-
-        }
+    public static ResourceLocation rl(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }

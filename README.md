@@ -1,4 +1,4 @@
-![Cosmicore Logo](https://raw.githubusercontent.com/Starexify/Cosmicore/1.21/src/main/resources/cosmicore_logo.png?token=GHSAT0AAAAAACTBPAKN3YXSWJCRIDHMQOYSZVHL2QA)
+![Big Swords R Logo](https://github.com/Starexify/BigSwordsR/blob/main/src/main/resources/big_swords_r_logo.png?raw=true)
 
 <p align="center">
   <a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="curseforge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg"></a>
