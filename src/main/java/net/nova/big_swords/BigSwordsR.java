@@ -3,6 +3,7 @@ package net.nova.big_swords;
 import net.minecraft.resources.ResourceLocation;
 import net.nova.big_swords.data.DataGenerators;
 import net.nova.big_swords.init.BSItems;
+import net.nova.big_swords.init.CreativeTab;
 import org.slf4j.Logger;
 
 import net.neoforged.bus.api.IEventBus;
@@ -17,6 +18,7 @@ public class BigSwordsR {
     public static final Logger logger = LoggerFactory.getLogger(BigSwordsR.class);
 
     public BigSwordsR(IEventBus bus) {
+        CreativeTab.CREATIVE_TAB.register(bus);
         BSItems.ITEMS.register(bus);
 
         bus.addListener(DataGenerators::gatherData);
