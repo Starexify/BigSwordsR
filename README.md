@@ -1,28 +1,22 @@
 ![Big Swords R Logo](https://github.com/Starexify/BigSwordsR/blob/main/src/main/resources/big_swords_r_logo.png?raw=true)
 
 <p align="center">
-  <a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="curseforge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg"></a>
-  <a href="https://modrinth.com/mod/cosmicore"><img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg"></a>
+  <a href="https://www.curseforge.com/minecraft/mc-mods/big-swords-r"><img alt="curseforge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg"></a>
+  <a href="https://modrinth.com/mod/big-swords-r"><img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg"></a>
 </p>
 
 <p align="center">
-  <a href="https://minecraft.curseforge.com/projects/cosmicore"><a href="https://minecraft.curseforge.com/projects/cosmicore"><img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/1057420?style=for-the-badge&logo=curseforge"></a>
+  <a href="https://www.curseforge.com/minecraft/mc-mods/big-swords-r"><img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/690473?style=for-the-badge&logo=curseforge&color=96000C"></a>
 </p>
 
 <p align="center">
-  <a href="https://x.com/FoxiStar9"><img alt="X (formerly Twitter) URL" src="https://img.shields.io/twitter/url?url=https%3A%2F%2Fx.com%2FFoxiStar9&style=for-the-badge&logo=x&logoColor=000000&label=Follow%20Us&color=555555"></a>
-  <a href="https://github.com/Starexify/Cosmicore/issues"><img alt="GitHub Issues" src="https://img.shields.io/github/issues/Starexify/Cosmicore?style=for-the-badge&color=1B3193"></a>
+  <a href="https://github.com/Starexify/BigSwordsR/issues"><img alt="GitHub Issues" src="https://img.shields.io/github/issues/Starexify/BigSwordsR?style=for-the-badge&color=1B3193"></a>
   <a href="https://github.com/Starexify/Cosmicore/blob/1.21/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/Starexify/Cosmicore?style=for-the-badge&color=1B3193"></a>
 </p>
 
 
 <table align="center" style="border-collapse: collapse; margin: 20px auto; width: 80%;">
   <tr>
-    <td align="center" style="border: none; padding: 10px;">
-      <a href="#%EF%B8%8F-cosmicore-news" style="text-decoration: none; color: #808080; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
-        🗞️ News
-      </a>
-    </td>
     <td align="center" style="border: none; padding: 10px;">
       <a href="#%E2%84%B9%EF%B8%8F-about" style="text-decoration: none; color: #00A7E1; font-size: 1.2em; font-weight: bold; transition: color 0.3s ease;">
         ℹ️ About 
@@ -52,14 +46,12 @@
 ⚠️**Please note that this is just an alpha version, so expect that features may be buggy or not fully implemented yet.
 We would appreciate your feedback and ideas as we work on this project!**
 
-## 🗞️ Cosmicore News
-
-Nothing to see here yet
 
 ## ℹ️ About
 
 Cosmicore is a brand-new meteors mod for minecraft, inspired by the nostalgia of the old Falling Meteors mod, but with a
 whole lot more content.
+
 
 ## ✨ Features
 
@@ -84,15 +76,16 @@ whole lot more content.
   </tbody>
 </table>
 
+
 ## 🚀 Planned Updates
 
-In the upcoming updates we plan to add:
+In the upcoming updates I plan to add:
 
 - ☄️ **MORE METEORS!!** and **FALLING METEORS** _(not the mod)_
 - Even more structures
 - Even more materials
 - More new machines
-- And more!
+
 
 ## 📜 License
 

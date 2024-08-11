@@ -13,5 +13,5 @@ public class BSItems {
 
     // Big Swords
     public static DeferredItem<Item> WOODEN_BIG_SWORD = ITEMS.register("wooden_big_sword",
-            () -> new SwordItem(Tiers.WOOD, new Item.Properties().attributes(SwordItem.createAttributes(Tiers.WOOD, 3, -2.4F))));
+            () -> new SwordItem(Tiers.WOOD, new Item.Properties().attributes(SwordItem.createAttributes(Tiers.WOOD, 3, -3F))));
 }
