@@ -30,10 +30,10 @@ public class BSItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.LEG_ARMOR).add(BSItems.LIVINGMETAL_LEGGINGS.get());
         tag(ItemTags.FOOT_ARMOR).add(BSItems.LIVINGMETAL_BOOTS.get());
 
-        tag(ItemTags.SWORDS).addTag(Tags.BSItemTags.BIG_SWORDS).add(BSItems.LIVINGMETAL_SWORD.get());
-        tag(ItemTags.PICKAXES).add(BSItems.LIVINGMETAL_PICKAXE.get());
-        tag(ItemTags.AXES).add(BSItems.LIVINGMETAL_AXE.get());
-        tag(ItemTags.SHOVELS).add(BSItems.LIVINGMETAL_SHOVEL.get());
-        tag(ItemTags.HOES).add(BSItems.LIVINGMETAL_HOE.get());
+        tag(ItemTags.SWORDS).addTag(Tags.BSItemTags.BIG_SWORDS).add(BSItems.LIVINGMETAL_SWORD.get(), BSItems.BIOMASS_SWORD.get());
+        tag(ItemTags.PICKAXES).add(BSItems.LIVINGMETAL_PICKAXE.get(), BSItems.LIVINGMETAL_PICKAXE.get());
+        tag(ItemTags.AXES).add(BSItems.LIVINGMETAL_AXE.get(), BSItems.BIOMASS_AXE.get());
+        tag(ItemTags.SHOVELS).add(BSItems.LIVINGMETAL_SHOVEL.get(), BSItems.BIOMASS_SHOVEL.get());
+        tag(ItemTags.HOES).add(BSItems.LIVINGMETAL_HOE.get(), BSItems.BIOMASS_HOE.get());
     }
 }

@@ -56,6 +56,14 @@ public class BSItemModelProvider extends ItemModelProvider {
         handheldItem(BSItems.LIVINGMETAL_SHOVEL.get());
         handheldItem(BSItems.LIVINGMETAL_HOE.get());
 
+        // Biomass Models
+        basicItem(BSItems.BIOMASS.get());
+        handheldItem(BSItems.BIOMASS_SWORD.get());
+        handheldItem(BSItems.BIOMASS_PICKAXE.get());
+        handheldItem(BSItems.BIOMASS_AXE.get());
+        handheldItem(BSItems.BIOMASS_SHOVEL.get());
+        handheldItem(BSItems.BIOMASS_HOE.get());
+
         // Ender Upgrade
         basicItem(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE.get());
 

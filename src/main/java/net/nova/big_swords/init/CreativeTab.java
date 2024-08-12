@@ -18,14 +18,7 @@ public class CreativeTab {
         CreativeModeTab.Builder builder = CreativeModeTab.builder();
 
         builder.displayItems((itemDisplay, output) -> {
-            // Sticks
-            output.accept(BSItems.GIANT_WOODEN_STICK);
-            output.accept(BSItems.GIANT_BLAZE_ROD);
-            output.accept(BSItems.GIANT_LIVINGMETAL_HANDLE);
-
             // Livingmetal Stuff
-            output.accept(BSBlocks.LIVINGMETAL_BLOCK);
-            output.accept(BSItems.LIVINGMETAL_INGOT);
             output.accept(BSItems.LIVINGMETAL_HELMET);
             output.accept(BSItems.LIVINGMETAL_CHESTPLATE);
             output.accept(BSItems.LIVINGMETAL_LEGGINGS);
@@ -35,6 +28,22 @@ public class CreativeTab {
             output.accept(BSItems.LIVINGMETAL_AXE);
             output.accept(BSItems.LIVINGMETAL_SHOVEL);
             output.accept(BSItems.LIVINGMETAL_HOE);
+            output.accept(BSBlocks.LIVINGMETAL_BLOCK);
+            output.accept(BSItems.LIVINGMETAL_INGOT);
+
+
+            // Biomass Stuff
+            output.accept(BSItems.BIOMASS_SWORD);
+            output.accept(BSItems.BIOMASS_PICKAXE);
+            output.accept(BSItems.BIOMASS_AXE);
+            output.accept(BSItems.BIOMASS_SHOVEL);
+            output.accept(BSItems.BIOMASS_HOE);
+            output.accept(BSItems.BIOMASS);
+
+            // Sticks
+            output.accept(BSItems.GIANT_WOODEN_STICK);
+            output.accept(BSItems.GIANT_BLAZE_ROD);
+            output.accept(BSItems.GIANT_LIVINGMETAL_HANDLE);
 
             // Ender Upgrade
             output.accept(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE);
@@ -54,7 +63,7 @@ public class CreativeTab {
             output.accept(BSItems.LIVINGMETAL_BIG_SWORD);
         });
 
-        builder.icon(() -> new ItemStack(BSItems.WOODEN_BIG_SWORD.asItem()));
+        builder.icon(() -> new ItemStack(BSItems.ENDER_BIG_SWORD.asItem()));
         builder.title(Component.translatable(BIG_SWORDS_TAB_TITLE));
 
         return builder.build();

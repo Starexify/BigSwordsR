@@ -1,6 +1,12 @@
 {
   "big_swords.creativetab": "Big Swords R",
   "block.big_swords.livingmetal_block": "Livingmetal Block",
+  "item.big_swords.biomass": "Biomass",
+  "item.big_swords.biomass_axe": "Biomass Axe",
+  "item.big_swords.biomass_hoe": "Biomass Hoe",
+  "item.big_swords.biomass_pickaxe": "Biomass Pickaxe",
+  "item.big_swords.biomass_shovel": "Biomass Shovel",
+  "item.big_swords.biomass_sword": "Biomass Sword",
   "item.big_swords.diamond_big_sword": "Diamond Big Sword",
   "item.big_swords.ender_big_sword": "Ender Big Sword",
   "item.big_swords.ender_upgrade_smithing_template": "Smithing Template",
