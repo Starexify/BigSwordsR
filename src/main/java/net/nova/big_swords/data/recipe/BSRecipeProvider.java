@@ -34,6 +34,10 @@ public class BSRecipeProvider extends RecipeProvider {
     }
 
     // Recipes
+    protected static void nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeOutput pRecipeOutput, RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked, String pUnpackedName, String pUnpackedGroup) {
+        nineBlockStorageRecipes(pRecipeOutput, pUnpackedCategory, pUnpacked, pPackedCategory, pPacked, getSimpleRecipeName(pPacked), null, path + pUnpackedName, pUnpackedGroup);
+    }
+
     protected static void basicGiantStick(RecipeOutput recipeOutput, Item stick, DeferredItem<Item> result) {
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
                 .define('#', stick)
@@ -74,11 +78,11 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(pRecipeOutput, path + getItemName(pResultItem) + "_smithing");
     }
 
-    protected static void netheriteSmithing(RecipeOutput pRecipeOutput, Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
+    protected static void netheriteBlockSmithing(RecipeOutput pRecipeOutput, Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
         SmithingTransformRecipeBuilder.smithing(
-                        Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(pIngredientItem), Ingredient.of(Items.NETHERITE_INGOT), pCategory, pResultItem
+                        Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(pIngredientItem), Ingredient.of(Items.NETHERITE_BLOCK), pCategory, pResultItem
                 )
-                .unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT))
+                .unlocks("has_netherite_block", has(Items.NETHERITE_BLOCK))
                 .save(pRecipeOutput, path + getItemName(pResultItem) + "_smithing");
     }
 

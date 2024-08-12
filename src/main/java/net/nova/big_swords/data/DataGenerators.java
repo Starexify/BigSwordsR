@@ -8,6 +8,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.nova.big_swords.BigSwordsR;
+import net.nova.big_swords.data.loot.BSLootTableProvider;
 import net.nova.big_swords.data.recipe.BSRecipeProvider;
 import net.nova.big_swords.data.tags.BSBlockTagsProvider;
 import net.nova.big_swords.data.tags.BSItemTagsProvider;
@@ -28,6 +29,7 @@ public class DataGenerators {
 
             generator.addProvider(true, new LangProvider(output));
 
+            generator.addProvider(true, new BlockStateAndModelProvider(output, existingFileHelper));
             generator.addProvider(true, new BSItemModelProvider(output, existingFileHelper));
 
             generator.addProvider(true, new BSRecipeProvider(output, lookupProvider));
@@ -35,6 +37,8 @@ public class DataGenerators {
             BSBlockTagsProvider modBlockTagsProvider = new BSBlockTagsProvider(output, lookupProvider, existingFileHelper);
             generator.addProvider(true, modBlockTagsProvider);
             generator.addProvider(true, new BSItemTagsProvider(output, lookupProvider, modBlockTagsProvider, existingFileHelper));
+
+            generator.addProvider(true, new BSLootTableProvider(output, lookupProvider));
 
             generator.addProvider(true, new BSDataMapProvider(output, lookupProvider));
 

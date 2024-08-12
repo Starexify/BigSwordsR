@@ -2,6 +2,7 @@ package net.nova.big_swords.data;
 
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.CreativeTab;
 import net.nova.big_swords.item.EnderSmithingTemplate;
@@ -18,6 +19,11 @@ public class LangProvider extends LanguageProvider {
         // Items
         addItem(BSItems.GIANT_WOODEN_STICK, "Giant Wooden Stick");
         addItem(BSItems.GIANT_BLAZE_ROD, "Giant Blaze Rod");
+        addItem(BSItems.GIANT_LIVINGMETAL_HANDLE, "Giant Livingmetal Handle");
+
+        // Livingmetal Stuff
+        addItem(BSItems.LIVINGMETAL_INGOT, "Livingmetal Ingot");
+        addBlock(BSBlocks.LIVINGMETAL_BLOCK, "Livingmetal Block");
 
         // Big Swords
         addItem(BSItems.WOODEN_BIG_SWORD, "Wooden Big Sword");

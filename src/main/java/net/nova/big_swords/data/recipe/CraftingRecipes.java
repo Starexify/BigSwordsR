@@ -5,8 +5,10 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.BSItems;
 
 import java.util.concurrent.CompletableFuture;
@@ -23,9 +25,29 @@ public class CraftingRecipes extends BSRecipeProvider {
         // Sticks
         basicGiantStick(recipeOutput, Items.STICK, BSItems.GIANT_WOODEN_STICK);
         basicGiantStick(recipeOutput, Items.BLAZE_ROD, BSItems.GIANT_BLAZE_ROD);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BSItems.GIANT_LIVINGMETAL_HANDLE)
+                .define('#', Items.STICK)
+                .define('L', BSItems.LIVINGMETAL_INGOT)
+                .pattern(" L#")
+                .pattern("L#L")
+                .pattern("#L ")
+                .unlockedBy("has_" + getItemName(BSItems.LIVINGMETAL_INGOT), has(BSItems.LIVINGMETAL_INGOT))
+                .save(recipeOutput);
+
+        // Livingmetal Recipes
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT, RecipeCategory.BUILDING_BLOCKS, BSBlocks.LIVINGMETAL_BLOCK, getItemName(BSItems.LIVINGMETAL_INGOT) + "_from_" + getItemName(BSBlocks.LIVINGMETAL_BLOCK), getItemName(BSItems.LIVINGMETAL_INGOT));
 
         // Ender Upgrade
         copySmithingTemplate(recipeOutput, BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE, Items.ENDER_EYE, Items.OBSIDIAN);
+
+        // Livingmetal Recipes
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT)
+                .requires(Items.SOUL_SAND)
+                .requires(Items.IRON_INGOT)
+                .requires(Items.GHAST_TEAR)
+                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .save(recipeOutput);
+
 
         // Big Swords
         basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), ItemTags.PLANKS, BSItems.WOODEN_BIG_SWORD);
@@ -65,5 +87,6 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("#Q ")
                 .unlockedBy("has_" + getItemName(Items.OBSIDIAN), has(Items.OBSIDIAN))
                 .save(recipeOutput);
+
     }
 }

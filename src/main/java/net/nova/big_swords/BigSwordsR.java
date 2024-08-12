@@ -2,6 +2,7 @@ package net.nova.big_swords;
 
 import net.minecraft.resources.ResourceLocation;
 import net.nova.big_swords.data.DataGenerators;
+import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.CreativeTab;
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ public class BigSwordsR {
     public BigSwordsR(IEventBus bus) {
         CreativeTab.CREATIVE_TAB.register(bus);
         BSItems.ITEMS.register(bus);
+        BSBlocks.BLOCKS.register(bus);
 
         bus.addListener(DataGenerators::gatherData);
     }

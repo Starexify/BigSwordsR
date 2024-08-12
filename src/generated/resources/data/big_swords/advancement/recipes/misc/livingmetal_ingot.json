@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_netherite_block": {
+    "has_iron_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:netherite_block"
+            "items": "minecraft:iron_ingot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "big_swords:netherite_big_sword_smithing"
+        "recipe": "big_swords:livingmetal_ingot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_netherite_block"
+      "has_iron_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "big_swords:netherite_big_sword_smithing"
+      "big_swords:livingmetal_ingot"
     ]
   }
 }

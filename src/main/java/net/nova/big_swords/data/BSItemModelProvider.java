@@ -19,6 +19,10 @@ public class BSItemModelProvider extends ItemModelProvider {
         // Sticks
         basicItem(BSItems.GIANT_WOODEN_STICK.get());
         basicItem(BSItems.GIANT_BLAZE_ROD.get());
+        basicItem(BSItems.GIANT_LIVINGMETAL_HANDLE.get());
+
+        // Livingmetal Models
+        basicItem(BSItems.LIVINGMETAL_INGOT.get());
 
         // Ender Upgrade
         basicItem(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE.get());

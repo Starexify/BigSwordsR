@@ -8,15 +8,16 @@ import net.nova.big_swords.init.BSItems;
 
 import java.util.concurrent.CompletableFuture;
 
-public class BSSmithingRecipes extends BSRecipeProvider{
+public class BSSmithingRecipes extends BSRecipeProvider {
     public final RecipeOutput recipeOutput;
 
     public BSSmithingRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, RecipeOutput recipeOutput) {
         super(output, lookupProvider);
         this.recipeOutput = recipeOutput;
     }
+
     public void build() {
-        netheriteSmithing(recipeOutput, BSItems.DIAMOND_BIG_SWORD.asItem(), RecipeCategory.COMBAT, BSItems.NETHERITE_BIG_SWORD.asItem());
+        netheriteBlockSmithing(recipeOutput, BSItems.DIAMOND_BIG_SWORD.asItem(), RecipeCategory.COMBAT, BSItems.NETHERITE_BIG_SWORD.asItem());
         enderSmithing(recipeOutput, BSItems.OBSIDIAN_BIG_SWORD.asItem(), RecipeCategory.COMBAT, BSItems.ENDER_BIG_SWORD.asItem());
     }
 }

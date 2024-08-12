@@ -21,6 +21,11 @@ public class CreativeTab {
             // Sticks
             output.accept(BSItems.GIANT_WOODEN_STICK);
             output.accept(BSItems.GIANT_BLAZE_ROD);
+            output.accept(BSItems.GIANT_LIVINGMETAL_HANDLE);
+
+            // Livingmetal Stuff
+            output.accept(BSBlocks.LIVINGMETAL_BLOCK);
+            output.accept(BSItems.LIVINGMETAL_INGOT);
 
             // Ender Upgrade
             output.accept(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE);
