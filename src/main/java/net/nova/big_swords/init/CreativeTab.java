@@ -26,6 +26,10 @@ public class CreativeTab {
             // Livingmetal Stuff
             output.accept(BSBlocks.LIVINGMETAL_BLOCK);
             output.accept(BSItems.LIVINGMETAL_INGOT);
+            output.accept(BSItems.LIVINGMETAL_HELMET);
+            output.accept(BSItems.LIVINGMETAL_CHESTPLATE);
+            output.accept(BSItems.LIVINGMETAL_LEGGINGS);
+            output.accept(BSItems.LIVINGMETAL_BOOTS);
             output.accept(BSItems.LIVINGMETAL_SWORD);
             output.accept(BSItems.LIVINGMETAL_PICKAXE);
             output.accept(BSItems.LIVINGMETAL_AXE);
@@ -47,6 +51,7 @@ public class CreativeTab {
             output.accept(BSItems.QUARTZ_BIG_SWORD);
             output.accept(BSItems.OBSIDIAN_BIG_SWORD);
             output.accept(BSItems.ENDER_BIG_SWORD);
+            output.accept(BSItems.LIVINGMETAL_BIG_SWORD);
         });
 
         builder.icon(() -> new ItemStack(BSItems.WOODEN_BIG_SWORD.asItem()));

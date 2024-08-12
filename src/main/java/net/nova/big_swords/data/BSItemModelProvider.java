@@ -71,6 +71,7 @@ public class BSItemModelProvider extends ItemModelProvider {
         handheldItem(BSItems.QUARTZ_BIG_SWORD.get());
         handheldItem(BSItems.OBSIDIAN_BIG_SWORD.get());
         handheldItem(BSItems.ENDER_BIG_SWORD.get());
+        handheldItem(BSItems.LIVINGMETAL_BIG_SWORD.get());
     }
 
     private void handheldItem(Item item) {

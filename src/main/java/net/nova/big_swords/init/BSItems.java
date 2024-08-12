@@ -45,4 +45,5 @@ public class BSItems {
     public static DeferredItem<Item> QUARTZ_BIG_SWORD = ITEMS.register("quartz_big_sword", () -> new BigSwordItem(BSTiers.QUARTZ, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.QUARTZ, 5, -2.8F))));
     public static DeferredItem<Item> OBSIDIAN_BIG_SWORD = ITEMS.register("obsidian_big_sword", () -> new BigSwordItem(BSTiers.OBSIDIAN, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.OBSIDIAN, 5, -2.8F))));
     public static DeferredItem<Item> ENDER_BIG_SWORD = ITEMS.register("ender_big_sword", () -> new BigSwordItem(BSTiers.ENDER, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.ENDER, 5, -2.8F))));
+    public static DeferredItem<Item> LIVINGMETAL_BIG_SWORD = ITEMS.register("livingmetal_big_sword", () -> new BigSwordItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.LIVINGMETAL, 5, -2.8F))));
 }

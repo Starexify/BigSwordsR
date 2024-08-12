@@ -46,6 +46,7 @@ public class LangProvider extends LanguageProvider {
         addItem(BSItems.QUARTZ_BIG_SWORD, "Quartz Big Sword");
         addItem(BSItems.OBSIDIAN_BIG_SWORD, "Obsidian Big Sword");
         addItem(BSItems.ENDER_BIG_SWORD, "Ender Big Sword");
+        addItem(BSItems.LIVINGMETAL_BIG_SWORD, "Livingmetal Big Sword");
 
         // Creative Tab
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");

@@ -59,12 +59,13 @@ public class CraftingRecipes extends BSRecipeProvider {
 
 
         // Big Swords
-        basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), ItemTags.PLANKS, BSItems.WOODEN_BIG_SWORD);
-        basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), ItemTags.STONE_TOOL_MATERIALS, BSItems.STONE_BIG_SWORD);
-        basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), Items.IRON_INGOT, BSItems.IRON_BIG_SWORD);
-        basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), Items.GOLD_INGOT, BSItems.GOLDEN_BIG_SWORD);
-        basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), Items.DIAMOND, BSItems.DIAMOND_BIG_SWORD);
+        basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.get(), ItemTags.PLANKS, BSItems.WOODEN_BIG_SWORD);
+        basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.get(), ItemTags.STONE_TOOL_MATERIALS, BSItems.STONE_BIG_SWORD);
+        basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.get(), Items.IRON_INGOT, BSItems.IRON_BIG_SWORD);
+        basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.get(), Items.GOLD_INGOT, BSItems.GOLDEN_BIG_SWORD);
+        basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.get(), Items.DIAMOND, BSItems.DIAMOND_BIG_SWORD);
         basicBigSword(recipeOutput, Items.BONE, Items.ROTTEN_FLESH, BSItems.PATCHWORK_BIG_SWORD);
+        basicBigSword(recipeOutput, BSItems.GIANT_LIVINGMETAL_HANDLE.get(), BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_BIG_SWORD);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.SKULL_BIG_SWORD)
                 .define('#', BSItems.GIANT_WOODEN_STICK)
