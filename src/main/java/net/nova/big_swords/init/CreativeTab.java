@@ -26,6 +26,11 @@ public class CreativeTab {
             // Livingmetal Stuff
             output.accept(BSBlocks.LIVINGMETAL_BLOCK);
             output.accept(BSItems.LIVINGMETAL_INGOT);
+            output.accept(BSItems.LIVINGMETAL_SWORD);
+            output.accept(BSItems.LIVINGMETAL_PICKAXE);
+            output.accept(BSItems.LIVINGMETAL_AXE);
+            output.accept(BSItems.LIVINGMETAL_SHOVEL);
+            output.accept(BSItems.LIVINGMETAL_HOE);
 
             // Ender Upgrade
             output.accept(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE);

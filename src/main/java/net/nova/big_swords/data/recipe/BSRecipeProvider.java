@@ -39,7 +39,7 @@ public class BSRecipeProvider extends RecipeProvider {
     }
 
     protected static void basicGiantStick(RecipeOutput recipeOutput, Item stick, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
                 .define('#', stick)
                 .pattern(" ##")
                 .pattern("###")
@@ -67,6 +67,99 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("XXX")
                 .pattern("#X ")
                 .unlockedBy("has_" + getItemName(handle), has(handle))
+                .save(recipeOutput);
+    }
+
+    protected static void basicHelmet(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', material)
+                .pattern("###")
+                .pattern("# #")
+                .unlockedBy("has_" + getItemName(material), has(material))
+                .save(recipeOutput);
+    }
+
+    protected static void basicChestplate(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', material)
+                .pattern("# #")
+                .pattern("###")
+                .pattern("###")
+                .unlockedBy("has_" + getItemName(material), has(material))
+                .save(recipeOutput);
+    }
+
+    protected static void basicLeggings(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', material)
+                .pattern("###")
+                .pattern("# #")
+                .pattern("# #")
+                .unlockedBy("has_" + getItemName(material), has(material))
+                .save(recipeOutput);
+    }
+
+    protected static void basicBoots(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', material)
+                .pattern("###")
+                .pattern("# #")
+                .unlockedBy("has_" + getItemName(material), has(material))
+                .save(recipeOutput);
+    }
+
+    protected static void basicSword(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', handle)
+                .define('X', material)
+                .pattern("X")
+                .pattern("X")
+                .pattern("#")
+                .unlockedBy("has_" + getItemName(material), has(material))
+                .save(recipeOutput);
+    }
+
+    protected static void basicPickaxe(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result)
+                .define('#', handle)
+                .define('X', material)
+                .pattern("XXX")
+                .pattern(" # ")
+                .pattern(" # ")
+                .unlockedBy("has_" + getItemName(material), has(material))
+                .save(recipeOutput);
+    }
+
+    protected static void basicAxe(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result)
+                .define('#', handle)
+                .define('X', material)
+                .pattern("XX")
+                .pattern("#X")
+                .pattern("# ")
+                .unlockedBy("has_" + getItemName(material), has(material))
+                .save(recipeOutput);
+    }
+
+    protected static void basicShovel(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result)
+                .define('#', handle)
+                .define('X', material)
+                .pattern("X")
+                .pattern("#")
+                .pattern("#")
+                .unlockedBy("has_" + getItemName(material), has(material))
+                .save(recipeOutput);
+    }
+
+    protected static void basicHoe(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result)
+                .define('#', handle)
+                .define('X', material)
+                .pattern("XX")
+                .pattern("# ")
+                .pattern("# ")
+                .unlockedBy("has_" + getItemName(material), has(material))
                 .save(recipeOutput);
     }
 

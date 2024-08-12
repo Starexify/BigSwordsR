@@ -24,6 +24,15 @@ public class LangProvider extends LanguageProvider {
         // Livingmetal Stuff
         addItem(BSItems.LIVINGMETAL_INGOT, "Livingmetal Ingot");
         addBlock(BSBlocks.LIVINGMETAL_BLOCK, "Livingmetal Block");
+        addItem(BSItems.LIVINGMETAL_HELMET, "Livingmetal Helmet");
+        addItem(BSItems.LIVINGMETAL_CHESTPLATE, "Livingmetal Chestplate");
+        addItem(BSItems.LIVINGMETAL_LEGGINGS, "Livingmetal Leggings");
+        addItem(BSItems.LIVINGMETAL_BOOTS, "Livingmetal Boots");
+        addItem(BSItems.LIVINGMETAL_SWORD, "Livingmetal Sword");
+        addItem(BSItems.LIVINGMETAL_PICKAXE, "Livingmetal Pickaxe");
+        addItem(BSItems.LIVINGMETAL_AXE, "Livingmetal Axe");
+        addItem(BSItems.LIVINGMETAL_SHOVEL, "Livingmetal Shovel");
+        addItem(BSItems.LIVINGMETAL_HOE, "Livingmetal Hoe");
 
         // Big Swords
         addItem(BSItems.WOODEN_BIG_SWORD, "Wooden Big Sword");

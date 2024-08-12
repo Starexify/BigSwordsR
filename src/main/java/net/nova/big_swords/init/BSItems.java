@@ -1,7 +1,6 @@
 package net.nova.big_swords.init;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.nova.big_swords.item.BigSwordItem;
@@ -22,6 +21,17 @@ public class BSItems {
 
     // Livingmetal Stuff
     public static DeferredItem<Item> LIVINGMETAL_INGOT = ITEMS.register("livingmetal_ingot", () -> new Item(new Item.Properties()));
+    public static DeferredItem<Item> LIVINGMETAL_HELMET = ITEMS.register("livingmetal_helmet", () -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(29))));
+    public static DeferredItem<Item> LIVINGMETAL_CHESTPLATE = ITEMS.register("livingmetal_chestplate", () -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(29))));
+    public static DeferredItem<Item> LIVINGMETAL_LEGGINGS = ITEMS.register("livingmetal_leggings", () -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(29))));
+    public static DeferredItem<Item> LIVINGMETAL_BOOTS = ITEMS.register("livingmetal_boots", () -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(29))));
+
+    public static DeferredItem<Item> LIVINGMETAL_SWORD = ITEMS.register("livingmetal_sword", () -> new SwordItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(SwordItem.createAttributes(BSTiers.LIVINGMETAL, 3, -2.4F))));
+    public static DeferredItem<Item> LIVINGMETAL_PICKAXE = ITEMS.register("livingmetal_pickaxe", () -> new PickaxeItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(PickaxeItem.createAttributes(BSTiers.LIVINGMETAL, 1.0F, -2.8F))));
+    public static DeferredItem<Item> LIVINGMETAL_AXE = ITEMS.register("livingmetal_axe", () -> new AxeItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(AxeItem.createAttributes(BSTiers.LIVINGMETAL, 6.0F, -3.0F))));
+    public static DeferredItem<Item> LIVINGMETAL_SHOVEL = ITEMS.register("livingmetal_shovel", () -> new ShovelItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(ShovelItem.createAttributes(BSTiers.LIVINGMETAL, 1.5F, -3.0F))));
+    public static DeferredItem<Item> LIVINGMETAL_HOE = ITEMS.register("livingmetal_hoe", () -> new HoeItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(HoeItem.createAttributes(BSTiers.LIVINGMETAL, -2.5F, -0.5F))));
+
 
     // Big Swords
     public static DeferredItem<Item> WOODEN_BIG_SWORD = ITEMS.register("wooden_big_sword", () -> new BigSwordItem(Tiers.WOOD, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.WOOD, 5, -2.8F))));
