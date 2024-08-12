@@ -2,13 +2,14 @@ package net.nova.big_swords.data.recipe;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.registries.DeferredItem;
+import net.nova.big_swords.init.BSItems;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -29,6 +30,7 @@ public class BSRecipeProvider extends RecipeProvider {
     protected void buildRecipes(RecipeOutput recipeOutput) {
         new CraftingRecipes(output, lookupProvider, recipeOutput).build();
         new FurnaceRecipes(output, lookupProvider, recipeOutput).build();
+        new BSSmithingRecipes(output, lookupProvider, recipeOutput).build();
     }
 
     // Recipes
@@ -62,5 +64,33 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("#X ")
                 .unlockedBy("has_" + getItemName(handle), has(handle))
                 .save(recipeOutput);
+    }
+
+    protected static void enderSmithing(RecipeOutput pRecipeOutput, Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(pIngredientItem), Ingredient.of(Items.ENDER_EYE), pCategory, pResultItem
+                )
+                .unlocks("has_ender_eye", has(Items.ENDER_EYE))
+                .save(pRecipeOutput, path + getItemName(pResultItem) + "_smithing");
+    }
+
+    protected static void netheriteSmithing(RecipeOutput pRecipeOutput, Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(pIngredientItem), Ingredient.of(Items.NETHERITE_INGOT), pCategory, pResultItem
+                )
+                .unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT))
+                .save(pRecipeOutput, path + getItemName(pResultItem) + "_smithing");
+    }
+
+    protected static void copySmithingTemplate(RecipeOutput pRecipeOutput, ItemLike pTemplate, ItemLike pBaseItem, ItemLike pCopyItem) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, pTemplate, 2)
+                .define('#', pCopyItem)
+                .define('C', pBaseItem)
+                .define('S', pTemplate)
+                .pattern("#S#")
+                .pattern("#C#")
+                .pattern("###")
+                .unlockedBy(getHasName(pTemplate), has(pTemplate))
+                .save(pRecipeOutput);
     }
 }

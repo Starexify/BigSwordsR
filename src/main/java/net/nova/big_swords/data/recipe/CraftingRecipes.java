@@ -24,6 +24,9 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicGiantStick(recipeOutput, Items.STICK, BSItems.GIANT_WOODEN_STICK);
         basicGiantStick(recipeOutput, Items.BLAZE_ROD, BSItems.GIANT_BLAZE_ROD);
 
+        // Ender Upgrade
+        copySmithingTemplate(recipeOutput, BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE, Items.ENDER_EYE, Items.OBSIDIAN);
+
         // Big Swords
         basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), ItemTags.PLANKS, BSItems.WOODEN_BIG_SWORD);
         basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), ItemTags.STONE_TOOL_MATERIALS, BSItems.STONE_BIG_SWORD);
@@ -51,6 +54,16 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("XQQ")
                 .pattern("#X ")
                 .unlockedBy("has_" + getItemName(Items.QUARTZ), has(Items.QUARTZ))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.OBSIDIAN_BIG_SWORD)
+                .define('#', BSItems.GIANT_BLAZE_ROD)
+                .define('Q', Items.OBSIDIAN)
+                .define('D', BSItems.DIAMOND_BIG_SWORD)
+                .pattern(" QQ")
+                .pattern("QDQ")
+                .pattern("#Q ")
+                .unlockedBy("has_" + getItemName(Items.OBSIDIAN), has(Items.OBSIDIAN))
                 .save(recipeOutput);
     }
 }

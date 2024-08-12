@@ -22,6 +22,9 @@ public class CreativeTab {
             output.accept(BSItems.GIANT_WOODEN_STICK);
             output.accept(BSItems.GIANT_BLAZE_ROD);
 
+            // Ender Upgrade
+            output.accept(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE);
+
             // Big Swords
             output.accept(BSItems.WOODEN_BIG_SWORD);
             output.accept(BSItems.STONE_BIG_SWORD);
@@ -32,6 +35,8 @@ public class CreativeTab {
             output.accept(BSItems.PATCHWORK_BIG_SWORD);
             output.accept(BSItems.SKULL_BIG_SWORD);
             output.accept(BSItems.QUARTZ_BIG_SWORD);
+            output.accept(BSItems.OBSIDIAN_BIG_SWORD);
+            output.accept(BSItems.ENDER_BIG_SWORD);
         });
 
         builder.icon(() -> new ItemStack(BSItems.WOODEN_BIG_SWORD.asItem()));

@@ -20,6 +20,9 @@ public class BSItemModelProvider extends ItemModelProvider {
         basicItem(BSItems.GIANT_WOODEN_STICK.get());
         basicItem(BSItems.GIANT_BLAZE_ROD.get());
 
+        // Ender Upgrade
+        basicItem(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE.get());
+
         // Big Swords
         handheldItem(BSItems.WOODEN_BIG_SWORD.get());
         handheldItem(BSItems.STONE_BIG_SWORD.get());
@@ -30,6 +33,8 @@ public class BSItemModelProvider extends ItemModelProvider {
         handheldItem(BSItems.PATCHWORK_BIG_SWORD.get());
         handheldItem(BSItems.SKULL_BIG_SWORD.get());
         handheldItem(BSItems.QUARTZ_BIG_SWORD.get());
+        handheldItem(BSItems.OBSIDIAN_BIG_SWORD.get());
+        handheldItem(BSItems.ENDER_BIG_SWORD.get());
     }
 
     private void handheldItem(Item item) {

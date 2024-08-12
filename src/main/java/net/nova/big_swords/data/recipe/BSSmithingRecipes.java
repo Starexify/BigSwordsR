@@ -17,5 +17,6 @@ public class BSSmithingRecipes extends BSRecipeProvider{
     }
     public void build() {
         netheriteSmithing(recipeOutput, BSItems.DIAMOND_BIG_SWORD.asItem(), RecipeCategory.COMBAT, BSItems.NETHERITE_BIG_SWORD.asItem());
+        enderSmithing(recipeOutput, BSItems.OBSIDIAN_BIG_SWORD.asItem(), RecipeCategory.COMBAT, BSItems.ENDER_BIG_SWORD.asItem());
     }
 }
