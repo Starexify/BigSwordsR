@@ -22,6 +22,8 @@ public class LangProvider extends LanguageProvider {
         addItem(BSItems.STONE_BIG_SWORD, "Stone Big Sword");
         addItem(BSItems.IRON_BIG_SWORD, "Iron Big Sword");
         addItem(BSItems.GOLDEN_BIG_SWORD, "Golden Big Sword");
+        addItem(BSItems.DIAMOND_BIG_SWORD, "Diamond Big Sword");
+        addItem(BSItems.NETHERITE_BIG_SWORD, "Netherite Big Sword");
 
         // Creative Tab
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");

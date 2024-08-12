@@ -2,6 +2,9 @@
   "values": [
     "big_swords:wooden_big_sword",
     "big_swords:stone_big_sword",
-    "big_swords:iron_big_sword"
+    "big_swords:iron_big_sword",
+    "big_swords:golden_big_sword",
+    "big_swords:diamond_big_sword",
+    "big_swords:netherite_big_sword"
   ]
 }

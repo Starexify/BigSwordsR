@@ -36,6 +36,8 @@ public class DataGenerators {
             generator.addProvider(true, modBlockTagsProvider);
             generator.addProvider(true, new BSItemTagsProvider(output, lookupProvider, modBlockTagsProvider, existingFileHelper));
 
+            generator.addProvider(true, new BSDataMapProvider(output, lookupProvider));
+
         } catch (RuntimeException e) {
             BigSwordsR.logger.error("Cosmicore failed to gather data", e);
         }

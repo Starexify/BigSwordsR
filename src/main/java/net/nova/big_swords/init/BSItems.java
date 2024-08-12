@@ -27,4 +27,10 @@ public class BSItems {
 
     public static DeferredItem<Item> GOLDEN_BIG_SWORD = ITEMS.register("golden_big_sword",
             () -> new BigSwordItem(Tiers.GOLD, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.GOLD, 5, -3F))));
+
+    public static DeferredItem<Item> DIAMOND_BIG_SWORD = ITEMS.register("diamond_big_sword",
+            () -> new BigSwordItem(Tiers.DIAMOND, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.DIAMOND, 5, -3F))));
+
+    public static DeferredItem<Item> NETHERITE_BIG_SWORD = ITEMS.register("netherite_big_sword",
+            () -> new BigSwordItem(Tiers.NETHERITE, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.NETHERITE, 5, -3F))));
 }

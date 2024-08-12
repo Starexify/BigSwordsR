@@ -20,7 +20,8 @@ public class BSItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(Tags.BSItemTags.BIG_SWORDS).add(
-                BSItems.WOODEN_BIG_SWORD.asItem(), BSItems.STONE_BIG_SWORD.asItem(), BSItems.IRON_BIG_SWORD.asItem(), BSItems.GOLDEN_BIG_SWORD.asItem()
+                BSItems.WOODEN_BIG_SWORD.asItem(), BSItems.STONE_BIG_SWORD.asItem(), BSItems.IRON_BIG_SWORD.asItem(), BSItems.GOLDEN_BIG_SWORD.asItem(),
+                BSItems.DIAMOND_BIG_SWORD.asItem(), BSItems.NETHERITE_BIG_SWORD.asItem()
         );
 
         tag(ItemTags.SWORDS).addTag(Tags.BSItemTags.BIG_SWORDS);
