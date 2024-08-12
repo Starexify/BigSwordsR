@@ -18,6 +18,7 @@ public class BSItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         // Sticks
         basicItem(BSItems.GIANT_WOODEN_STICK.get());
+        basicItem(BSItems.GIANT_BLAZE_ROD.get());
 
         // Big Swords
         handheldItem(BSItems.WOODEN_BIG_SWORD.get());
@@ -28,6 +29,7 @@ public class BSItemModelProvider extends ItemModelProvider {
         handheldItem(BSItems.NETHERITE_BIG_SWORD.get());
         handheldItem(BSItems.PATCHWORK_BIG_SWORD.get());
         handheldItem(BSItems.SKULL_BIG_SWORD.get());
+        handheldItem(BSItems.QUARTZ_BIG_SWORD.get());
     }
 
     private void handheldItem(Item item) {

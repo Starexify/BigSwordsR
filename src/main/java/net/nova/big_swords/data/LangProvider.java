@@ -16,6 +16,7 @@ public class LangProvider extends LanguageProvider {
     protected void addTranslations() {
         // Items
         addItem(BSItems.GIANT_WOODEN_STICK, "Giant Wooden Stick");
+        addItem(BSItems.GIANT_BLAZE_ROD, "Giant Blaze Rod");
 
         // Big Swords
         addItem(BSItems.WOODEN_BIG_SWORD, "Wooden Big Sword");
@@ -26,6 +27,7 @@ public class LangProvider extends LanguageProvider {
         addItem(BSItems.NETHERITE_BIG_SWORD, "Netherite Big Sword");
         addItem(BSItems.PATCHWORK_BIG_SWORD, "Patchwork Big Sword");
         addItem(BSItems.SKULL_BIG_SWORD, "Skull Big Sword");
+        addItem(BSItems.QUARTZ_BIG_SWORD, "Quartz Big Sword");
 
         // Creative Tab
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");

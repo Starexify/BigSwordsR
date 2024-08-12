@@ -20,6 +20,7 @@ public class CreativeTab {
         builder.displayItems((itemDisplay, output) -> {
             // Sticks
             output.accept(BSItems.GIANT_WOODEN_STICK);
+            output.accept(BSItems.GIANT_BLAZE_ROD);
 
             // Big Swords
             output.accept(BSItems.WOODEN_BIG_SWORD);
@@ -30,6 +31,7 @@ public class CreativeTab {
             output.accept(BSItems.NETHERITE_BIG_SWORD);
             output.accept(BSItems.PATCHWORK_BIG_SWORD);
             output.accept(BSItems.SKULL_BIG_SWORD);
+            output.accept(BSItems.QUARTZ_BIG_SWORD);
         });
 
         builder.icon(() -> new ItemStack(BSItems.WOODEN_BIG_SWORD.asItem()));

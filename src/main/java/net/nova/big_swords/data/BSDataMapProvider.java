@@ -16,6 +16,7 @@ public class BSDataMapProvider extends DataMapProvider {
 
     @Override
     protected void gather() {
-        builder(NeoForgeDataMaps.FURNACE_FUELS).add(BSItems.WOODEN_BIG_SWORD, new FurnaceFuel(200), false);
+        builder(NeoForgeDataMaps.FURNACE_FUELS).add(BSItems.WOODEN_BIG_SWORD, new FurnaceFuel(200), false)
+                .add(BSItems.GIANT_BLAZE_ROD, new FurnaceFuel(16800), false);
     }
 }

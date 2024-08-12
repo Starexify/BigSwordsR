@@ -22,6 +22,7 @@ public class CraftingRecipes extends BSRecipeProvider {
     public void build() {
         // Sticks
         basicGiantStick(recipeOutput, Items.STICK, BSItems.GIANT_WOODEN_STICK);
+        basicGiantStick(recipeOutput, Items.BLAZE_ROD, BSItems.GIANT_BLAZE_ROD);
 
         // Big Swords
         basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.asItem(), ItemTags.PLANKS, BSItems.WOODEN_BIG_SWORD);
@@ -40,6 +41,16 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("XSB")
                 .pattern("#X ")
                 .unlockedBy("has_" + getItemName(Items.SKELETON_SKULL), has(Items.SKELETON_SKULL))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.QUARTZ_BIG_SWORD)
+                .define('#', BSItems.GIANT_BLAZE_ROD)
+                .define('Q', Items.QUARTZ)
+                .define('X', Items.QUARTZ_BLOCK)
+                .pattern(" QQ")
+                .pattern("XQQ")
+                .pattern("#X ")
+                .unlockedBy("has_" + getItemName(Items.QUARTZ), has(Items.QUARTZ))
                 .save(recipeOutput);
     }
 }

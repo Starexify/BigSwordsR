@@ -13,6 +13,7 @@ public class BSItems {
 
     // Sticks
     public static DeferredItem<Item> GIANT_WOODEN_STICK = ITEMS.register("giant_wooden_stick", () -> new Item(new Item.Properties()));
+    public static DeferredItem<Item> GIANT_BLAZE_ROD = ITEMS.register("giant_blaze_rod", () -> new Item(new Item.Properties()));
 
     // Big Swords
     public static DeferredItem<Item> WOODEN_BIG_SWORD = ITEMS.register("wooden_big_sword", () -> new BigSwordItem(Tiers.WOOD, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.WOOD, 5, -3F))));
@@ -23,4 +24,5 @@ public class BSItems {
     public static DeferredItem<Item> NETHERITE_BIG_SWORD = ITEMS.register("netherite_big_sword", () -> new BigSwordItem(Tiers.NETHERITE, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.NETHERITE, 5, -3F))));
     public static DeferredItem<Item> PATCHWORK_BIG_SWORD = ITEMS.register("patchwork_big_sword", () -> new BigSwordItem(BSTiers.PATCHWORK, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.PATCHWORK, 5, -3F))));
     public static DeferredItem<Item> SKULL_BIG_SWORD = ITEMS.register("skull_big_sword", () -> new BigSwordItem(BSTiers.SKULL, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.SKULL, 5, -3F))));
+    public static DeferredItem<Item> QUARTZ_BIG_SWORD = ITEMS.register("quartz_big_sword", () -> new BigSwordItem(BSTiers.QUARTZ, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.QUARTZ, 5, -3F))));
 }
