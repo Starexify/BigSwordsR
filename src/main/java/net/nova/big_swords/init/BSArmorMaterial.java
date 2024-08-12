@@ -31,4 +31,17 @@ public class BSArmorMaterial {
             )), 0.5F, 0.0F
     ));
 
+    public static Holder<ArmorMaterial> BIOMASS = ARMOR_MATERIALS.register("biomass", () -> new ArmorMaterial(
+            Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 2);
+                map.put(ArmorItem.Type.LEGGINGS, 5);
+                map.put(ArmorItem.Type.CHESTPLATE, 7);
+                map.put(ArmorItem.Type.HELMET, 3);
+                map.put(ArmorItem.Type.BODY, 5);
+            }), 14, SoundEvents.ARMOR_EQUIP_GENERIC, () -> Ingredient.of(BSItems.BIOMASS),
+            List.of(new ArmorMaterial.Layer(
+                    BigSwordsR.rl("biomass")
+            )), 0.0F, 0.0F
+    ));
+
 }

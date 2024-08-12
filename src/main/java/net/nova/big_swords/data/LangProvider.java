@@ -36,6 +36,10 @@ public class LangProvider extends LanguageProvider {
 
         // Biomass Lang
         addItem(BSItems.BIOMASS, "Biomass");
+        addItem(BSItems.BIOMASS_HELMET, "Biomass Helmet");
+        addItem(BSItems.BIOMASS_CHESTPLATE, "Biomass Chestplate");
+        addItem(BSItems.BIOMASS_LEGGINGS, "Biomass Leggings");
+        addItem(BSItems.BIOMASS_BOOTS, "Biomass Boots");
         addItem(BSItems.BIOMASS_SWORD, "Biomass Sword");
         addItem(BSItems.BIOMASS_PICKAXE, "Biomass Pickaxe");
         addItem(BSItems.BIOMASS_AXE, "Biomass Axe");
@@ -55,6 +59,7 @@ public class LangProvider extends LanguageProvider {
         addItem(BSItems.OBSIDIAN_BIG_SWORD, "Obsidian Big Sword");
         addItem(BSItems.ENDER_BIG_SWORD, "Ender Big Sword");
         addItem(BSItems.LIVINGMETAL_BIG_SWORD, "Livingmetal Big Sword");
+        addItem(BSItems.BIOMASS_BIG_SWORD, "Biomass Big Sword");
 
         // Creative Tab
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");

@@ -20,15 +20,16 @@ public class BSItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(Tags.BSItemTags.BIG_SWORDS).add(
-                BSItems.WOODEN_BIG_SWORD.asItem(), BSItems.STONE_BIG_SWORD.asItem(), BSItems.IRON_BIG_SWORD.asItem(), BSItems.GOLDEN_BIG_SWORD.asItem(),
-                BSItems.DIAMOND_BIG_SWORD.asItem(), BSItems.NETHERITE_BIG_SWORD.asItem(), BSItems.PATCHWORK_BIG_SWORD.asItem(), BSItems.SKULL_BIG_SWORD.asItem(),
-                BSItems.QUARTZ_BIG_SWORD.asItem(), BSItems.OBSIDIAN_BIG_SWORD.asItem(), BSItems.ENDER_BIG_SWORD.asItem(), BSItems.LIVINGMETAL_BIG_SWORD.asItem()
+                BSItems.WOODEN_BIG_SWORD.get(), BSItems.STONE_BIG_SWORD.get(), BSItems.IRON_BIG_SWORD.get(), BSItems.GOLDEN_BIG_SWORD.get(),
+                BSItems.DIAMOND_BIG_SWORD.get(), BSItems.NETHERITE_BIG_SWORD.get(), BSItems.PATCHWORK_BIG_SWORD.get(), BSItems.SKULL_BIG_SWORD.get(),
+                BSItems.QUARTZ_BIG_SWORD.get(), BSItems.OBSIDIAN_BIG_SWORD.get(), BSItems.ENDER_BIG_SWORD.get(), BSItems.LIVINGMETAL_BIG_SWORD.get(),
+                BSItems.BIOMASS_BIG_SWORD.get()
         );
 
-        tag(ItemTags.HEAD_ARMOR).add(BSItems.LIVINGMETAL_HELMET.get());
-        tag(ItemTags.CHEST_ARMOR).add(BSItems.LIVINGMETAL_CHESTPLATE.get());
-        tag(ItemTags.LEG_ARMOR).add(BSItems.LIVINGMETAL_LEGGINGS.get());
-        tag(ItemTags.FOOT_ARMOR).add(BSItems.LIVINGMETAL_BOOTS.get());
+        tag(ItemTags.HEAD_ARMOR).add(BSItems.LIVINGMETAL_HELMET.get(), BSItems.BIOMASS_HELMET.get());
+        tag(ItemTags.CHEST_ARMOR).add(BSItems.LIVINGMETAL_CHESTPLATE.get(), BSItems.BIOMASS_CHESTPLATE.get());
+        tag(ItemTags.LEG_ARMOR).add(BSItems.LIVINGMETAL_LEGGINGS.get(), BSItems.BIOMASS_LEGGINGS.get());
+        tag(ItemTags.FOOT_ARMOR).add(BSItems.LIVINGMETAL_BOOTS.get(), BSItems.BIOMASS_BOOTS.get());
 
         tag(ItemTags.SWORDS).addTag(Tags.BSItemTags.BIG_SWORDS).add(BSItems.LIVINGMETAL_SWORD.get(), BSItems.BIOMASS_SWORD.get());
         tag(ItemTags.PICKAXES).add(BSItems.LIVINGMETAL_PICKAXE.get(), BSItems.LIVINGMETAL_PICKAXE.get());

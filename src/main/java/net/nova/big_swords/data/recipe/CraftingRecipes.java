@@ -35,6 +35,12 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .save(recipeOutput);
 
         // Livingmetal Recipes
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT)
+                .requires(Items.SOUL_SAND)
+                .requires(Items.IRON_INGOT)
+                .requires(Items.GHAST_TEAR)
+                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .save(recipeOutput);
         nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT, RecipeCategory.BUILDING_BLOCKS, BSBlocks.LIVINGMETAL_BLOCK, getItemName(BSItems.LIVINGMETAL_INGOT) + "_from_" + getItemName(BSBlocks.LIVINGMETAL_BLOCK), getItemName(BSItems.LIVINGMETAL_INGOT));
         basicHelmet(recipeOutput, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_HELMET);
         basicChestplate(recipeOutput, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_CHESTPLATE);
@@ -46,16 +52,19 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicShovel(recipeOutput, Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_SHOVEL);
         basicHoe(recipeOutput, Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_HOE);
 
+        // Biomass Recipes
+        basicHelmet(recipeOutput, BSItems.BIOMASS.get(), BSItems.BIOMASS_HELMET);
+        basicChestplate(recipeOutput, BSItems.BIOMASS.get(), BSItems.BIOMASS_CHESTPLATE);
+        basicLeggings(recipeOutput, BSItems.BIOMASS.get(), BSItems.BIOMASS_LEGGINGS);
+        basicBoots(recipeOutput, BSItems.BIOMASS.get(), BSItems.BIOMASS_BOOTS);
+        basicSword(recipeOutput, Items.STICK, BSItems.BIOMASS.get(), BSItems.BIOMASS_SWORD);
+        basicPickaxe(recipeOutput, Items.STICK, BSItems.BIOMASS.get(), BSItems.BIOMASS_PICKAXE);
+        basicAxe(recipeOutput, Items.STICK, BSItems.BIOMASS.get(), BSItems.BIOMASS_AXE);
+        basicShovel(recipeOutput, Items.STICK, BSItems.BIOMASS.get(), BSItems.BIOMASS_SHOVEL);
+        basicHoe(recipeOutput, Items.STICK, BSItems.BIOMASS.get(), BSItems.BIOMASS_HOE);
+
         // Ender Upgrade
         copySmithingTemplate(recipeOutput, BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE, Items.ENDER_EYE, Items.OBSIDIAN);
-
-        // Livingmetal Recipes
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT)
-                .requires(Items.SOUL_SAND)
-                .requires(Items.IRON_INGOT)
-                .requires(Items.GHAST_TEAR)
-                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
-                .save(recipeOutput);
 
 
         // Big Swords
@@ -66,6 +75,8 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.get(), Items.DIAMOND, BSItems.DIAMOND_BIG_SWORD);
         basicBigSword(recipeOutput, Items.BONE, Items.ROTTEN_FLESH, BSItems.PATCHWORK_BIG_SWORD);
         basicBigSword(recipeOutput, BSItems.GIANT_LIVINGMETAL_HANDLE.get(), BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_BIG_SWORD);
+        basicBigSwordTwoMat(recipeOutput, BSItems.GIANT_BLAZE_ROD.get(), Items.QUARTZ, Items.QUARTZ_BLOCK , BSItems.QUARTZ_BIG_SWORD);
+        basicBigSwordTwoMat(recipeOutput, BSItems.GIANT_WOODEN_STICK.get(), BSItems.BIOMASS.get(), Items.NETHER_BRICK , BSItems.BIOMASS_BIG_SWORD);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.SKULL_BIG_SWORD)
                 .define('#', BSItems.GIANT_WOODEN_STICK)
@@ -78,16 +89,6 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .unlockedBy("has_" + getItemName(Items.SKELETON_SKULL), has(Items.SKELETON_SKULL))
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.QUARTZ_BIG_SWORD)
-                .define('#', BSItems.GIANT_BLAZE_ROD)
-                .define('Q', Items.QUARTZ)
-                .define('X', Items.QUARTZ_BLOCK)
-                .pattern(" QQ")
-                .pattern("XQQ")
-                .pattern("#X ")
-                .unlockedBy("has_" + getItemName(Items.QUARTZ), has(Items.QUARTZ))
-                .save(recipeOutput);
-
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.OBSIDIAN_BIG_SWORD)
                 .define('#', BSItems.GIANT_BLAZE_ROD)
                 .define('Q', Items.OBSIDIAN)
@@ -97,6 +98,5 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("#Q ")
                 .unlockedBy("has_" + getItemName(Items.OBSIDIAN), has(Items.OBSIDIAN))
                 .save(recipeOutput);
-
     }
 }

@@ -28,16 +28,21 @@ public class CreativeTab {
             output.accept(BSItems.LIVINGMETAL_AXE);
             output.accept(BSItems.LIVINGMETAL_SHOVEL);
             output.accept(BSItems.LIVINGMETAL_HOE);
-            output.accept(BSBlocks.LIVINGMETAL_BLOCK);
-            output.accept(BSItems.LIVINGMETAL_INGOT);
-
 
             // Biomass Stuff
+            output.accept(BSItems.BIOMASS_HELMET);
+            output.accept(BSItems.BIOMASS_CHESTPLATE);
+            output.accept(BSItems.BIOMASS_LEGGINGS);
+            output.accept(BSItems.BIOMASS_BOOTS);
             output.accept(BSItems.BIOMASS_SWORD);
             output.accept(BSItems.BIOMASS_PICKAXE);
             output.accept(BSItems.BIOMASS_AXE);
             output.accept(BSItems.BIOMASS_SHOVEL);
             output.accept(BSItems.BIOMASS_HOE);
+
+            // Materials
+            output.accept(BSBlocks.LIVINGMETAL_BLOCK);
+            output.accept(BSItems.LIVINGMETAL_INGOT);
             output.accept(BSItems.BIOMASS);
 
             // Sticks
@@ -61,6 +66,7 @@ public class CreativeTab {
             output.accept(BSItems.OBSIDIAN_BIG_SWORD);
             output.accept(BSItems.ENDER_BIG_SWORD);
             output.accept(BSItems.LIVINGMETAL_BIG_SWORD);
+            output.accept(BSItems.BIOMASS_BIG_SWORD);
         });
 
         builder.icon(() -> new ItemStack(BSItems.ENDER_BIG_SWORD.asItem()));

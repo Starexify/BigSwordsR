@@ -48,6 +48,18 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
+    protected static void basicBigSwordTwoMat(RecipeOutput recipeOutput, Item handle, Item material, Item material2, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', handle)
+                .define('X', material)
+                .define('Y', material2)
+                .pattern(" XX")
+                .pattern("YXX")
+                .pattern("#Y ")
+                .unlockedBy("has_" + getItemName(material), has(material))
+                .save(recipeOutput);
+    }
+
     protected static void basicBigSword(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
                 .define('#', handle)

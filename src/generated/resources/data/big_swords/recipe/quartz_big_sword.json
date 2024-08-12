@@ -5,17 +5,17 @@
     "#": {
       "item": "big_swords:giant_blaze_rod"
     },
-    "Q": {
+    "X": {
       "item": "minecraft:quartz"
     },
-    "X": {
+    "Y": {
       "item": "minecraft:quartz_block"
     }
   },
   "pattern": [
-    " QQ",
-    "XQQ",
-    "#X "
+    " XX",
+    "YXX",
+    "#Y "
   ],
   "result": {
     "count": 1,
