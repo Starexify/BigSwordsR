@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "big_swords:giant_wooden_stick"
+    },
+    "B": {
+      "item": "minecraft:bone"
+    },
+    "S": {
+      "item": "minecraft:skeleton_skull"
+    },
+    "X": {
+      "item": "minecraft:bone_block"
+    }
+  },
+  "pattern": [
+    " BB",
+    "XSB",
+    "#X "
+  ],
+  "result": {
+    "count": 1,
+    "id": "big_swords:skull_big_sword"
+  }
+}

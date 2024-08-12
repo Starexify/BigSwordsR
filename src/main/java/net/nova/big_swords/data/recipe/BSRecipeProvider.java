@@ -49,7 +49,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern(" XX")
                 .pattern("XXX")
                 .pattern("#X ")
-                .unlockedBy("has_" + getItemName(handle), has(handle))
+                .unlockedBy("has_" + getItemName(material), has(material))
                 .save(recipeOutput);
     }
 

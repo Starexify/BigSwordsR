@@ -9,7 +9,7 @@ public class BigSwordItem extends SwordItem {
 
     public BigSwordItem(Tier pTier, Properties pProperties) {
         super(pTier, pProperties);
-        this.customDurability = pTier.getUses() * 3;
+        this.customDurability = pTier.getUses() * 2;
     }
 
     @Override

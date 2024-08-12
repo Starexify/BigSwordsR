@@ -28,6 +28,8 @@ public class CreativeTab {
             output.accept(BSItems.GOLDEN_BIG_SWORD);
             output.accept(BSItems.DIAMOND_BIG_SWORD);
             output.accept(BSItems.NETHERITE_BIG_SWORD);
+            output.accept(BSItems.PATCHWORK_BIG_SWORD);
+            output.accept(BSItems.SKULL_BIG_SWORD);
         });
 
         builder.icon(() -> new ItemStack(BSItems.WOODEN_BIG_SWORD.asItem()));

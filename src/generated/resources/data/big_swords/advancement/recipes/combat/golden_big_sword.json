@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_giant_wooden_stick": {
+    "has_gold_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "big_swords:giant_wooden_stick"
+            "items": "minecraft:gold_ingot"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_giant_wooden_stick"
+      "has_gold_ingot"
     ]
   ],
   "rewards": {
