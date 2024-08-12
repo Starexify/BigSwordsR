@@ -67,6 +67,9 @@ public class CreativeTab {
             output.accept(BSItems.ENDER_BIG_SWORD);
             output.accept(BSItems.LIVINGMETAL_BIG_SWORD);
             output.accept(BSItems.BIOMASS_BIG_SWORD);
+
+            // Glaives
+            output.accept(BSItems.WOODEN_GLAIVE);
         });
 
         builder.icon(() -> new ItemStack(BSItems.ENDER_BIG_SWORD.asItem()));

@@ -60,6 +60,28 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
+    protected static void basicGlaive(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', handle)
+                .define('X', material)
+                .pattern("XX ")
+                .pattern("X#X")
+                .pattern(" X#")
+                .unlockedBy("has_" + getItemName(material), has(material))
+                .save(recipeOutput);
+    }
+
+    protected static void basicGlaive(RecipeOutput recipeOutput, Item handle, TagKey<Item> material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', handle)
+                .define('X', material)
+                .pattern("XX ")
+                .pattern("X#X")
+                .pattern(" X#")
+                .unlockedBy("has_" + getItemName(handle), has(handle))
+                .save(recipeOutput);
+    }
+
     protected static void basicBigSword(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
                 .define('#', handle)

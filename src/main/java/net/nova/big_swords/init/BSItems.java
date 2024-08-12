@@ -5,6 +5,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.nova.big_swords.item.BigSwordItem;
 import net.nova.big_swords.item.EnderSmithingTemplate;
+import net.nova.big_swords.item.GlaiveItem;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
@@ -58,4 +59,7 @@ public class BSItems {
     public static DeferredItem<Item> ENDER_BIG_SWORD = ITEMS.register("ender_big_sword", () -> new BigSwordItem(BSTiers.ENDER, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.ENDER, 5, -2.8F))));
     public static DeferredItem<Item> LIVINGMETAL_BIG_SWORD = ITEMS.register("livingmetal_big_sword", () -> new BigSwordItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.LIVINGMETAL, 5, -2.8F))));
     public static DeferredItem<Item> BIOMASS_BIG_SWORD = ITEMS.register("biomass_big_sword", () -> new BigSwordItem(BSTiers.BIOMASS, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.BIOMASS, 5, -2.8F))));
+
+    // Glaives
+    public static DeferredItem<Item> WOODEN_GLAIVE = ITEMS.register("wooden_glaive", () -> new GlaiveItem(Tiers.WOOD, new Item.Properties().attributes(GlaiveItem.createAttributes(Tiers.WOOD, 2, -2.2F))));
 }

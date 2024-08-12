@@ -84,13 +84,22 @@ public class BSItemModelProvider extends ItemModelProvider {
         handheldItem(BSItems.OBSIDIAN_BIG_SWORD.get());
         handheldItem(BSItems.ENDER_BIG_SWORD.get());
         handheldItem(BSItems.LIVINGMETAL_BIG_SWORD.get());
+        handheldItem(BSItems.BIOMASS_BIG_SWORD.get());
+
+        // Glaives
+        handheldGlaive(BSItems.WOODEN_GLAIVE.get());
+    }
+
+    private void handheldGlaive(Item item) {
+        getBuilder(getItemName(item))
+                .parent(getExistingFile(modLoc("item/handheld_glaive")))
+                .texture("layer0", "item/" + getItemName(item));
     }
 
     private void handheldItem(Item item) {
-        String name = getItemName(item);
-        getBuilder(name)
+        getBuilder(getItemName(item))
                 .parent(getExistingFile(mcLoc("item/handheld")))
-                .texture("layer0", "item/" + name);
+                .texture("layer0", "item/" + getItemName(item));
     }
 
     private void trimmableArmorItem(Item item) {

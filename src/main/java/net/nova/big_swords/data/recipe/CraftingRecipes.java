@@ -98,5 +98,8 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("#Q ")
                 .unlockedBy("has_" + getItemName(Items.OBSIDIAN), has(Items.OBSIDIAN))
                 .save(recipeOutput);
+
+        // Glaives
+        basicGlaive(recipeOutput, Items.STICK, ItemTags.PLANKS, BSItems.WOODEN_GLAIVE);
     }
 }

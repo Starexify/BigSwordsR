@@ -61,6 +61,9 @@ public class LangProvider extends LanguageProvider {
         addItem(BSItems.LIVINGMETAL_BIG_SWORD, "Livingmetal Big Sword");
         addItem(BSItems.BIOMASS_BIG_SWORD, "Biomass Big Sword");
 
+        // Glaives
+        addItem(BSItems.WOODEN_GLAIVE, "Wooden Glaive");
+
         // Creative Tab
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");
 
