@@ -1,5 +1,7 @@
 {
   "values": [
-    "big_swords:wooden_glaive"
+    "big_swords:wooden_glaive",
+    "big_swords:stone_glaive",
+    "big_swords:iron_glaive"
   ]
 }

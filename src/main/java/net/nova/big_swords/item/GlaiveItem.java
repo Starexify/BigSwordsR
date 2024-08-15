@@ -1,10 +1,11 @@
 package net.nova.big_swords.item;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
@@ -30,6 +31,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 
+import static net.nova.big_swords.BigSwordsR.rl;
+
 public class GlaiveItem extends TieredItem {
     private final float minDamage;
     private final float maxDamage;
@@ -39,6 +42,13 @@ public class GlaiveItem extends TieredItem {
         super(pTier, pProperties.component(DataComponents.TOOL, createToolProperties()));
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
+
+        pTooltipComponents.add(Component.literal(minDamage + " - " + maxDamage + " Charge Damage").withStyle(ChatFormatting.DARK_GREEN));
     }
 
     @Override
@@ -67,7 +77,7 @@ public class GlaiveItem extends TieredItem {
 
             if (!level.isClientSide) {
                 Vec3 startVec = player.getEyePosition(1.0F);
-                Vec3 endVec = startVec.add(player.getLookAngle().scale(6.0)); // 6 block range
+                Vec3 endVec = startVec.add(player.getLookAngle().scale(5.0)); // 5 block range
                 AABB boundingBox = new AABB(startVec, endVec).inflate(1.0);
                 Predicate<LivingEntity> predicate = livingEntity -> livingEntity != player && livingEntity.isPickable();
                 List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, boundingBox, predicate);

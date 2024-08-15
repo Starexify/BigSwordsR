@@ -70,6 +70,13 @@ public class CreativeTab {
 
             // Glaives
             output.accept(BSItems.WOODEN_GLAIVE);
+            output.accept(BSItems.STONE_GLAIVE);
+            output.accept(BSItems.IRON_GLAIVE);
+            output.accept(BSItems.GOLDEN_GLAIVE);
+            output.accept(BSItems.DIAMOND_GLAIVE);
+            output.accept(BSItems.NETHERITE_GLAIVE);
+            output.accept(BSItems.BIOMASS_GLAIVE);
+            output.accept(BSItems.LIVINGMETAL_GLAIVE);
         });
 
         builder.icon(() -> new ItemStack(BSItems.ENDER_BIG_SWORD.asItem()));

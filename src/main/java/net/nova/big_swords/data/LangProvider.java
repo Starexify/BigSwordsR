@@ -64,6 +64,13 @@ public class LangProvider extends LanguageProvider {
 
         // Glaives
         addItem(BSItems.WOODEN_GLAIVE, "Wooden Glaive");
+        addItem(BSItems.STONE_GLAIVE, "Stone Glaive");
+        addItem(BSItems.IRON_GLAIVE, "Iron Glaive");
+        addItem(BSItems.GOLDEN_GLAIVE, "Golden Glaive");
+        addItem(BSItems.DIAMOND_GLAIVE, "Diamond Glaive");
+        addItem(BSItems.NETHERITE_GLAIVE, "Netherite Glaive");
+        addItem(BSItems.BIOMASS_GLAIVE, "Biomass Glaive");
+        addItem(BSItems.LIVINGMETAL_GLAIVE, "Livingmetal Glaive");
 
         // Creative Tab
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");

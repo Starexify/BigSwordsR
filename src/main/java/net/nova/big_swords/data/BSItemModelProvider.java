@@ -88,6 +88,13 @@ public class BSItemModelProvider extends ItemModelProvider {
 
         // Glaives
         handheldGlaive(BSItems.WOODEN_GLAIVE.get());
+        handheldGlaive(BSItems.STONE_GLAIVE.get());
+        handheldGlaive(BSItems.IRON_GLAIVE.get());
+        handheldGlaive(BSItems.GOLDEN_GLAIVE.get());
+        handheldGlaive(BSItems.DIAMOND_GLAIVE.get());
+        handheldGlaive(BSItems.NETHERITE_GLAIVE.get());
+        handheldGlaive(BSItems.BIOMASS_GLAIVE.get());
+        handheldGlaive(BSItems.LIVINGMETAL_GLAIVE.get());
     }
 
     private void handheldGlaive(Item item) {

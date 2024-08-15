@@ -101,5 +101,20 @@ public class CraftingRecipes extends BSRecipeProvider {
 
         // Glaives
         basicGlaive(recipeOutput, Items.STICK, ItemTags.PLANKS, BSItems.WOODEN_GLAIVE);
+        basicGlaive(recipeOutput, Items.STICK, ItemTags.STONE_TOOL_MATERIALS, BSItems.STONE_GLAIVE);
+        basicGlaive(recipeOutput, Items.STICK, Items.IRON_INGOT, BSItems.IRON_GLAIVE);
+        basicGlaive(recipeOutput, Items.STICK, Items.GOLD_INGOT, BSItems.GOLDEN_GLAIVE);
+        basicGlaive(recipeOutput, Items.STICK, Items.DIAMOND, BSItems.DIAMOND_GLAIVE);
+        basicGlaive(recipeOutput, Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_GLAIVE);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.BIOMASS_GLAIVE)
+                .define('#', Items.STICK)
+                .define('X', BSItems.BIOMASS)
+                .define('Y', Items.NETHER_BRICK)
+                .pattern("XX ")
+                .pattern("X#Y")
+                .pattern(" Y#")
+                .unlockedBy("has_" + getItemName(BSItems.BIOMASS), has(BSItems.BIOMASS))
+                .save(recipeOutput);
     }
 }
