@@ -61,5 +61,5 @@ public class BSItems {
     public static DeferredItem<Item> BIOMASS_BIG_SWORD = ITEMS.register("biomass_big_sword", () -> new BigSwordItem(BSTiers.BIOMASS, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.BIOMASS, 5, -2.8F))));
 
     // Glaives
-    public static DeferredItem<Item> WOODEN_GLAIVE = ITEMS.register("wooden_glaive", () -> new GlaiveItem(Tiers.WOOD, new Item.Properties().attributes(GlaiveItem.createAttributes(Tiers.WOOD, 2, -2.2F))));
+    public static DeferredItem<Item> WOODEN_GLAIVE = ITEMS.register("wooden_glaive", () -> new GlaiveItem(Tiers.WOOD, new Item.Properties().attributes(GlaiveItem.createAttributes(Tiers.WOOD, 2, -2.2F)), 3F, 4F));
 }
