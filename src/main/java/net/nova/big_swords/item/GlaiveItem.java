@@ -3,6 +3,7 @@ package net.nova.big_swords.item;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
@@ -23,6 +24,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.nova.big_swords.init.Sounds;
 
 import java.util.List;
 import java.util.Random;
@@ -56,6 +58,7 @@ public class GlaiveItem extends TieredItem {
         return InteractionResultHolder.consume(itemstack);
     }
 
+    // Glaive Mechanic
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
         if (entity instanceof Player player) {
@@ -65,27 +68,36 @@ public class GlaiveItem extends TieredItem {
             if (!level.isClientSide) {
                 Vec3 startVec = player.getEyePosition(1.0F);
                 Vec3 endVec = startVec.add(player.getLookAngle().scale(6.0)); // 6 block range
-
                 AABB boundingBox = new AABB(startVec, endVec).inflate(1.0);
                 Predicate<LivingEntity> predicate = livingEntity -> livingEntity != player && livingEntity.isPickable();
                 List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, boundingBox, predicate);
 
                 EntityHitResult entityHitResult = getEntityHitResult(player, startVec, endVec, entities);
 
+                player.swing(InteractionHand.MAIN_HAND, true);
                 if (entityHitResult != null && entityHitResult.getType() == HitResult.Type.ENTITY) {
                     LivingEntity target = (LivingEntity) entityHitResult.getEntity();
-                    player.swing(InteractionHand.MAIN_HAND, true);
-
                     float damage = minDamage + random.nextFloat() * (maxDamage - minDamage);
                     damage = Math.round(damage * 10.0f) / 10.0f;
                     target.hurt(player.damageSources().playerAttack(player), damage);
 
                     stack.hurtAndBreak(3, player, EquipmentSlot.MAINHAND);
                     player.getCooldowns().addCooldown(this, 40);
-                    level.playSound(null, target.getX(), target.getY(), target.getZ(), SoundEvents.HIT, SoundSource.PLAYERS, 1.0F, 1.0F);
+                    playSound(level, player, Sounds.GLAIVE_HIT.get());
                     player.sendSystemMessage(Component.literal("Hit entity with dmg: " + damage)); // Debug output
+                } else {
+                    player.getCooldowns().addCooldown(this, 10);
+                    playSound(level, player, Sounds.GLAIVE_SWING.get());
                 }
             }
+        }
+    }
+
+    private static void playSound(Level level, Player player, SoundEvent sound) {
+        if (!player.level().isClientSide) {
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f);
+        } else {
+            level.playLocalSound(player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f, false);
         }
     }
 

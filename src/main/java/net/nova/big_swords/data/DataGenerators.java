@@ -42,6 +42,8 @@ public class DataGenerators {
 
             generator.addProvider(true, new BSDataMapProvider(output, lookupProvider));
 
+            generator.addProvider(true, new SoundsProvider(output, existingFileHelper));
+
         } catch (RuntimeException e) {
             BigSwordsR.logger.error("Cosmicore failed to gather data", e);
         }

@@ -5,6 +5,7 @@ import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.CreativeTab;
+import net.nova.big_swords.init.Sounds;
 import net.nova.big_swords.item.EnderSmithingTemplate;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
@@ -74,5 +75,9 @@ public class LangProvider extends LanguageProvider {
         add(EnderSmithingTemplate.ENDER_UPGRADE_BASE_SLOT_DESCRIPTION.getString(), "Add obsidian armor, weapon, or tool");
         add(EnderSmithingTemplate.ENDER_UPGRADE_INGREDIENTS.getString(), "Ender Eye");
         add(EnderSmithingTemplate.ENDER_UPGRADE.getString(), "Ender Upgrade");
+
+        // Sounds
+        add(SoundsProvider.getSubtitle(Sounds.GLAIVE_HIT), "Glaive Hit");
+        add(SoundsProvider.getSubtitle(Sounds.GLAIVE_SWING), "Glaive Swing");
     }
 }
