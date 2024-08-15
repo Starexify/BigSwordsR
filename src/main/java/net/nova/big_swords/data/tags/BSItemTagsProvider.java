@@ -27,7 +27,8 @@ public class BSItemTagsProvider extends ItemTagsProvider {
         );
 
         tag(Tags.BSItemTags.GLAIVES).add(
-                BSItems.WOODEN_GLAIVE.get(), BSItems.STONE_GLAIVE.asItem(), BSItems.IRON_GLAIVE.asItem()
+                BSItems.WOODEN_GLAIVE.get(), BSItems.STONE_GLAIVE.asItem(), BSItems.IRON_GLAIVE.asItem(), BSItems.GOLDEN_GLAIVE.asItem(), BSItems.DIAMOND_GLAIVE.asItem(),
+                BSItems.NETHERITE_GLAIVE.asItem(), BSItems.BIOMASS_GLAIVE.asItem(), BSItems.LIVINGMETAL_GLAIVE.asItem()
         );
 
         tag(ItemTags.HEAD_ARMOR).add(BSItems.LIVINGMETAL_HELMET.get(), BSItems.BIOMASS_HELMET.get());

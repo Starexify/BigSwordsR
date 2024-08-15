@@ -1,7 +1,6 @@
 package net.nova.big_swords.item;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -31,8 +30,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 
-import static net.nova.big_swords.BigSwordsR.rl;
-
 public class GlaiveItem extends TieredItem {
     private final float minDamage;
     private final float maxDamage;
@@ -48,7 +45,9 @@ public class GlaiveItem extends TieredItem {
     public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
 
-        pTooltipComponents.add(Component.literal(minDamage + " - " + maxDamage + " Charge Damage").withStyle(ChatFormatting.DARK_GREEN));
+        pTooltipComponents.add(Component.empty());
+        pTooltipComponents.add(Component.literal("Special:").withStyle(ChatFormatting.GRAY));
+        pTooltipComponents.add(Component.literal(" " + this.minDamage + " - " + this.maxDamage + " Charged Damage").withStyle(ChatFormatting.DARK_GREEN));
     }
 
     @Override
