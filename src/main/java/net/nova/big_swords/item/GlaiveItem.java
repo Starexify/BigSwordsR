@@ -4,8 +4,6 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -29,6 +27,8 @@ import net.nova.big_swords.init.Sounds;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
+
+import static net.nova.big_swords.BigSwordsR.playSound;
 
 public class GlaiveItem extends TieredItem {
     private final float minDamage;
@@ -57,7 +57,7 @@ public class GlaiveItem extends TieredItem {
 
     @Override
     public int getUseDuration(ItemStack pStack, LivingEntity pEntity) {
-        return 18000;
+        return 36000;
     }
 
     @Override
@@ -99,14 +99,6 @@ public class GlaiveItem extends TieredItem {
                     playSound(level, player, Sounds.GLAIVE_SWING.get());
                 }
             }
-        }
-    }
-
-    private static void playSound(Level level, Player player, SoundEvent sound) {
-        if (!player.level().isClientSide) {
-            level.playSound(null, player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f);
-        } else {
-            level.playLocalSound(player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f, false);
         }
     }
 

@@ -22,6 +22,27 @@ public class CraftingRecipes extends BSRecipeProvider {
     }
 
     public void build() {
+        // Extra Recipes
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BSItems.CREEP_BALL)
+                .define('#', Items.SLIME_BALL)
+                .define('O', Items.ROTTEN_FLESH)
+                .define('X', Items.SPIDER_EYE)
+                .pattern("XOX")
+                .pattern("O#O")
+                .pattern("XOX")
+                .unlockedBy("has_" + getItemName(Items.SLIME_BALL), has(Items.SLIME_BALL))
+                .save(recipeOutput);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BSItems.CREEP_BALL)
+                .define('#', Items.SLIME_BALL)
+                .define('O', Items.ROTTEN_FLESH)
+                .define('X', Items.SPIDER_EYE)
+                .pattern("OXO")
+                .pattern("X#X")
+                .pattern("OXO")
+                .unlockedBy("has_" + getItemName(Items.SLIME_BALL), has(Items.SLIME_BALL))
+                .save(recipeOutput);
+
+
         // Sticks
         basicGiantStick(recipeOutput, Items.STICK, BSItems.GIANT_WOODEN_STICK);
         basicGiantStick(recipeOutput, Items.BLAZE_ROD, BSItems.GIANT_BLAZE_ROD);
@@ -53,6 +74,7 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicHoe(recipeOutput, Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_HOE);
 
         // Biomass Recipes
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, BSItems.BIOMASS, RecipeCategory.BUILDING_BLOCKS, BSBlocks.BIOMASS_BLOCK, getItemName(BSItems.BIOMASS) + "_from_" + getItemName(BSBlocks.BIOMASS_BLOCK), getItemName(BSItems.BIOMASS));
         basicHelmet(recipeOutput, BSItems.BIOMASS.get(), BSItems.BIOMASS_HELMET);
         basicChestplate(recipeOutput, BSItems.BIOMASS.get(), BSItems.BIOMASS_CHESTPLATE);
         basicLeggings(recipeOutput, BSItems.BIOMASS.get(), BSItems.BIOMASS_LEGGINGS);

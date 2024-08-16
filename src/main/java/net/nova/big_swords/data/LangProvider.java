@@ -22,6 +22,10 @@ public class LangProvider extends LanguageProvider {
         addItem(BSItems.GIANT_BLAZE_ROD, "Giant Blaze Rod");
         addItem(BSItems.GIANT_LIVINGMETAL_HANDLE, "Giant Livingmetal Handle");
 
+        // Extra Stuff
+        addBlock(BSBlocks.CREEP_BLOCK, "Creep Block");
+        addItem(BSItems.CREEP_BALL, "Creep Ball");
+
         // Livingmetal Lang
         addItem(BSItems.LIVINGMETAL_INGOT, "Livingmetal Ingot");
         addBlock(BSBlocks.LIVINGMETAL_BLOCK, "Livingmetal Block");
@@ -37,6 +41,7 @@ public class LangProvider extends LanguageProvider {
 
         // Biomass Lang
         addItem(BSItems.BIOMASS, "Biomass");
+        addBlock(BSBlocks.BIOMASS_BLOCK, "Biomass Block");
         addItem(BSItems.BIOMASS_HELMET, "Biomass Helmet");
         addItem(BSItems.BIOMASS_CHESTPLATE, "Biomass Chestplate");
         addItem(BSItems.BIOMASS_LEGGINGS, "Biomass Leggings");

@@ -12,6 +12,9 @@ import static net.nova.big_swords.BigSwordsR.MODID;
 public class BSItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
+    // Items
+    public static DeferredItem<Item> CREEP_BALL = ITEMS.register("creep_ball", () -> new Item(new Item.Properties()));
+
     // Sticks
     public static DeferredItem<Item> GIANT_WOODEN_STICK = ITEMS.register("giant_wooden_stick", () -> new Item(new Item.Properties()));
     public static DeferredItem<Item> GIANT_BLAZE_ROD = ITEMS.register("giant_blaze_rod", () -> new Item(new Item.Properties()));

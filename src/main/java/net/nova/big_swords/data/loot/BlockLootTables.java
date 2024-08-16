@@ -20,8 +20,9 @@ public class BlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        // Livingmetal Drops
         dropSelf(BSBlocks.LIVINGMETAL_BLOCK.get());
+        dropSelf(BSBlocks.BIOMASS_BLOCK.get());
+        dropSelf(BSBlocks.CREEP_BLOCK.get());
     }
 
     @Override

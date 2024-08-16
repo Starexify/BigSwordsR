@@ -43,7 +43,12 @@ public class CreativeTab {
             // Materials
             output.accept(BSBlocks.LIVINGMETAL_BLOCK);
             output.accept(BSItems.LIVINGMETAL_INGOT);
+            output.accept(BSBlocks.BIOMASS_BLOCK);
             output.accept(BSItems.BIOMASS);
+
+            // Extra Stuff
+            output.accept(BSItems.CREEP_BALL);
+            output.accept(BSBlocks.CREEP_BLOCK);
 
             // Sticks
             output.accept(BSItems.GIANT_WOODEN_STICK);

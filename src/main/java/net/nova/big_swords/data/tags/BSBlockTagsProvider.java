@@ -22,6 +22,10 @@ public class BSBlockTagsProvider extends BlockTagsProvider {
                 BSBlocks.LIVINGMETAL_BLOCK.getKey()
         );
 
+        tag(BlockTags.MINEABLE_WITH_HOE).add(
+                BSBlocks.BIOMASS_BLOCK.getKey()
+        );
+
         tag(BlockTags.NEEDS_IRON_TOOL).add(
                 BSBlocks.LIVINGMETAL_BLOCK.getKey()
         );
