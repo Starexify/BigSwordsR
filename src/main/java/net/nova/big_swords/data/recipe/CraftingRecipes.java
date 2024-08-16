@@ -24,6 +24,7 @@ public class CraftingRecipes extends BSRecipeProvider {
     public void build() {
         // Extra Recipes
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BSItems.CREEP_BALL)
+                .group(getItemName(BSItems.CREEP_BALL))
                 .define('#', Items.SLIME_BALL)
                 .define('O', Items.ROTTEN_FLESH)
                 .define('X', Items.SPIDER_EYE)
@@ -33,6 +34,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .unlockedBy("has_" + getItemName(Items.SLIME_BALL), has(Items.SLIME_BALL))
                 .save(recipeOutput);
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BSItems.CREEP_BALL)
+                .group(getItemName(BSItems.CREEP_BALL))
                 .define('#', Items.SLIME_BALL)
                 .define('O', Items.ROTTEN_FLESH)
                 .define('X', Items.SPIDER_EYE)
@@ -40,6 +42,12 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("X#X")
                 .pattern("OXO")
                 .unlockedBy("has_" + getItemName(Items.SLIME_BALL), has(Items.SLIME_BALL))
+                .save(recipeOutput, path + getItemName(BSItems.CREEP_BALL) + "_2");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, BSItems.BIOMASS_SEED)
+                .requires(Items.FERMENTED_SPIDER_EYE)
+                .requires(Items.NETHER_WART)
+                .unlockedBy("has_" + getItemName(Items.FERMENTED_SPIDER_EYE), has(Items.FERMENTED_SPIDER_EYE))
                 .save(recipeOutput);
 
 
@@ -60,7 +68,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .requires(Items.SOUL_SAND)
                 .requires(Items.IRON_INGOT)
                 .requires(Items.GHAST_TEAR)
-                .unlockedBy("has_iron_ingot", has(Items.IRON_INGOT))
+                .unlockedBy("has_" + getItemName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                 .save(recipeOutput);
         nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT, RecipeCategory.BUILDING_BLOCKS, BSBlocks.LIVINGMETAL_BLOCK, getItemName(BSItems.LIVINGMETAL_INGOT) + "_from_" + getItemName(BSBlocks.LIVINGMETAL_BLOCK), getItemName(BSItems.LIVINGMETAL_INGOT));
         basicHelmet(recipeOutput, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_HELMET);

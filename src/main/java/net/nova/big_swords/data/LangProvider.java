@@ -25,6 +25,7 @@ public class LangProvider extends LanguageProvider {
         // Extra Stuff
         addBlock(BSBlocks.CREEP_BLOCK, "Creep Block");
         addItem(BSItems.CREEP_BALL, "Creep Ball");
+        addItem(BSItems.BIOMASS_SEED, "Biomass Seed");
 
         // Livingmetal Lang
         addItem(BSItems.LIVINGMETAL_INGOT, "Livingmetal Ingot");

@@ -14,9 +14,9 @@
     }
   },
   "pattern": [
-    "XOX",
-    "O#O",
-    "XOX"
+    "OXO",
+    "X#X",
+    "OXO"
   ],
   "result": {
     "count": 1,
