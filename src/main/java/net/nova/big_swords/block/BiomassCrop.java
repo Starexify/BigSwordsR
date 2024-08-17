@@ -19,10 +19,10 @@ public class BiomassCrop extends CropBlock {
     public static final int MAX_AGE = 3;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
     private static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
-            Block.box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 4.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 6.0, 16.0),
-            Block.box(0.0, 0.0, 0.0, 16.0, 8.0, 16.0),
+            Block.box(5.0, 0.0, 5.0, 11.0, 7.0, 11.0),
+            Block.box(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
+            Block.box(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
+            Block.box(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
     };
 
     public BiomassCrop(Properties properties) {
@@ -39,7 +39,7 @@ public class BiomassCrop extends CropBlock {
     // Crop Stuff
     @Override
     protected boolean mayPlaceOn(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
-        return pState.getBlock() instanceof CreepBlock; // TODO: Maybe make a tag for it?
+        return pState.getBlock() instanceof CreepBlock && pState.getValue(CreepBlock.TILLED);
     }
 
     @Override

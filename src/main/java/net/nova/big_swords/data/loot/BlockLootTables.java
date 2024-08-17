@@ -37,7 +37,9 @@ public class BlockLootTables extends BlockLootSubProvider {
     protected void generate() {
         dropSelf(BSBlocks.LIVINGMETAL_BLOCK.get());
         dropSelf(BSBlocks.BIOMASS_BLOCK.get());
-        dropSelf(BSBlocks.CREEP_BLOCK.get());
+
+        // Creep Block Drops
+        add(BSBlocks.CREEP_BLOCK.get(), block -> this.createSingleItemTableWithSilkTouch(block, Blocks.SOUL_SAND));
 
         // Biomass Drops
         LootItemCondition.Builder lootitemcondition$builder1 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(BSBlocks.BIOMASS.get())
@@ -50,6 +52,7 @@ public class BlockLootTables extends BlockLootSubProvider {
                 pCropBlock,
                 LootTable.lootTable()
                         .withPool(LootPool.lootPool().add(LootItem.lootTableItem(pGrownCropItem).when(pDropGrownCropCondition).otherwise(LootItem.lootTableItem(pSeedsItem))))
+                        .withPool(LootPool.lootPool().add(LootItem.lootTableItem(pSeedsItem)))
         );
     }
 

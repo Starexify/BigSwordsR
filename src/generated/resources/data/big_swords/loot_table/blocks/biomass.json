@@ -33,6 +33,16 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "big_swords:biomass_seed"
+        }
+      ],
+      "rolls": 1.0
     }
   ],
   "random_sequence": "big_swords:blocks/biomass"
