@@ -62,6 +62,10 @@ The mod also adds two new types of weapons, Glaives and Scythes.
 <table align="center" style="border-collapse: collapse;">
   <tbody>
     <tr>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>🌱 Farming</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;">New Biomass Seed which grows on Tilled Creep Blocks, only way to gain Biomass</td>
+    </tr>
+    <tr>
       <td style="padding: 10px; text-align: left; border: none;"><strong>🪨 New Materials</strong></td>
       <td style="padding: 10px; text-align: left; border: none;"><strong>Livingmetal</strong> and <strong>Biomass</strong> are two new materials.</td>
     </tr>
