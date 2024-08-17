@@ -73,10 +73,6 @@ The mod also adds two new types of weapons, Glaives and Scythes.
       <td style="padding: 10px; text-align: left; border: none;"><strong>⚔️️ Glaives</strong></td>
       <td style="padding: 10px; text-align: left; border: none;">New weapons that deal small damage, but are fast and have more range.</td>
     </tr>
-    <tr>
-      <td style="padding: 10px; text-align: left; border: none;"><strong>⚔️️ Scythes</strong></td>
-      <td style="padding: 10px; text-align: left; border: none;">New weapons that are similar to hoes but <strong>BETTER</strong>, they hit mobs in a short area.</td>
-    </tr>
   </tbody>
 </table>
 
@@ -85,6 +81,7 @@ The mod also adds two new types of weapons, Glaives and Scythes.
 
 In the upcoming updates I plan to add:
 
+- Scythes
 - Better functionality and shields
 
 
