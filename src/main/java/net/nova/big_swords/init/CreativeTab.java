@@ -68,11 +68,11 @@ public class CreativeTab {
                 output.accept(BSItems.GOLDEN_BIG_SWORD);
                 output.accept(BSItems.DIAMOND_BIG_SWORD);
                 output.accept(BSItems.NETHERITE_BIG_SWORD);
+                output.accept(BSItems.OBSIDIAN_BIG_SWORD);
+                output.accept(BSItems.ENDER_BIG_SWORD);
                 output.accept(BSItems.BIOMASS_BIG_SWORD);
                 output.accept(BSItems.LIVINGMETAL_BIG_SWORD);
                 output.accept(BSItems.QUARTZ_BIG_SWORD);
-                output.accept(BSItems.OBSIDIAN_BIG_SWORD);
-                output.accept(BSItems.ENDER_BIG_SWORD);
                 output.accept(BSItems.SKULL_BIG_SWORD);
                 output.accept(BSItems.PATCHWORK_BIG_SWORD);
 

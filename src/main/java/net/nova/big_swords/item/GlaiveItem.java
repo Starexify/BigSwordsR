@@ -6,6 +6,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -16,12 +17,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.*;
+import net.nova.big_swords.block.CreepBlock;
 import net.nova.big_swords.init.Sounds;
 
 import java.util.List;
@@ -63,6 +63,20 @@ public class GlaiveItem extends TieredItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack itemstack = player.getItemInHand(usedHand);
+
+        // Check if the player is looking at a CreepBlock
+        BlockHitResult blockHit = level.clip(new ClipContext(
+                player.getEyePosition(1.0F),
+                player.getEyePosition(1.0F).add(player.getLookAngle().scale(5.0)), // 5 block range
+                ClipContext.Block.OUTLINE,
+                ClipContext.Fluid.NONE,
+                player
+        ));
+
+        if (blockHit.getType() == HitResult.Type.BLOCK && level.getBlockState(blockHit.getBlockPos()).getBlock() instanceof CreepBlock) {
+            return InteractionResultHolder.pass(itemstack); // Pass if a CreepBlock is hit
+        }
+
         player.startUsingItem(usedHand);
         return InteractionResultHolder.consume(itemstack);
     }
@@ -93,7 +107,7 @@ public class GlaiveItem extends TieredItem {
                     stack.hurtAndBreak(3, player, EquipmentSlot.MAINHAND);
                     player.getCooldowns().addCooldown(this, 40);
                     playSound(level, player, Sounds.GLAIVE_HIT.get());
-                    player.sendSystemMessage(Component.literal("Hit entity with dmg: " + damage)); // Debug output
+                    // player.sendSystemMessage(Component.literal("Hit entity with dmg: " + damage)); // Debug output
                 } else {
                     player.getCooldowns().addCooldown(this, 10);
                     playSound(level, player, Sounds.GLAIVE_SWING.get());
