@@ -7,9 +7,11 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.nova.big_swords.block.BiomassCrop;
 import net.nova.big_swords.block.CreepBlock;
 
 import java.util.function.Supplier;
@@ -38,6 +40,15 @@ public class BSBlocks {
             .instrument(NoteBlockInstrument.COW_BELL)
             .strength(1.5F)
             .sound(SoundType.SOUL_SAND)
+    ));
+
+    public static DeferredBlock<Block> BIOMASS = BLOCKS.register("biomass", () -> new BiomassCrop(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.PLANT)
+            .noCollission()
+            .randomTicks()
+            .instabreak()
+            .sound(SoundType.CROP)
+            .pushReaction(PushReaction.DESTROY)
     ));
 
 

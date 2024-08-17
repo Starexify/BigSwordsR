@@ -1,6 +1,7 @@
 package net.nova.big_swords.init;
 
 import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.nova.big_swords.item.BigSwordItem;
@@ -14,7 +15,7 @@ public class BSItems {
 
     // Extra
     public static DeferredItem<Item> CREEP_BALL = ITEMS.register("creep_ball", () -> new Item(new Item.Properties()));
-    public static DeferredItem<Item> BIOMASS_SEED = ITEMS.register("biomass_seed", () -> new Item(new Item.Properties()));
+    public static DeferredItem<Item> BIOMASS_SEED = ITEMS.register("biomass_seed", () -> new ItemNameBlockItem(BSBlocks.BIOMASS.get(), new Item.Properties()));
 
     // Sticks
     public static DeferredItem<Item> GIANT_WOODEN_STICK = ITEMS.register("giant_wooden_stick", () -> new Item(new Item.Properties()));

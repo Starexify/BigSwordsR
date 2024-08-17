@@ -61,7 +61,6 @@ public class BSItemModelProvider extends ItemModelProvider {
         handheldItem(BSItems.LIVINGMETAL_HOE.get());
 
         // Biomass Models
-        basicItem(BSItems.BIOMASS.get());
         trimmableArmorItem(BSItems.BIOMASS_HELMET.get());
         trimmableArmorItem(BSItems.BIOMASS_CHESTPLATE.get());
         trimmableArmorItem(BSItems.BIOMASS_LEGGINGS.get());
