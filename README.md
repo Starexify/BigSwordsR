@@ -10,6 +10,7 @@
 </p>
 
 <p align="center">
+  <a href="https://github.com/Starexify/BigSwordsR/wiki"><img alt="Documentation" src="https://img.shields.io/badge/mod%20documentation%20(Wiki)-1?style=for-the-badge&logo=readdotcv&color=96000C"></a> 
   <a href="https://github.com/Starexify/BigSwordsR/issues"><img alt="GitHub Issues" src="https://img.shields.io/github/issues/Starexify/BigSwordsR?style=for-the-badge&color=1B3193"></a>
   <a href="https://github.com/Starexify/BigSwordsR/blob/main/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/Starexify/BigSwordsR?style=for-the-badge&color=1B3193"></a>
 </p>
