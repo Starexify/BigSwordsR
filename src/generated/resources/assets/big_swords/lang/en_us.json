@@ -54,6 +54,8 @@
   "item.big_swords.stone_glaive": "Stone Glaive",
   "item.big_swords.wooden_big_sword": "Wooden Big Sword",
   "item.big_swords.wooden_glaive": "Wooden Glaive",
+  "resourcePack.big_swords.big_swords_r_16x.description": "16x version of the Big Swords",
+  "resourcePack.big_swords.big_swords_r_16x.name": "Big Swords R 16x",
   "sounds.big_swords.glaive_hit": "Glaive Hit",
   "sounds.big_swords.glaive_swing": "Glaive Swing",
   "upgrade.big_swords.ender_upgrade": "Ender Upgrade"

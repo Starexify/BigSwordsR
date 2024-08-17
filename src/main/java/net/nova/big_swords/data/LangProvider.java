@@ -2,6 +2,7 @@ package net.nova.big_swords.data;
 
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.nova.big_swords.event.BigSwordsRClient;
 import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.CreativeTab;
@@ -92,5 +93,9 @@ public class LangProvider extends LanguageProvider {
         // Sounds
         add(SoundsProvider.getSubtitle(Sounds.GLAIVE_HIT), "Glaive Hit");
         add(SoundsProvider.getSubtitle(Sounds.GLAIVE_SWING), "Glaive Swing");
+
+        // Resourcepacks
+        add(BigSwordsRClient.RP_16x_NAME, "Big Swords R 16x");
+        add(BigSwordsRClient.RP_16x_DESC, "16x version of the Big Swords");
     }
 }
