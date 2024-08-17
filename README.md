@@ -44,12 +44,11 @@
     </td>
   </tr>
 </table>
-
-
-# Big Swords R
-
-⚠️**Please note that the mod is based on the series of mods, Asgard Shields, and this is just a hobby project and I do not plan to monetize it, therefore content may be different from originals.**
-
+<p align="center">
+    <strong>
+        ⚠️Please note that the mod is based on the series of mods, Asgard Shields, and this is just a hobby project and I do not plan to monetize it, therefore content may be different from originals.
+    </strong>
+</p>
 
 ## ℹ️ About
 
@@ -102,5 +101,4 @@ In the upcoming updates I plan to add:
 
 ## 📜 License
 
-This mod is licensed under the MIT License, allowing for free use, modification, and distribution, meaning you can use
-our mod in your modpacks. For more details, please see the full license included with the mod.
+This mod is licensed under the MIT License, allowing for free use, modification, and distribution, meaning you can use my mod in your modpacks. For more details, please see the full license included with the mod.
