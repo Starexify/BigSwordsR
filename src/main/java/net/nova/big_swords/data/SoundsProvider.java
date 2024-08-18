@@ -19,6 +19,8 @@ public class SoundsProvider extends SoundDefinitionsProvider {
     public void registerSounds() {
         addSound(Sounds.GLAIVE_SWING);
         addSound(Sounds.GLAIVE_HIT);
+        addSound(Sounds.SCYTHE_SLASH);
+        addSound(Sounds.REAPER_SLASH);
     }
 
     // Some methods for simpler generation

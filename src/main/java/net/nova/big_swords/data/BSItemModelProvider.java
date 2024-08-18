@@ -98,6 +98,18 @@ public class BSItemModelProvider extends ItemModelProvider {
         handheldGlaive(BSItems.NETHERITE_GLAIVE.get());
         handheldGlaive(BSItems.BIOMASS_GLAIVE.get());
         handheldGlaive(BSItems.LIVINGMETAL_GLAIVE.get());
+
+        // Scythe
+        handheldItem(BSItems.WOODEN_SCYTHE.get());
+        handheldItem(BSItems.STONE_SCYTHE.get());
+        handheldItem(BSItems.IRON_SCYTHE.get());
+        handheldItem(BSItems.GOLDEN_SCYTHE.get());
+        handheldItem(BSItems.DIAMOND_SCYTHE.get());
+        handheldItem(BSItems.NETHERITE_SCYTHE.get());
+        handheldItem(BSItems.BIOMASS_SCYTHE.get());
+        handheldItem(BSItems.LIVINGMETAL_SCYTHE.get());
+        handheldItem(BSItems.BONE_SCYTHE.get());
+        handheldItem(BSItems.SOUL_REAPER.get());
     }
 
     private void handheldGlaive(Item item) {

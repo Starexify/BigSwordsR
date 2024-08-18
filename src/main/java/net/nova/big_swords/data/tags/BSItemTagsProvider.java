@@ -27,8 +27,13 @@ public class BSItemTagsProvider extends ItemTagsProvider {
         );
 
         tag(Tags.BSItemTags.GLAIVES).add(
-                BSItems.WOODEN_GLAIVE.get(), BSItems.STONE_GLAIVE.asItem(), BSItems.IRON_GLAIVE.asItem(), BSItems.GOLDEN_GLAIVE.asItem(), BSItems.DIAMOND_GLAIVE.asItem(),
-                BSItems.NETHERITE_GLAIVE.asItem(), BSItems.BIOMASS_GLAIVE.asItem(), BSItems.LIVINGMETAL_GLAIVE.asItem()
+                BSItems.WOODEN_GLAIVE.get(), BSItems.STONE_GLAIVE.get(), BSItems.IRON_GLAIVE.get(), BSItems.GOLDEN_GLAIVE.get(), BSItems.DIAMOND_GLAIVE.get(),
+                BSItems.NETHERITE_GLAIVE.get(), BSItems.BIOMASS_GLAIVE.get(), BSItems.LIVINGMETAL_GLAIVE.get()
+        );
+
+        tag(Tags.BSItemTags.SCYTHES).add(
+                BSItems.WOODEN_SCYTHE.get(), BSItems.STONE_SCYTHE.get(), BSItems.IRON_SCYTHE.get(), BSItems.GOLDEN_SCYTHE.get(), BSItems.DIAMOND_SCYTHE.get(),
+                BSItems.NETHERITE_SCYTHE.get(), BSItems.BIOMASS_SCYTHE.get(), BSItems.LIVINGMETAL_SCYTHE.get(), BSItems.BONE_SCYTHE.get(), BSItems.SOUL_REAPER.get()
         );
 
         tag(ItemTags.HEAD_ARMOR).add(BSItems.LIVINGMETAL_HELMET.get(), BSItems.BIOMASS_HELMET.get());
@@ -40,7 +45,7 @@ public class BSItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.PICKAXES).add(BSItems.LIVINGMETAL_PICKAXE.get(), BSItems.LIVINGMETAL_PICKAXE.get());
         tag(ItemTags.AXES).add(BSItems.LIVINGMETAL_AXE.get(), BSItems.BIOMASS_AXE.get());
         tag(ItemTags.SHOVELS).add(BSItems.LIVINGMETAL_SHOVEL.get(), BSItems.BIOMASS_SHOVEL.get());
-        tag(ItemTags.HOES).add(BSItems.LIVINGMETAL_HOE.get(), BSItems.BIOMASS_HOE.get());
+        tag(ItemTags.HOES).addTag(Tags.BSItemTags.SCYTHES).add(BSItems.LIVINGMETAL_HOE.get(), BSItems.BIOMASS_HOE.get());
 
         tag(ItemTags.BREAKS_DECORATED_POTS).addTag(Tags.BSItemTags.GLAIVES);
         tag(ItemTags.SWORD_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);

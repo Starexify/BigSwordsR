@@ -20,6 +20,7 @@ public class FurnaceRecipes extends BSRecipeProvider {
     }
 
     public void build() {
+        // Big Swords
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(
                                 BSItems.IRON_BIG_SWORD
                         ),
@@ -28,7 +29,7 @@ public class FurnaceRecipes extends BSRecipeProvider {
                         0.1F,
                         200
                 )
-                .unlockedBy("has_iron_big_sword", has(BSItems.IRON_BIG_SWORD))
+                .unlockedBy("has_" + getItemName(BSItems.IRON_BIG_SWORD), has(BSItems.IRON_BIG_SWORD))
                 .save(recipeOutput, path + getSmeltingRecipeName(BSItems.IRON_BIG_SWORD));
 
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(
@@ -39,7 +40,7 @@ public class FurnaceRecipes extends BSRecipeProvider {
                         0.1F,
                         100
                 )
-                .unlockedBy("has_iron_big_sword", has(BSItems.IRON_BIG_SWORD))
+                .unlockedBy("has_" + getItemName(BSItems.IRON_BIG_SWORD), has(BSItems.IRON_BIG_SWORD))
                 .save(recipeOutput, path + getBlastingRecipeName(BSItems.IRON_BIG_SWORD));
 
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(
@@ -50,7 +51,7 @@ public class FurnaceRecipes extends BSRecipeProvider {
                         0.1F,
                         200
                 )
-                .unlockedBy("has_golden_big_sword", has(BSItems.GOLDEN_BIG_SWORD))
+                .unlockedBy("has_" + getItemName(BSItems.GOLDEN_BIG_SWORD), has(BSItems.GOLDEN_BIG_SWORD))
                 .save(recipeOutput, path + getSmeltingRecipeName(BSItems.GOLDEN_BIG_SWORD));
 
         SimpleCookingRecipeBuilder.blasting(Ingredient.of(
@@ -61,7 +62,61 @@ public class FurnaceRecipes extends BSRecipeProvider {
                         0.1F,
                         100
                 )
-                .unlockedBy("has_golden_big_sword", has(BSItems.GOLDEN_BIG_SWORD))
+                .unlockedBy("has_" + getItemName(BSItems.GOLDEN_BIG_SWORD), has(BSItems.GOLDEN_BIG_SWORD))
                 .save(recipeOutput, path + getBlastingRecipeName(BSItems.GOLDEN_BIG_SWORD));
+
+        // Glaives & Scythes
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(
+                                BSItems.IRON_GLAIVE,
+                                BSItems.IRON_SCYTHE
+                        ),
+                        RecipeCategory.MISC,
+                        Items.IRON_NUGGET,
+                        0.1F,
+                        200
+                )
+                .unlockedBy("has_" + getItemName(BSItems.IRON_GLAIVE), has(BSItems.IRON_GLAIVE))
+                .unlockedBy("has_" + getItemName(BSItems.IRON_SCYTHE), has(BSItems.IRON_SCYTHE))
+                .save(recipeOutput, path + getSmeltingRecipeName(Items.IRON_NUGGET));
+
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(
+                                BSItems.IRON_GLAIVE,
+                                BSItems.IRON_SCYTHE
+                        ),
+                        RecipeCategory.MISC,
+                        Items.IRON_NUGGET,
+                        0.1F,
+                        100
+                )
+                .unlockedBy("has_" + getItemName(BSItems.IRON_GLAIVE), has(BSItems.IRON_GLAIVE))
+                .unlockedBy("has_" + getItemName(BSItems.IRON_SCYTHE), has(BSItems.IRON_SCYTHE))
+                .save(recipeOutput, path + getBlastingRecipeName(Items.IRON_NUGGET));
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(
+                                BSItems.GOLDEN_GLAIVE,
+                                BSItems.GOLDEN_SCYTHE
+                        ),
+                        RecipeCategory.MISC,
+                        Items.GOLD_NUGGET,
+                        0.1F,
+                        200
+                )
+                .unlockedBy("has_" + getItemName(BSItems.GOLDEN_GLAIVE), has(BSItems.GOLDEN_GLAIVE))
+                .unlockedBy("has_" + getItemName(BSItems.GOLDEN_SCYTHE), has(BSItems.GOLDEN_SCYTHE))
+                .save(recipeOutput, path + getSmeltingRecipeName(Items.GOLD_NUGGET));
+
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(
+                                BSItems.GOLDEN_GLAIVE,
+                                BSItems.GOLDEN_SCYTHE
+                        ),
+                        RecipeCategory.MISC,
+                        Items.GOLD_NUGGET,
+                        0.1F,
+                        100
+                )
+                .unlockedBy("has_" + getItemName(BSItems.GOLDEN_GLAIVE), has(BSItems.GOLDEN_GLAIVE))
+                .unlockedBy("has_" + getItemName(BSItems.GOLDEN_SCYTHE), has(BSItems.GOLDEN_SCYTHE))
+                .save(recipeOutput, path + getBlastingRecipeName(Items.GOLD_NUGGET));
+
     }
 }

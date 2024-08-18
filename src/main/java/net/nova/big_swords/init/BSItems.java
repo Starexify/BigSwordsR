@@ -7,6 +7,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.nova.big_swords.item.BigSwordItem;
 import net.nova.big_swords.item.EnderSmithingTemplate;
 import net.nova.big_swords.item.GlaiveItem;
+import net.nova.big_swords.item.ScytheItem;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
@@ -56,12 +57,12 @@ public class BSItems {
     public static DeferredItem<Item> IRON_BIG_SWORD = ITEMS.register("iron_big_sword", () -> new BigSwordItem(Tiers.IRON, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.IRON, 5, -2.8F))));
     public static DeferredItem<Item> GOLDEN_BIG_SWORD = ITEMS.register("golden_big_sword", () -> new BigSwordItem(Tiers.GOLD, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.GOLD, 5, -2.8F))));
     public static DeferredItem<Item> DIAMOND_BIG_SWORD = ITEMS.register("diamond_big_sword", () -> new BigSwordItem(Tiers.DIAMOND, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.DIAMOND, 5, -2.8F))));
-    public static DeferredItem<Item> NETHERITE_BIG_SWORD = ITEMS.register("netherite_big_sword", () -> new BigSwordItem(Tiers.NETHERITE, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.NETHERITE, 5, -2.8F))));
+    public static DeferredItem<Item> NETHERITE_BIG_SWORD = ITEMS.register("netherite_big_sword", () -> new BigSwordItem(Tiers.NETHERITE, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.NETHERITE, 5, -2.8F)).fireResistant()));
     public static DeferredItem<Item> PATCHWORK_BIG_SWORD = ITEMS.register("patchwork_big_sword", () -> new BigSwordItem(BSTiers.PATCHWORK, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.PATCHWORK, 5, -2.8F))));
     public static DeferredItem<Item> SKULL_BIG_SWORD = ITEMS.register("skull_big_sword", () -> new BigSwordItem(BSTiers.SKULL, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.SKULL, 5, -2.8F))));
     public static DeferredItem<Item> QUARTZ_BIG_SWORD = ITEMS.register("quartz_big_sword", () -> new BigSwordItem(BSTiers.QUARTZ, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.QUARTZ, 5, -2.8F))));
     public static DeferredItem<Item> OBSIDIAN_BIG_SWORD = ITEMS.register("obsidian_big_sword", () -> new BigSwordItem(BSTiers.OBSIDIAN, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.OBSIDIAN, 5, -2.8F))));
-    public static DeferredItem<Item> ENDER_BIG_SWORD = ITEMS.register("ender_big_sword", () -> new BigSwordItem(BSTiers.ENDER, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.ENDER, 5, -2.8F))));
+    public static DeferredItem<Item> ENDER_BIG_SWORD = ITEMS.register("ender_big_sword", () -> new BigSwordItem(BSTiers.ENDER, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.ENDER, 5, -2.8F)).fireResistant()));
     public static DeferredItem<Item> LIVINGMETAL_BIG_SWORD = ITEMS.register("livingmetal_big_sword", () -> new BigSwordItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.LIVINGMETAL, 5, -2.8F))));
     public static DeferredItem<Item> BIOMASS_BIG_SWORD = ITEMS.register("biomass_big_sword", () -> new BigSwordItem(BSTiers.BIOMASS, new Item.Properties().attributes(BigSwordItem.createAttributes(BSTiers.BIOMASS, 5, -2.8F))));
 
@@ -71,7 +72,21 @@ public class BSItems {
     public static DeferredItem<Item> IRON_GLAIVE = ITEMS.register("iron_glaive", () -> new GlaiveItem(Tiers.IRON, new Item.Properties().attributes(GlaiveItem.createAttributes(Tiers.IRON, 2, -2.2F)), 4F, 5F));
     public static DeferredItem<Item> GOLDEN_GLAIVE = ITEMS.register("golden_glaive", () -> new GlaiveItem(Tiers.GOLD, new Item.Properties().attributes(GlaiveItem.createAttributes(Tiers.GOLD, 2, -2.2F)), 3F, 4F));
     public static DeferredItem<Item> DIAMOND_GLAIVE = ITEMS.register("diamond_glaive", () -> new GlaiveItem(Tiers.DIAMOND, new Item.Properties().attributes(GlaiveItem.createAttributes(Tiers.DIAMOND, 2, -2.2F)), 4.5F, 5.5F));
-    public static DeferredItem<Item> NETHERITE_GLAIVE = ITEMS.register("netherite_glaive", () -> new GlaiveItem(Tiers.NETHERITE, new Item.Properties().attributes(GlaiveItem.createAttributes(Tiers.NETHERITE, 2, -2.2F)), 5.5F, 6.5F));
+    public static DeferredItem<Item> NETHERITE_GLAIVE = ITEMS.register("netherite_glaive", () -> new GlaiveItem(Tiers.NETHERITE, new Item.Properties().attributes(GlaiveItem.createAttributes(Tiers.NETHERITE, 2, -2.2F)).fireResistant(), 5.5F, 6.5F));
     public static DeferredItem<Item> BIOMASS_GLAIVE = ITEMS.register("biomass_glaive", () -> new GlaiveItem(BSTiers.BIOMASS, new Item.Properties().attributes(GlaiveItem.createAttributes(BSTiers.BIOMASS, 2, -2.2F)), 4F, 4.5F));
     public static DeferredItem<Item> LIVINGMETAL_GLAIVE = ITEMS.register("livingmetal_glaive", () -> new GlaiveItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(GlaiveItem.createAttributes(BSTiers.LIVINGMETAL, 2, -2.2F)), 4.5F, 5.5F));
+
+    // Scythes
+    public static DeferredItem<Item> WOODEN_SCYTHE = ITEMS.register("wooden_scythe", () -> new ScytheItem(Tiers.WOOD, new Item.Properties().attributes(ScytheItem.createAttributes(Tiers.WOOD, 1, -2.0F)), 2F, 3F));
+    public static DeferredItem<Item> STONE_SCYTHE = ITEMS.register("stone_scythe", () -> new ScytheItem(Tiers.STONE, new Item.Properties().attributes(ScytheItem.createAttributes(Tiers.STONE, 1, -2.0F)), 2.5F, 3.5F));
+    public static DeferredItem<Item> IRON_SCYTHE = ITEMS.register("iron_scythe", () -> new ScytheItem(Tiers.IRON, new Item.Properties().attributes(ScytheItem.createAttributes(Tiers.IRON, 1, -2.0F)), 3F, 4F));
+    public static DeferredItem<Item> GOLDEN_SCYTHE = ITEMS.register("golden_scythe", () -> new ScytheItem(Tiers.GOLD, new Item.Properties().attributes(ScytheItem.createAttributes(Tiers.GOLD, 1, -2.0F)), 2F, 3F));
+    public static DeferredItem<Item> DIAMOND_SCYTHE = ITEMS.register("diamond_scythe", () -> new ScytheItem(Tiers.DIAMOND, new Item.Properties().attributes(ScytheItem.createAttributes(Tiers.DIAMOND, 1, -2.0F)), 3.5F, 4.5F));
+    public static DeferredItem<Item> NETHERITE_SCYTHE = ITEMS.register("netherite_scythe", () -> new ScytheItem(Tiers.NETHERITE, new Item.Properties().attributes(ScytheItem.createAttributes(Tiers.NETHERITE, 1, -2.0F)).fireResistant(), 4.5F, 5.5F));
+    public static DeferredItem<Item> BIOMASS_SCYTHE = ITEMS.register("biomass_scythe", () -> new ScytheItem(BSTiers.BIOMASS, new Item.Properties().attributes(ScytheItem.createAttributes(BSTiers.BIOMASS, 1, -2.0F)), 3F, 3.5F));
+    public static DeferredItem<Item> LIVINGMETAL_SCYTHE = ITEMS.register("livingmetal_scythe", () -> new ScytheItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(ScytheItem.createAttributes(BSTiers.LIVINGMETAL, 1, -2.0F)), 3.5F, 4.5F));
+    public static DeferredItem<Item> BONE_SCYTHE = ITEMS.register("bone_scythe", () -> new ScytheItem(BSTiers.SKULL, new Item.Properties().attributes(ScytheItem.createAttributes(BSTiers.SKULL, 1, -2.0F)), 2F, 2.1F));
+    public static DeferredItem<Item> SOUL_REAPER = ITEMS.register("soul_reaper", () -> new ScytheItem(BSTiers.REAPER, new Item.Properties().attributes(ScytheItem.createAttributes(BSTiers.REAPER, 1, -2.0F)).rarity(Rarity.EPIC).fireResistant(), 9F, 10F));
+
+
 }

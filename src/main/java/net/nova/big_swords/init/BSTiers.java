@@ -14,4 +14,5 @@ public class BSTiers {
     public static final Tier ENDER = new SimpleTier(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 3046, 12.0F, 5.5F, 18, () -> Ingredient.of(Items.ENDER_EYE));
     public static final Tier LIVINGMETAL = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 375, 7.5F, 2.5F, 16, () -> Ingredient.of(BSItems.LIVINGMETAL_INGOT));
     public static final Tier BIOMASS = new SimpleTier(BlockTags.INCORRECT_FOR_IRON_TOOL, 188, 8.0F, 2.0F, 18, () -> Ingredient.of(BSItems.BIOMASS));
+    public static final Tier REAPER = new SimpleTier(BlockTags.INCORRECT_FOR_WOODEN_TOOL, 206, 2.0F, -0.5F, 18, () -> Ingredient.of(Items.BONE));
 }

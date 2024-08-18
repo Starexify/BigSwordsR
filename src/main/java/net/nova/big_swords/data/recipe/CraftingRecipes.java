@@ -146,5 +146,32 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern(" Y#")
                 .unlockedBy("has_" + getItemName(BSItems.BIOMASS), has(BSItems.BIOMASS))
                 .save(recipeOutput);
+
+        // Scythes
+        basicScythe(recipeOutput, Items.STICK, ItemTags.PLANKS, BSItems.WOODEN_SCYTHE);
+        basicScythe(recipeOutput, Items.STICK, ItemTags.STONE_TOOL_MATERIALS, BSItems.STONE_SCYTHE);
+        basicScythe(recipeOutput, Items.STICK, Items.IRON_INGOT, BSItems.IRON_SCYTHE);
+        basicScythe(recipeOutput, Items.STICK, Items.GOLD_INGOT, BSItems.GOLDEN_SCYTHE);
+        basicScythe(recipeOutput, Items.STICK, Items.DIAMOND, BSItems.DIAMOND_SCYTHE);
+        basicScythe(recipeOutput, Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_SCYTHE);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.BIOMASS_SCYTHE)
+                .define('#', Items.STICK)
+                .define('X', BSItems.BIOMASS)
+                .define('Y', Items.NETHER_BRICK)
+                .pattern("XX#")
+                .pattern(" #Y")
+                .pattern("#  ")
+                .unlockedBy("has_" + getItemName(BSItems.BIOMASS), has(BSItems.BIOMASS))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.BONE_SCYTHE)
+                .define('#', Items.BONE)
+                .define('Y', Items.BONE_BLOCK)
+                .pattern("###")
+                .pattern(" #Y")
+                .pattern("#  ")
+                .unlockedBy("has_" + getItemName(BSItems.BIOMASS), has(BSItems.BIOMASS))
+                .save(recipeOutput);
     }
 }

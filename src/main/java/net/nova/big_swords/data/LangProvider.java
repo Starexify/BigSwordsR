@@ -79,6 +79,18 @@ public class LangProvider extends LanguageProvider {
         addItem(BSItems.BIOMASS_GLAIVE, "Biomass Glaive");
         addItem(BSItems.LIVINGMETAL_GLAIVE, "Livingmetal Glaive");
 
+        // Scythes
+        addItem(BSItems.WOODEN_SCYTHE, "Wooden Scythe");
+        addItem(BSItems.STONE_SCYTHE, "Stone Scythe");
+        addItem(BSItems.IRON_SCYTHE, "Iron Scythe");
+        addItem(BSItems.GOLDEN_SCYTHE, "Golden Scythe");
+        addItem(BSItems.DIAMOND_SCYTHE, "Diamond Scythe");
+        addItem(BSItems.NETHERITE_SCYTHE, "Netherite Scythe");
+        addItem(BSItems.BIOMASS_SCYTHE, "Biomass Scythe");
+        addItem(BSItems.LIVINGMETAL_SCYTHE, "Livingmetal Scythe");
+        addItem(BSItems.BONE_SCYTHE, "Bone Scythe");
+        addItem(BSItems.SOUL_REAPER, "Soul Reaper");
+
         // Creative Tab
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");
 
@@ -93,6 +105,8 @@ public class LangProvider extends LanguageProvider {
         // Sounds
         add(SoundsProvider.getSubtitle(Sounds.GLAIVE_HIT), "Glaive Hit");
         add(SoundsProvider.getSubtitle(Sounds.GLAIVE_SWING), "Glaive Swing");
+        add(SoundsProvider.getSubtitle(Sounds.SCYTHE_SLASH), "Scythe Slash");
+        add(SoundsProvider.getSubtitle(Sounds.REAPER_SLASH), "Reaper Slash");
 
         // Resourcepacks
         add(BigSwordsRClient.RP_16x_NAME, "Big Swords R 16x");

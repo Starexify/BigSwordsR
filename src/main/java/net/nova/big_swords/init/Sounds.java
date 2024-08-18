@@ -15,6 +15,8 @@ public class Sounds {
 
     public static final Supplier<SoundEvent> GLAIVE_SWING = registerSoundEvents("glaive_swing");
     public static final Supplier<SoundEvent> GLAIVE_HIT = registerSoundEvents("glaive_hit");
+    public static final Supplier<SoundEvent> SCYTHE_SLASH = registerSoundEvents("scythe_slash");
+    public static final Supplier<SoundEvent> REAPER_SLASH = registerSoundEvents("reaper_slash");
 
     public static DeferredHolder<SoundEvent, SoundEvent> registerSoundEvents(String name) {
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(BigSwordsR.rl(name)));

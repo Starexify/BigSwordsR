@@ -1,7 +1,6 @@
 package net.nova.big_swords.item;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
@@ -18,24 +17,24 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.*;
-import net.nova.big_swords.block.CreepBlock;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Sounds;
 
 import java.util.List;
 import java.util.Random;
-import java.util.function.Predicate;
 
 import static net.nova.big_swords.BigSwordsR.playSound;
 
-public class GlaiveItem extends TieredItem {
+public class ScytheItem extends HoeItem {
     private final float minDamage;
     private final float maxDamage;
     private final Random random = new Random();
-    private final float range = 5.0f; // 5 block range
 
-    public GlaiveItem(Tier pTier, Item.Properties pProperties, float minDamage, float maxDamage) {
+    public ScytheItem(Tier pTier, Item.Properties pProperties, float minDamage, float maxDamage) {
         super(pTier, pProperties.component(DataComponents.TOOL, createToolProperties()));
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
@@ -48,29 +47,21 @@ public class GlaiveItem extends TieredItem {
         pTooltipComponents.add(Component.empty());
         pTooltipComponents.add(Component.literal("Special:").withStyle(ChatFormatting.GRAY));
         pTooltipComponents.add(Component.literal(" " + this.minDamage + " - " + this.maxDamage + " Charged Damage").withStyle(ChatFormatting.DARK_GREEN));
-        pTooltipComponents.add(Component.literal(" " + this.range + " Range").withStyle(ChatFormatting.DARK_GREEN));
     }
 
-    // Glaive Mechanic
+    // Scythe Mechanic
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         ItemStack itemstack = player.getItemInHand(usedHand);
-
-        // Check if the player is looking at a CreepBlock and pass if a CreepBlock is hit
-        BlockHitResult blockHit = level.clip(new ClipContext(
-                player.getEyePosition(1.0F),
-                player.getEyePosition(1.0F).add(player.getLookAngle().scale(5.0)), // 5 block range
-                ClipContext.Block.OUTLINE,
-                ClipContext.Fluid.NONE,
-                player
-        ));
-        if (blockHit.getType() == HitResult.Type.BLOCK && level.getBlockState(blockHit.getBlockPos()).getBlock() instanceof CreepBlock) {
-            return InteractionResultHolder.pass(itemstack);
-        }
-
         player.startUsingItem(usedHand);
         return InteractionResultHolder.consume(itemstack);
     }
+
+    public float radius = 1.5f;  // Radius of the half-circle
+    public float width = 3.0f;   // Width of the attack area
+    public float height = 3.0f;  // Height of the attack area
+    public float depth = 3.0f;   // Depth of the attack area
+    public float distance = 0.5f; // Distance in front of the player
 
     @Override
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
@@ -79,56 +70,77 @@ public class GlaiveItem extends TieredItem {
             if (i < 10) return; // Require a minimum charge time
 
             if (!level.isClientSide) {
-                Vec3 startVec = player.getEyePosition(1.0F);
-                Vec3 endVec = startVec.add(player.getLookAngle().scale(range));
-                AABB boundingBox = new AABB(startVec, endVec).inflate(1.0);
-                Predicate<LivingEntity> predicate = livingEntity -> livingEntity != player && livingEntity.isPickable();
-                List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, boundingBox, predicate);
+                Vec3 lookVec = player.getLookAngle();
+                Vec3 playerPos = player.position().add(0, player.getEyeHeight(), 0);
+                Vec3 attackCenter = playerPos.add(lookVec.scale(distance + depth / 2));
+                AABB boundingBox = new AABB(
+                        attackCenter.x - width/2, attackCenter.y - height/2, attackCenter.z - width/2,
+                        attackCenter.x + width/2, attackCenter.y + height/2, attackCenter.z + width/2
+                );
 
-                EntityHitResult entityHitResult = getEntityHitResult(player, startVec, endVec, entities);
+                List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, boundingBox,
+                        e -> e != player && e.isPickable());
 
                 player.swing(InteractionHand.MAIN_HAND, true);
-                if (entityHitResult != null && entityHitResult.getType() == HitResult.Type.ENTITY) {
-                    LivingEntity target = (LivingEntity) entityHitResult.getEntity();
-                    BlockHitResult blockHit = level.clip(new ClipContext(startVec, target.getEyePosition(1.0F), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+                int entitiesHit = 0;
+                for (LivingEntity target : entities) {
+                    Vec3 targetPos = target.position().add(0, target.getBbHeight() / 2, 0);
+                    Vec3 toTarget = targetPos.subtract(playerPos);
 
-                    if (blockHit.getType() == HitResult.Type.MISS) {
-                        glaiveHits(level, player, stack, target);
-                    } else {
-                        glaiveMiss(player, level);
+                    // Check if the entity is within the half-circle area
+                    if (isInAttackArea(toTarget, lookVec)) {
+                        BlockHitResult blockHit = level.clip(new ClipContext(playerPos, targetPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+
+                        if (blockHit.getType() == HitResult.Type.MISS) {
+                            scytheHits(player, target);
+                            entitiesHit++;
+                        }
                     }
+                }
+
+                if (entitiesHit > 0) {
+                    int durabilityDamage = entitiesHit * 2;
+                    stack.hurtAndBreak(durabilityDamage, player, EquipmentSlot.MAINHAND);
+                    player.getCooldowns().addCooldown(this, 40);
+
+                    // player.sendSystemMessage(Component.literal("Hit entities with dmg: " + entitiesHit)); // Debug output
+                    // player.sendSystemMessage(Component.literal("Damage dealt to Item: " + durabilityDamage)); // Debug output
                 } else {
-                    glaiveMiss(player, level);
+                    player.getCooldowns().addCooldown(this, 10);
+                }
+
+                if (stack.is(BSItems.SOUL_REAPER)) {
+                    playSound(level, player, Sounds.REAPER_SLASH.get());
+                } else {
+                    playSound(level, player, Sounds.SCYTHE_SLASH.get());
                 }
             }
         }
     }
 
-    private void glaiveHits(Level level, Player player, ItemStack stack, LivingEntity target) {
+    private boolean isInAttackArea(Vec3 toTarget, Vec3 lookVec) {
+        // Create a coordinate system based on the look vector
+        Vec3 up = new Vec3(0, 1, 0);
+        Vec3 right = lookVec.cross(up).normalize();
+        Vec3 adjustedUp = right.cross(lookVec).normalize();
+
+        // Project the toTarget vector onto this coordinate system
+        double forwardProject = toTarget.dot(lookVec);
+        double rightProject = toTarget.dot(right);
+        double upProject = toTarget.dot(adjustedUp);
+
+        // Check if the entity is within the half-circle area
+        boolean inRadius = Math.sqrt(rightProject * rightProject + upProject * upProject) <= radius;
+        boolean inFront = forwardProject >= distance && forwardProject <= distance + depth;
+        boolean inHeight = Math.abs(upProject) <= height / 2;
+
+        return inRadius && inFront && inHeight;
+    }
+
+    public void scytheHits(Player player, LivingEntity target) {
         float damage = minDamage + random.nextFloat() * (maxDamage - minDamage);
         damage = Math.round(damage * 10.0f) / 10.0f;
         target.hurt(player.damageSources().playerAttack(player), damage);
-
-        stack.hurtAndBreak(3, player, EquipmentSlot.MAINHAND);
-        player.getCooldowns().addCooldown(this, 40);
-        playSound(level, player, Sounds.GLAIVE_HIT.get());
-
-        // player.sendSystemMessage(Component.literal("Hit entity with dmg: " + damage)); // Debug output
-    }
-
-    private void glaiveMiss(Player player, Level level) {
-        player.getCooldowns().addCooldown(this, 10);
-        playSound(level, player, Sounds.GLAIVE_SWING.get());
-    }
-
-    private EntityHitResult getEntityHitResult(Player player, Vec3 startVec, Vec3 endVec, List<LivingEntity> entities) {
-        for (LivingEntity entity : entities) {
-            AABB entityBoundingBox = entity.getBoundingBox();
-            if (entityBoundingBox.clip(startVec, endVec).isPresent()) {
-                return new EntityHitResult(entity);
-            }
-        }
-        return null;
     }
 
     @Override
@@ -170,10 +182,5 @@ public class GlaiveItem extends TieredItem {
                         EquipmentSlotGroup.MAINHAND
                 )
                 .build();
-    }
-
-    @Override
-    public boolean canAttackBlock(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer) {
-        return !pPlayer.isCreative();
     }
 }

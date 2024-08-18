@@ -85,6 +85,18 @@ public class CreativeTab {
                 output.accept(BSItems.NETHERITE_GLAIVE);
                 output.accept(BSItems.BIOMASS_GLAIVE);
                 output.accept(BSItems.LIVINGMETAL_GLAIVE);
+
+                // Scythes
+                output.accept(BSItems.WOODEN_SCYTHE);
+                output.accept(BSItems.STONE_SCYTHE);
+                output.accept(BSItems.IRON_SCYTHE);
+                output.accept(BSItems.GOLDEN_SCYTHE);
+                output.accept(BSItems.DIAMOND_SCYTHE);
+                output.accept(BSItems.NETHERITE_SCYTHE);
+                output.accept(BSItems.BIOMASS_SCYTHE);
+                output.accept(BSItems.LIVINGMETAL_SCYTHE);
+                output.accept(BSItems.BONE_SCYTHE);
+                output.accept(BSItems.SOUL_REAPER);
             })
             .build()
     );

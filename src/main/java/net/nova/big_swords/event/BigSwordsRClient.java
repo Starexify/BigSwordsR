@@ -109,6 +109,18 @@ public class BigSwordsRClient {
             putAfter(BSItems.NETHERITE_GLAIVE.get(), BSItems.BIOMASS_GLAIVE, event);
             putAfter(BSItems.BIOMASS_GLAIVE.get(), BSItems.LIVINGMETAL_GLAIVE, event);
 
+            // Scythes Placement
+            putAfter(BSItems.LIVINGMETAL_GLAIVE.get(), BSItems.WOODEN_SCYTHE, event);
+            putAfter(BSItems.WOODEN_SCYTHE.get(), BSItems.STONE_SCYTHE, event);
+            putAfter(BSItems.STONE_SCYTHE.get(), BSItems.IRON_SCYTHE, event);
+            putAfter(BSItems.IRON_SCYTHE.get(), BSItems.GOLDEN_SCYTHE, event);
+            putAfter(BSItems.GOLDEN_SCYTHE.get(), BSItems.DIAMOND_SCYTHE, event);
+            putAfter(BSItems.DIAMOND_SCYTHE.get(), BSItems.NETHERITE_SCYTHE, event);
+            putAfter(BSItems.NETHERITE_SCYTHE.get(), BSItems.BIOMASS_SCYTHE, event);
+            putAfter(BSItems.BIOMASS_SCYTHE.get(), BSItems.LIVINGMETAL_SCYTHE, event);
+            putAfter(BSItems.LIVINGMETAL_SCYTHE.get(), BSItems.BONE_SCYTHE, event);
+            putAfter(BSItems.BONE_SCYTHE.get(), BSItems.SOUL_REAPER, event);
+
             // Armor Placement
             putAfter(Items.NETHERITE_BOOTS, BSItems.BIOMASS_HELMET, event);
             putAfter(BSItems.BIOMASS_HELMET.get(), BSItems.BIOMASS_CHESTPLATE, event);
