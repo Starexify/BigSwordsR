@@ -25,6 +25,7 @@ public class BigSwordsR {
         BSItems.ITEMS.register(bus);
         BSBlocks.BLOCKS.register(bus);
         Sounds.SOUND_EVENTS.register(bus);
+        BSLootModifier.LOOT_MODIFIERS.register(bus);
 
         bus.addListener(DataGenerators::gatherData);
     }
