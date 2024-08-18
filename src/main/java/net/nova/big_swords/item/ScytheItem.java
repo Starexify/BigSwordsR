@@ -67,7 +67,7 @@ public class ScytheItem extends HoeItem {
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
         if (entity instanceof Player player) {
             int i = this.getUseDuration(stack, entity) - timeLeft;
-            if (i < 10) return; // Require a minimum charge time
+            if (i < 20) return; // Require a minimum charge time
 
             if (!level.isClientSide) {
                 Vec3 lookVec = player.getLookAngle();
