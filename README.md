@@ -101,7 +101,7 @@ In the upcoming updates I plan to add:
 **A:** Because I want to bring the good old mods back.
 
 **Q:** Why the new sword textures? \
-**A:** Because I find them way cooler than the old textures tbf and better look, but if you want an older look of the swords I made a 16x resourcepack (link in the beginning).
+**A:** Because I find them way cooler than the old textures tbf and better look, but I integrated a 16x resourcepack for those who rather use the 16x textures.
 
 ## 📜 License
 
