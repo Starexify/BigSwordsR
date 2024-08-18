@@ -89,7 +89,6 @@ The mod also adds two new types of weapons, Glaives and Scythes.
 
 In the upcoming updates I plan to add:
 
-- Scythes
 - Better functionality and shields
 
 
