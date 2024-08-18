@@ -4,10 +4,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.nova.big_swords.item.BigSwordItem;
-import net.nova.big_swords.item.EnderSmithingTemplate;
-import net.nova.big_swords.item.GlaiveItem;
-import net.nova.big_swords.item.ScytheItem;
+import net.nova.big_swords.item.*;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
@@ -88,5 +85,6 @@ public class BSItems {
     public static DeferredItem<Item> BONE_SCYTHE = ITEMS.register("bone_scythe", () -> new ScytheItem(BSTiers.SKULL, new Item.Properties().attributes(ScytheItem.createAttributes(BSTiers.SKULL, 1, -2.0F)), 2F, 2.1F));
     public static DeferredItem<Item> SOUL_REAPER = ITEMS.register("soul_reaper", () -> new ScytheItem(BSTiers.REAPER, new Item.Properties().attributes(ScytheItem.createAttributes(BSTiers.REAPER, 1, -2.0F)).rarity(Rarity.EPIC).fireResistant(), 9F, 10F));
 
-
+    // Shields
+    public static DeferredItem<Item> WOODEN_SHIELD = ITEMS.register("wooden_shield", () -> new WoodenShield(Tiers.WOOD, new Item.Properties()));
 }

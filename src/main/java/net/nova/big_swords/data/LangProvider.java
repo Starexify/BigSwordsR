@@ -1,6 +1,7 @@
 package net.nova.big_swords.data;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.nova.big_swords.event.BigSwordsRClient;
 import net.nova.big_swords.init.BSBlocks;
@@ -8,6 +9,8 @@ import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.CreativeTab;
 import net.nova.big_swords.init.Sounds;
 import net.nova.big_swords.item.EnderSmithingTemplate;
+
+import java.util.function.Supplier;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
@@ -91,6 +94,9 @@ public class LangProvider extends LanguageProvider {
         addItem(BSItems.BONE_SCYTHE, "Bone Scythe");
         addItem(BSItems.SOUL_REAPER, "Soul Reaper");
 
+        // Shields
+        addShield(BSItems.WOODEN_SHIELD, "Wooden Shield", "Special Perk: Arrow Catch", "Weakness: Fire Damage");
+
         // Creative Tab
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");
 
@@ -111,5 +117,11 @@ public class LangProvider extends LanguageProvider {
         // Resourcepacks
         add(BigSwordsRClient.RP_16x_NAME, "Big Swords R 16x");
         add(BigSwordsRClient.RP_16x_DESC, "16x version of the Big Swords");
+    }
+
+    public void addShield(Supplier<? extends Item> key, String name, String perk, String weakness) {
+        add(key.get(), name);
+        add(key.get() + ".perk", perk);
+        add(key.get() + ".weakness", weakness);
     }
 }

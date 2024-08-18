@@ -19,8 +19,10 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.nova.big_swords.client.renderer.item.BSItemProperties;
 import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.BSItems;
 
@@ -54,6 +56,11 @@ public class BigSwordsRClient {
     }
 
     @SubscribeEvent
+    public static void setupClient(FMLClientSetupEvent event) {
+        event.enqueueWork(BSItemProperties::addCustomItemProperties);
+    }
+
+    @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
         ResourceKey<CreativeModeTab> tabKey = event.getTabKey();
 
@@ -61,7 +68,6 @@ public class BigSwordsRClient {
             putAfter(Items.NETHERITE_BLOCK, BSBlocks.BIOMASS_BLOCK, event);
             putAfter(BSBlocks.BIOMASS_BLOCK.asItem(), BSBlocks.LIVINGMETAL_BLOCK, event);
         }
-
 
         if (tabKey.equals(CreativeModeTabs.NATURAL_BLOCKS)) {
             putAfter(Items.SOUL_SAND, BSBlocks.CREEP_BLOCK, event);
@@ -120,6 +126,9 @@ public class BigSwordsRClient {
             putAfter(BSItems.BIOMASS_SCYTHE.get(), BSItems.LIVINGMETAL_SCYTHE, event);
             putAfter(BSItems.LIVINGMETAL_SCYTHE.get(), BSItems.BONE_SCYTHE, event);
             putAfter(BSItems.BONE_SCYTHE.get(), BSItems.SOUL_REAPER, event);
+
+            // Shields Placement
+            putAfter(Items.SHIELD, BSItems.WOODEN_SHIELD, event);
 
             // Armor Placement
             putAfter(Items.NETHERITE_BOOTS, BSItems.BIOMASS_HELMET, event);

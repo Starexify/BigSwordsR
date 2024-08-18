@@ -97,6 +97,9 @@ public class CreativeTab {
                 output.accept(BSItems.LIVINGMETAL_SCYTHE);
                 output.accept(BSItems.BONE_SCYTHE);
                 output.accept(BSItems.SOUL_REAPER);
+
+                // Shields
+                output.accept(BSItems.WOODEN_SHIELD);
             })
             .build()
     );

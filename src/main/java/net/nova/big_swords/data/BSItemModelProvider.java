@@ -11,6 +11,7 @@ import net.minecraft.world.item.armortrim.TrimMaterials;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.nova.big_swords.client.renderer.item.BSItemProperties;
 import net.nova.big_swords.init.BSItems;
 
 import java.util.LinkedHashMap;
@@ -99,7 +100,7 @@ public class BSItemModelProvider extends ItemModelProvider {
         handheldGlaive(BSItems.BIOMASS_GLAIVE.get());
         handheldGlaive(BSItems.LIVINGMETAL_GLAIVE.get());
 
-        // Scythe
+        // Scythes
         handheldItem(BSItems.WOODEN_SCYTHE.get());
         handheldItem(BSItems.STONE_SCYTHE.get());
         handheldItem(BSItems.IRON_SCYTHE.get());
@@ -110,6 +111,22 @@ public class BSItemModelProvider extends ItemModelProvider {
         handheldItem(BSItems.LIVINGMETAL_SCYTHE.get());
         handheldItem(BSItems.BONE_SCYTHE.get());
         handheldItem(BSItems.SOUL_REAPER.get());
+
+        // Shields
+        shieldItem(BSItems.WOODEN_SHIELD.get());
+    }
+
+    // Models
+    private void shieldItem(Item item) {
+        getBuilder(getItemName(item) + "_blocking")
+                .parent(getExistingFile(modLoc("item/template_shield_blocking")))
+                .texture("layer0", "item/" + getItemName(item));
+
+        getBuilder(getItemName(item))
+                .parent(getExistingFile(modLoc("item/template_shield")))
+                .texture("layer0", "item/" + getItemName(item))
+                .override().predicate(BSItemProperties.blockingPredicate, 1)
+                .model(getExistingFile(modLoc("item/" + getItemName(item) + "_blocking")));
     }
 
     private void handheldGlaive(Item item) {

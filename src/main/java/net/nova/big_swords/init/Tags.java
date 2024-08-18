@@ -10,6 +10,7 @@ public class Tags {
         public static final TagKey<Item> BIG_SWORDS = itemTag("big_swords");
         public static final TagKey<Item> GLAIVES = itemTag("glaives");
         public static final TagKey<Item> SCYTHES = itemTag("scythes");
+        public static final TagKey<Item> SHIELDS = itemTag("shields");
     }
 
     private static TagKey<Item> itemTag(String name) {

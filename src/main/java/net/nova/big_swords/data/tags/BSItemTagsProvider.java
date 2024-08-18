@@ -36,6 +36,10 @@ public class BSItemTagsProvider extends ItemTagsProvider {
                 BSItems.NETHERITE_SCYTHE.get(), BSItems.BIOMASS_SCYTHE.get(), BSItems.LIVINGMETAL_SCYTHE.get(), BSItems.BONE_SCYTHE.get(), BSItems.SOUL_REAPER.get()
         );
 
+        tag(Tags.BSItemTags.SHIELDS).add(
+                BSItems.WOODEN_SHIELD.get()
+        );
+
         tag(ItemTags.HEAD_ARMOR).add(BSItems.LIVINGMETAL_HELMET.get(), BSItems.BIOMASS_HELMET.get());
         tag(ItemTags.CHEST_ARMOR).add(BSItems.LIVINGMETAL_CHESTPLATE.get(), BSItems.BIOMASS_CHESTPLATE.get());
         tag(ItemTags.LEG_ARMOR).add(BSItems.LIVINGMETAL_LEGGINGS.get(), BSItems.BIOMASS_LEGGINGS.get());
@@ -46,6 +50,8 @@ public class BSItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.AXES).add(BSItems.LIVINGMETAL_AXE.get(), BSItems.BIOMASS_AXE.get());
         tag(ItemTags.SHOVELS).add(BSItems.LIVINGMETAL_SHOVEL.get(), BSItems.BIOMASS_SHOVEL.get());
         tag(ItemTags.HOES).addTag(Tags.BSItemTags.SCYTHES).add(BSItems.LIVINGMETAL_HOE.get(), BSItems.BIOMASS_HOE.get());
+
+        tag(ItemTags.DURABILITY_ENCHANTABLE).addTag(Tags.BSItemTags.SHIELDS);
 
         tag(ItemTags.BREAKS_DECORATED_POTS).addTag(Tags.BSItemTags.GLAIVES);
         tag(ItemTags.SWORD_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);

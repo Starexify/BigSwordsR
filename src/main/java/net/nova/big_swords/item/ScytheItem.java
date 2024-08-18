@@ -155,7 +155,7 @@ public class ScytheItem extends HoeItem {
 
     @Override
     public int getUseDuration(ItemStack pStack, LivingEntity pEntity) {
-        return 36000;
+        return 72000;
     }
 
     // Sword-like Item Stuff
