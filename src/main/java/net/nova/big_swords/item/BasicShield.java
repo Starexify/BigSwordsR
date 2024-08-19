@@ -44,5 +44,4 @@ public class BasicShield extends ShieldItem {
     public boolean isValidRepairItem(ItemStack pToRepair, ItemStack pRepair) {
         return this.tier.getRepairIngredient().test(pRepair) || super.isValidRepairItem(pToRepair, pRepair);
     }
-
 }
