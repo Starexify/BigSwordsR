@@ -85,7 +85,8 @@ public class BSItems {
     public static DeferredItem<Item> SOUL_REAPER = ITEMS.register("soul_reaper", () -> new ScytheItem(BSTiers.REAPER, new Item.Properties().attributes(ScytheItem.createAttributes(BSTiers.REAPER, 1, -2.0F)).rarity(Rarity.EPIC).fireResistant(), 9F, 10F));
 
     // Shields
-    public static DeferredItem<Item> WOODEN_SHIELD = ITEMS.register("wooden_shield", () -> new TieredShield(Tiers.WOOD, new Item.Properties()));
+    public static DeferredItem<Item> WOODEN_SHIELD = ITEMS.register("wooden_shield", () -> new TieredShield(Tiers.WOOD, new Item.Properties(), 2));
     public static DeferredItem<Item> STONE_SHIELD = ITEMS.register("stone_shield", () -> new TieredShield(Tiers.STONE, new Item.Properties()));
-    public static DeferredItem<Item> GILDED_WOODEN_SHIELD = ITEMS.register("gilded_wooden_shield", () -> new GildedTieredShield(Tiers.WOOD, new Item.Properties()));
+    public static DeferredItem<Item> GILDED_WOODEN_SHIELD = ITEMS.register("gilded_wooden_shield", () -> new GildedTieredShield(Tiers.WOOD, new Item.Properties(), 4));
+    public static DeferredItem<Item> GILDED_STONE_SHIELD = ITEMS.register("gilded_stone_shield", () -> new GildedTieredShield(Tiers.STONE, new Item.Properties(), 2));
 }

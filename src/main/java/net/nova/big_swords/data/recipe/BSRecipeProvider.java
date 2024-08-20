@@ -34,6 +34,39 @@ public class BSRecipeProvider extends RecipeProvider {
     }
 
     // Recipes
+    protected static void basicGildedShield(RecipeOutput recipeOutput, DeferredItem<Item> shield, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', shield)
+                .define('X', Items.GOLD_INGOT)
+                .pattern("XXX")
+                .pattern("X#X")
+                .pattern(" X ")
+                .unlockedBy("has_" + getItemName(shield), has(shield))
+                .save(recipeOutput);
+    }
+
+    protected static void basicShield(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', Items.LEATHER)
+                .define('X', material)
+                .pattern("XXX")
+                .pattern("X#X")
+                .pattern(" X ")
+                .unlockedBy("has_" + getItemName(material), has(material))
+                .save(recipeOutput);
+    }
+
+    protected static void basicShield(RecipeOutput recipeOutput, TagKey<Item> material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+                .define('#', Items.LEATHER)
+                .define('X', material)
+                .pattern("XXX")
+                .pattern("X#X")
+                .pattern(" X ")
+                .unlockedBy("has_" + getItemName(Items.LEATHER), has(Items.LEATHER))
+                .save(recipeOutput);
+    }
+
     protected static void nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeOutput pRecipeOutput, RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked, String pUnpackedName, String pUnpackedGroup) {
         nineBlockStorageRecipes(pRecipeOutput, pUnpackedCategory, pUnpacked, pPackedCategory, pPacked, path + getSimpleRecipeName(pPacked), null, path + pUnpackedName, pUnpackedGroup);
     }

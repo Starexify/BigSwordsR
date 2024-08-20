@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "big_swords:wooden_shield"
+    },
+    "X": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    " X "
+  ],
+  "result": {
+    "count": 1,
+    "id": "big_swords:gilded_wooden_shield"
+  }
+}

@@ -114,7 +114,9 @@ public class BSItemModelProvider extends ItemModelProvider {
 
         // Shields
         shieldItem(BSItems.WOODEN_SHIELD.get());
+        shieldItem(BSItems.GILDED_WOODEN_SHIELD.get());
         shieldItem(BSItems.STONE_SHIELD.get());
+        shieldItem(BSItems.GILDED_STONE_SHIELD.get());
     }
 
     // Models

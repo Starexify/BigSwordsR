@@ -95,8 +95,10 @@ public class LangProvider extends LanguageProvider {
         addItem(BSItems.SOUL_REAPER, "Soul Reaper");
 
         // Shields
-        addShield(BSItems.WOODEN_SHIELD, "Wooden Shield", "Special Perk: Arrow Catch", "Weakness: Fire Damage");
+        addShield(BSItems.WOODEN_SHIELD, "Wooden Shield", "Special Perk: Arrow Catch", "Weakness: Flammable");
+        addShield(BSItems.GILDED_WOODEN_SHIELD, "Gilded Wooden Shield", "Special Perk: Arrow Catch", "Weakness: Flammable");
         addShield(BSItems.STONE_SHIELD, "Stone Shield", "Special Perk: Fire Resistant", "Weakness: Explosive Damage");
+        addShield(BSItems.GILDED_STONE_SHIELD, "Gilded Stone Shield", "Special Perk: Fire Resistant", "Weakness: Explosive Damage");
 
         // Creative Tab
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");

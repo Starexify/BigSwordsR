@@ -173,5 +173,12 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("#  ")
                 .unlockedBy("has_" + getItemName(BSItems.BIOMASS), has(BSItems.BIOMASS))
                 .save(recipeOutput);
+
+        // Shields
+        basicShield(recipeOutput, ItemTags.PLANKS, BSItems.WOODEN_SHIELD);
+        basicShield(recipeOutput, ItemTags.STONE_TOOL_MATERIALS, BSItems.STONE_SHIELD);
+
+        // Gilded Shields
+        basicGildedShield(recipeOutput, BSItems.WOODEN_SHIELD, BSItems.GILDED_WOODEN_SHIELD);
     }
 }

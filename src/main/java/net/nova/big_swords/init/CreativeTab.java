@@ -100,6 +100,9 @@ public class CreativeTab {
 
                 // Shields
                 output.accept(BSItems.WOODEN_SHIELD);
+                output.accept(BSItems.GILDED_WOODEN_SHIELD);
+                output.accept(BSItems.STONE_SHIELD);
+                output.accept(BSItems.GILDED_STONE_SHIELD);
             })
             .build()
     );
