@@ -86,7 +86,12 @@ public class BSItems {
 
     // Shields
     public static DeferredItem<Item> WOODEN_SHIELD = ITEMS.register("wooden_shield", () -> new TieredShield(Tiers.WOOD, new Item.Properties(), 2));
-    public static DeferredItem<Item> STONE_SHIELD = ITEMS.register("stone_shield", () -> new TieredShield(Tiers.STONE, new Item.Properties()));
     public static DeferredItem<Item> GILDED_WOODEN_SHIELD = ITEMS.register("gilded_wooden_shield", () -> new GildedTieredShield(Tiers.WOOD, new Item.Properties(), 4));
+    public static DeferredItem<Item> STONE_SHIELD = ITEMS.register("stone_shield", () -> new TieredShield(Tiers.STONE, new Item.Properties()));
     public static DeferredItem<Item> GILDED_STONE_SHIELD = ITEMS.register("gilded_stone_shield", () -> new GildedTieredShield(Tiers.STONE, new Item.Properties(), 2));
+    public static DeferredItem<Item> IRON_SHIELD = ITEMS.register("iron_shield", () -> new TieredShield(Tiers.IRON, new Item.Properties()));
+    public static DeferredItem<Item> GILDED_IRON_SHIELD = ITEMS.register("gilded_iron_shield", () -> new GildedTieredShield(Tiers.IRON, new Item.Properties(), 1, 125));
+    public static DeferredItem<Item> DIAMOND_SHIELD = ITEMS.register("diamond_shield", () -> new TieredShield(Tiers.DIAMOND, new Item.Properties(), 1, -(Tiers.DIAMOND.getUses()/2)));
+    public static DeferredItem<Item> GILDED_DIAMOND_SHIELD = ITEMS.register("gilded_diamond_shield", () -> new GildedTieredShield(Tiers.DIAMOND, new Item.Properties(), 1, -653));
+
 }

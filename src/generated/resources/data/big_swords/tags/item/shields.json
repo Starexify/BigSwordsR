@@ -2,6 +2,11 @@
   "values": [
     "big_swords:wooden_shield",
     "big_swords:gilded_wooden_shield",
-    "big_swords:stone_shield"
+    "big_swords:stone_shield",
+    "big_swords:gilded_stone_shield",
+    "big_swords:iron_shield",
+    "big_swords:gilded_iron_shield",
+    "big_swords:diamond_shield",
+    "big_swords:gilded_diamond_shield"
   ]
 }

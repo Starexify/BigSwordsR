@@ -14,11 +14,16 @@ public class TieredShield extends ShieldItem {
     private final Tier tier;
 
     public TieredShield(Tier pTier, Properties pProperties) {
-        this(pTier, pProperties, 1);
+        this(pTier, pProperties, 1, 0);
     }
 
     public TieredShield(Tier pTier, Properties pProperties, int durabilityMultiplier) {
         super(pProperties.durability(pTier.getUses() * durabilityMultiplier));
+        this.tier = pTier;
+    }
+
+    public TieredShield(Tier pTier, Properties pProperties, int durabilityMultiplier, int additionalDurability) {
+        super(pProperties.durability(pTier.getUses() * durabilityMultiplier + additionalDurability));
         this.tier = pTier;
     }
 

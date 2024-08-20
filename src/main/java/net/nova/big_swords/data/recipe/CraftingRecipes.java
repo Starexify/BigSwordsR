@@ -177,8 +177,13 @@ public class CraftingRecipes extends BSRecipeProvider {
         // Shields
         basicShield(recipeOutput, ItemTags.PLANKS, BSItems.WOODEN_SHIELD);
         basicShield(recipeOutput, ItemTags.STONE_TOOL_MATERIALS, BSItems.STONE_SHIELD);
+        basicShield(recipeOutput, Items.IRON_INGOT, BSItems.IRON_SHIELD);
+        basicShield(recipeOutput, Items.DIAMOND, BSItems.DIAMOND_SHIELD);
 
         // Gilded Shields
         basicGildedShield(recipeOutput, BSItems.WOODEN_SHIELD, BSItems.GILDED_WOODEN_SHIELD);
+        basicGildedShield(recipeOutput, BSItems.STONE_SHIELD, BSItems.GILDED_STONE_SHIELD);
+        basicGildedShield(recipeOutput, BSItems.IRON_SHIELD, BSItems.GILDED_IRON_SHIELD);
+        basicGildedShield(recipeOutput, BSItems.DIAMOND_SHIELD, BSItems.GILDED_DIAMOND_SHIELD);
     }
 }

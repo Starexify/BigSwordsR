@@ -4,9 +4,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.nova.big_swords.data.DataGenerators;
 import net.nova.big_swords.init.*;
 import org.slf4j.Logger;
@@ -29,7 +33,6 @@ public class BigSwordsR {
 
         bus.addListener(DataGenerators::gatherData);
     }
-
 
     public static void playSound(Level level, Player player, SoundEvent sound) {
         if (!player.level().isClientSide) {
