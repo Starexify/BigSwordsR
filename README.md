@@ -7,6 +7,7 @@
 
 <p align="center">
   <a href="https://www.curseforge.com/minecraft/mc-mods/big-swords-r"><img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/690473?style=for-the-badge&logo=curseforge&color=96000C"></a>
+  <a href="https://modrinth.com/mod/big-swords-r"><img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/edrOLdWE?style=for-the-badge&logo=modrinth&color=96000C"></a>
 </p>
 
 <p align="center">
@@ -45,9 +46,10 @@
     </td>
   </tr>
 </table>
+
 <p align="center">
     <strong>
-        ⚠️Please note that the mod is based on the series of mods, Asgard Shields, and this is just a hobby project and I do not plan to monetize it, therefore content may be different from originals.
+        ⚠️Please note that the mod is based on the series of mods, Asgard Shields, and this is just a hobby project, therefore content may be different from originals.
     </strong>
 </p>
 
