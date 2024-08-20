@@ -37,7 +37,7 @@ public class BSItemTagsProvider extends ItemTagsProvider {
         );
 
         tag(Tags.BSItemTags.SHIELDS).add(
-                BSItems.WOODEN_SHIELD.get()
+                BSItems.WOODEN_SHIELD.get(), BSItems.STONE_SHIELD.get()
         );
 
         tag(ItemTags.HEAD_ARMOR).add(BSItems.LIVINGMETAL_HELMET.get(), BSItems.BIOMASS_HELMET.get());

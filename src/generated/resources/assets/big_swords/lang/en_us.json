@@ -1,5 +1,7 @@
 {
   "big_swords.creativetab": "Big Swords R",
+  "big_swords:stone_shield.perk": "Special Perk: Fire Resistant",
+  "big_swords:stone_shield.weakness": "Weakness: Explosive Damage",
   "big_swords:wooden_shield.perk": "Special Perk: Arrow Catch",
   "big_swords:wooden_shield.weakness": "Weakness: Fire Damage",
   "block.big_swords.biomass_block": "Biomass Block",
@@ -63,6 +65,7 @@
   "item.big_swords.stone_big_sword": "Stone Big Sword",
   "item.big_swords.stone_glaive": "Stone Glaive",
   "item.big_swords.stone_scythe": "Stone Scythe",
+  "item.big_swords.stone_shield": "Stone Shield",
   "item.big_swords.wooden_big_sword": "Wooden Big Sword",
   "item.big_swords.wooden_glaive": "Wooden Glaive",
   "item.big_swords.wooden_scythe": "Wooden Scythe",

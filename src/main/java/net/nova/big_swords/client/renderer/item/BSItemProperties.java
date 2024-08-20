@@ -13,6 +13,7 @@ public class BSItemProperties {
 
     public static void addCustomItemProperties() {
         makeShield(BSItems.WOODEN_SHIELD.get());
+        makeShield(BSItems.STONE_SHIELD.get());
     }
 
     private static void makeShield(Item item) {

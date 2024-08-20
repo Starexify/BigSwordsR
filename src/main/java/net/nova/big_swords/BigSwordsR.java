@@ -30,6 +30,7 @@ public class BigSwordsR {
         bus.addListener(DataGenerators::gatherData);
     }
 
+
     public static void playSound(Level level, Player player, SoundEvent sound) {
         if (!player.level().isClientSide) {
             level.playSound(null, player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f);

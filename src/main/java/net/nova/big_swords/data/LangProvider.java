@@ -96,6 +96,7 @@ public class LangProvider extends LanguageProvider {
 
         // Shields
         addShield(BSItems.WOODEN_SHIELD, "Wooden Shield", "Special Perk: Arrow Catch", "Weakness: Fire Damage");
+        addShield(BSItems.STONE_SHIELD, "Stone Shield", "Special Perk: Fire Resistant", "Weakness: Explosive Damage");
 
         // Creative Tab
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");

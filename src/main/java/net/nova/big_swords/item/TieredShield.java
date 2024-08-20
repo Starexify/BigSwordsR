@@ -10,10 +10,10 @@ import net.minecraft.world.item.TooltipFlag;
 
 import java.util.List;
 
-public class BasicShield extends ShieldItem {
+public class TieredShield extends ShieldItem {
     private final Tier tier;
 
-    public BasicShield(Tier pTier, Properties pProperties) {
+    public TieredShield(Tier pTier, Properties pProperties) {
         super(pProperties.durability(pTier.getUses() * 2));
         this.tier = pTier;
     }
@@ -25,9 +25,9 @@ public class BasicShield extends ShieldItem {
         String perk = BuiltInRegistries.ITEM.getKey(pStack.getItem()) + ".perk";
         String weakness = BuiltInRegistries.ITEM.getKey(pStack.getItem()) + ".weakness";
 
-        pTooltipComponents.add(Component.empty());
         pTooltipComponents.add(Component.translatable(perk).withStyle(ChatFormatting.GRAY));
         pTooltipComponents.add(Component.translatable(weakness).withStyle(ChatFormatting.GRAY));
+        pTooltipComponents.add(Component.empty());
     }
 
     // Tier Stuff
