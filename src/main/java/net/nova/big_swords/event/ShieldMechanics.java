@@ -6,11 +6,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.Fireball;
-import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
@@ -72,7 +71,7 @@ public class ShieldMechanics {
                 if ((damageSource.is(DamageTypes.EXPLOSION) || damageSource.is(DamageTypes.PLAYER_EXPLOSION))) {
                     float damageToPlayer = blockedDamage / 3;
                     event.setBlockedDamage(blockedDamage - damageToPlayer);
-                    event.setShieldDamage(event.shieldDamage() + damageToPlayer);
+                    event.setShieldDamage(shieldDamage + damageToPlayer);
 
                 }
             }
@@ -93,9 +92,33 @@ public class ShieldMechanics {
             boolean isDiamondShield = shield.is(BSItems.DIAMOND_SHIELD);
             boolean isGildedDiamondShield = shield.is(BSItems.GILDED_DIAMOND_SHIELD);
             if ((isDiamondShield || isGildedDiamondShield) && event.getBlocked()) {
-                // Perk TODO
-                if (sourceEntity instanceof Projectile projectile) {
+                float reflectChance = isGildedDiamondShield ? 0.75f : 0.5f;
+                // Perk
+                if (randomChance < reflectChance) {
+                    if (sourceEntity instanceof Projectile originalProjectile && !(originalProjectile instanceof ThrownTrident)) {
+                        boolean wasOnFire = originalProjectile.isOnFire();
+                        originalProjectile.discard();
+                        Projectile newProjectile = (Projectile) originalProjectile.getType().create(player.level());
 
+                        if (newProjectile != null && attacker != null) {
+                            newProjectile.setPos(player.getX(), originalProjectile.getY(), player.getZ());
+                            newProjectile.setOwner(player);
+
+                            if (wasOnFire) {
+                                newProjectile.igniteForSeconds(100);
+                            }
+
+                            Vec3 directionToAttacker = attacker.position().subtract(player.position()).normalize();
+
+                            float velocity = 1.0f;
+                            newProjectile.shoot(directionToAttacker.x, directionToAttacker.y, directionToAttacker.z, velocity, 0.0f);
+
+                            player.level().addFreshEntity(newProjectile);
+                        }
+
+                        // Weakness
+                        event.setShieldDamage(shieldDamage * 4);
+                    }
                 }
             }
 

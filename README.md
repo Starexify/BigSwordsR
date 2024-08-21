@@ -83,6 +83,10 @@ The mod also adds two new types of weapons, Glaives and Scythes.
       <td style="padding: 10px; text-align: left; border: none;"><strong>⚔️️ Scythes</strong></td>
       <td style="padding: 10px; text-align: left; border: none;">New weapons that are similar to hoes but <strong>BETTER</strong>, they hit mobs in a short area.</td>
     </tr>
+    <tr>
+      <td style="padding: 10px; text-align: left; border: none;"><strong>🛡️ Shields</strong></td>
+      <td style="padding: 10px; text-align: left; border: none;">New shields that are similar to the minecraft ones but <strong>BETTER</strong>, each having a perk that comes with a weakness.</td>
+    </tr>
   </tbody>
 </table>
 
@@ -91,7 +95,7 @@ The mod also adds two new types of weapons, Glaives and Scythes.
 
 In the upcoming updates I plan to add:
 
-- Better functionality and shields
+- Rest of the shields
 
 
 ## ❓ Frequently Asked Questions

@@ -1,9 +1,9 @@
 {
   "big_swords.creativetab": "Big Swords R",
-  "big_swords:diamond_shield.perk": "Special Perk: ",
-  "big_swords:diamond_shield.weakness": "Weakness: ",
-  "big_swords:gilded_diamond_shield.perk": "Special Perk: ",
-  "big_swords:gilded_diamond_shield.weakness": "Weakness: ",
+  "big_swords:diamond_shield.perk": "Special Perk: Counter Reflect",
+  "big_swords:diamond_shield.weakness": "Weakness: Reflective Impact",
+  "big_swords:gilded_diamond_shield.perk": "Special Perk: Counter Reflect",
+  "big_swords:gilded_diamond_shield.weakness": "Weakness: Reflective Impact",
   "big_swords:gilded_iron_shield.perk": "Special Perk: Explosive Resistant",
   "big_swords:gilded_iron_shield.weakness": "Weakness: Rusting",
   "big_swords:gilded_netherite_shield.perk": "Special Perk: Reflecting Guard",
