@@ -185,5 +185,6 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicGildedShield(recipeOutput, BSItems.STONE_SHIELD, BSItems.GILDED_STONE_SHIELD);
         basicGildedShield(recipeOutput, BSItems.IRON_SHIELD, BSItems.GILDED_IRON_SHIELD);
         basicGildedShield(recipeOutput, BSItems.DIAMOND_SHIELD, BSItems.GILDED_DIAMOND_SHIELD);
+        basicGildedShield(recipeOutput, BSItems.NETHERITE_SHIELD, BSItems.GILDED_NETHERITE_SHIELD);
     }
 }

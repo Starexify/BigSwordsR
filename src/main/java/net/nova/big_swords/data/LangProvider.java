@@ -103,6 +103,8 @@ public class LangProvider extends LanguageProvider {
         addShield(BSItems.GILDED_IRON_SHIELD, "Gilded Iron Shield", "Special Perk: Explosive Resistant", "Weakness: Rusting");
         addShield(BSItems.DIAMOND_SHIELD, "Diamond Shield", "Special Perk: ", "Weakness: ");
         addShield(BSItems.GILDED_DIAMOND_SHIELD, "Gilded Diamond Shield", "Special Perk: ", "Weakness: ");
+        addShield(BSItems.NETHERITE_SHIELD, "Netherite Shield", "Special Perk: Reflecting Guard", "Weakness: Reflecting Pause");
+        addShield(BSItems.GILDED_NETHERITE_SHIELD, "Gilded Netherite Shield", "Special Perk: Reflecting Guard", "Weakness: Reflecting Pause");
 
         // Creative Tab
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");

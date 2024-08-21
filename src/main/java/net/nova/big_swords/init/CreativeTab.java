@@ -105,6 +105,10 @@ public class CreativeTab {
                 output.accept(BSItems.GILDED_STONE_SHIELD);
                 output.accept(BSItems.IRON_SHIELD);
                 output.accept(BSItems.GILDED_IRON_SHIELD);
+                output.accept(BSItems.DIAMOND_SHIELD);
+                output.accept(BSItems.GILDED_DIAMOND_SHIELD);
+                output.accept(BSItems.NETHERITE_SHIELD);
+                output.accept(BSItems.GILDED_NETHERITE_SHIELD);
             }).build()
     );
 }

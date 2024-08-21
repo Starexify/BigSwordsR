@@ -20,6 +20,8 @@ public class BSItemProperties {
         makeShield(BSItems.GILDED_IRON_SHIELD.get());
         makeShield(BSItems.DIAMOND_SHIELD.get());
         makeShield(BSItems.GILDED_DIAMOND_SHIELD.get());
+        makeShield(BSItems.NETHERITE_SHIELD.get());
+        makeShield(BSItems.GILDED_NETHERITE_SHIELD.get());
     }
 
     private static void makeShield(Item item) {

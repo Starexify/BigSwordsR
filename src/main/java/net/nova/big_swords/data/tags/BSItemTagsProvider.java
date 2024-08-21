@@ -38,7 +38,8 @@ public class BSItemTagsProvider extends ItemTagsProvider {
 
         tag(Tags.BSItemTags.SHIELDS).add(
                 BSItems.WOODEN_SHIELD.get(), BSItems.GILDED_WOODEN_SHIELD.get(), BSItems.STONE_SHIELD.get(), BSItems.GILDED_STONE_SHIELD.get(),
-                BSItems.IRON_SHIELD.get(), BSItems.GILDED_IRON_SHIELD.get(), BSItems.DIAMOND_SHIELD.get(), BSItems.GILDED_DIAMOND_SHIELD.get()
+                BSItems.IRON_SHIELD.get(), BSItems.GILDED_IRON_SHIELD.get(), BSItems.DIAMOND_SHIELD.get(), BSItems.GILDED_DIAMOND_SHIELD.get(),
+                BSItems.NETHERITE_SHIELD.get(), BSItems.GILDED_NETHERITE_SHIELD.get()
         );
 
         tag(ItemTags.HEAD_ARMOR).add(BSItems.LIVINGMETAL_HELMET.get(), BSItems.BIOMASS_HELMET.get());

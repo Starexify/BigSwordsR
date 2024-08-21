@@ -121,6 +121,8 @@ public class BSItemModelProvider extends ItemModelProvider {
         shieldItem(BSItems.GILDED_IRON_SHIELD.get());
         shieldItem(BSItems.DIAMOND_SHIELD.get());
         shieldItem(BSItems.GILDED_DIAMOND_SHIELD.get());
+        shieldItem(BSItems.NETHERITE_SHIELD.get());
+        shieldItem(BSItems.GILDED_NETHERITE_SHIELD.get());
     }
 
     // Models
