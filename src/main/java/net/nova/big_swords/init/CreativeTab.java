@@ -111,16 +111,16 @@ public class CreativeTab {
                 output.accept(BSItems.GILDED_NETHERITE_SHIELD);
                 output.accept(BSItems.ENDER_SHIELD);
                 output.accept(BSItems.GILDED_ENDER_SHIELD);
+                output.accept(BSItems.BIOMASS_SHIELD);
+                output.accept(BSItems.GILDED_BIOMASS_SHIELD);
+                output.accept(BSItems.LIVINGMETAL_SHIELD);
+                output.accept(BSItems.GILDED_LIVINGMETAL_SHIELD);
                 output.accept(BSItems.QUARTZ_SHIELD);
                 output.accept(BSItems.GILDED_QUARTZ_SHIELD);
                 output.accept(BSItems.PATCHWORK_SHIELD);
                 output.accept(BSItems.GILDED_PATCHWORK_SHIELD);
                 output.accept(BSItems.SKULL_SHIELD);
                 output.accept(BSItems.GILDED_SKULL_SHIELD);
-                output.accept(BSItems.BIOMASS_SHIELD);
-                output.accept(BSItems.GILDED_BIOMASS_SHIELD);
-                output.accept(BSItems.LIVINGMETAL_SHIELD);
-                output.accept(BSItems.GILDED_LIVINGMETAL_SHIELD);
             }).build()
     );
 }
