@@ -1,14 +1,27 @@
 package net.nova.big_swords.event;
 
-import net.minecraft.network.chat.Component;
+import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.monster.EnderMan;
+import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.*;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.Fireball;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -32,6 +45,7 @@ public class ShieldMechanics {
             float blockedDamage = event.getBlockedDamage();
             float shieldDamage = event.shieldDamage();
             double randomChance = Math.random();
+            double randomChanceE = Math.random();
 
             // Wooden Shields
             boolean isWoodenShield = shield.is(BSItems.WOODEN_SHIELD);
@@ -135,12 +149,98 @@ public class ShieldMechanics {
                     attacker.hurt(damageSource, damageToReflect);
 
                     // Weakness
-                    if (randomChance < cooldownChance) {
+                    if (randomChanceE < cooldownChance) {
                         player.getCooldowns().addCooldown(shield.getItem(), cooldownTime);
                         player.stopUsingItem();
                     }
                 }
             }
+
+            // Ender Shields
+            boolean isEnderShield = shield.is(BSItems.ENDER_SHIELD);
+            boolean isGildedEnderShield = shield.is(BSItems.GILDED_ENDER_SHIELD);
+            if ((isEnderShield || isGildedEnderShield) && event.getBlocked()) {
+                // Perk
+                float teleportDisplaceChance = isGildedEnderShield ? 0.4f : 0.2f;
+                if (randomChance < teleportDisplaceChance && attacker != null && !(attacker instanceof AbstractSkeleton || attacker instanceof WitherBoss)) {
+                    Vec3 playerPos = player.position();
+                    Vec3 playerFacing = player.getLookAngle().normalize();
+                    // Random angle between -45 and 45 degrees
+                    double angle = (randomChance * 90 - 45) * Math.PI / 180;
+
+                    // Calculate the teleport vector
+                    Vec3 randomVector = new Vec3(
+                            Math.cos(angle),
+                            0,
+                            Math.sin(angle)
+                    ).normalize();
+
+                    double blendFactor = 0.7; // Adjust this value to control how much it follows the player's look direction
+                    Vec3 teleportVector = playerFacing.scale(blendFactor).add(randomVector.scale(1 - blendFactor)).normalize();
+
+                    double teleportDistance = 10 + (randomChance * 5);
+                    Vec3 newAttackerPosition = playerPos.add(teleportVector.scale(teleportDistance));
+
+                    // Adjust Y position to find a safe spot
+                    BlockPos blockPos = new BlockPos((int) Math.floor(newAttackerPosition.x), (int) Math.floor(newAttackerPosition.y), (int) Math.floor(newAttackerPosition.z));
+                    BlockPos safePos = player.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, blockPos);
+
+                    attacker.teleportTo(safePos.getX() + 0.5, safePos.getY(), safePos.getZ() + 0.5);
+                    attacker.playSound(SoundEvents.ENDERMAN_TELEPORT);
+                }
+
+                // Weakness
+                if (attacker instanceof EnderMan || attacker instanceof EnderDragon || attacker instanceof Endermite) {
+                    event.setBlocked(false);
+                }
+            }
+
+            // Quartz Shields
+            boolean isQuartzShield = shield.is(BSItems.QUARTZ_SHIELD);
+            boolean isGildedQuartzShield = shield.is(BSItems.GILDED_QUARTZ_SHIELD);
+            if ((isQuartzShield || isGildedQuartzShield) && event.getBlocked()) {
+                // Perk
+                float quartzBarrierChance = isGildedQuartzShield ? 0.25f : 0.15f;
+                if (randomChance < quartzBarrierChance) {
+                    player.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 30 * 20, 2, false, false));
+
+                    // Weakness
+                    float hungerChance = isGildedQuartzShield ? 0.3f : 0.2f;
+                    if (randomChanceE < hungerChance) {
+                        int hungerReduction = 8; // Reduces 1 full food bar (2 hunger points)
+                        float saturationReduction = 10.5f; // Adjust as needed
+                        player.getFoodData().eat(-hungerReduction, -saturationReduction);
+                    }
+                }
+            }
+
+            // Patchwork Shields
+            boolean isPatchworkShield = shield.is(BSItems.PATCHWORK_SHIELD);
+            boolean isGildedPatchworkShield = shield.is(BSItems.GILDED_PATCHWORK_SHIELD);
+            if ((isPatchworkShield || isGildedPatchworkShield) && event.getBlocked()) {
+                // Perk
+                if (randomChance < 0.25 && attacker instanceof LivingEntity livingAttacker) {
+                    int perkAmplifier = isGildedPatchworkShield ? 1 : 2;
+                    livingAttacker.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10 * 20, perkAmplifier, false, false));
+                }
+
+                // Weakness
+                float weaknessChance = isGildedPatchworkShield ? 0.25f : 0.5f;
+                if (randomChanceE < weaknessChance) {
+                    event.setBlocked(false);
+                }
+            }
+
+            // Skull Shields
+            boolean isSkullShield = shield.is(BSItems.SKULL_SHIELD);
+            boolean isGildedSkullShield = shield.is(BSItems.GILDED_SKULL_SHIELD);
+            if ((isSkullShield || isGildedSkullShield) && event.getBlocked()) {
+                if (attacker instanceof Mob mob) {
+                    mob.getNavigation().stop();
+                    mob.setNoAi(true);
+                }
+            }
+
         }
     }
 

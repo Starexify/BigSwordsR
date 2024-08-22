@@ -109,6 +109,14 @@ public class CreativeTab {
                 output.accept(BSItems.GILDED_DIAMOND_SHIELD);
                 output.accept(BSItems.NETHERITE_SHIELD);
                 output.accept(BSItems.GILDED_NETHERITE_SHIELD);
+                output.accept(BSItems.ENDER_SHIELD);
+                output.accept(BSItems.GILDED_ENDER_SHIELD);
+                output.accept(BSItems.QUARTZ_SHIELD);
+                output.accept(BSItems.GILDED_QUARTZ_SHIELD);
+                output.accept(BSItems.PATCHWORK_SHIELD);
+                output.accept(BSItems.GILDED_PATCHWORK_SHIELD);
+                output.accept(BSItems.SKULL_SHIELD);
+                output.accept(BSItems.GILDED_SKULL_SHIELD);
             }).build()
     );
 }

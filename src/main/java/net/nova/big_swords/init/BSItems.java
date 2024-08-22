@@ -95,4 +95,12 @@ public class BSItems {
     public static DeferredItem<Item> GILDED_DIAMOND_SHIELD = ITEMS.register("gilded_diamond_shield", () -> new GildedTieredShield(Tiers.DIAMOND, new Item.Properties(), 1, -653));
     public static DeferredItem<Item> NETHERITE_SHIELD = ITEMS.register("netherite_shield", () -> new TieredShield(Tiers.NETHERITE, new Item.Properties(), 1, -(Tiers.NETHERITE.getUses() / 2)));
     public static DeferredItem<Item> GILDED_NETHERITE_SHIELD = ITEMS.register("gilded_netherite_shield", () -> new GildedTieredShield(Tiers.NETHERITE, new Item.Properties(), 1, -793));
+    public static DeferredItem<Item> ENDER_SHIELD = ITEMS.register("ender_shield", () -> new TieredShield(BSTiers.ENDER, new Item.Properties(), 1, -(BSTiers.ENDER.getUses() / 2)));
+    public static DeferredItem<Item> GILDED_ENDER_SHIELD = ITEMS.register("gilded_ender_shield", () -> new GildedTieredShield(BSTiers.ENDER, new Item.Properties(), 1, -1190));
+    public static DeferredItem<Item> QUARTZ_SHIELD = ITEMS.register("quartz_shield", () -> new TieredShield(BSTiers.QUARTZ, new Item.Properties()));
+    public static DeferredItem<Item> GILDED_QUARTZ_SHIELD = ITEMS.register("gilded_quartz_shield", () -> new GildedTieredShield(BSTiers.QUARTZ, new Item.Properties(), 2));
+    public static DeferredItem<Item> PATCHWORK_SHIELD = ITEMS.register("patchwork_shield", () -> new TieredShield(BSTiers.PATCHWORK, new Item.Properties(), 2));
+    public static DeferredItem<Item> GILDED_PATCHWORK_SHIELD = ITEMS.register("gilded_patchwork_shield", () -> new GildedTieredShield(BSTiers.PATCHWORK, new Item.Properties(), 3));
+    public static DeferredItem<Item> SKULL_SHIELD = ITEMS.register("skull_shield", () -> new TieredShield(BSTiers.SKULL, new Item.Properties(), 2));
+    public static DeferredItem<Item> GILDED_SKULL_SHIELD = ITEMS.register("gilded_skull_shield", () -> new GildedTieredShield(BSTiers.SKULL, new Item.Properties(), 3, +51));
 }

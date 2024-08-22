@@ -9,6 +9,14 @@
     "big_swords:diamond_shield",
     "big_swords:gilded_diamond_shield",
     "big_swords:netherite_shield",
-    "big_swords:gilded_netherite_shield"
+    "big_swords:gilded_netherite_shield",
+    "big_swords:ender_shield",
+    "big_swords:gilded_ender_shield",
+    "big_swords:quartz_shield",
+    "big_swords:gilded_quartz_shield",
+    "big_swords:patchwork_shield",
+    "big_swords:gilded_patchwork_shield",
+    "big_swords:skull_shield",
+    "big_swords:gilded_skull_shield"
   ]
 }

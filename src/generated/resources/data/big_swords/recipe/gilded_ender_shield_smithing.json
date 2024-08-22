@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:ender_eye"
+  },
+  "base": {
+    "item": "big_swords:gilded_netherite_shield"
+  },
+  "result": {
+    "count": 1,
+    "id": "big_swords:gilded_ender_shield"
+  },
+  "template": {
+    "item": "big_swords:ender_upgrade_smithing_template"
+  }
+}

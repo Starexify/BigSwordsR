@@ -22,6 +22,14 @@ public class BSItemProperties {
         makeShield(BSItems.GILDED_DIAMOND_SHIELD.get());
         makeShield(BSItems.NETHERITE_SHIELD.get());
         makeShield(BSItems.GILDED_NETHERITE_SHIELD.get());
+        makeShield(BSItems.ENDER_SHIELD.get());
+        makeShield(BSItems.GILDED_ENDER_SHIELD.get());
+        makeShield(BSItems.QUARTZ_SHIELD.get());
+        makeShield(BSItems.GILDED_QUARTZ_SHIELD.get());
+        makeShield(BSItems.PATCHWORK_SHIELD.get());
+        makeShield(BSItems.GILDED_PATCHWORK_SHIELD.get());
+        makeShield(BSItems.SKULL_SHIELD.get());
+        makeShield(BSItems.GILDED_SKULL_SHIELD.get());
     }
 
     private static void makeShield(Item item) {

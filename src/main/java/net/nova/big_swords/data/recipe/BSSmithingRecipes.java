@@ -23,5 +23,7 @@ public class BSSmithingRecipes extends BSRecipeProvider {
         netheriteSmithing(recipeOutput, BSItems.DIAMOND_SCYTHE.get(), RecipeCategory.COMBAT, BSItems.NETHERITE_SCYTHE.get());
         netheriteSmithing(recipeOutput, BSItems.DIAMOND_SHIELD.get(), RecipeCategory.COMBAT, BSItems.NETHERITE_SHIELD.get());
         netheriteSmithing(recipeOutput, BSItems.GILDED_DIAMOND_SHIELD.get(), RecipeCategory.COMBAT, BSItems.GILDED_NETHERITE_SHIELD.get());
+        enderSmithing(recipeOutput, BSItems.NETHERITE_SHIELD.get(), RecipeCategory.COMBAT, BSItems.ENDER_SHIELD.get());
+        enderSmithing(recipeOutput, BSItems.GILDED_NETHERITE_SHIELD.get(), RecipeCategory.COMBAT, BSItems.GILDED_ENDER_SHIELD.get());
     }
 }

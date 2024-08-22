@@ -4,10 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.nova.big_swords.event.BigSwordsRClient;
-import net.nova.big_swords.init.BSBlocks;
-import net.nova.big_swords.init.BSItems;
-import net.nova.big_swords.init.CreativeTab;
-import net.nova.big_swords.init.Sounds;
+import net.nova.big_swords.init.*;
 import net.nova.big_swords.item.EnderSmithingTemplate;
 
 import java.util.function.Supplier;
@@ -105,6 +102,14 @@ public class LangProvider extends LanguageProvider {
         addShield(BSItems.GILDED_DIAMOND_SHIELD, "Gilded Diamond Shield", "Special Perk: Counter Reflect", "Weakness: Reflective Impact");
         addShield(BSItems.NETHERITE_SHIELD, "Netherite Shield", "Special Perk: Reflecting Guard", "Weakness: Reflecting Pause");
         addShield(BSItems.GILDED_NETHERITE_SHIELD, "Gilded Netherite Shield", "Special Perk: Reflecting Guard", "Weakness: Reflecting Pause");
+        addShield(BSItems.ENDER_SHIELD, "Ender Shield", "Special Perk: Teleport Displace", "Weakness: Ender Damage");
+        addShield(BSItems.GILDED_ENDER_SHIELD, "Gilded Ender Shield", "Special Perk: Teleport Displace", "Weakness: Ender Damage");
+        addShield(BSItems.QUARTZ_SHIELD, "Quartz Shield", "Special Perk: Quartz Barrier", "Weakness: Hunger Toll");
+        addShield(BSItems.GILDED_QUARTZ_SHIELD, "Gilded Quartz Shield", "Special Perk: Quartz Barrier", "Weakness: Hunger Toll");
+        addShield(BSItems.PATCHWORK_SHIELD, "Gilded Patchwork Shield", "Special Perk: Necrotic Weaken", "Weakness: Rotten Defense");
+        addShield(BSItems.GILDED_PATCHWORK_SHIELD, "Gilded Patchwork Shield", "Special Perk: Necrotic Weaken", "Weakness: Rotten Defense");
+        addShield(BSItems.SKULL_SHIELD, "Gilded Skull Shield", "Special Perk: Impact Stun", "Weakness: Brittle Bones");
+        addShield(BSItems.GILDED_SKULL_SHIELD, "Gilded Skull Shield", "Special Perk: Impact Stun", "Weakness: Brittle Bones");
 
         // Creative Tab
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");

@@ -123,6 +123,14 @@ public class BSItemModelProvider extends ItemModelProvider {
         shieldItem(BSItems.GILDED_DIAMOND_SHIELD.get());
         shieldItem(BSItems.NETHERITE_SHIELD.get());
         shieldItem(BSItems.GILDED_NETHERITE_SHIELD.get());
+        shieldItem(BSItems.ENDER_SHIELD.get());
+        shieldItem(BSItems.GILDED_ENDER_SHIELD.get());
+        shieldItem(BSItems.QUARTZ_SHIELD.get());
+        shieldItem(BSItems.GILDED_QUARTZ_SHIELD.get());
+        shieldItem(BSItems.PATCHWORK_SHIELD.get());
+        shieldItem(BSItems.GILDED_PATCHWORK_SHIELD.get());
+        shieldItem(BSItems.SKULL_SHIELD.get());
+        shieldItem(BSItems.GILDED_SKULL_SHIELD.get());
     }
 
     // Models

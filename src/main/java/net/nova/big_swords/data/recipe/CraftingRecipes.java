@@ -179,6 +179,25 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicShield(recipeOutput, ItemTags.STONE_TOOL_MATERIALS, BSItems.STONE_SHIELD);
         basicShield(recipeOutput, Items.IRON_INGOT, BSItems.IRON_SHIELD);
         basicShield(recipeOutput, Items.DIAMOND, BSItems.DIAMOND_SHIELD);
+        basicShield(recipeOutput, Items.QUARTZ, BSItems.QUARTZ_SHIELD);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.PATCHWORK_SHIELD)
+                .define('X', Items.ROTTEN_FLESH)
+                .pattern("XXX")
+                .pattern("XXX")
+                .pattern(" X ")
+                .unlockedBy("has_" + getItemName(Items.ROTTEN_FLESH), has(Items.ROTTEN_FLESH))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.SKULL_SHIELD)
+                .define('X', Items.BONE)
+                .define('S', Items.SKELETON_SKULL)
+                .define('#', Items.LEATHER)
+                .pattern("XSX")
+                .pattern("X#X")
+                .pattern(" X ")
+                .unlockedBy("has_" + getItemName(Items.BONE), has(Items.BONE))
+                .save(recipeOutput);
 
         // Gilded Shields
         basicGildedShield(recipeOutput, BSItems.WOODEN_SHIELD, BSItems.GILDED_WOODEN_SHIELD);
@@ -186,5 +205,18 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicGildedShield(recipeOutput, BSItems.IRON_SHIELD, BSItems.GILDED_IRON_SHIELD);
         basicGildedShield(recipeOutput, BSItems.DIAMOND_SHIELD, BSItems.GILDED_DIAMOND_SHIELD);
         basicGildedShield(recipeOutput, BSItems.NETHERITE_SHIELD, BSItems.GILDED_NETHERITE_SHIELD);
+        basicGildedShield(recipeOutput, BSItems.ENDER_SHIELD, BSItems.GILDED_ENDER_SHIELD);
+        basicGildedShield(recipeOutput, BSItems.QUARTZ_SHIELD, BSItems.GILDED_QUARTZ_SHIELD);
+        basicGildedShield(recipeOutput, BSItems.PATCHWORK_SHIELD, BSItems.GILDED_PATCHWORK_SHIELD);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.GILDED_SKULL_SHIELD)
+                .define('#', BSItems.SKULL_SHIELD)
+                .define('X', Items.GOLD_INGOT)
+                .define('S', Items.WITHER_SKELETON_SKULL)
+                .pattern("XSX")
+                .pattern("X#X")
+                .pattern(" X ")
+                .unlockedBy("has_" + getItemName(BSItems.SKULL_SHIELD), has(BSItems.SKULL_SHIELD))
+                .save(recipeOutput);
     }
 }
