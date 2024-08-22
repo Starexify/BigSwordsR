@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:leather"
+    },
+    "X": {
+      "item": "big_swords:biomass"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    " X "
+  ],
+  "result": {
+    "count": 1,
+    "id": "big_swords:biomass_shield"
+  }
+}

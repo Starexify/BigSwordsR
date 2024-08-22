@@ -131,6 +131,10 @@ public class BSItemModelProvider extends ItemModelProvider {
         shieldItem(BSItems.GILDED_PATCHWORK_SHIELD.get());
         shieldItem(BSItems.SKULL_SHIELD.get());
         shieldItem(BSItems.GILDED_SKULL_SHIELD.get());
+        shieldItem(BSItems.BIOMASS_SHIELD.get());
+        shieldItem(BSItems.GILDED_BIOMASS_SHIELD.get());
+        shieldItem(BSItems.LIVINGMETAL_SHIELD.get());
+        shieldItem(BSItems.GILDED_LIVINGMETAL_SHIELD.get());
     }
 
     // Models

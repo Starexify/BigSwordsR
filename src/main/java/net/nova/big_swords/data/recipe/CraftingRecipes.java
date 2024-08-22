@@ -180,6 +180,8 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicShield(recipeOutput, Items.IRON_INGOT, BSItems.IRON_SHIELD);
         basicShield(recipeOutput, Items.DIAMOND, BSItems.DIAMOND_SHIELD);
         basicShield(recipeOutput, Items.QUARTZ, BSItems.QUARTZ_SHIELD);
+        basicShield(recipeOutput, BSItems.BIOMASS.get(), BSItems.BIOMASS_SHIELD);
+        basicShield(recipeOutput, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_SHIELD);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.PATCHWORK_SHIELD)
                 .define('X', Items.ROTTEN_FLESH)
@@ -208,6 +210,8 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicGildedShield(recipeOutput, BSItems.ENDER_SHIELD, BSItems.GILDED_ENDER_SHIELD);
         basicGildedShield(recipeOutput, BSItems.QUARTZ_SHIELD, BSItems.GILDED_QUARTZ_SHIELD);
         basicGildedShield(recipeOutput, BSItems.PATCHWORK_SHIELD, BSItems.GILDED_PATCHWORK_SHIELD);
+        basicGildedShield(recipeOutput, BSItems.BIOMASS_SHIELD, BSItems.GILDED_BIOMASS_SHIELD);
+        basicGildedShield(recipeOutput, BSItems.LIVINGMETAL_SHIELD, BSItems.GILDED_LIVINGMETAL_SHIELD);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.GILDED_SKULL_SHIELD)
                 .define('#', BSItems.SKULL_SHIELD)

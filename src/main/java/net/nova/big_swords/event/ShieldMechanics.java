@@ -1,6 +1,7 @@
 package net.nova.big_swords.event;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -21,13 +22,17 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.nova.big_swords.init.BSItems;
+
+import java.util.Random;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 import static net.nova.big_swords.BigSwordsR.playSound;
@@ -46,6 +51,7 @@ public class ShieldMechanics {
             float shieldDamage = event.shieldDamage();
             double randomChance = Math.random();
             double randomChanceE = Math.random();
+            Random random = new Random();
 
             // Wooden Shields
             boolean isWoodenShield = shield.is(BSItems.WOODEN_SHIELD);
@@ -95,11 +101,8 @@ public class ShieldMechanics {
             boolean isGildedIronShield = shield.is(BSItems.GILDED_IRON_SHIELD);
             if ((isIronShield || isGildedIronShield) && (damageSource.is(DamageTypes.EXPLOSION) || damageSource.is(DamageTypes.PLAYER_EXPLOSION)) && event.getBlocked()) {
                 // Perk
-                if (isIronShield) {
-                    event.setShieldDamage(shieldDamage / 2);
-                } else if (isGildedIronShield) {
-                    event.setShieldDamage(0);
-                }
+                float newShieldDamage = isGildedIronShield ? 0 : (isIronShield ? shieldDamage / 2 : shieldDamage);
+                event.setShieldDamage(newShieldDamage);
             }
 
             // Diamond Shields
@@ -162,7 +165,7 @@ public class ShieldMechanics {
             if ((isEnderShield || isGildedEnderShield) && event.getBlocked()) {
                 // Perk
                 float teleportDisplaceChance = isGildedEnderShield ? 0.4f : 0.2f;
-                if (randomChance < teleportDisplaceChance && attacker != null && !(attacker instanceof AbstractSkeleton || attacker instanceof WitherBoss)) {
+                if ((randomChance < teleportDisplaceChance) && attacker != null && !(attacker instanceof AbstractSkeleton || attacker instanceof WitherBoss)) {
                     Vec3 playerPos = player.position();
                     Vec3 playerFacing = player.getLookAngle().normalize();
                     // Random angle between -45 and 45 degrees
@@ -235,12 +238,90 @@ public class ShieldMechanics {
             boolean isSkullShield = shield.is(BSItems.SKULL_SHIELD);
             boolean isGildedSkullShield = shield.is(BSItems.GILDED_SKULL_SHIELD);
             if ((isSkullShield || isGildedSkullShield) && event.getBlocked()) {
-                if (attacker instanceof Mob mob) {
-                    mob.getNavigation().stop();
-                    mob.setNoAi(true);
+                // Perk
+                float perkChance = isGildedPatchworkShield ? 0.25f : 0.15f;
+                if (randomChance < perkChance && attacker instanceof Mob mob) {
+                    setNearestTarget(mob, player);
+
+                }
+
+                // Weakness
+                float weaknessChance = isGildedPatchworkShield ? 0.15f : 0.35f;
+                if (randomChance < weaknessChance) {
+                    event.setShieldDamage(shieldDamage * 3);
                 }
             }
 
+            // Biomass Shields
+            boolean isBiomassShield = shield.is(BSItems.BIOMASS_SHIELD);
+            boolean isGildedBiomassShield = shield.is(BSItems.GILDED_BIOMASS_SHIELD);
+            if ((isBiomassShield || isGildedBiomassShield) && event.getBlocked()) {
+                // Perk
+                if (randomChance < 0.45) {
+                    float healthToRestore = blockedDamage * 0.30f;
+                    player.heal(healthToRestore);
+                }
+
+                // Weakness
+                if (randomChanceE < 0.15) {
+                    float damagePercentage = isGildedBiomassShield ? 0.2f : 0.4f;
+                    float healthToDamage = blockedDamage - (blockedDamage * damagePercentage);
+                    event.setBlockedDamage(healthToDamage);
+                }
+            }
+
+            // Livingmetal Shields
+            boolean isLivingmetalShield = shield.is(BSItems.LIVINGMETAL_SHIELD);
+            boolean isGildedLivingmetalShield = shield.is(BSItems.GILDED_LIVINGMETAL_SHIELD);
+            if ((isLivingmetalShield || isGildedLivingmetalShield) && event.getBlocked()) {
+                // Perk
+                float perkChance = isGildedLivingmetalShield ? 0.4f : 0.25f;
+                if (randomChance < perkChance) {
+                    // Weakness
+                    float chanceToUseMoreXP = isGildedLivingmetalShield ? 0.15f : 0.2f;
+                    int minXP = 2;
+                    int maxXP = 4;
+                    int xpToUse = randomChanceE < chanceToUseMoreXP ? maxXP + random.nextInt(3) : minXP + random.nextInt(3);
+
+                    float xpToHealthRatio = 2.0f;
+                    float healthToHeal = xpToUse * xpToHealthRatio;
+
+                    if (player.experienceLevel >= xpToUse && player.getMaxHealth() - 2 > player.getHealth()) {
+                        player.heal(healthToHeal);
+                        player.giveExperienceLevels(-xpToUse);
+                    }
+                }
+            }
+        }
+    }
+
+    private static void setNearestTarget(Mob mob, Player blockingPlayer) {
+        double SEARCH_RANGE = 16.0;
+        Level level = mob.level();
+        AABB boundingBox = new AABB(
+                mob.getX() - SEARCH_RANGE, mob.getY() - SEARCH_RANGE, mob.getZ() - SEARCH_RANGE,
+                mob.getX() + SEARCH_RANGE, mob.getY() + SEARCH_RANGE, mob.getZ() + SEARCH_RANGE
+        );
+
+        // Find entities in the bounding box
+        LivingEntity nearestEntity = null;
+        double nearestDistance = Double.MAX_VALUE;
+
+        for (Entity entity : level.getEntities(mob, boundingBox, e -> e instanceof LivingEntity && !e.equals(blockingPlayer))) {
+            if (entity instanceof LivingEntity livingEntity) {
+                double distance = mob.distanceToSqr(livingEntity);
+                if (distance < nearestDistance) {
+                    nearestDistance = distance;
+                    nearestEntity = livingEntity;
+                }
+            }
+        }
+
+        // Set the nearest non-player entity as the target
+        if (nearestEntity != null) {
+            mob.setTarget(nearestEntity);
+        } else {
+            mob.setTarget(null); // Optional: Clear target if no valid target is found
         }
     }
 

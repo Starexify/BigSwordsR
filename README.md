@@ -95,7 +95,7 @@ The mod also adds two new types of weapons, Glaives and Scythes. And the long aw
 
 In the upcoming updates I plan to add:
 
-- Rest of the shields
+- Achievements
 
 
 ## ❓ Frequently Asked Questions

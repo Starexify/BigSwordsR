@@ -108,8 +108,12 @@ public class LangProvider extends LanguageProvider {
         addShield(BSItems.GILDED_QUARTZ_SHIELD, "Gilded Quartz Shield", "Special Perk: Quartz Barrier", "Weakness: Hunger Toll");
         addShield(BSItems.PATCHWORK_SHIELD, "Gilded Patchwork Shield", "Special Perk: Necrotic Weaken", "Weakness: Rotten Defense");
         addShield(BSItems.GILDED_PATCHWORK_SHIELD, "Gilded Patchwork Shield", "Special Perk: Necrotic Weaken", "Weakness: Rotten Defense");
-        addShield(BSItems.SKULL_SHIELD, "Gilded Skull Shield", "Special Perk: Impact Stun", "Weakness: Brittle Bones");
-        addShield(BSItems.GILDED_SKULL_SHIELD, "Gilded Skull Shield", "Special Perk: Impact Stun", "Weakness: Brittle Bones");
+        addShield(BSItems.SKULL_SHIELD, "Skull Shield", "Special Perk: Fear", "Weakness: Brittle Bones");
+        addShield(BSItems.GILDED_SKULL_SHIELD, "Gilded Skull Shield", "Special Perk: Fear", "Weakness: Brittle Bones");
+        addShield(BSItems.BIOMASS_SHIELD, "Biomass Shield", "Special Perk: Vitality Transfer", "Weakness: Life Leech");
+        addShield(BSItems.GILDED_BIOMASS_SHIELD, "Gilded Biomass Shield", "Special Perk: Vitality Transfer", "Weakness: Life Leech");
+        addShield(BSItems.LIVINGMETAL_SHIELD, "Livingmetal Shield", "Special Perk: Experience Infusion", "Weakness: Experience Drain");
+        addShield(BSItems.GILDED_LIVINGMETAL_SHIELD, "Gilded Livingmetal Shield", "Special Perk: Experience Infusion", "Weakness: Experience Drain");
 
         // Creative Tab
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");

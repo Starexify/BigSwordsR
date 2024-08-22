@@ -17,6 +17,10 @@
     "big_swords:patchwork_shield",
     "big_swords:gilded_patchwork_shield",
     "big_swords:skull_shield",
-    "big_swords:gilded_skull_shield"
+    "big_swords:gilded_skull_shield",
+    "big_swords:biomass_shield",
+    "big_swords:gilded_biomass_shield",
+    "big_swords:livingmetal_shield",
+    "big_swords:gilded_livingmetal_shield"
   ]
 }

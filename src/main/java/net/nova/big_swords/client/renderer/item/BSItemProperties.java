@@ -30,6 +30,10 @@ public class BSItemProperties {
         makeShield(BSItems.GILDED_PATCHWORK_SHIELD.get());
         makeShield(BSItems.SKULL_SHIELD.get());
         makeShield(BSItems.GILDED_SKULL_SHIELD.get());
+        makeShield(BSItems.BIOMASS_SHIELD.get());
+        makeShield(BSItems.GILDED_BIOMASS_SHIELD.get());
+        makeShield(BSItems.LIVINGMETAL_SHIELD.get());
+        makeShield(BSItems.GILDED_LIVINGMETAL_SHIELD.get());
     }
 
     private static void makeShield(Item item) {
