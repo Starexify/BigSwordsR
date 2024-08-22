@@ -56,7 +56,7 @@
 ## ℹ️ About
 
 Big Swords R (Remembered or Reboot or Remake, etc.) adds Big Swords in the game, they deal more damage than regular swords but the attack speed is lowered.
-The mod also adds two new types of weapons, Glaives and Scythes.
+The mod also adds two new types of weapons, Glaives and Scythes. And the long awaited SHIELDS, each with one special perk and weakness.
 
 
 ## ✨ Features
