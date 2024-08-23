@@ -49,7 +49,7 @@
 
 <p align="center">
     <strong>
-        ⚠️This mod is a spiritual successor to the Asgard Shields mod series, and this is just a hobby project, therefore content may be different from originals.
+        This mod is a spiritual successor to the Asgard Shields mod series, and this is just a hobby project, therefore content may be different from originals.
     </strong>
 </p>
 
