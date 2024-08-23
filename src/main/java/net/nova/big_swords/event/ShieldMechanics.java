@@ -36,7 +36,8 @@ import net.nova.big_swords.init.BSItems;
 
 import java.util.Random;
 
-import static net.nova.big_swords.BigSwordsR.*;
+import static net.nova.big_swords.BigSwordsR.MODID;
+import static net.nova.big_swords.BigSwordsR.playSound;
 
 @EventBusSubscriber(modid = MODID)
 public class ShieldMechanics {
@@ -118,7 +119,6 @@ public class ShieldMechanics {
                     float damageToPlayer = blockedDamage / 3;
                     event.setBlockedDamage(blockedDamage - damageToPlayer);
                     event.setShieldDamage(shieldDamage + damageToPlayer);
-
                 }
             }
 
