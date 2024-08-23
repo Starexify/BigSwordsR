@@ -248,9 +248,9 @@ public class ShieldMechanics {
             boolean isGildedPatchworkShield = shield.is(BSItems.GILDED_PATCHWORK_SHIELD);
             if ((isPatchworkShield || isGildedPatchworkShield)) {
                 // Perk
-                if (randomChance < 0.25 && attacker instanceof LivingEntity livingAttacker) {
-                    int perkAmplifier = isGildedPatchworkShield ? 1 : 2;
-                    livingAttacker.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10 * 20, perkAmplifier, false, false));
+                float perkChance = isGildedPatchworkShield ? 0.5f : 0.25f;
+                if (randomChance < perkChance && attacker instanceof LivingEntity livingAttacker) {
+                    livingAttacker.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10 * 20, 0, false, false));
                 }
 
                 // Weakness
