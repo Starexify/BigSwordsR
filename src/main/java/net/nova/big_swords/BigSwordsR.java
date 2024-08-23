@@ -1,9 +1,12 @@
 package net.nova.big_swords;
 
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -30,6 +33,7 @@ public class BigSwordsR {
         bus.addListener(DataGenerators::gatherData);
     }
 
+    // Util
     public static void playSound(Level level, Player player, SoundEvent sound) {
         if (!player.level().isClientSide) {
             level.playSound(null, player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f);
@@ -38,5 +42,9 @@ public class BigSwordsR {
 
     public static ResourceLocation rl(String path) {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
+    }
+
+    public static Holder<Enchantment> getEnchantment(Level level, ResourceKey<Enchantment> enchantment) {
+        return level.holderOrThrow(enchantment);
     }
 }

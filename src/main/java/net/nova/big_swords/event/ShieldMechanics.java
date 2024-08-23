@@ -22,6 +22,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
@@ -30,19 +31,19 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.init.BSItems;
 
 import java.util.Random;
 
-import static net.nova.big_swords.BigSwordsR.MODID;
-import static net.nova.big_swords.BigSwordsR.playSound;
+import static net.nova.big_swords.BigSwordsR.*;
 
 @EventBusSubscriber(modid = MODID)
 public class ShieldMechanics {
 
     @SubscribeEvent
     public static void onShieldBlock(LivingShieldBlockEvent event) {
-        if (event.getEntity() instanceof Player player) {
+        if (event.getEntity() instanceof Player player && event.getBlocked()) {
             ItemStack shield = player.getUseItem();
             Entity attacker = event.getDamageSource().getEntity();
             Entity sourceEntity = event.getDamageSource().getDirectEntity();
@@ -52,12 +53,13 @@ public class ShieldMechanics {
             double randomChance = Math.random();
             double randomChanceE = Math.random();
             Random random = new Random();
+            Level level = player.level();
 
             // Wooden Shields
             boolean isWoodenShield = shield.is(BSItems.WOODEN_SHIELD);
             boolean isGildedWoodenShield = shield.is(BSItems.GILDED_WOODEN_SHIELD);
-            if ((isWoodenShield || isGildedWoodenShield) && damageSource.is(DamageTypes.ARROW) && event.getBlocked()) {
-                if (sourceEntity instanceof Arrow arrow) {
+            if ((isWoodenShield || isGildedWoodenShield)) {
+                if (damageSource.is(DamageTypes.ARROW) && sourceEntity instanceof Arrow arrow) {
                     // Perk
                     double catchChance = isGildedWoodenShield ? 0.7 : 0.4;
                     if (randomChance < catchChance) {
@@ -74,14 +76,38 @@ public class ShieldMechanics {
                         event.setShieldDamage(shieldDamage * 4);
                     }
                 }
+
+                // Weakness
+                if (attacker instanceof LivingEntity livingAttacker) {
+                    ItemStack attackerWeapon = livingAttacker.getMainHandItem();
+                    int fireAspectLevel = attackerWeapon.getEnchantmentLevel(BigSwordsR.getEnchantment(level, Enchantments.FIRE_ASPECT));
+                    switch (fireAspectLevel) {
+                        case 1:
+                            event.setShieldDamage(shieldDamage * 3);
+                            player.sendSystemMessage(Component.literal("Fire aspect 1"));
+                            break;
+                        case 2:
+                            event.setShieldDamage(shieldDamage * 5);
+                            player.sendSystemMessage(Component.literal("Fire aspect 2"));
+                            break;
+                    }
+                }
             }
 
             // Stone Shields
             boolean isStoneShield = shield.is(BSItems.STONE_SHIELD);
             boolean isGildedStoneShield = shield.is(BSItems.GILDED_STONE_SHIELD);
-            if ((isStoneShield || isGildedStoneShield) && event.getBlocked()) {
+            if ((isStoneShield || isGildedStoneShield)) {
                 // Perk
-                if (sourceEntity instanceof Fireball || (sourceEntity instanceof Arrow arrow && arrow.isOnFire())) {
+                if (attacker instanceof LivingEntity livingAttacker) {
+                    ItemStack attackerWeapon = livingAttacker.getMainHandItem();
+                    int fireAspectLevel = attackerWeapon.getEnchantmentLevel(BigSwordsR.getEnchantment(level, Enchantments.FIRE_ASPECT));
+                    if (fireAspectLevel > 0) {
+                        event.setShieldDamage(0);
+                        playSound(player.level(), player, SoundEvents.FIRE_EXTINGUISH);
+                    }
+                }
+                if (sourceEntity instanceof Fireball || (sourceEntity instanceof Projectile projectile && projectile.isOnFire())) {
                     event.setShieldDamage(0);
                     sourceEntity.remove(Entity.RemovalReason.DISCARDED);
                     playSound(player.level(), player, SoundEvents.FIRE_EXTINGUISH);
@@ -99,7 +125,7 @@ public class ShieldMechanics {
             // Iron Shields
             boolean isIronShield = shield.is(BSItems.IRON_SHIELD);
             boolean isGildedIronShield = shield.is(BSItems.GILDED_IRON_SHIELD);
-            if ((isIronShield || isGildedIronShield) && (damageSource.is(DamageTypes.EXPLOSION) || damageSource.is(DamageTypes.PLAYER_EXPLOSION)) && event.getBlocked()) {
+            if ((isIronShield || isGildedIronShield) && (damageSource.is(DamageTypes.EXPLOSION) || damageSource.is(DamageTypes.PLAYER_EXPLOSION))) {
                 // Perk
                 float newShieldDamage = isGildedIronShield ? 0 : (isIronShield ? shieldDamage / 2 : shieldDamage);
                 event.setShieldDamage(newShieldDamage);
@@ -108,7 +134,7 @@ public class ShieldMechanics {
             // Diamond Shields
             boolean isDiamondShield = shield.is(BSItems.DIAMOND_SHIELD);
             boolean isGildedDiamondShield = shield.is(BSItems.GILDED_DIAMOND_SHIELD);
-            if ((isDiamondShield || isGildedDiamondShield) && event.getBlocked()) {
+            if ((isDiamondShield || isGildedDiamondShield)) {
                 float reflectChance = isGildedDiamondShield ? 0.75f : 0.5f;
                 // Perk
                 if (randomChance < reflectChance) {
@@ -162,7 +188,7 @@ public class ShieldMechanics {
             // Ender Shields
             boolean isEnderShield = shield.is(BSItems.ENDER_SHIELD);
             boolean isGildedEnderShield = shield.is(BSItems.GILDED_ENDER_SHIELD);
-            if ((isEnderShield || isGildedEnderShield) && event.getBlocked()) {
+            if ((isEnderShield || isGildedEnderShield)) {
                 // Perk
                 float teleportDisplaceChance = isGildedEnderShield ? 0.4f : 0.2f;
                 if ((randomChance < teleportDisplaceChance) && attacker != null && !(attacker instanceof AbstractSkeleton || attacker instanceof WitherBoss)) {
@@ -201,7 +227,7 @@ public class ShieldMechanics {
             // Quartz Shields
             boolean isQuartzShield = shield.is(BSItems.QUARTZ_SHIELD);
             boolean isGildedQuartzShield = shield.is(BSItems.GILDED_QUARTZ_SHIELD);
-            if ((isQuartzShield || isGildedQuartzShield) && event.getBlocked()) {
+            if ((isQuartzShield || isGildedQuartzShield)) {
                 // Perk
                 float quartzBarrierChance = isGildedQuartzShield ? 0.25f : 0.15f;
                 if (randomChance < quartzBarrierChance) {
@@ -220,7 +246,7 @@ public class ShieldMechanics {
             // Patchwork Shields
             boolean isPatchworkShield = shield.is(BSItems.PATCHWORK_SHIELD);
             boolean isGildedPatchworkShield = shield.is(BSItems.GILDED_PATCHWORK_SHIELD);
-            if ((isPatchworkShield || isGildedPatchworkShield) && event.getBlocked()) {
+            if ((isPatchworkShield || isGildedPatchworkShield)) {
                 // Perk
                 if (randomChance < 0.25 && attacker instanceof LivingEntity livingAttacker) {
                     int perkAmplifier = isGildedPatchworkShield ? 1 : 2;
@@ -237,7 +263,7 @@ public class ShieldMechanics {
             // Skull Shields
             boolean isSkullShield = shield.is(BSItems.SKULL_SHIELD);
             boolean isGildedSkullShield = shield.is(BSItems.GILDED_SKULL_SHIELD);
-            if ((isSkullShield || isGildedSkullShield) && event.getBlocked()) {
+            if ((isSkullShield || isGildedSkullShield)) {
                 // Perk
                 float perkChance = isGildedPatchworkShield ? 0.25f : 0.15f;
                 if (randomChance < perkChance && attacker instanceof Mob mob) {
@@ -255,7 +281,7 @@ public class ShieldMechanics {
             // Biomass Shields
             boolean isBiomassShield = shield.is(BSItems.BIOMASS_SHIELD);
             boolean isGildedBiomassShield = shield.is(BSItems.GILDED_BIOMASS_SHIELD);
-            if ((isBiomassShield || isGildedBiomassShield) && event.getBlocked()) {
+            if ((isBiomassShield || isGildedBiomassShield)) {
                 // Perk
                 if (randomChance < 0.45) {
                     float healthToRestore = blockedDamage * 0.30f;
@@ -273,7 +299,7 @@ public class ShieldMechanics {
             // Livingmetal Shields
             boolean isLivingmetalShield = shield.is(BSItems.LIVINGMETAL_SHIELD);
             boolean isGildedLivingmetalShield = shield.is(BSItems.GILDED_LIVINGMETAL_SHIELD);
-            if ((isLivingmetalShield || isGildedLivingmetalShield) && event.getBlocked()) {
+            if ((isLivingmetalShield || isGildedLivingmetalShield)) {
                 // Perk
                 float perkChance = isGildedLivingmetalShield ? 0.4f : 0.25f;
                 if (randomChance < perkChance) {
