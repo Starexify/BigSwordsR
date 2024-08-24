@@ -1,0 +1,37 @@
+{
+  "parent": "big_swords:root/first_big_sword",
+  "criteria": {
+    "get_DeferredHolder{ResourceKey[minecraft:item / big_swords:netherite_big_sword]}": {
+      "conditions": {
+        "items": [
+          {
+            "items": "big_swords:netherite_big_sword"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.big_swords.get_netherite_big_sword.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "big_swords:netherite_big_sword"
+    },
+    "title": {
+      "translate": "advancements.big_swords.get_netherite_big_sword.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_DeferredHolder{ResourceKey[minecraft:item / big_swords:netherite_big_sword]}"
+    ]
+  ],
+  "rewards": {
+    "experience": 225
+  },
+  "sends_telemetry_event": true
+}

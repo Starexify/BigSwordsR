@@ -11,7 +11,7 @@ public class BSItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
     // Extra
-    public static DeferredItem<Item> CREEP_BALL = ITEMS.register("creep_ball", () -> new Item(new Item.Properties()));
+    public static DeferredItem<Item> CREEP_BALL = ITEMS.register("creep_ball", () -> new CreepBall(new Item.Properties()));
     public static DeferredItem<Item> BIOMASS_SEED = ITEMS.register("biomass_seed", () -> new ItemNameBlockItem(BSBlocks.BIOMASS.get(), new Item.Properties()));
 
     // Sticks

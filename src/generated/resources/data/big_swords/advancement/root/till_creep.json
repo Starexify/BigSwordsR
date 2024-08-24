@@ -1,0 +1,48 @@
+{
+  "parent": "big_swords:root/creep_a_block",
+  "criteria": {
+    "till_creep": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "big_swords:creep_block",
+                "state": {
+                  "tilled": "true"
+                }
+              }
+            }
+          },
+          {
+            "condition": "minecraft:match_tool",
+            "predicate": {
+              "items": "#big_swords:glaives"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:item_used_on_block"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.big_swords.till_creep.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "big_swords:creep_block"
+    },
+    "title": {
+      "translate": "advancements.big_swords.till_creep.title"
+    }
+  },
+  "requirements": [
+    [
+      "till_creep"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

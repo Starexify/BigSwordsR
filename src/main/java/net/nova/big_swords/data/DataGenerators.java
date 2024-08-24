@@ -8,6 +8,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.nova.big_swords.BigSwordsR;
+import net.nova.big_swords.data.advancement.BSAdvancementsProvider;
 import net.nova.big_swords.data.loot.BSLootTableProvider;
 import net.nova.big_swords.data.loot.GlobalLootModifier;
 import net.nova.big_swords.data.recipe.BSRecipeProvider;
@@ -44,6 +45,8 @@ public class DataGenerators {
             generator.addProvider(true, new BSDataMapProvider(output, lookupProvider));
 
             generator.addProvider(true, new SoundsProvider(output, existingFileHelper));
+
+            generator.addProvider(true, new BSAdvancementsProvider(output, lookupProvider, existingFileHelper));
 
             generator.addProvider(true, new GlobalLootModifier(output, lookupProvider));
 

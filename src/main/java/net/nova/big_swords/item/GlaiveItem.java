@@ -4,8 +4,11 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -16,11 +19,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
 import net.nova.big_swords.block.CreepBlock;
+import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.Sounds;
 
 import java.util.List;
@@ -49,6 +54,25 @@ public class GlaiveItem extends TieredItem {
         pTooltipComponents.add(Component.literal("Special:").withStyle(ChatFormatting.GRAY));
         pTooltipComponents.add(Component.literal(" " + this.minDamage + " - " + this.maxDamage + " Charged Damage").withStyle(ChatFormatting.DARK_GREEN));
         pTooltipComponents.add(Component.literal(" " + this.range + " Range").withStyle(ChatFormatting.DARK_GREEN));
+    }
+
+    // Tilling Creep
+    @Override
+    public InteractionResult useOn(UseOnContext context) {
+        BlockPos blockpos = context.getClickedPos();
+        Level level = context.getLevel();
+        BlockState state = level.getBlockState(blockpos);
+        Player player = context.getPlayer();
+        ItemStack itemStack = context.getItemInHand();
+
+        if (state.getBlock() instanceof CreepBlock creepBlock && !state.getValue(CreepBlock.TILLED)) {
+            level.playSound(null, blockpos, SoundEvents.SOUL_ESCAPE.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+            creepBlock.tillBlock(level, blockpos, state);
+            itemStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()));
+
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+        return super.useOn(context);
     }
 
     // Glaive Mechanic

@@ -3,6 +3,7 @@ package net.nova.big_swords.data;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.nova.big_swords.data.advancement.BigSwordsAdvancements;
 import net.nova.big_swords.event.BigSwordsRClient;
 import net.nova.big_swords.init.*;
 import net.nova.big_swords.item.EnderSmithingTemplate;
@@ -132,9 +133,35 @@ public class LangProvider extends LanguageProvider {
         add(SoundsProvider.getSubtitle(Sounds.SCYTHE_SLASH), "Scythe Slash");
         add(SoundsProvider.getSubtitle(Sounds.REAPER_SLASH), "Reaper Slash");
 
+        // Advancements
+        addAdvancement("root","The root of Big Swords R", "");
+        addAdvancement("first_big_sword","Big Swords", "Your very first Big Sword");
+        addAdvancement("get_netherite_big_sword","Equipped with Debris", "Obtain the mighty Netherite Big Sword");
+        addAdvancement("get_ender_big_sword","Blade of the Void", "The Endermen last resort");
+
+        addAdvancement("first_scythe","Scythes", "Your very first Scythe");
+        addAdvancement("get_netherite_scythe","Harvest Enemies with Debris", "Obtain the formidable Netherite Scythe");
+        addAdvancement("get_soul_reaper","Grim Reaper's Touch", "Reap them of their souls");
+
+        addAdvancement("first_glaive","Glaives", "Your very first Glaive");
+        addAdvancement("get_netherite_glaive","Reaching with Debris", "Obtain the imposing Netherite Glaive");
+
+        addAdvancement("first_shield","Shields", "Your very first Shield");
+        addAdvancement("get_netherite_shield","Protected with Debris", "Obtain the unyielding Netherite Shield");
+        addAdvancement("get_ender_shield","Warped Protection", "Obtain the teleporting Ender Shield");
+
+        addAdvancement("creep_a_block","Creep-A-Block", "Use a Creeper Ball on Soul Sand to create a Creep Block");
+        addAdvancement("till_creep","Till Creep Blocks", "Use a Glaive on Creep Blocks to till them and start your biomass farm");
+
         // Resourcepacks
         add(BigSwordsRClient.RP_16x_NAME, "Big Swords R 16x");
         add(BigSwordsRClient.RP_16x_DESC, "16x version of the Big Swords");
+    }
+
+    // Methods
+    public void addAdvancement(String advancementName, String title, String description) {
+        add("advancements." + MODID + "." + advancementName + ".title", title);
+        add("advancements." + MODID + "." + advancementName + ".description", description);
     }
 
     public void addShield(Supplier<? extends Item> key, String name, String perk, String weakness) {
