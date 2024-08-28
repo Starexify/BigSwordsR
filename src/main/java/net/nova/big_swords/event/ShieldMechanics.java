@@ -30,7 +30,6 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.init.BSItems;
 
@@ -348,39 +347,6 @@ public class ShieldMechanics {
             mob.setTarget(nearestEntity);
         } else {
             mob.setTarget(null); // Optional: Clear target if no valid target is found
-        }
-    }
-
-    // Iron Shield Weakness
-    @SubscribeEvent
-    public static void onPlayerTick(PlayerTickEvent.Pre event) {
-        Player player = event.getEntity();
-
-        if (player.level().isClientSide) return;
-
-        ItemStack mainHandItem = player.getMainHandItem();
-        ItemStack offHandItem = player.getOffhandItem();
-
-        boolean isIronShieldInMainHand = mainHandItem.is(BSItems.IRON_SHIELD);
-        boolean isGildedIronShieldInMainHand = mainHandItem.is(BSItems.GILDED_IRON_SHIELD);
-        boolean isIronShieldInOffHand = offHandItem.is(BSItems.IRON_SHIELD);
-        boolean isGildedIronShieldInOffHand = offHandItem.is(BSItems.GILDED_IRON_SHIELD);
-
-        if (player.isInWater()) {
-            if (isIronShieldInMainHand || isGildedIronShieldInMainHand) {
-                decayItem(mainHandItem, player);
-            }
-            if (isIronShieldInOffHand || isGildedIronShieldInOffHand) {
-                decayItem(offHandItem, player);
-            }
-        }
-    }
-
-    private static void decayItem(ItemStack itemStack, Player player) {
-        if (!itemStack.isEmpty() && itemStack.isDamageableItem()) {
-            if (itemStack.getDamageValue() < itemStack.getMaxDamage() - 1) {
-                itemStack.hurtAndBreak(1, player, itemStack.getEquipmentSlot());
-            }
         }
     }
 }
