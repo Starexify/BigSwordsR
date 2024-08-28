@@ -156,6 +156,10 @@ public class LangProvider extends LanguageProvider {
         // Resourcepacks
         add(BigSwordsRClient.RP_16x_NAME, "Big Swords R 16x");
         add(BigSwordsRClient.RP_16x_DESC, "16x version of the Big Swords");
+
+        // Mod Menu
+        add("big_swords.modrinth", "Modrinth Link");
+        add("big_swords.curseforge", "CurseForge Link");
     }
 
     // Methods

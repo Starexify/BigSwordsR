@@ -44,10 +44,6 @@ public class TieredShield extends ShieldItem {
     }
 
     // Tier Stuff
-    public Tier getTier() {
-        return this.tier;
-    }
-
     @Override
     public int getEnchantmentValue() {
         return this.tier.getEnchantmentValue();
