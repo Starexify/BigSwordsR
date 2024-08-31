@@ -3,7 +3,16 @@
     "big_swords:giant_blaze_rod": {
       "burn_time": 16800
     },
+    "big_swords:giant_wooden_stick": {
+      "burn_time": 700
+    },
     "big_swords:wooden_big_sword": {
+      "burn_time": 200
+    },
+    "big_swords:wooden_glaive": {
+      "burn_time": 200
+    },
+    "big_swords:wooden_scythe": {
       "burn_time": 200
     }
   }
