@@ -27,12 +27,11 @@ public class CreepBall extends Item {
             level.playSound(null, blockpos, SoundEvents.SOUL_SAND_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
             Player player = pContext.getPlayer();
             ItemStack itemstack = pContext.getItemInHand();
-            boolean flag = !player.hasInfiniteMaterials() && itemstack.getCount() == 1;
-            level.setBlock(blockpos, BSBlocks.CREEP_BLOCK.get().defaultBlockState(), 3);
 
-            if (!flag) {
+            if (!player.hasInfiniteMaterials()) {
                 itemstack.shrink(1);
             }
+            level.setBlock(blockpos, BSBlocks.CREEP_BLOCK.get().defaultBlockState(), 3);
 
             return InteractionResult.sidedSuccess(level.isClientSide);
         }
