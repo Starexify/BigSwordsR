@@ -1,7 +1,0 @@
-// 1.21.1	2024-08-31T15:19:37.911286	Tags for minecraft:block mod id big_swords
-fd3c8f9ef8456a1cfd340066367807a86d20e3dc data/minecraft/tags/block/mineable/hoe.json
-6f82791913441798574b68177b39b207e7e5d4d6 data/minecraft/tags/block/mineable/pickaxe.json
-0791c92382c26286bf8cf6ed94f5c61453d996ce data/minecraft/tags/block/mineable/shovel.json
-6f82791913441798574b68177b39b207e7e5d4d6 data/minecraft/tags/block/needs_iron_tool.json
-fd3c8f9ef8456a1cfd340066367807a86d20e3dc data/minecraft/tags/block/soul_fire_base_blocks.json
-fd3c8f9ef8456a1cfd340066367807a86d20e3dc data/minecraft/tags/block/soul_speed_blocks.json
