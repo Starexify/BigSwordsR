@@ -41,8 +41,9 @@ public class BSItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         // Extra
-        basicItem(BSItems.CREEP_BALL.get());
         basicItem(BSItems.BIOMASS_SEED.get());
+        basicItem(BSItems.CREEP_BALL.get());
+        basicItem(BSItems.SOUL.get());
 
         // Sticks
         basicItem(BSItems.GIANT_WOODEN_STICK.get());

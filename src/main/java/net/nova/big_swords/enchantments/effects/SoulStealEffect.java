@@ -34,7 +34,7 @@ public record SoulStealEffect(int duration) implements EnchantmentEntityEffect {
             };
 
             if (level.getRandom().nextDouble() < dropChance) {
-                ItemStack soulItem = new ItemStack(BSItems.LIVINGMETAL_INGOT.get());
+                ItemStack soulItem = new ItemStack(BSItems.SOUL.get());
                 livingEntity.spawnAtLocation(soulItem);
 
                 // Spawn soul particles
