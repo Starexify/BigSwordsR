@@ -5,6 +5,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
@@ -29,6 +30,7 @@ public class BigSwordsR {
         BSBlocks.BLOCKS.register(bus);
         Sounds.SOUND_EVENTS.register(bus);
         BSLootModifier.LOOT_MODIFIERS.register(bus);
+        BSEnchantmentEntityEffects.ENTITY_EFFECT.register(bus);
 
         bus.addListener(DataGenerators::gatherData);
     }
@@ -37,6 +39,12 @@ public class BigSwordsR {
     public static void playSound(Level level, Player player, SoundEvent sound) {
         if (!player.level().isClientSide) {
             level.playSound(null, player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f);
+        }
+    }
+
+    public static void playSound(Level level, LivingEntity livingEntity, SoundEvent sound) {
+        if (!livingEntity.level().isClientSide) {
+            level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f);
         }
     }
 

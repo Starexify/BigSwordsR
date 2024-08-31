@@ -54,6 +54,7 @@ public class GlaiveItem extends TieredItem {
         pTooltipComponents.add(Component.literal("Special:").withStyle(ChatFormatting.GRAY));
         pTooltipComponents.add(Component.literal(" " + this.minDamage + " - " + this.maxDamage + " Charged Damage").withStyle(ChatFormatting.DARK_GREEN));
         pTooltipComponents.add(Component.literal(" " + this.range + " Range").withStyle(ChatFormatting.DARK_GREEN));
+        pTooltipComponents.add(Component.empty());
     }
 
     // Tilling Creep

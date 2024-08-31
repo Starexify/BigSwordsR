@@ -1,0 +1,33 @@
+{
+  "anvil_cost": 3,
+  "description": {
+    "translate": "enchantment.big_swords.soul_stealer"
+  },
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "affected": "victim",
+        "effect": {
+          "type": "big_swords:soul_steal",
+          "duration": 0
+        },
+        "enchanted": "attacker"
+      }
+    ]
+  },
+  "exclusive_set": "#big_swords:exclusive_set/scythe_exclusive",
+  "max_cost": {
+    "base": 57,
+    "per_level_above_first": 8
+  },
+  "max_level": 3,
+  "min_cost": {
+    "base": 17,
+    "per_level_above_first": 8
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#big_swords:scythes",
+  "weight": 2
+}
