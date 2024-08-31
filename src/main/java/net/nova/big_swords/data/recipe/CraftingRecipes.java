@@ -64,11 +64,13 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .save(recipeOutput);
 
         // Livingmetal Recipes
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT)
-                .requires(Items.SOUL_SAND)
-                .requires(Items.IRON_INGOT)
-                .requires(Items.GHAST_TEAR)
-                .unlockedBy("has_" + getItemName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT)
+                .define('I', Items.IRON_INGOT)
+                .define('S', BSItems.SOUL)
+                .pattern("SSS")
+                .pattern("SIS")
+                .pattern("SSS")
+                .unlockedBy("has_" + getItemName(BSItems.SOUL), has(BSItems.SOUL))
                 .save(recipeOutput);
         nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT, RecipeCategory.BUILDING_BLOCKS, BSBlocks.LIVINGMETAL_BLOCK, getItemName(BSItems.LIVINGMETAL_INGOT) + "_from_" + getItemName(BSBlocks.LIVINGMETAL_BLOCK), getItemName(BSItems.LIVINGMETAL_INGOT));
         basicHelmet(recipeOutput, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_HELMET);
@@ -105,8 +107,8 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicBigSword(recipeOutput, BSItems.GIANT_WOODEN_STICK.get(), Items.DIAMOND, BSItems.DIAMOND_BIG_SWORD);
         basicBigSword(recipeOutput, Items.BONE, Items.ROTTEN_FLESH, BSItems.PATCHWORK_BIG_SWORD);
         basicBigSword(recipeOutput, BSItems.GIANT_LIVINGMETAL_HANDLE.get(), BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_BIG_SWORD);
-        basicBigSwordTwoMat(recipeOutput, BSItems.GIANT_BLAZE_ROD.get(), Items.QUARTZ, Items.QUARTZ_BLOCK , BSItems.QUARTZ_BIG_SWORD);
-        basicBigSwordTwoMat(recipeOutput, BSItems.GIANT_WOODEN_STICK.get(), BSItems.BIOMASS.get(), Items.NETHER_BRICK , BSItems.BIOMASS_BIG_SWORD);
+        basicBigSwordTwoMat(recipeOutput, BSItems.GIANT_BLAZE_ROD.get(), Items.QUARTZ, Items.QUARTZ_BLOCK, BSItems.QUARTZ_BIG_SWORD);
+        basicBigSwordTwoMat(recipeOutput, BSItems.GIANT_WOODEN_STICK.get(), BSItems.BIOMASS.get(), Items.NETHER_BRICK, BSItems.BIOMASS_BIG_SWORD);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.SKULL_BIG_SWORD)
                 .define('#', BSItems.GIANT_WOODEN_STICK)
