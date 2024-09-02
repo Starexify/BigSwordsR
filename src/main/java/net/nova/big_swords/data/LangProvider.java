@@ -166,6 +166,7 @@ public class LangProvider extends LanguageProvider {
         // Mod Menu
         add("big_swords.modrinth", "Modrinth Link");
         add("big_swords.curseforge", "CurseForge Link");
+        add("big_swords.wiki", "Wiki Link");
     }
 
     // Methods
