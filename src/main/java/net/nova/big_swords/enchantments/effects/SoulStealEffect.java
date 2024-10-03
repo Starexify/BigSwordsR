@@ -4,12 +4,10 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantedItemInUse;
 import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
@@ -25,7 +23,7 @@ public record SoulStealEffect(int duration) implements EnchantmentEntityEffect {
 
     @Override
     public void apply(ServerLevel level, int pEnchantmentLevel, EnchantedItemInUse pItem, Entity entity, Vec3 pOrigin) {
-        if (entity instanceof LivingEntity livingEntity && !livingEntity.getType().is(Tags.EntityTypeTags.SOULLESS) && (livingEntity.isDeadOrDying())) {
+        if (entity instanceof LivingEntity livingEntity && !livingEntity.getType().is(Tags.EntityTypeTags.SOULLESS) && (livingEntity.isDeadOrDying()) && pItem.itemStack().is(Tags.BSItemTags.SCYTHES)) {
             double dropChance = switch (pEnchantmentLevel) {
                 case 1 -> 0.3;
                 case 2 -> 0.6;

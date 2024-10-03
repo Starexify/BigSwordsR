@@ -3,6 +3,7 @@ package net.nova.big_swords.item;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -15,12 +16,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.item.enchantment.EnchantedItemInUse;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.nova.big_swords.BigSwordsR;
+import net.nova.big_swords.data.BSEnchantments;
+import net.nova.big_swords.enchantments.effects.SoulStealEffect;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Sounds;
 
@@ -95,6 +102,17 @@ public class ScytheItem extends HoeItem {
                         if (blockHit.getType() == HitResult.Type.MISS) {
                             scytheHits(player, target);
                             entitiesHit++;
+
+                            int soulStealerEnchantment = stack.getEnchantmentLevel(BigSwordsR.getEnchantment(level, BSEnchantments.SOUL_STEALER));
+                            if (soulStealerEnchantment > 0) {
+                                SoulStealEffect soulStealEffect = new SoulStealEffect(200);
+                                soulStealEffect.apply((ServerLevel) level,
+                                        soulStealerEnchantment,
+                                        new EnchantedItemInUse(stack, entity.getEquipmentSlotForItem(stack), entity),
+                                        target,
+                                        target.position()
+                                );
+                            }
                         }
                     }
                 }
