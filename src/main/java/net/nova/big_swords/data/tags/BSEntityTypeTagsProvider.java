@@ -20,6 +20,6 @@ public class BSEntityTypeTagsProvider extends EntityTypeTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         tag(Tags.EntityTypeTags.SOULLESS).addTags(EntityTypeTags.UNDEAD);
-        tag(Tags.EntityTypeTags.HALLOWEEN_MOB).addTags(EntityTypeTags.SKELETONS, EntityTypeTags.ZOMBIES);
+        tag(Tags.EntityTypeTags.HALLOWEEN_MOB).addTags(EntityTypeTags.SKELETONS);
     }
 }
