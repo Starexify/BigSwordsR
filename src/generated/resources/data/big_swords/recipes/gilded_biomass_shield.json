@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "big_swords:biomass_shield"
+    },
+    "X": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    " X "
+  ],
+  "result": {
+    "item": "big_swords:gilded_biomass_shield"
+  },
+  "show_notification": true
+}

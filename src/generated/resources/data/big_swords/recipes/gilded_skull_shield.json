@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "big_swords:skull_shield"
+    },
+    "S": {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    "X": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "XSX",
+    "X#X",
+    " X "
+  ],
+  "result": {
+    "item": "big_swords:gilded_skull_shield"
+  },
+  "show_notification": true
+}

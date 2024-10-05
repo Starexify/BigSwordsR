@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:leather"
+    },
+    "X": {
+      "item": "big_swords:livingmetal_ingot"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "X#X",
+    " X "
+  ],
+  "result": {
+    "item": "big_swords:livingmetal_shield"
+  },
+  "show_notification": true
+}

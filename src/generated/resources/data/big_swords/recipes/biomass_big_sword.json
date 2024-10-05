@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "big_swords:giant_wooden_stick"
+    },
+    "X": {
+      "item": "big_swords:biomass"
+    },
+    "Y": {
+      "item": "minecraft:nether_brick"
+    }
+  },
+  "pattern": [
+    " XX",
+    "YXX",
+    "#Y "
+  ],
+  "result": {
+    "item": "big_swords:biomass_big_sword"
+  },
+  "show_notification": true
+}

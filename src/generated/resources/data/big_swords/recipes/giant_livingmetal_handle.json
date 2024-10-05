@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "L": {
+      "item": "big_swords:livingmetal_ingot"
+    }
+  },
+  "pattern": [
+    " L#",
+    "L#L",
+    "#L "
+  ],
+  "result": {
+    "item": "big_swords:giant_livingmetal_handle"
+  },
+  "show_notification": true
+}

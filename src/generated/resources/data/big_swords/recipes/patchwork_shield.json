@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "X": {
+      "item": "minecraft:rotten_flesh"
+    }
+  },
+  "pattern": [
+    "XXX",
+    "XXX",
+    " X "
+  ],
+  "result": {
+    "item": "big_swords:patchwork_shield"
+  },
+  "show_notification": true
+}

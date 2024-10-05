@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "XX ",
+    "X#X",
+    " X#"
+  ],
+  "result": {
+    "item": "big_swords:wooden_glaive"
+  },
+  "show_notification": true
+}

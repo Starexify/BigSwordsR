@@ -11,9 +11,9 @@ import java.util.function.Supplier;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public enum BSArmorMaterial implements ArmorMaterial {
-    LIVINGMETAL("livingmetal", 29, new int[]{3, 5, 7, 3}, 12,
+    LIVINGMETAL("livingmetal", 29, new int[]{3, 7, 5, 3}, 12,
             SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> Ingredient.of(BSItems.LIVINGMETAL_INGOT.get())),
-    BIOMASS("biomass", 29, new int[]{2, 5, 7, 3}, 14,
+    BIOMASS("biomass", 29, new int[]{3, 7, 5, 2}, 14,
             SoundEvents.ARMOR_EQUIP_GENERIC, 0.0F, 0.0F, () -> Ingredient.of(BSItems.BIOMASS_SEED.get()))
     ;
 

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "big_swords:giant_livingmetal_handle"
+    },
+    "X": {
+      "item": "big_swords:livingmetal_ingot"
+    }
+  },
+  "pattern": [
+    " XX",
+    "XXX",
+    "#X "
+  ],
+  "result": {
+    "item": "big_swords:livingmetal_big_sword"
+  },
+  "show_notification": true
+}

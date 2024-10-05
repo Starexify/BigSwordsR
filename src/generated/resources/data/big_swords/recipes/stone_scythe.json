@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "tag": "minecraft:stone_tool_materials"
+    }
+  },
+  "pattern": [
+    "XX#",
+    " #X",
+    "#  "
+  ],
+  "result": {
+    "item": "big_swords:stone_scythe"
+  },
+  "show_notification": true
+}

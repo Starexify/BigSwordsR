@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "big_swords:giant_blaze_rod"
+    },
+    "X": {
+      "item": "minecraft:quartz"
+    },
+    "Y": {
+      "item": "minecraft:quartz_block"
+    }
+  },
+  "pattern": [
+    " XX",
+    "YXX",
+    "#Y "
+  ],
+  "result": {
+    "item": "big_swords:quartz_big_sword"
+  },
+  "show_notification": true
+}

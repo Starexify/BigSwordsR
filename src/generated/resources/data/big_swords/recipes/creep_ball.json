@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "creep_ball",
+  "key": {
+    "#": {
+      "item": "minecraft:slime_ball"
+    },
+    "O": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "X": {
+      "item": "minecraft:spider_eye"
+    }
+  },
+  "pattern": [
+    "XOX",
+    "O#O",
+    "XOX"
+  ],
+  "result": {
+    "item": "big_swords:creep_ball"
+  },
+  "show_notification": true
+}

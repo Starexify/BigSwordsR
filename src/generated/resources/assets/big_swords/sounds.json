@@ -1,0 +1,26 @@
+{
+  "glaive_hit": {
+    "sounds": [
+      "big_swords:glaive_hit"
+    ],
+    "subtitle": "sounds.big_swords.glaive_hit"
+  },
+  "glaive_swing": {
+    "sounds": [
+      "big_swords:glaive_swing"
+    ],
+    "subtitle": "sounds.big_swords.glaive_swing"
+  },
+  "reaper_slash": {
+    "sounds": [
+      "big_swords:reaper_slash"
+    ],
+    "subtitle": "sounds.big_swords.reaper_slash"
+  },
+  "scythe_slash": {
+    "sounds": [
+      "big_swords:scythe_slash"
+    ],
+    "subtitle": "sounds.big_swords.scythe_slash"
+  }
+}

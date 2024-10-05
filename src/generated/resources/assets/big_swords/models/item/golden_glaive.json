@@ -1,0 +1,6 @@
+{
+  "parent": "big_swords:item/handheld_glaive",
+  "textures": {
+    "layer0": "big_swords:item/golden_glaive"
+  }
+}

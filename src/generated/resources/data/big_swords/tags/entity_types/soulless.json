@@ -1,0 +1,20 @@
+{
+  "values": [
+    "#minecraft:skeletons",
+    "minecraft:zombie",
+    "minecraft:zoglin",
+    "minecraft:zombified_piglin",
+    "minecraft:wither",
+    "minecraft:iron_golem",
+    "minecraft:snow_golem",
+    "minecraft:blaze",
+    "minecraft:guardian",
+    "minecraft:elder_guardian",
+    "minecraft:zombie_horse",
+    "minecraft:zombie_villager",
+    "minecraft:drowned",
+    "minecraft:husk",
+    "minecraft:warden",
+    "minecraft:giant"
+  ]
+}

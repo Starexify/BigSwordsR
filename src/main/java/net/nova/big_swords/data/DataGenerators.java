@@ -8,7 +8,11 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.nova.big_swords.BigSwordsR;
+import net.nova.big_swords.data.loot.BSLootTableProvider;
+import net.nova.big_swords.data.loot.GlobalLootModifier;
+import net.nova.big_swords.data.recipe.BSRecipeProvider;
 import net.nova.big_swords.data.tags.BSBlockTagsProvider;
+import net.nova.big_swords.data.tags.BSEntityTypeTagsProvider;
 import net.nova.big_swords.data.tags.BSItemTagsProvider;
 
 import java.util.concurrent.CompletableFuture;
@@ -30,25 +34,22 @@ public class DataGenerators {
             generator.addProvider(true, new BlockStateAndModelProvider(output, existingFileHelper));
             generator.addProvider(true, new BSItemModelProvider(output, existingFileHelper));
 
-//            generator.addProvider(true, new BSRecipeProvider(output, lookupProvider));
+            generator.addProvider(true, new BSRecipeProvider(output));
 
             BSBlockTagsProvider modBlockTagsProvider = new BSBlockTagsProvider(output, lookupProvider, existingFileHelper);
             generator.addProvider(true, modBlockTagsProvider);
             generator.addProvider(true, new BSItemTagsProvider(output, lookupProvider, modBlockTagsProvider, existingFileHelper));
-/*            generator.addProvider(true, new BSEntityTypeTagsProvider(output, lookupProvider, existingFileHelper));
-            generator.addProvider(true, new BSEnchantmentTagsProvider(output, lookupProvider, existingFileHelper));
+            generator.addProvider(true, new BSEntityTypeTagsProvider(output, lookupProvider, existingFileHelper));
 
-            generator.addProvider(true, new BSLootTableProvider(output, lookupProvider));
+            generator.addProvider(true, new BSLootTableProvider(output));
 
-            generator.addProvider(true, new BSDataMapProvider(output, lookupProvider));
+//            generator.addProvider(true, new BSDataMapProvider(output, lookupProvider));
 
             generator.addProvider(true, new SoundsProvider(output, existingFileHelper));
 
-            generator.addProvider(true, new BSAdvancementsProvider(output, lookupProvider, existingFileHelper));
+//            generator.addProvider(true, new BSAdvancementsProvider(output, lookupProvider, existingFileHelper));
 
-            generator.addProvider(true, new GlobalLootModifier(output, lookupProvider));
-
-            generator.addProvider(true, new DatapackProvider(output, lookupProvider));*/
+            generator.addProvider(true, new GlobalLootModifier(output));
 
         } catch (RuntimeException e) {
             BigSwordsR.logger.error("Cosmicore failed to gather data", e);
