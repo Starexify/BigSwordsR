@@ -1,0 +1,37 @@
+{
+  "parent": "big_swords:root",
+  "criteria": {
+    "get_net.minecraftforge.registries.RegistryObject@b875a05c": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "big_swords:scythes"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.big_swords.first_scythe.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "big_swords:wooden_scythe",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.big_swords.first_scythe.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_net.minecraftforge.registries.RegistryObject@b875a05c"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

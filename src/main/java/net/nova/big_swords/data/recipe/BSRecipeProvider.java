@@ -27,8 +27,8 @@ public class BSRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> recipeOutput) {
         new CraftingRecipes(output, recipeOutput).build();
-/*        new FurnaceRecipes(output, recipeOutput).build();
-        new BSSmithingRecipes(output, recipeOutput).build();*/
+        new FurnaceRecipes(output, recipeOutput).build();
+        new BSSmithingRecipes(output, recipeOutput).build();
     }
 
     // Recipes

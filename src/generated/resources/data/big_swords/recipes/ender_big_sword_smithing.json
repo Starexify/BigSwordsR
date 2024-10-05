@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:ender_eye"
+  },
+  "base": {
+    "item": "big_swords:obsidian_big_sword"
+  },
+  "result": {
+    "item": "big_swords:ender_big_sword"
+  },
+  "template": {
+    "item": "big_swords:ender_upgrade_smithing_template"
+  }
+}

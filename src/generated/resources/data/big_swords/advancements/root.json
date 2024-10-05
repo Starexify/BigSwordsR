@@ -1,0 +1,31 @@
+{
+  "criteria": {
+    "player_join": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "big_swords:textures/gui/advancements/backgrounds/big_swords.png",
+    "description": {
+      "translate": "advancements.big_swords.root.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "big_swords:ender_big_sword",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.big_swords.root.title"
+    }
+  },
+  "requirements": [
+    [
+      "player_join"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

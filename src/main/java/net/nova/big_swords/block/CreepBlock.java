@@ -6,9 +6,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.Property;
 
 public class CreepBlock extends Block {
-    public static final BooleanProperty TILLED = BooleanProperty.create("tilled");
+    public static final Property<Boolean> TILLED = BooleanProperty.create("tilled");
 
     public CreepBlock(Properties pProperties) {
         super(pProperties);

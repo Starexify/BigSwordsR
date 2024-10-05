@@ -1,0 +1,42 @@
+{
+  "parent": "big_swords:root/get_netherite_shield",
+  "criteria": {
+    "get_ender_shield": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "big_swords:ender_shield"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.big_swords.get_ender_shield.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "big_swords:ender_shield",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.big_swords.get_ender_shield.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_ender_shield"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

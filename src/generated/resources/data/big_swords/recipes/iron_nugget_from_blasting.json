@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "ingredient": [
+    {
+      "item": "big_swords:iron_glaive"
+    },
+    {
+      "item": "big_swords:iron_scythe"
+    }
+  ],
+  "result": "minecraft:iron_nugget"
+}

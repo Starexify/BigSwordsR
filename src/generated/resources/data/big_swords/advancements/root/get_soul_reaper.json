@@ -1,0 +1,42 @@
+{
+  "parent": "big_swords:root/first_scythe",
+  "criteria": {
+    "get_soul_reaper": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "big_swords:soul_reaper"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.big_swords.get_soul_reaper.description"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "item": "big_swords:soul_reaper",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.big_swords.get_soul_reaper.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_soul_reaper"
+    ]
+  ],
+  "rewards": {
+    "experience": 200
+  },
+  "sends_telemetry_event": true
+}

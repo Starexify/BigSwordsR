@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": [
+    {
+      "item": "big_swords:golden_glaive"
+    },
+    {
+      "item": "big_swords:golden_scythe"
+    }
+  ],
+  "result": "minecraft:gold_nugget"
+}

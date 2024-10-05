@@ -1,0 +1,37 @@
+{
+  "parent": "big_swords:root",
+  "criteria": {
+    "get_net.minecraftforge.registries.RegistryObject@df51a580": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "big_swords:big_swords"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.big_swords.first_big_sword.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "big_swords:wooden_big_sword",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.big_swords.first_big_sword.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_net.minecraftforge.registries.RegistryObject@df51a580"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

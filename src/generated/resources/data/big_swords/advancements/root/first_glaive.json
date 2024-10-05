@@ -1,0 +1,37 @@
+{
+  "parent": "big_swords:root",
+  "criteria": {
+    "get_net.minecraftforge.registries.RegistryObject@a46f3bf0": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "big_swords:glaives"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.big_swords.first_glaive.description"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "big_swords:wooden_glaive",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.big_swords.first_glaive.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_net.minecraftforge.registries.RegistryObject@a46f3bf0"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
