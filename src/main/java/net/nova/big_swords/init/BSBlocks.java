@@ -11,6 +11,7 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import net.nova.big_swords.block.BiomassCrop;
 import net.nova.big_swords.block.CreepBlock;
 
 import java.util.function.Supplier;
@@ -20,13 +21,13 @@ import static net.nova.big_swords.BigSwordsR.MODID;
 public class BSBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
 
-/*    public static RegistryObject<Block> LIVINGMETAL_BLOCK = registerBlock("livingmetal_block", () -> new Block(BlockBehaviour.Properties.of()
+    public static RegistryObject<Block> LIVINGMETAL_BLOCK = registerBlock("livingmetal_block", () -> new Block(BlockBehaviour.Properties.of()
             .mapColor(MapColor.COLOR_LIGHT_BLUE)
             .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
             .requiresCorrectToolForDrops()
             .strength(5.0F, 6.0F)
             .sound(BSSoundTypes.LIVINGMETAL_BLOCK)
-    ));*/
+    ));
 
     public static RegistryObject<Block> BIOMASS_BLOCK = registerBlock("biomass_block", () -> new Block(BlockBehaviour.Properties.of()
             .mapColor(MapColor.COLOR_RED)
@@ -41,14 +42,14 @@ public class BSBlocks {
             .sound(SoundType.SOUL_SAND)
     ));
 
-/*    public static RegistryObject<Block> BIOMASS = BLOCKS.register("biomass", () -> new BiomassCrop(BlockBehaviour.Properties.of()
+    public static RegistryObject<Block> BIOMASS = BLOCKS.register("biomass", () -> new BiomassCrop(BlockBehaviour.Properties.of()
             .mapColor(MapColor.PLANT)
             .noCollission()
             .randomTicks()
             .instabreak()
             .sound(SoundType.CROP)
             .pushReaction(PushReaction.DESTROY)
-    ));*/
+    ));
 
 
     // Registers
