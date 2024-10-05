@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "tilled=false": {
+      "model": "big_swords:block/creep_block"
+    },
+    "tilled=true": {
+      "model": "big_swords:block/creep_block_tilled"
+    }
+  }
+}
