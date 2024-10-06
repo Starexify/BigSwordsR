@@ -43,10 +43,10 @@ public class CreativeTab {
                 output.accept(BSItems.LIVINGMETAL_HOE);
 
                 // Extra Stuff
+                output.accept(BSItems.SOUL);
                 output.accept(BSItems.CREEP_BALL);
                 output.accept(BSBlocks.CREEP_BLOCK);
                 output.accept(BSItems.BIOMASS_SEED);
-                output.accept(BSItems.SOUL);
 
                 // Materials
                 output.accept(BSBlocks.BIOMASS_BLOCK);

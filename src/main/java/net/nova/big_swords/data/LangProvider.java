@@ -156,6 +156,8 @@ public class LangProvider extends LanguageProvider {
         addAdvancement("creep_a_block","Creep-A-Block", "Use a Creeper Ball on Soul Sand to create a Creep Block");
         addAdvancement("till_creep","Till Creep Blocks", "Use a Glaive on Creep Blocks to till them and start your biomass farm");
 
+        addAdvancement("soul_harvesting", "Soul Harvesting", "Claim the essence of your first fallen foe");
+
         // Resourcepacks
         add(BigSwordsRClient.RP_16x_NAME, "Big Swords R 16x");
         add(BigSwordsRClient.RP_16x_DESC, "16x version of the Big Swords");
