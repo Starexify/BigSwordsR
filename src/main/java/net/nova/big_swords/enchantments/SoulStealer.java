@@ -47,6 +47,16 @@ public class SoulStealer extends Enchantment {
     }
 
     @Override
+    public int getMinCost(int pLevel) {
+        return 17 + (pLevel * 8);
+    }
+
+    @Override
+    public int getMaxCost(int pLevel) {
+        return this.getMinCost(pLevel) + 19;
+    }
+
+    @Override
     public int getMaxLevel() {
         return 3;
     }

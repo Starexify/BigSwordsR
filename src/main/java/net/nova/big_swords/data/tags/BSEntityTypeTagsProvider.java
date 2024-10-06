@@ -21,10 +21,11 @@ public class BSEntityTypeTagsProvider extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        tag(Tags.EntityTypeTags.SOULLESS).addTags(EntityTypeTags.SKELETONS).add(
-                EntityType.ZOMBIE, EntityType.ZOGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER, EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE,
+        tag(Tags.EntityTypeTags.SOULLESS)
+                .addTags(EntityTypeTags.SKELETONS)
+                .add(EntityType.ZOMBIE, EntityType.ZOGLIN, EntityType.ZOMBIFIED_PIGLIN, EntityType.WITHER, EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE,
                 EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.ZOMBIE_HORSE, EntityType.ZOMBIE_VILLAGER, EntityType.DROWNED, EntityType.HUSK, EntityType.WARDEN,
-                EntityType.GIANT
+                EntityType.GIANT, EntityType.PHANTOM
         );
         tag(Tags.EntityTypeTags.HALLOWEEN_MOB).addTags(EntityTypeTags.SKELETONS);
     }

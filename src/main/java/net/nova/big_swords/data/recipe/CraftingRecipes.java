@@ -65,9 +65,9 @@ public class CraftingRecipes extends BSRecipeProvider {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT.get())
                 .define('I', Items.IRON_INGOT)
                 .define('S', BSItems.SOUL.get())
-                .pattern("SSS")
+                .pattern(" S ")
                 .pattern("SIS")
-                .pattern("SSS")
+                .pattern(" S ")
                 .unlockedBy("has_" + getItemName(BSItems.SOUL.get()), has(BSItems.SOUL.get()))
                 .save(recipeOutput);
         nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT, RecipeCategory.BUILDING_BLOCKS, BSBlocks.LIVINGMETAL_BLOCK, getItemName(BSItems.LIVINGMETAL_INGOT.get()) + "_from_" + getItemName(BSBlocks.LIVINGMETAL_BLOCK.get()), getItemName(BSItems.LIVINGMETAL_INGOT.get()));

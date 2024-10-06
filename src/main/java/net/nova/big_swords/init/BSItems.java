@@ -34,7 +34,7 @@ public class BSItems {
     public static RegistryObject<Item> LIVINGMETAL_PICKAXE = ITEMS.register("livingmetal_pickaxe", () -> new PickaxeItem(BSTiers.LIVINGMETAL, 1, -2.8F, new Item.Properties()));
     public static RegistryObject<Item> LIVINGMETAL_AXE = ITEMS.register("livingmetal_axe", () -> new AxeItem(BSTiers.LIVINGMETAL, 6.0F, -3.0F, new Item.Properties()));
     public static RegistryObject<Item> LIVINGMETAL_SHOVEL = ITEMS.register("livingmetal_shovel", () -> new ShovelItem(BSTiers.LIVINGMETAL, 1.5F, -3.0F, new Item.Properties()));
-    public static RegistryObject<Item> LIVINGMETAL_HOE = ITEMS.register("livingmetal_hoe", () -> new HoeItem(BSTiers.LIVINGMETAL, -2, -0.5F, new Item.Properties()));
+    public static RegistryObject<Item> LIVINGMETAL_HOE = ITEMS.register("livingmetal_hoe", () -> new BSHoeItem(BSTiers.LIVINGMETAL, -2.5F, -0.5F, new Item.Properties()));
 
     // Biomass Stuff
     public static RegistryObject<Item> BIOMASS = ITEMS.register("biomass", () -> new Item(new Item.Properties()));

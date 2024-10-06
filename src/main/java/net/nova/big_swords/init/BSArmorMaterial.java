@@ -12,12 +12,12 @@ import static net.nova.big_swords.BigSwordsR.MODID;
 
 public enum BSArmorMaterial implements ArmorMaterial {
     LIVINGMETAL("livingmetal", 29, new int[]{3, 7, 5, 3}, 12,
-            SoundEvents.ARMOR_EQUIP_IRON, 0.0F, 0.0F, () -> Ingredient.of(BSItems.LIVINGMETAL_INGOT.get())),
+            SoundEvents.ARMOR_EQUIP_IRON, 0.5F, 0.0F, () -> Ingredient.of(BSItems.LIVINGMETAL_INGOT.get())),
     BIOMASS("biomass", 29, new int[]{3, 7, 5, 2}, 14,
             SoundEvents.ARMOR_EQUIP_GENERIC, 0.0F, 0.0F, () -> Ingredient.of(BSItems.BIOMASS_SEED.get()))
     ;
 
-    private static final int[] BASE_DURABILITY = {11, 16, 16, 13};
+    private static final int[] BASE_DURABILITY = {11, 16, 15, 13};
     private final String name;
     private final int durabilityMultiplier;
     private final int[] protectionAmounts;

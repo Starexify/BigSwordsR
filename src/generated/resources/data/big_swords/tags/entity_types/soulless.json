@@ -15,6 +15,7 @@
     "minecraft:drowned",
     "minecraft:husk",
     "minecraft:warden",
-    "minecraft:giant"
+    "minecraft:giant",
+    "minecraft:phantom"
   ]
 }
