@@ -9,6 +9,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.nova.big_swords.init.BSItems;
+import org.jetbrains.annotations.Nullable;
 
 public class BigSwordItem extends SwordItem {
     private final float attackDamage;
@@ -22,7 +25,7 @@ public class BigSwordItem extends SwordItem {
 
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", this.attackDamage, AttributeModifier.Operation.ADDITION));
-        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", (double)pAttackSpeedModifier, AttributeModifier.Operation.ADDITION));
+        builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", (double) pAttackSpeedModifier, AttributeModifier.Operation.ADDITION));
         this.defaultModifiers = builder.build();
     }
 
@@ -39,5 +42,14 @@ public class BigSwordItem extends SwordItem {
     @Override
     public int getMaxDamage(ItemStack stack) {
         return this.customDurability;
+    }
+
+    @Override
+    public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+        if (itemStack.is(BSItems.WOODEN_BIG_SWORD.get())) {
+            return 200;
+        } else {
+            return super.getBurnTime(itemStack, recipeType);
+        }
     }
 }

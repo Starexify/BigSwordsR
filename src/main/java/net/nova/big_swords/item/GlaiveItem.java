@@ -18,6 +18,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.level.ClipContext;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
 import net.nova.big_swords.block.CreepBlock;
+import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Sounds;
 import org.jetbrains.annotations.Nullable;
 
@@ -196,5 +198,14 @@ public class GlaiveItem extends TieredItem {
     @Override
     public boolean canAttackBlock(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer) {
         return !pPlayer.isCreative();
+    }
+
+    @Override
+    public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+        if (itemStack.is(BSItems.WOODEN_GLAIVE.get())) {
+            return 200;
+        } else {
+            return super.getBurnTime(itemStack, recipeType);
+        }
     }
 }

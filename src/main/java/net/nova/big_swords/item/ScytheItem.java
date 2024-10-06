@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -175,5 +176,14 @@ public class ScytheItem extends HoeItem {
     @Override
     public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot pEquipmentSlot) {
         return pEquipmentSlot == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(pEquipmentSlot);
+    }
+
+    @Override
+    public int getBurnTime(ItemStack itemStack, @Nullable RecipeType<?> recipeType) {
+        if (itemStack.is(BSItems.WOODEN_SCYTHE.get())) {
+            return 200;
+        } else {
+            return super.getBurnTime(itemStack, recipeType);
+        }
     }
 }

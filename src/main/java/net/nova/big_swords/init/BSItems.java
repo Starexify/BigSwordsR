@@ -17,8 +17,8 @@ public class BSItems {
     public static RegistryObject<Item> SOUL = ITEMS.register("soul", () -> new Item(new Item.Properties()));
 
     // Sticks
-    public static RegistryObject<Item> GIANT_WOODEN_STICK = ITEMS.register("giant_wooden_stick", () -> new Item(new Item.Properties()));
-    public static RegistryObject<Item> GIANT_BLAZE_ROD = ITEMS.register("giant_blaze_rod", () -> new Item(new Item.Properties()));
+    public static RegistryObject<Item> GIANT_WOODEN_STICK = ITEMS.register("giant_wooden_stick", () -> new BurnItem(new Item.Properties(), 700));
+    public static RegistryObject<Item> GIANT_BLAZE_ROD = ITEMS.register("giant_blaze_rod", () -> new BurnItem(new Item.Properties(), 16800));
     public static RegistryObject<Item> GIANT_LIVINGMETAL_HANDLE = ITEMS.register("giant_livingmetal_handle", () -> new Item(new Item.Properties()));
 
     // Ender Template
