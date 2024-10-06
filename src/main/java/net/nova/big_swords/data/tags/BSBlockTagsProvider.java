@@ -24,7 +24,7 @@ public class BSBlockTagsProvider extends BlockTagsProvider {
 
         tag(BlockTags.NEEDS_IRON_TOOL).add(BSBlocks.LIVINGMETAL_BLOCK.getKey());
 
-        tag(BlockTags.SOUL_SPEED_BLOCKS).add(BSBlocks.BIOMASS_BLOCK.getKey());
-        tag(BlockTags.SOUL_FIRE_BASE_BLOCKS).add(BSBlocks.BIOMASS_BLOCK.getKey());
+        tag(BlockTags.SOUL_SPEED_BLOCKS).add(BSBlocks.CREEP_BLOCK.getKey());
+        tag(BlockTags.SOUL_FIRE_BASE_BLOCKS).add(BSBlocks.CREEP_BLOCK.getKey());
     }
 }

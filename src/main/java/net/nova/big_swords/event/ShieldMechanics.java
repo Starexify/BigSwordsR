@@ -84,11 +84,9 @@ public class ShieldMechanics {
                     switch (fireAspectLevel) {
                         case 1:
                             event.setShieldDamage(shieldDamage * 3);
-                            player.sendSystemMessage(Component.literal("Fire aspect 1"));
                             break;
                         case 2:
                             event.setShieldDamage(shieldDamage * 5);
-                            player.sendSystemMessage(Component.literal("Fire aspect 2"));
                             break;
                     }
                 }
@@ -167,7 +165,7 @@ public class ShieldMechanics {
             // Netherite Shields
             boolean isNetheriteShield = shield.is(BSItems.NETHERITE_SHIELD);
             boolean isGildedNetheriteShield = shield.is(BSItems.GILDED_NETHERITE_SHIELD);
-            if ((isNetheriteShield || isGildedNetheriteShield) && event.getBlocked()) {
+            if ((isNetheriteShield || isGildedNetheriteShield)) {
                 float damageToReflect = isGildedNetheriteShield ? blockedDamage * 0.5f : blockedDamage * 0.3f;
                 float cooldownChance = isGildedNetheriteShield ? 0.1f : 0.15f;
                 int cooldownTime = isGildedNetheriteShield ? 80 : 160;

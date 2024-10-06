@@ -18,7 +18,6 @@ public class Tags {
     }
 
     public static class EnchantmentTags {
-        public static final TagKey<Enchantment> IN_ENCHANTING_TABLE = enchantmentTag("in_enchanting_table");
         public static final TagKey<Enchantment> SCYTHE_EXCLUSIVE = enchantmentTag("exclusive_set/scythe_exclusive");
     }
 
