@@ -1,8 +1,6 @@
 {
   "anvil_cost": 3,
-  "description": {
-    "translate": "enchantment.big_swords.soul_stealer"
-  },
+  "description": "Soul Stealer",
   "effects": {
     "minecraft:post_attack": [
       {
@@ -17,7 +15,7 @@
   },
   "exclusive_set": "#big_swords:exclusive_set/scythe_exclusive",
   "max_cost": {
-    "base": 57,
+    "base": 36,
     "per_level_above_first": 8
   },
   "max_level": 3,

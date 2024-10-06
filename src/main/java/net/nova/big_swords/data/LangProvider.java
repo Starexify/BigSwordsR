@@ -156,9 +156,6 @@ public class LangProvider extends LanguageProvider {
         addAdvancement("creep_a_block","Creep-A-Block", "Use a Creeper Ball on Soul Sand to create a Creep Block");
         addAdvancement("till_creep","Till Creep Blocks", "Use a Glaive on Creep Blocks to till them and start your biomass farm");
 
-        // Enchantments
-        addEnchantment(BSEnchantments.SOUL_STEALER, "Soul Stealer");
-
         // Resourcepacks
         add(BigSwordsRClient.RP_16x_NAME, "Big Swords R 16x");
         add(BigSwordsRClient.RP_16x_DESC, "16x version of the Big Swords");
@@ -170,10 +167,6 @@ public class LangProvider extends LanguageProvider {
     }
 
     // Methods
-    private void addEnchantment(ResourceKey<Enchantment> key, String name) {
-        add("enchantment." + key.location().getNamespace() + "." + key.location().getPath(), name);
-    }
-
     public void addAdvancement(String advancementName, String title, String description) {
         add("advancements." + MODID + "." + advancementName + ".title", title);
         add("advancements." + MODID + "." + advancementName + ".description", description);

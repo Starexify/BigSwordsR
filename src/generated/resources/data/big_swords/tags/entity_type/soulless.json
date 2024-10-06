@@ -1,5 +1,12 @@
 {
   "values": [
-    "#minecraft:undead"
+    "#minecraft:undead",
+    "minecraft:iron_golem",
+    "minecraft:snow_golem",
+    "minecraft:blaze",
+    "minecraft:guardian",
+    "minecraft:elder_guardian",
+    "minecraft:warden",
+    "minecraft:giant"
   ]
 }

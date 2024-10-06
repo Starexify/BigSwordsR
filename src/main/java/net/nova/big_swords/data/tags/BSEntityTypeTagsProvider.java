@@ -4,6 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.world.entity.EntityType;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.nova.big_swords.init.Tags;
 import org.jetbrains.annotations.Nullable;
@@ -19,7 +20,9 @@ public class BSEntityTypeTagsProvider extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        tag(Tags.EntityTypeTags.SOULLESS).addTags(EntityTypeTags.UNDEAD);
+        tag(Tags.EntityTypeTags.SOULLESS)
+                .addTags(EntityTypeTags.UNDEAD)
+                .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GIANT);
         tag(Tags.EntityTypeTags.HALLOWEEN_MOB).addTags(EntityTypeTags.SKELETONS);
     }
 }
