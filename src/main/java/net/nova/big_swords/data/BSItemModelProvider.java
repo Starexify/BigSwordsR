@@ -4,6 +4,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.armortrim.TrimMaterial;
@@ -164,6 +165,10 @@ public class BSItemModelProvider extends ItemModelProvider {
     }
 
     private void trimmableArmorItem(Item item) {
+        String name = getItemName(item);
+        String itemName = "item/" + name;
+        ModelFile mcItem = getExistingFile(mcLoc("item/generated"));
+
         if (item instanceof ArmorItem armorItem) {
             trimMaterials.entrySet().forEach(entry -> {
                 // Variables
@@ -176,11 +181,17 @@ public class BSItemModelProvider extends ItemModelProvider {
                 };
 
                 String trimType = entry.getKey().location().getPath();
-                String name = getItemName(item);
                 float trimValue = entry.getValue();
-                ResourceLocation textureLocation = mcLoc("trims/items/" + armorType + "_trim_" + trimType);
-                String itemName = "item/" + name;
-                ModelFile mcItem = getExistingFile(mcLoc("item/generated"));
+                ResourceLocation textureLocation;
+                if (entry.getKey().location().getNamespace().equals("minecraft")) { // Vanilla trims
+                    textureLocation = mcLoc("trims/items/" + armorType + "_trim_" + trimType);
+                } else { // Modded trims (assuming they're in your mod's namespace)
+                    textureLocation = modLoc("trims/items/" + armorType + "_trim_" + trimType);
+                }
+
+                ModelFile model = new ModelFile.UncheckedModelFile(modLoc(itemName + "_" + trimType + "_trim"));
+
+                //existingFileHelper.trackGenerated(textureLocation, PackType.CLIENT_RESOURCES, ".png", "textures");
 
                 // Trimmed parts
                 getBuilder(name + "_" + trimType + "_trim")
@@ -193,7 +204,7 @@ public class BSItemModelProvider extends ItemModelProvider {
                         .parent(mcItem)
                         .override()
                         .predicate(ResourceLocation.parse("trim_type"), trimValue)
-                        .model(getExistingFile(modLoc(itemName + "_" + trimType + "_trim"))).end()
+                        .model(model).end()
                         .texture("layer0", modLoc(itemName));
             });
         }
