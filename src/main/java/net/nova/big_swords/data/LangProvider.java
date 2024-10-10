@@ -158,6 +158,9 @@ public class LangProvider extends LanguageProvider {
 
         addAdvancement("soul_harvesting", "Soul Harvesting", "Claim the essence of your first fallen foe");
 
+        // Trim Material
+        add("trim_material.big_swords.livingmetal", "Livingmetal Material");
+
         // Resourcepacks
         add(BigSwordsRClient.RP_16x_NAME, "Big Swords R 16x");
         add(BigSwordsRClient.RP_16x_DESC, "16x version of the Big Swords");

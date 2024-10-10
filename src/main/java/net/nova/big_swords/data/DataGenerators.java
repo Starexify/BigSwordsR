@@ -56,6 +56,8 @@ public class DataGenerators {
 
             generator.addProvider(true, new DatapackProvider(output, lookupProvider));
 
+            generator.addProvider(true, new AtlasesProvider(output, lookupProvider, existingFileHelper));
+
         } catch (RuntimeException e) {
             BigSwordsR.logger.error("Cosmicore failed to gather data", e);
         }

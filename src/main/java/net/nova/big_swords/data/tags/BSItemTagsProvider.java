@@ -62,5 +62,7 @@ public class BSItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.SWORD_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);
         tag(ItemTags.SHARP_WEAPON_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);
         tag(ItemTags.DURABILITY_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);
+
+        tag(ItemTags.TRIM_MATERIALS).add(BSItems.LIVINGMETAL_INGOT.get());
     }
 }
