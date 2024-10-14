@@ -158,12 +158,6 @@ public class BSItemModelProvider extends ItemModelProvider {
                 .texture("layer0", "item/" + getItemName(item));
     }
 
-    private void handheldItem(Item item) {
-        getBuilder(getItemName(item))
-                .parent(getExistingFile(mcLoc("item/handheld")))
-                .texture("layer0", "item/" + getItemName(item));
-    }
-
     private void trimmableArmorItem(Item item) {
         String name = getItemName(item);
         String itemName = "item/" + name;
