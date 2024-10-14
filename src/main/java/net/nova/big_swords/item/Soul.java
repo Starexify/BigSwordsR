@@ -27,10 +27,8 @@ public class Soul extends Item {
                 level.setBlock(pos.below(), Blocks.SOUL_SAND.defaultBlockState(), 3);
                 level.playSound(null, pos.below(), SoundEvents.SOUL_SAND_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
-                // Reduce item stack size
                 stack.shrink(1);
 
-                // If the stack is now empty, remove the entity
                 if (stack.isEmpty()) {
                     entity.discard();
                     return super.onEntityItemUpdate(stack, entity);
