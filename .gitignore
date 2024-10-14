@@ -17,9 +17,12 @@ out
 build
 .gradle
 
+# run
+run/*
+!run/options.txt
+
 # other
 eclipse
-run
 runs
 run-data
 

@@ -87,7 +87,8 @@ public class BigSwordsAdvancements implements ForgeAdvancementProvider.Advanceme
                 ItemPredicate.Builder.item().of(Tags.BSItemTags.GLAIVES)
         )).save(save, MODID + ":root/till_creep");
 
-        // Livingmetal Advancements (Soon)
+        // Livingmetal Advancements
+        Advancement soulHarvesting = makeRoot(root, BSItems.SOUL.get(), BSItems.SOUL.get(), "soul_harvesting", FrameType.TASK, save);
     }
 
     // Methods
@@ -108,6 +109,24 @@ public class BigSwordsAdvancements implements ForgeAdvancementProvider.Advanceme
                 .save(save, MODID + ":root/" + name);
 
         return advancement;
+    }
+
+    public static Advancement makeRoot(Advancement parent, ItemLike displayItem, ItemLike criterionItem, String name, FrameType advancementType, Consumer<Advancement> save) {
+        Advancement advancement = Advancement.Builder.advancement()
+                .parent(parent)
+                .display(
+                        displayItem,
+                        Component.translatable("advancements." + MODID + "." + name + ".title"),
+                        Component.translatable("advancements." + MODID + "." + name + ".description"),
+                        null,
+                        advancementType,
+                        true,
+                        false,
+                        false
+                )
+                .addCriterion("get_" + displayItem, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(criterionItem).build())) // Example of using a specific item instead of TagKey
+                .save(save, MODID + ":root/" + name);
+        return advancement; // Return the created AdvancementHolder
     }
 
     public static Advancement makeRootXP(Advancement parent, RegistryObject<Item> displayItem, String name, FrameType advancementType, int xp, Consumer<Advancement> save) {

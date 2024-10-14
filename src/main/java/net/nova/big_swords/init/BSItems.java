@@ -14,7 +14,7 @@ public class BSItems {
     // Extra
     public static RegistryObject<Item> BIOMASS_SEED = ITEMS.register("biomass_seed", () -> new ItemNameBlockItem(BSBlocks.BIOMASS.get(), new Item.Properties()));
     public static RegistryObject<Item> CREEP_BALL = ITEMS.register("creep_ball", () -> new CreepBall(new Item.Properties()));
-    public static RegistryObject<Item> SOUL = ITEMS.register("soul", () -> new Item(new Item.Properties()));
+    public static RegistryObject<Item> SOUL = ITEMS.register("soul", () -> new Soul(new Item.Properties()));
 
     // Sticks
     public static RegistryObject<Item> GIANT_WOODEN_STICK = ITEMS.register("giant_wooden_stick", () -> new BurnItem(new Item.Properties(), 700));

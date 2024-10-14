@@ -59,5 +59,7 @@ public class BSItemTagsProvider extends ItemTagsProvider {
 
 
         tag(ItemTags.BREAKS_DECORATED_POTS).addTag(Tags.BSItemTags.GLAIVES);
+
+        tag(ItemTags.TRIM_MATERIALS).add(BSItems.LIVINGMETAL_INGOT.get());
     }
 }
