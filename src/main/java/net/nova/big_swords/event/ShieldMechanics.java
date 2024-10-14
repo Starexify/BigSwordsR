@@ -38,7 +38,7 @@ import java.util.Random;
 import static net.nova.big_swords.BigSwordsR.MODID;
 import static net.nova.big_swords.BigSwordsR.playSound;
 
-@EventBusSubscriber(modid = MODID)
+@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.GAME)
 public class ShieldMechanics {
 
     @SubscribeEvent

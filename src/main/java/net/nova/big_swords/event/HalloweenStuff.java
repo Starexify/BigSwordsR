@@ -22,7 +22,7 @@ import java.time.temporal.ChronoField;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
-@EventBusSubscriber(modid = MODID)
+@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.GAME)
 public class HalloweenStuff {
     @SubscribeEvent
     public static void onEntitySpawned(EntityJoinLevelEvent event) {
