@@ -20,7 +20,7 @@ public class BSTrimMaterials {
     public static final ResourceKey<TrimMaterial> LIVINGMETAL = createKey("livingmetal");
 
     public static void bootstrap(BootstrapContext<TrimMaterial> pContext) {
-        register(pContext, LIVINGMETAL, BSItems.LIVINGMETAL_INGOT.get(), Style.EMPTY.withColor(16121855), 1.1F, Map.of(BSArmorMaterial.LIVINGMETAL, "livingmetal_darker"));
+        register(pContext, LIVINGMETAL, BSItems.LIVINGMETAL_INGOT.get(), Style.EMPTY.withColor(16121855), 0.8F, Map.of(BSArmorMaterial.LIVINGMETAL, "livingmetal_darker"));
     }
 
     private static ResourceKey<TrimMaterial> createKey(String name) {
