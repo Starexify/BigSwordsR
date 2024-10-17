@@ -1,5 +1,6 @@
 package net.nova.big_swords.data;
 
+import net.minecraft.client.renderer.texture.atlas.sources.PalettedPermutations;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -73,16 +74,16 @@ public class AtlasesProvider extends SpriteSourceProvider {
 
     @Override
     protected void addSources() {
-/*        atlas(SpriteSourceProvider.BLOCKS_ATLAS).addSource(new PalettedPermutations(
+        atlas(SpriteSourceProvider.BLOCKS_ATLAS).addSource(new PalettedPermutations(
                 textures,
                 new ResourceLocation("trims/color_palettes/trim_palette"),
                 permutations
         ));
 
-        atlas(ARMOR_TRIMS).addSource(new PalettedPermutation(
+        atlas(ARMOR_TRIMS).addSource(new PalettedPermutations(
                 trimTextures,
                 new ResourceLocation("trims/color_palettes/trim_palette"),
                 permutations
-        ));*/
+        ));
     }
 }
