@@ -4,13 +4,14 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.function.Supplier;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
-public enum BSArmorMaterial implements ArmorMaterial {
+public enum BSArmorMaterials implements ArmorMaterial {
     LIVINGMETAL("livingmetal", 29, new int[]{3, 7, 5, 3}, 12,
             SoundEvents.ARMOR_EQUIP_IRON, 0.5F, 0.0F, () -> Ingredient.of(BSItems.LIVINGMETAL_INGOT.get())),
     BIOMASS("biomass", 29, new int[]{3, 7, 5, 2}, 14,
@@ -27,7 +28,7 @@ public enum BSArmorMaterial implements ArmorMaterial {
     private final float knockbackResistance;
     private final Supplier<Ingredient> repairIngredient;
 
-    BSArmorMaterial(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantmentValue, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
+    BSArmorMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantmentValue, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;
         this.protectionAmounts = protectionAmounts;
@@ -36,6 +37,7 @@ public enum BSArmorMaterial implements ArmorMaterial {
         this.toughness = toughness;
         this.knockbackResistance = knockbackResistance;
         this.repairIngredient = repairIngredient;
+
     }
 
     @Override

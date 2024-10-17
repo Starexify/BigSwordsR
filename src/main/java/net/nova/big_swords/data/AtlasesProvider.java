@@ -1,12 +1,15 @@
 package net.nova.big_swords.data;
 
+import net.minecraft.client.renderer.texture.atlas.SpriteSource;
 import net.minecraft.client.renderer.texture.atlas.sources.PalettedPermutations;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.SpriteSourceProvider;
+import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 import net.nova.big_swords.BigSwordsR;
 
+import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Map;
 
@@ -74,16 +77,25 @@ public class AtlasesProvider extends SpriteSourceProvider {
 
     @Override
     protected void addSources() {
-        atlas(SpriteSourceProvider.BLOCKS_ATLAS).addSource(new PalettedPermutations(
+        atlas(SpriteSourceProvider.BLOCKS_ATLAS).addSource(createPalettedPermutations(
                 textures,
                 new ResourceLocation("trims/color_palettes/trim_palette"),
                 permutations
         ));
 
-        atlas(ARMOR_TRIMS).addSource(new PalettedPermutations(
+        atlas(ARMOR_TRIMS).addSource(createPalettedPermutations(
                 trimTextures,
                 new ResourceLocation("trims/color_palettes/trim_palette"),
                 permutations
         ));
+    }
+
+    private SpriteSource createPalettedPermutations(List<ResourceLocation> textures, ResourceLocation paletteKey, Map<String, ResourceLocation> permutations) {
+        try {
+            Constructor<PalettedPermutations> constructor = ObfuscationReflectionHelper.findConstructor(PalettedPermutations.class, List.class, ResourceLocation.class, Map.class);
+            return constructor.newInstance(textures, paletteKey, permutations);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create PalettedPermutations", e);
+        }
     }
 }

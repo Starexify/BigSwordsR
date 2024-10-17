@@ -1,0 +1,18 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:paletted_permutations",
+      "palette_key": "minecraft:trims/color_palettes/trim_palette",
+      "permutations": {
+        "livingmetal": "big_swords:trims/color_palettes/livingmetal",
+        "livingmetal_darker": "big_swords:trims/color_palettes/livingmetal_darker"
+      },
+      "textures": [
+        "minecraft:trims/items/leggings_trim",
+        "minecraft:trims/items/chestplate_trim",
+        "minecraft:trims/items/helmet_trim",
+        "minecraft:trims/items/boots_trim"
+      ]
+    }
+  ]
+}

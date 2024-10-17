@@ -1,0 +1,12 @@
+{
+  "asset_name": "livingmetal",
+  "description": {
+    "color": "#F5FFFF",
+    "translate": "trim_material.big_swords.livingmetal"
+  },
+  "ingredient": "big_swords:livingmetal_ingot",
+  "item_model_index": 0.8,
+  "override_armor_materials": {
+    "big_swords:livingmetal": "livingmetal_darker"
+  }
+}

@@ -14,8 +14,7 @@ import static net.nova.big_swords.BigSwordsR.MODID;
 public class DatapackProvider extends DatapackBuiltinEntriesProvider {
     public DatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, new RegistrySetBuilder()
-                //.add(Registries.TRIM_MATERIAL, BSTrimMaterials::bootstrap)
-                ,
+                        .add(Registries.TRIM_MATERIAL, BSTrimMaterials::bootstrap),
                 Set.of(MODID));
     }
 }

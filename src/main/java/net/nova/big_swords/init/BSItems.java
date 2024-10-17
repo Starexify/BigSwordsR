@@ -26,10 +26,10 @@ public class BSItems {
 
     // Livingmetal Stuff
     public static RegistryObject<Item> LIVINGMETAL_INGOT = ITEMS.register("livingmetal_ingot", () -> new Item(new Item.Properties()));
-    public static RegistryObject<Item> LIVINGMETAL_HELMET = ITEMS.register("livingmetal_helmet", () -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static RegistryObject<Item> LIVINGMETAL_CHESTPLATE = ITEMS.register("livingmetal_chestplate", () -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-    public static RegistryObject<Item> LIVINGMETAL_LEGGINGS = ITEMS.register("livingmetal_leggings", () -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-    public static RegistryObject<Item> LIVINGMETAL_BOOTS = ITEMS.register("livingmetal_boots", () -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static RegistryObject<Item> LIVINGMETAL_HELMET = ITEMS.register("livingmetal_helmet", () -> new ArmorItem(BSArmorMaterials.LIVINGMETAL, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static RegistryObject<Item> LIVINGMETAL_CHESTPLATE = ITEMS.register("livingmetal_chestplate", () -> new ArmorItem(BSArmorMaterials.LIVINGMETAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static RegistryObject<Item> LIVINGMETAL_LEGGINGS = ITEMS.register("livingmetal_leggings", () -> new ArmorItem(BSArmorMaterials.LIVINGMETAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static RegistryObject<Item> LIVINGMETAL_BOOTS = ITEMS.register("livingmetal_boots", () -> new ArmorItem(BSArmorMaterials.LIVINGMETAL, ArmorItem.Type.BOOTS, new Item.Properties()));
     public static RegistryObject<Item> LIVINGMETAL_SWORD = ITEMS.register("livingmetal_sword", () -> new SwordItem(BSTiers.LIVINGMETAL, 3, -2.4F, new Item.Properties()));
     public static RegistryObject<Item> LIVINGMETAL_PICKAXE = ITEMS.register("livingmetal_pickaxe", () -> new PickaxeItem(BSTiers.LIVINGMETAL, 1, -2.8F, new Item.Properties()));
     public static RegistryObject<Item> LIVINGMETAL_AXE = ITEMS.register("livingmetal_axe", () -> new AxeItem(BSTiers.LIVINGMETAL, 6.0F, -3.0F, new Item.Properties()));
@@ -38,10 +38,10 @@ public class BSItems {
 
     // Biomass Stuff
     public static RegistryObject<Item> BIOMASS = ITEMS.register("biomass", () -> new Item(new Item.Properties()));
-    public static RegistryObject<Item> BIOMASS_HELMET = ITEMS.register("biomass_helmet", () -> new ArmorItem(BSArmorMaterial.BIOMASS, ArmorItem.Type.HELMET, new Item.Properties()));
-    public static RegistryObject<Item> BIOMASS_CHESTPLATE = ITEMS.register("biomass_chestplate", () -> new ArmorItem(BSArmorMaterial.BIOMASS, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
-    public static RegistryObject<Item> BIOMASS_LEGGINGS = ITEMS.register("biomass_leggings", () -> new ArmorItem(BSArmorMaterial.BIOMASS, ArmorItem.Type.LEGGINGS, new Item.Properties()));
-    public static RegistryObject<Item> BIOMASS_BOOTS = ITEMS.register("biomass_boots", () -> new ArmorItem(BSArmorMaterial.BIOMASS, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static RegistryObject<Item> BIOMASS_HELMET = ITEMS.register("biomass_helmet", () -> new ArmorItem(BSArmorMaterials.BIOMASS, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static RegistryObject<Item> BIOMASS_CHESTPLATE = ITEMS.register("biomass_chestplate", () -> new ArmorItem(BSArmorMaterials.BIOMASS, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static RegistryObject<Item> BIOMASS_LEGGINGS = ITEMS.register("biomass_leggings", () -> new ArmorItem(BSArmorMaterials.BIOMASS, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static RegistryObject<Item> BIOMASS_BOOTS = ITEMS.register("biomass_boots", () -> new ArmorItem(BSArmorMaterials.BIOMASS, ArmorItem.Type.BOOTS, new Item.Properties()));
     public static RegistryObject<Item> BIOMASS_SWORD = ITEMS.register("biomass_sword", () -> new SwordItem(BSTiers.BIOMASS, 3, -2.4F, new Item.Properties()));
     public static RegistryObject<Item> BIOMASS_PICKAXE = ITEMS.register("biomass_pickaxe", () -> new PickaxeItem(BSTiers.BIOMASS, 1, -2.8F, new Item.Properties()));
     public static RegistryObject<Item> BIOMASS_AXE = ITEMS.register("biomass_axe", () -> new AxeItem(BSTiers.BIOMASS, 6.0F, -3.0F, new Item.Properties()));
