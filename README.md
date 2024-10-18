@@ -2,12 +2,12 @@
 
 <p align="center">
   <a href="https://www.curseforge.com/minecraft/mc-mods/big-swords-r"><img alt="curseforge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg"></a>
-  <a href="https://modrinth.com/mod/big-swords-r"><img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg"></a>
+  <a href="https://modrinth.com/mod/big-swords-rr"><img alt="modrinth" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg"></a>
 </p>
 
 <p align="center">
   <a href="https://www.curseforge.com/minecraft/mc-mods/big-swords-r"><img alt="CurseForge Downloads" src="https://img.shields.io/curseforge/dt/690473?style=for-the-badge&logo=curseforge&color=96000C"></a>
-  <a href="https://modrinth.com/mod/big-swords-r"><img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/edrOLdWE?style=for-the-badge&logo=modrinth&color=96000C"></a>
+  <a href="https://modrinth.com/mod/big-swords-rr"><img alt="Modrinth Downloads" src="https://img.shields.io/modrinth/dt/uq8RUJSn?style=for-the-badge&logo=modrinth&color=96000C"></a>
 </p>
 
 <p align="center">
