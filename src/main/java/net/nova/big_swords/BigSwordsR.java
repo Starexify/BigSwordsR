@@ -21,8 +21,8 @@ public class BigSwordsR {
     public static final String MODID = "big_swords";
     public static final Logger logger = LoggerFactory.getLogger(BigSwordsR.class);
 
-    public BigSwordsR(FMLJavaModLoadingContext context) {
-        IEventBus bus = context.getModEventBus();
+    public BigSwordsR() {
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
         CreativeTab.CREATIVE_TAB.register(bus);
         BSItems.ITEMS.register(bus);
