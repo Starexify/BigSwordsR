@@ -1,7 +1,7 @@
 {
   "asset_name": "livingmetal",
   "description": {
-    "color": "#70C2D1",
+    "color": "#E0F9FF",
     "translate": "trim_material.big_swords.livingmetal"
   },
   "ingredient": "big_swords:livingmetal_ingot",
