@@ -6,6 +6,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.nova.big_swords.init.BSBlocks;
+import net.nova.big_swords.init.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
