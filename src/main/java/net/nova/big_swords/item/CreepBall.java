@@ -28,9 +28,8 @@ public class CreepBall extends Item {
             Player player = pContext.getPlayer();
             ItemStack itemstack = pContext.getItemInHand();
 
-            if (!player.hasInfiniteMaterials()) {
-                itemstack.shrink(1);
-            }
+            itemstack.consume(1, player);
+
             level.setBlock(blockpos, BSBlocks.CREEP_BLOCK.get().defaultBlockState(), 3);
 
             return InteractionResult.sidedSuccess(level.isClientSide);

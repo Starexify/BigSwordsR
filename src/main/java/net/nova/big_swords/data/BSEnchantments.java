@@ -1,19 +1,15 @@
 package net.nova.big_swords.data;
 
 import net.minecraft.core.HolderGetter;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentTarget;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.enchantment.effects.SummonEntityEffect;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.enchantments.effects.SoulStealEffect;
 import net.nova.big_swords.init.Tags;
@@ -46,11 +42,11 @@ public class BSEnchantments {
         );
     }
 
-    private static void register(BootstrapContext<Enchantment> pContext, ResourceKey<Enchantment> pKey, Enchantment.Builder pBuilder) {
+    public static void register(BootstrapContext<Enchantment> pContext, ResourceKey<Enchantment> pKey, Enchantment.Builder pBuilder) {
         pContext.register(pKey, pBuilder.build(pKey.location()));
     }
 
-    private static ResourceKey<Enchantment> key(String name) {
+    public static ResourceKey<Enchantment> key(String name) {
         return ResourceKey.create(Registries.ENCHANTMENT, BigSwordsR.rl(name));
     }
 }

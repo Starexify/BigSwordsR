@@ -31,7 +31,7 @@ public class BlockStateAndModelProvider extends BlockStateProvider {
         biomassCrop(BSBlocks.BIOMASS.get(), BlockStateProperties.AGE_3, 0, 1, 2, 3);
     }
 
-    private void biomassCrop(Block pCropBlock, IntegerProperty pAgeProperty, int... pAgeToVisualStageMapping) {
+    public void biomassCrop(Block pCropBlock, IntegerProperty pAgeProperty, int... pAgeToVisualStageMapping) {
         if (pAgeProperty.getPossibleValues().size() != pAgeToVisualStageMapping.length) {
             throw new IllegalArgumentException("Number of ages and visual stages must match");
         }
@@ -50,11 +50,11 @@ public class BlockStateAndModelProvider extends BlockStateProvider {
                 .texture("layer0", modLoc("item/" + name(pCropBlock)));
     }
 
-    private void normalBlock(Block block) {
+    public void normalBlock(Block block) {
         simpleBlockWithItem(block, models().cubeAll(name(block), modLoc("block/" + name(block))));
     }
 
-    private void creepBlock(Block block) {
+    public void creepBlock(Block block) {
         getVariantBuilder(block).forAllStates(state -> {
             boolean tilled = state.getValue(CreepBlock.TILLED);
             String topTexture = tilled ? "block/" + name(block) + "_top_tilled" : "block/" + name(block) + "_top";
@@ -74,11 +74,11 @@ public class BlockStateAndModelProvider extends BlockStateProvider {
     }
 
     // Other stuff
-    private ResourceLocation key(Block block) {
+    public ResourceLocation key(Block block) {
         return BuiltInRegistries.BLOCK.getKey(block);
     }
 
-    private String name(Block block) {
+    public String name(Block block) {
         return key(block).getPath();
     }
 }

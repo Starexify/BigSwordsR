@@ -24,7 +24,7 @@ public class SoundsProvider extends SoundDefinitionsProvider {
     }
 
     // Some methods for simpler generation
-    protected void addSound(final Supplier<SoundEvent> soundEvent) {
+    public void addSound(final Supplier<SoundEvent> soundEvent) {
         this.add(soundEvent.get(), definition()
                 .subtitle(getSubtitle(soundEvent))
                 .with(sound(soundEvent.get().getLocation().toString())));

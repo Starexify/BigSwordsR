@@ -25,7 +25,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
 import net.nova.big_swords.block.CreepBlock;
-import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.Sounds;
 
 import java.util.List;
@@ -110,7 +109,7 @@ public class GlaiveItem extends TieredItem {
                 Predicate<LivingEntity> predicate = livingEntity -> livingEntity != player && livingEntity.isPickable();
                 List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, boundingBox, predicate);
 
-                EntityHitResult entityHitResult = getEntityHitResult(player, startVec, endVec, entities);
+                EntityHitResult entityHitResult = getEntityHitResult(startVec, endVec, entities);
 
                 player.swing(InteractionHand.MAIN_HAND, true);
                 if (entityHitResult != null && entityHitResult.getType() == HitResult.Type.ENTITY) {
@@ -146,7 +145,7 @@ public class GlaiveItem extends TieredItem {
         playSound(level, player, Sounds.GLAIVE_SWING.get());
     }
 
-    private EntityHitResult getEntityHitResult(Player player, Vec3 startVec, Vec3 endVec, List<LivingEntity> entities) {
+    private EntityHitResult getEntityHitResult(Vec3 startVec, Vec3 endVec, List<LivingEntity> entities) {
         for (LivingEntity entity : entities) {
             AABB entityBoundingBox = entity.getBoundingBox();
             if (entityBoundingBox.clip(startVec, endVec).isPresent()) {

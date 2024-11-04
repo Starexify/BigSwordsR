@@ -52,7 +52,7 @@ public class BlockLootTables extends BlockLootSubProvider {
     }
 
     // Loot method
-    protected LootTable.Builder createBiomassDrops(Block pCropBlock, Item pGrownCropItem, Item pSeedsItem, LootItemCondition.Builder pDropGrownCropCondition, LootItemCondition.Builder scytheCondition) {
+    public LootTable.Builder createBiomassDrops(Block pCropBlock, Item pGrownCropItem, Item pSeedsItem, LootItemCondition.Builder pDropGrownCropCondition, LootItemCondition.Builder scytheCondition) {
         return this.applyExplosionDecay(
                 pCropBlock,
                 LootTable.lootTable()

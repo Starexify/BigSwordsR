@@ -22,20 +22,20 @@ public class AtlasesProvider extends SpriteSourceProvider {
     }
 
     // Add here the palettes
-    private final Map<String, ResourceLocation> permutations = Map.of(
+    public final Map<String, ResourceLocation> permutations = Map.of(
             "livingmetal", BigSwordsR.rl("trims/color_palettes/livingmetal"),
             "livingmetal_darker", BigSwordsR.rl("trims/color_palettes/livingmetal_darker")
     );
 
     // Just some lists of things idk
-    private final List<ResourceLocation> textures = List.of(
+    public final List<ResourceLocation> textures = List.of(
             ResourceLocation.withDefaultNamespace("trims/items/leggings_trim"),
             ResourceLocation.withDefaultNamespace("trims/items/chestplate_trim"),
             ResourceLocation.withDefaultNamespace("trims/items/helmet_trim"),
             ResourceLocation.withDefaultNamespace("trims/items/boots_trim")
     );
 
-    private final List<ResourceLocation> trimTextures = List.of(
+    public final List<ResourceLocation> trimTextures = List.of(
             ResourceLocation.withDefaultNamespace("trims/models/armor/coast"),
             ResourceLocation.withDefaultNamespace("trims/models/armor/coast_leggings"),
             ResourceLocation.withDefaultNamespace("trims/models/armor/sentry"),

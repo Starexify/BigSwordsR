@@ -1,5 +1,6 @@
 package net.nova.big_swords.init;
 
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -16,7 +17,7 @@ public class CreativeTab {
 
     public static String BIG_SWORDS_TAB_TITLE = "big_swords.creativetab";
 
-    public static final Supplier<CreativeModeTab> BIG_SWORDS_TAB = CREATIVE_TAB.register("big_swords_tab", () -> CreativeModeTab.builder()
+    public static final Holder<CreativeModeTab> BIG_SWORDS_TAB = CREATIVE_TAB.register("big_swords_tab", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(BSItems.ENDER_BIG_SWORD.get()))
             .title(Component.translatable(BIG_SWORDS_TAB_TITLE))
             .displayItems((itemDisplayParameters, output) -> {

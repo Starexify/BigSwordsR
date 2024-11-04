@@ -13,8 +13,8 @@ import java.util.List;
 import static net.nova.big_swords.BigSwordsR.rl;
 
 public class EnderSmithingTemplate extends SmithingTemplateItem {
-    private static final ChatFormatting TITLE_FORMAT = ChatFormatting.GRAY;
-    private static final ChatFormatting DESCRIPTION_FORMAT = ChatFormatting.BLUE;
+    public static final ChatFormatting TITLE_FORMAT = ChatFormatting.GRAY;
+    public static final ChatFormatting DESCRIPTION_FORMAT = ChatFormatting.BLUE;
 
     public static final Component ENDER_UPGRADE = Component.translatable(
             Util.makeDescriptionId("upgrade", rl("ender_upgrade"))
@@ -36,17 +36,17 @@ public class EnderSmithingTemplate extends SmithingTemplateItem {
             Util.makeDescriptionId("item", rl("smithing_template.ender_upgrade.additions_slot_description"))
     );
 
-    private static final ResourceLocation EMPTY_SLOT_HELMET = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_helmet");
-    private static final ResourceLocation EMPTY_SLOT_CHESTPLATE = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_chestplate");
-    private static final ResourceLocation EMPTY_SLOT_LEGGINGS = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_leggings");
-    private static final ResourceLocation EMPTY_SLOT_BOOTS = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_boots");
-    private static final ResourceLocation EMPTY_SLOT_HOE = ResourceLocation.withDefaultNamespace("item/empty_slot_hoe");
-    private static final ResourceLocation EMPTY_SLOT_AXE = ResourceLocation.withDefaultNamespace("item/empty_slot_axe");
-    private static final ResourceLocation EMPTY_SLOT_SWORD = ResourceLocation.withDefaultNamespace("item/empty_slot_sword");
-    private static final ResourceLocation EMPTY_SLOT_SHOVEL = ResourceLocation.withDefaultNamespace("item/empty_slot_shovel");
-    private static final ResourceLocation EMPTY_SLOT_PICKAXE = ResourceLocation.withDefaultNamespace("item/empty_slot_pickaxe");
-    private static final ResourceLocation EMPTY_SLOT_BIG_SWORD = BigSwordsR.rl("item/empty_slot_big_sword");
-    private static final ResourceLocation EMPTY_SLOT_INGOT = ResourceLocation.withDefaultNamespace("item/empty_slot_ingot");
+    public static final ResourceLocation EMPTY_SLOT_HELMET = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_helmet");
+    public static final ResourceLocation EMPTY_SLOT_CHESTPLATE = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_chestplate");
+    public static final ResourceLocation EMPTY_SLOT_LEGGINGS = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_leggings");
+    public static final ResourceLocation EMPTY_SLOT_BOOTS = ResourceLocation.withDefaultNamespace("item/empty_armor_slot_boots");
+    public static final ResourceLocation EMPTY_SLOT_HOE = ResourceLocation.withDefaultNamespace("item/empty_slot_hoe");
+    public static final ResourceLocation EMPTY_SLOT_AXE = ResourceLocation.withDefaultNamespace("item/empty_slot_axe");
+    public static final ResourceLocation EMPTY_SLOT_SWORD = ResourceLocation.withDefaultNamespace("item/empty_slot_sword");
+    public static final ResourceLocation EMPTY_SLOT_SHOVEL = ResourceLocation.withDefaultNamespace("item/empty_slot_shovel");
+    public static final ResourceLocation EMPTY_SLOT_PICKAXE = ResourceLocation.withDefaultNamespace("item/empty_slot_pickaxe");
+    public static final ResourceLocation EMPTY_SLOT_BIG_SWORD = BigSwordsR.rl("item/empty_slot_big_sword");
+    public static final ResourceLocation EMPTY_SLOT_INGOT = ResourceLocation.withDefaultNamespace("item/empty_slot_ingot");
 
     public EnderSmithingTemplate(Component pAppliesTo, Component pIngredients, Component pUpgradeDescription, Component pBaseSlotDescription, Component pAdditionsSlotDescription, List<ResourceLocation> pBaseSlotEmptyIcons, List<ResourceLocation> pAdditionalSlotEmptyIcons, FeatureFlag... pRequiredFeatures) {
         super(pAppliesTo, pIngredients, pUpgradeDescription, pBaseSlotDescription, pAdditionsSlotDescription, pBaseSlotEmptyIcons, pAdditionalSlotEmptyIcons, pRequiredFeatures);
@@ -64,7 +64,7 @@ public class EnderSmithingTemplate extends SmithingTemplateItem {
         );
     }
 
-    private static List<ResourceLocation> createEnderUpgradeIconList() {
+    public static List<ResourceLocation> createEnderUpgradeIconList() {
         return List.of(
                 EMPTY_SLOT_HELMET,
                 EMPTY_SLOT_SWORD,
@@ -79,7 +79,7 @@ public class EnderSmithingTemplate extends SmithingTemplateItem {
         );
     }
 
-    private static List<ResourceLocation> createEnderUpgradeMaterialList() {
+    public static List<ResourceLocation> createEnderUpgradeMaterialList() {
         return List.of(EMPTY_SLOT_INGOT);
     }
 }
