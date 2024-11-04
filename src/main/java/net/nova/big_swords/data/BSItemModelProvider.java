@@ -4,7 +4,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.armortrim.TrimMaterial;
@@ -140,7 +139,7 @@ public class BSItemModelProvider extends ItemModelProvider {
     }
 
     // Models
-    private void shieldItem(Item item) {
+    public void shieldItem(Item item) {
         getBuilder(getItemName(item) + "_blocking")
                 .parent(getExistingFile(modLoc("item/template_shield_blocking")))
                 .texture("layer0", "item/" + getItemName(item));
@@ -152,19 +151,19 @@ public class BSItemModelProvider extends ItemModelProvider {
                 .model(getExistingFile(modLoc("item/" + getItemName(item) + "_blocking")));
     }
 
-    private void handheldGlaive(Item item) {
+    public void handheldGlaive(Item item) {
         getBuilder(getItemName(item))
                 .parent(getExistingFile(modLoc("item/handheld_glaive")))
                 .texture("layer0", "item/" + getItemName(item));
     }
 
-    private void trimmableArmorItem(Item item) {
+    public void trimmableArmorItem(Item item) {
         String name = getItemName(item);
         String itemName = "item/" + name;
         ModelFile mcItem = getExistingFile(mcLoc("item/generated"));
 
         if (item instanceof ArmorItem armorItem) {
-            trimMaterials.entrySet().forEach(entry -> {
+            trimMaterials.forEach((key, value) -> {
                 // Variables
                 String armorType = switch (armorItem.getEquipmentSlot()) {
                     case HEAD -> "helmet";
@@ -174,10 +173,10 @@ public class BSItemModelProvider extends ItemModelProvider {
                     default -> "";
                 };
 
-                String trimType = entry.getKey().location().getPath();
-                float trimValue = entry.getValue();
+                String trimType = key.location().getPath();
+                float trimValue = value;
                 ResourceLocation textureLocation;
-                if (entry.getKey().location().getNamespace().equals("minecraft")) { // Vanilla trims
+                if (key.location().getNamespace().equals("minecraft")) { // Vanilla trims
                     textureLocation = mcLoc("trims/items/" + armorType + "_trim_" + trimType);
                 } else { // Modded trims (assuming they're in your mod's namespace)
                     textureLocation = modLoc("trims/items/" + armorType + "_trim_" + trimType);
@@ -204,7 +203,7 @@ public class BSItemModelProvider extends ItemModelProvider {
         }
     }
 
-    private String getItemName(Item item) {
+    public String getItemName(Item item) {
         return BuiltInRegistries.ITEM.getKey(item).toString().replace(MODID + ":", "");
     }
 }

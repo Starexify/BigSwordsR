@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.Item;
@@ -20,22 +21,20 @@ public class BSTrimMaterials {
     public static final ResourceKey<TrimMaterial> LIVINGMETAL = createKey("livingmetal");
 
     public static void bootstrap(BootstrapContext<TrimMaterial> pContext) {
-        register(pContext, LIVINGMETAL, BSItems.LIVINGMETAL_INGOT.get(), Style.EMPTY.withColor(16121855), 0.8F, Map.of(BSArmorMaterial.LIVINGMETAL, "livingmetal_darker"));
+        register(pContext, LIVINGMETAL, BSItems.LIVINGMETAL_INGOT.get(), Style.EMPTY.withColor(TextColor.parseColor("#e0f9ff").getOrThrow()), 0.8F, Map.of(BSArmorMaterial.LIVINGMETAL, "livingmetal_darker"));
     }
 
-    private static ResourceKey<TrimMaterial> createKey(String name) {
+    public static ResourceKey<TrimMaterial> createKey(String name) {
         return ResourceKey.create(Registries.TRIM_MATERIAL, BigSwordsR.rl(name));
     }
 
     // Registers
-    private static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> materialKey, Item ingredient, Style style, float itemModelIndex) {
+    public static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> materialKey, Item ingredient, Style style, float itemModelIndex) {
         register(context, materialKey, ingredient, style, itemModelIndex, Map.of());
     }
 
-    private static void register(BootstrapContext<TrimMaterial> pContext, ResourceKey<TrimMaterial> pMaterialKey, Item pIngredient, Style pStyle, float pItemModelIndex, Map<Holder<ArmorMaterial>, String> pOverrideArmorMaterials) {
-        TrimMaterial trimmaterial = TrimMaterial.create(
-                pMaterialKey.location().getPath(),
-                pIngredient, pItemModelIndex,
+    public static void register(BootstrapContext<TrimMaterial> pContext, ResourceKey<TrimMaterial> pMaterialKey, Item pIngredient, Style pStyle, float pItemModelIndex, Map<Holder<ArmorMaterial>, String> pOverrideArmorMaterials) {
+        TrimMaterial trimmaterial = TrimMaterial.create(pMaterialKey.location().getPath(), pIngredient, pItemModelIndex,
                 Component.translatable(Util.makeDescriptionId("trim_material", pMaterialKey.location())).withStyle(pStyle),
                 pOverrideArmorMaterials
         );
