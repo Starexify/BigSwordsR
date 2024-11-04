@@ -33,7 +33,7 @@ public class BSItems {
     public static DeferredItem<Item> LIVINGMETAL_PICKAXE = ITEMS.register("livingmetal_pickaxe", () -> new PickaxeItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(PickaxeItem.createAttributes(BSTiers.LIVINGMETAL, 1.0F, -2.8F))));
     public static DeferredItem<Item> LIVINGMETAL_AXE = ITEMS.register("livingmetal_axe", () -> new AxeItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(AxeItem.createAttributes(BSTiers.LIVINGMETAL, 6.0F, -3.0F))));
     public static DeferredItem<Item> LIVINGMETAL_SHOVEL = ITEMS.register("livingmetal_shovel", () -> new ShovelItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(ShovelItem.createAttributes(BSTiers.LIVINGMETAL, 1.5F, -3.0F))));
-    public static DeferredItem<Item> LIVINGMETAL_HOE = ITEMS.register("livingmetal_hoe", () -> new HoeItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(HoeItem.createAttributes(BSTiers.LIVINGMETAL, -2.5F, -0.5F))));
+    public static DeferredItem<Item> LIVINGMETAL_HOE = ITEMS.register("livingmetal_hoe", () -> new HoeItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(HoeItem.createAttributes(BSTiers.LIVINGMETAL, -2.5F, 0.0F))));
 
     // Biomass Stuff
     public static DeferredItem<Item> BIOMASS = ITEMS.register("biomass", () -> new Item(new Item.Properties()));
@@ -45,8 +45,7 @@ public class BSItems {
     public static DeferredItem<Item> BIOMASS_PICKAXE = ITEMS.register("biomass_pickaxe", () -> new PickaxeItem(BSTiers.BIOMASS, new Item.Properties().attributes(PickaxeItem.createAttributes(BSTiers.BIOMASS, 1.0F, -2.8F))));
     public static DeferredItem<Item> BIOMASS_AXE = ITEMS.register("biomass_axe", () -> new AxeItem(BSTiers.BIOMASS, new Item.Properties().attributes(AxeItem.createAttributes(BSTiers.BIOMASS, 6.0F, -3.0F))));
     public static DeferredItem<Item> BIOMASS_SHOVEL = ITEMS.register("biomass_shovel", () -> new ShovelItem(BSTiers.BIOMASS, new Item.Properties().attributes(ShovelItem.createAttributes(BSTiers.BIOMASS, 1.5F, -3.0F))));
-    public static DeferredItem<Item> BIOMASS_HOE = ITEMS.register("biomass_hoe", () -> new HoeItem(BSTiers.BIOMASS, new Item.Properties().attributes(HoeItem.createAttributes(BSTiers.BIOMASS, -2.5F, -0.5F))));
-
+    public static DeferredItem<Item> BIOMASS_HOE = ITEMS.register("biomass_hoe", () -> new HoeItem(BSTiers.BIOMASS, new Item.Properties().attributes(HoeItem.createAttributes(BSTiers.BIOMASS, -2.0F, -0.5F))));
 
     // Big Swords
     public static DeferredItem<Item> WOODEN_BIG_SWORD = ITEMS.register("wooden_big_sword", () -> new BigSwordItem(Tiers.WOOD, new Item.Properties().attributes(BigSwordItem.createAttributes(Tiers.WOOD, 6.5F, -2.8F))));

@@ -80,8 +80,8 @@ public class ScytheItem extends HoeItem {
                 Vec3 playerPos = player.position().add(0, player.getEyeHeight(), 0);
                 Vec3 attackCenter = playerPos.add(lookVec.scale(distance + depth / 2));
                 AABB boundingBox = new AABB(
-                        attackCenter.x - width/2, attackCenter.y - height/2, attackCenter.z - width/2,
-                        attackCenter.x + width/2, attackCenter.y + height/2, attackCenter.z + width/2
+                        attackCenter.x - width / 2, attackCenter.y - height / 2, attackCenter.z - width / 2,
+                        attackCenter.x + width / 2, attackCenter.y + height / 2, attackCenter.z + width / 2
                 );
 
                 List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, boundingBox,
@@ -135,7 +135,7 @@ public class ScytheItem extends HoeItem {
         }
     }
 
-    private boolean isInAttackArea(Vec3 toTarget, Vec3 lookVec) {
+    public boolean isInAttackArea(Vec3 toTarget, Vec3 lookVec) {
         // Create a coordinate system based on the look vector
         Vec3 up = new Vec3(0, 1, 0);
         Vec3 right = lookVec.cross(up).normalize();
@@ -186,18 +186,13 @@ public class ScytheItem extends HoeItem {
 
     public static ItemAttributeModifiers createAttributes(Tier p_330371_, float p_331976_, float p_332104_) {
         return ItemAttributeModifiers.builder()
-                .add(
-                        Attributes.ATTACK_DAMAGE,
-                        new AttributeModifier(
-                                BASE_ATTACK_DAMAGE_ID, (double) ((float) p_331976_ + p_330371_.getAttackDamageBonus()), AttributeModifier.Operation.ADD_VALUE
-                        ),
+                .add(Attributes.ATTACK_DAMAGE,
+                        new AttributeModifier(BASE_ATTACK_DAMAGE_ID, (double) ((float) p_331976_ + p_330371_.getAttackDamageBonus()), AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND
                 )
-                .add(
-                        Attributes.ATTACK_SPEED,
+                .add(Attributes.ATTACK_SPEED,
                         new AttributeModifier(BASE_ATTACK_SPEED_ID, (double) p_332104_, AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND
-                )
-                .build();
+                ).build();
     }
 }
