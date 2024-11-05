@@ -1,4 +1,4 @@
-![Big Swords R Logo](https://github.com/Starexify/BigSwordsR/blob/main/src/1.21-neo/resources/big_swords_r_logo.png?raw=true)
+![Big Swords R Logo](https://github.com/Starexify/BigSwordsR/blob/1.21-neo/src/main/resources/big_swords_r_logo.png?raw=true)
 
 <p align="center">
   <a href="https://www.curseforge.com/minecraft/mc-mods/big-swords-r"><img alt="curseforge" height="56" src="https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg"></a>
