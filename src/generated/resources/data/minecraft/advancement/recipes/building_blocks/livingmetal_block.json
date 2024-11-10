@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_biomass_block": {
+    "has_livingmetal_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "big_swords:biomass_block"
+            "items": "big_swords:livingmetal_ingot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "big_swords:biomass_from_biomass_block"
+        "recipe": "minecraft:livingmetal_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_biomass_block"
+      "has_livingmetal_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "big_swords:biomass_from_biomass_block"
+      "minecraft:livingmetal_block"
     ]
   }
 }

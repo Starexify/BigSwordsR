@@ -24,7 +24,6 @@ public class BigSwordsR {
     public static final Logger logger = LoggerFactory.getLogger(BigSwordsR.class);
 
     public BigSwordsR(IEventBus bus) {
-        BSArmorMaterial.ARMOR_MATERIALS.register(bus);
         CreativeTab.CREATIVE_TAB.register(bus);
         BSItems.ITEMS.register(bus);
         BSBlocks.BLOCKS.register(bus);

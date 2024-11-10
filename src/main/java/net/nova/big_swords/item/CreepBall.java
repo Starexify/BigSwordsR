@@ -32,7 +32,7 @@ public class CreepBall extends Item {
 
             level.setBlock(blockpos, BSBlocks.CREEP_BLOCK.get().defaultBlockState(), 3);
 
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return InteractionResult.SUCCESS;
         }
     }
 }

@@ -7,7 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.nova.big_swords.init.BSItems;
@@ -15,20 +15,20 @@ import net.nova.big_swords.init.BSItems;
 import java.util.List;
 
 public class TieredShield extends ShieldItem {
-    private final Tier tier;
+    private final ToolMaterial toolMaterial;
 
-    public TieredShield(Tier pTier, Properties pProperties) {
-        this(pTier, pProperties, 1, 0);
+    public TieredShield(ToolMaterial toolMaterial, Properties properties) {
+        this(toolMaterial, properties, 1, 0);
     }
 
-    public TieredShield(Tier pTier, Properties pProperties, int durabilityMultiplier) {
-        super(pProperties.durability(pTier.getUses() * durabilityMultiplier));
-        this.tier = pTier;
+    public TieredShield(ToolMaterial toolMaterial, Properties properties, int durabilityMultiplier) {
+        super(properties.durability(toolMaterial.durability() * durabilityMultiplier));
+        this.toolMaterial = toolMaterial;
     }
 
-    public TieredShield(Tier pTier, Properties pProperties, int durabilityMultiplier, int additionalDurability) {
-        super(pProperties.durability(pTier.getUses() * durabilityMultiplier + additionalDurability));
-        this.tier = pTier;
+    public TieredShield(ToolMaterial toolMaterial, Properties properties, int durabilityMultiplier, int additionalDurability) {
+        super(properties.durability(toolMaterial.durability() * durabilityMultiplier + additionalDurability));
+        this.toolMaterial = toolMaterial;
     }
 
     @Override
@@ -44,15 +44,15 @@ public class TieredShield extends ShieldItem {
     }
 
     // Tier Stuff
-    @Override
+/*    @Override
     public int getEnchantmentValue() {
-        return this.tier.getEnchantmentValue();
+        return this.toolMaterial.enchantmentValue();
     }
 
     @Override
     public boolean isValidRepairItem(ItemStack pToRepair, ItemStack pRepair) {
-        return this.tier.getRepairIngredient().test(pRepair) || super.isValidRepairItem(pToRepair, pRepair);
-    }
+        return this.toolMaterial.rp().test(pRepair) || super.isValidRepairItem(pToRepair, pRepair);
+    }*/
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity entity, int pSlotId, boolean pIsSelected) {

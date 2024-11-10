@@ -4,12 +4,8 @@
   "cookingtime": 100,
   "experience": 0.1,
   "ingredient": [
-    {
-      "item": "big_swords:iron_glaive"
-    },
-    {
-      "item": "big_swords:iron_scythe"
-    }
+    "big_swords:iron_glaive",
+    "big_swords:iron_scythe"
   ],
   "result": {
     "count": 1,

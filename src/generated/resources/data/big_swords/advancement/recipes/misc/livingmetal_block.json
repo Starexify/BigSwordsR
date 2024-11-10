@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_livingmetal_ingot": {
+    "has_livingmetal_block": {
       "conditions": {
         "items": [
           {
-            "items": "big_swords:livingmetal_ingot"
+            "items": "big_swords:livingmetal_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_livingmetal_ingot"
+      "has_livingmetal_block"
     ]
   ],
   "rewards": {

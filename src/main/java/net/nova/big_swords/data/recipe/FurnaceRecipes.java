@@ -12,11 +12,8 @@ import net.nova.big_swords.init.BSItems;
 import java.util.concurrent.CompletableFuture;
 
 public class FurnaceRecipes extends BSRecipeProvider {
-    public final RecipeOutput recipeOutput;
-
-    public FurnaceRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, RecipeOutput recipeOutput) {
-        super(output, lookupProvider);
-        this.recipeOutput = recipeOutput;
+    public FurnaceRecipes(HolderLookup.Provider lookupProvider, RecipeOutput recipeOutput) {
+        super(lookupProvider, recipeOutput);
     }
 
     public void build() {

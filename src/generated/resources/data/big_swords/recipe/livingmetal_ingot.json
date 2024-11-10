@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "I": {
-      "item": "minecraft:iron_ingot"
-    },
-    "S": {
-      "item": "big_swords:soul"
-    }
+    "I": "minecraft:iron_ingot",
+    "S": "big_swords:soul"
   },
   "pattern": [
     " S ",

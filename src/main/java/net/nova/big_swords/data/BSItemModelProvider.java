@@ -1,13 +1,18 @@
 package net.nova.big_swords.data;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.armortrim.TrimMaterial;
-import net.minecraft.world.item.armortrim.TrimMaterials;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.Equippable;
+import net.minecraft.world.item.equipment.trim.TrimMaterial;
+import net.minecraft.world.item.equipment.trim.TrimMaterials;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -165,40 +170,45 @@ public class BSItemModelProvider extends ItemModelProvider {
         if (item instanceof ArmorItem armorItem) {
             trimMaterials.forEach((key, value) -> {
                 // Variables
-                String armorType = switch (armorItem.getEquipmentSlot()) {
-                    case HEAD -> "helmet";
-                    case CHEST -> "chestplate";
-                    case LEGS -> "leggings";
-                    case FEET -> "boots";
-                    default -> "";
-                };
+                Equippable equippable = item.getDefaultInstance().get(DataComponents.EQUIPPABLE);
+                if (equippable != null) {
+                    EquipmentSlot slot = equippable.slot();
 
-                String trimType = key.location().getPath();
-                float trimValue = value;
-                ResourceLocation textureLocation;
-                if (key.location().getNamespace().equals("minecraft")) { // Vanilla trims
-                    textureLocation = mcLoc("trims/items/" + armorType + "_trim_" + trimType);
-                } else { // Modded trims (assuming they're in your mod's namespace)
-                    textureLocation = modLoc("trims/items/" + armorType + "_trim_" + trimType);
+                    String armorType = switch (slot) {
+                        case HEAD -> "helmet";
+                        case CHEST -> "chestplate";
+                        case LEGS -> "leggings";
+                        case FEET -> "boots";
+                        default -> "";
+                    };
+
+                    String trimType = key.location().getPath();
+                    float trimValue = value;
+                    ResourceLocation textureLocation;
+                    if (key.location().getNamespace().equals("minecraft")) { // Vanilla trims
+                        textureLocation = mcLoc("trims/items/" + armorType + "_trim_" + trimType);
+                    } else { // Modded trims
+                        textureLocation = modLoc("trims/items/" + armorType + "_trim_" + trimType);
+                    }
+
+                    ModelFile model = new ModelFile.UncheckedModelFile(modLoc(itemName + "_" + trimType + "_trim"));
+
+                    //existingFileHelper.trackGenerated(textureLocation, PackType.CLIENT_RESOURCES, ".png", "textures");
+
+                    // Trimmed parts
+                    getBuilder(name + "_" + trimType + "_trim")
+                            .parent(mcItem)
+                            .texture("layer0", itemName)
+                            .texture("layer1", textureLocation);
+
+                    // Armor with trimmed parts
+                    getBuilder(name)
+                            .parent(mcItem)
+                            .override()
+                            .predicate(ResourceLocation.parse("trim_type"), trimValue)
+                            .model(model).end()
+                            .texture("layer0", modLoc(itemName));
                 }
-
-                ModelFile model = new ModelFile.UncheckedModelFile(modLoc(itemName + "_" + trimType + "_trim"));
-
-                //existingFileHelper.trackGenerated(textureLocation, PackType.CLIENT_RESOURCES, ".png", "textures");
-
-                // Trimmed parts
-                getBuilder(name + "_" + trimType + "_trim")
-                        .parent(mcItem)
-                        .texture("layer0", itemName)
-                        .texture("layer1", textureLocation);
-
-                // Armor with trimmed parts
-                getBuilder(name)
-                        .parent(mcItem)
-                        .override()
-                        .predicate(ResourceLocation.parse("trim_type"), trimValue)
-                        .model(model).end()
-                        .texture("layer0", modLoc(itemName));
             });
         }
     }

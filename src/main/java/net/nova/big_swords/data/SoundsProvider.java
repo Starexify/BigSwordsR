@@ -27,10 +27,10 @@ public class SoundsProvider extends SoundDefinitionsProvider {
     public void addSound(final Supplier<SoundEvent> soundEvent) {
         this.add(soundEvent.get(), definition()
                 .subtitle(getSubtitle(soundEvent))
-                .with(sound(soundEvent.get().getLocation().toString())));
+                .with(sound(soundEvent.get().location().toString())));
     }
 
     public static String getSubtitle(Supplier<SoundEvent> soundEvent) {
-        return "sounds." + MODID + "." + soundEvent.get().getLocation().getPath();
+        return "sounds." + MODID + "." + soundEvent.get().location();
     }
 }

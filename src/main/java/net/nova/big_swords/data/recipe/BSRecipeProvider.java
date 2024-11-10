@@ -1,6 +1,8 @@
 package net.nova.big_swords.data.recipe;
 
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
@@ -16,26 +18,28 @@ import java.util.concurrent.CompletableFuture;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class BSRecipeProvider extends RecipeProvider {
-    public final PackOutput output;
-    public final CompletableFuture<HolderLookup.Provider> lookupProvider;
+    public final RecipeOutput recipeOutput;
+    public final HolderLookup.Provider lookupProvider;
     public static String path = MODID + ":";
+    public static HolderGetter<Item> items;
 
-    public BSRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider);
-        this.output = output;
+    public BSRecipeProvider(HolderLookup.Provider lookupProvider, RecipeOutput recipeOutput) {
+        super(lookupProvider, recipeOutput);
         this.lookupProvider = lookupProvider;
+        this.recipeOutput = recipeOutput;
+        items = lookupProvider.lookupOrThrow(Registries.ITEM);
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput recipeOutput) {
-        new CraftingRecipes(output, lookupProvider, recipeOutput).build();
-        new FurnaceRecipes(output, lookupProvider, recipeOutput).build();
-        new BSSmithingRecipes(output, lookupProvider, recipeOutput).build();
+    protected void buildRecipes() {
+        new CraftingRecipes(lookupProvider, recipeOutput).build();
+        new FurnaceRecipes(lookupProvider, recipeOutput).build();
+        new BSSmithingRecipes(lookupProvider, recipeOutput).build();
     }
 
     // Recipes
-    public static void basicGildedShield(RecipeOutput recipeOutput, DeferredItem<Item> shield, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicGildedShield(RecipeOutput recipeOutput, DeferredItem<Item> shield, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', shield)
                 .define('X', Items.GOLD_INGOT)
                 .pattern("XXX")
@@ -45,8 +49,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicShield(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicShield(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', Items.LEATHER)
                 .define('X', material)
                 .pattern("XXX")
@@ -56,8 +60,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicShield(RecipeOutput recipeOutput, TagKey<Item> material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicShield(RecipeOutput recipeOutput, TagKey<Item> material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', Items.LEATHER)
                 .define('X', material)
                 .pattern("XXX")
@@ -67,12 +71,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeOutput pRecipeOutput, RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked, String pUnpackedName, String pUnpackedGroup) {
-        nineBlockStorageRecipes(pRecipeOutput, pUnpackedCategory, pUnpacked, pPackedCategory, pPacked, path + getSimpleRecipeName(pPacked), null, path + pUnpackedName, pUnpackedGroup);
-    }
-
-    public static void basicGiantStick(RecipeOutput recipeOutput, Item stick, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result)
+    public void basicGiantStick(RecipeOutput recipeOutput, Item stick, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, result)
                 .define('#', stick)
                 .pattern(" ##")
                 .pattern("###")
@@ -81,8 +81,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicBigSwordTwoMat(RecipeOutput recipeOutput, Item handle, Item material, Item material2, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicBigSwordTwoMat(RecipeOutput recipeOutput, Item handle, Item material, Item material2, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', handle)
                 .define('X', material)
                 .define('Y', material2)
@@ -93,8 +93,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicScythe(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicScythe(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', handle)
                 .define('X', material)
                 .pattern("XX#")
@@ -104,8 +104,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicScythe(RecipeOutput recipeOutput, Item handle, TagKey<Item> material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicScythe(RecipeOutput recipeOutput, Item handle, TagKey<Item> material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', handle)
                 .define('X', material)
                 .pattern("XX#")
@@ -115,8 +115,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicGlaive(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicGlaive(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', handle)
                 .define('X', material)
                 .pattern("XX ")
@@ -126,8 +126,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicGlaive(RecipeOutput recipeOutput, Item handle, TagKey<Item> material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicGlaive(RecipeOutput recipeOutput, Item handle, TagKey<Item> material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', handle)
                 .define('X', material)
                 .pattern("XX ")
@@ -137,8 +137,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicBigSword(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicBigSword(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', handle)
                 .define('X', material)
                 .pattern(" XX")
@@ -148,8 +148,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicBigSword(RecipeOutput recipeOutput, Item handle, TagKey<Item> material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicBigSword(RecipeOutput recipeOutput, Item handle, TagKey<Item> material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', handle)
                 .define('X', material)
                 .pattern(" XX")
@@ -159,8 +159,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicHelmet(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicHelmet(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', material)
                 .pattern("###")
                 .pattern("# #")
@@ -168,8 +168,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicChestplate(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicChestplate(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', material)
                 .pattern("# #")
                 .pattern("###")
@@ -178,8 +178,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicLeggings(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicLeggings(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', material)
                 .pattern("###")
                 .pattern("# #")
@@ -188,8 +188,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicBoots(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicBoots(RecipeOutput recipeOutput, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', material)
                 .pattern("###")
                 .pattern("# #")
@@ -197,8 +197,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicSword(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, result)
+    public void basicSword(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, result)
                 .define('#', handle)
                 .define('X', material)
                 .pattern("X")
@@ -208,8 +208,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicPickaxe(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result)
+    public void basicPickaxe(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.TOOLS, result)
                 .define('#', handle)
                 .define('X', material)
                 .pattern("XXX")
@@ -219,8 +219,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicAxe(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result)
+    public void basicAxe(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.TOOLS, result)
                 .define('#', handle)
                 .define('X', material)
                 .pattern("XX")
@@ -230,8 +230,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicShovel(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result)
+    public void basicShovel(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.TOOLS, result)
                 .define('#', handle)
                 .define('X', material)
                 .pattern("X")
@@ -241,8 +241,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void basicHoe(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, result)
+    public void basicHoe(RecipeOutput recipeOutput, Item handle, Item material, DeferredItem<Item> result) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.TOOLS, result)
                 .define('#', handle)
                 .define('X', material)
                 .pattern("XX")
@@ -252,7 +252,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(recipeOutput);
     }
 
-    public static void enderSmithing(RecipeOutput pRecipeOutput, Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
+    public void enderSmithing(RecipeOutput pRecipeOutput, Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
         SmithingTransformRecipeBuilder.smithing(
                         Ingredient.of(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(pIngredientItem), Ingredient.of(Items.ENDER_EYE), pCategory, pResultItem
                 )
@@ -260,7 +260,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(pRecipeOutput, path + getItemName(pResultItem) + "_smithing");
     }
 
-    public static void netheriteSmithing(RecipeOutput pRecipeOutput, Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
+    public void netheriteSmithing(RecipeOutput pRecipeOutput, Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
         SmithingTransformRecipeBuilder.smithing(
                         Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(pIngredientItem), Ingredient.of(Items.NETHERITE_INGOT), pCategory, pResultItem
                 )
@@ -268,7 +268,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(pRecipeOutput, path + getItemName(pResultItem) + "_smithing");
     }
 
-    public static void netheriteBlockSmithing(RecipeOutput pRecipeOutput, Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
+    public void netheriteBlockSmithing(RecipeOutput pRecipeOutput, Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
         SmithingTransformRecipeBuilder.smithing(
                         Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(pIngredientItem), Ingredient.of(Items.NETHERITE_BLOCK), pCategory, pResultItem
                 )
@@ -276,8 +276,8 @@ public class BSRecipeProvider extends RecipeProvider {
                 .save(pRecipeOutput, path + getItemName(pResultItem) + "_smithing");
     }
 
-    public static void copySmithingTemplate(RecipeOutput pRecipeOutput, ItemLike pTemplate, ItemLike pBaseItem, ItemLike pCopyItem) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, pTemplate, 2)
+    public void copySmithingTemplate(RecipeOutput pRecipeOutput, ItemLike pTemplate, ItemLike pBaseItem, ItemLike pCopyItem) {
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, pTemplate, 2)
                 .define('#', pCopyItem)
                 .define('C', pBaseItem)
                 .define('S', pTemplate)
@@ -286,5 +286,26 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("###")
                 .unlockedBy(getHasName(pTemplate), has(pTemplate))
                 .save(pRecipeOutput);
+    }
+
+    @Override
+    protected void nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked, String pUnpackedName, String pUnpackedGroup) {
+        super.nineBlockStorageRecipesRecipesWithCustomUnpacking(pUnpackedCategory, pUnpacked, pPackedCategory, pPacked, path + getSimpleRecipeName(pPacked), pUnpackedGroup);
+    }
+
+    public static class Runner extends RecipeProvider.Runner {
+        public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+            super(output, lookupProvider);
+        }
+
+        @Override
+        protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput output) {
+            return new BSRecipeProvider(provider, output);
+        }
+
+        @Override
+        public String getName() {
+            return "Big Swords R Recipes";
+        }
     }
 }

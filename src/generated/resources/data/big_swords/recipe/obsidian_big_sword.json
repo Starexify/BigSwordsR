@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "big_swords:giant_blaze_rod"
-    },
-    "D": {
-      "item": "big_swords:diamond_big_sword"
-    },
-    "Q": {
-      "item": "minecraft:obsidian"
-    }
+    "#": "big_swords:giant_blaze_rod",
+    "D": "big_swords:diamond_big_sword",
+    "Q": "minecraft:obsidian"
   },
   "pattern": [
     " QQ",

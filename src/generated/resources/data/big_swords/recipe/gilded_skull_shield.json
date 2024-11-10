@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "big_swords:skull_shield"
-    },
-    "S": {
-      "item": "minecraft:wither_skeleton_skull"
-    },
-    "X": {
-      "item": "minecraft:gold_ingot"
-    }
+    "#": "big_swords:skull_shield",
+    "S": "minecraft:wither_skeleton_skull",
+    "X": "minecraft:gold_ingot"
   },
   "pattern": [
     "XSX",

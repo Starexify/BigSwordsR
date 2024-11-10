@@ -1,16 +1,10 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": {
-    "item": "minecraft:netherite_block"
-  },
-  "base": {
-    "item": "big_swords:diamond_big_sword"
-  },
+  "addition": "minecraft:netherite_block",
+  "base": "big_swords:diamond_big_sword",
   "result": {
     "count": 1,
     "id": "big_swords:netherite_big_sword"
   },
-  "template": {
-    "item": "minecraft:netherite_upgrade_smithing_template"
-  }
+  "template": "minecraft:netherite_upgrade_smithing_template"
 }

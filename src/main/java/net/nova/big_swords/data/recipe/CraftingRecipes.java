@@ -14,16 +14,13 @@ import net.nova.big_swords.init.BSItems;
 import java.util.concurrent.CompletableFuture;
 
 public class CraftingRecipes extends BSRecipeProvider {
-    public final RecipeOutput recipeOutput;
-
-    public CraftingRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, RecipeOutput recipeOutput) {
-        super(output, lookupProvider);
-        this.recipeOutput = recipeOutput;
+    public CraftingRecipes(HolderLookup.Provider lookupProvider, RecipeOutput recipeOutput) {
+        super(lookupProvider, recipeOutput);
     }
 
     public void build() {
         // Extra Recipes
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BSItems.CREEP_BALL)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, BSItems.CREEP_BALL)
                 .group(getItemName(BSItems.CREEP_BALL))
                 .define('#', Items.SLIME_BALL)
                 .define('O', Items.ROTTEN_FLESH)
@@ -33,7 +30,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("XOX")
                 .unlockedBy("has_" + getItemName(Items.SLIME_BALL), has(Items.SLIME_BALL))
                 .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BSItems.CREEP_BALL)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, BSItems.CREEP_BALL)
                 .group(getItemName(BSItems.CREEP_BALL))
                 .define('#', Items.SLIME_BALL)
                 .define('O', Items.ROTTEN_FLESH)
@@ -44,7 +41,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .unlockedBy("has_" + getItemName(Items.SLIME_BALL), has(Items.SLIME_BALL))
                 .save(recipeOutput, path + getItemName(BSItems.CREEP_BALL) + "_2");
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, BSItems.BIOMASS_SEED)
+        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, BSItems.BIOMASS_SEED)
                 .requires(Items.FERMENTED_SPIDER_EYE)
                 .requires(Items.NETHER_WART)
                 .unlockedBy("has_" + getItemName(Items.FERMENTED_SPIDER_EYE), has(Items.FERMENTED_SPIDER_EYE))
@@ -54,7 +51,7 @@ public class CraftingRecipes extends BSRecipeProvider {
         // Sticks
         basicGiantStick(recipeOutput, Items.STICK, BSItems.GIANT_WOODEN_STICK);
         basicGiantStick(recipeOutput, Items.BLAZE_ROD, BSItems.GIANT_BLAZE_ROD);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BSItems.GIANT_LIVINGMETAL_HANDLE)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, BSItems.GIANT_LIVINGMETAL_HANDLE)
                 .define('#', Items.STICK)
                 .define('L', BSItems.LIVINGMETAL_INGOT)
                 .pattern(" L#")
@@ -64,7 +61,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .save(recipeOutput);
 
         // Livingmetal Recipes
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT)
                 .define('I', Items.IRON_INGOT)
                 .define('S', BSItems.SOUL)
                 .pattern(" S ")
@@ -72,7 +69,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern(" S ")
                 .unlockedBy("has_" + getItemName(BSItems.SOUL), has(BSItems.SOUL))
                 .save(recipeOutput);
-        nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT, RecipeCategory.BUILDING_BLOCKS, BSBlocks.LIVINGMETAL_BLOCK, getItemName(BSItems.LIVINGMETAL_INGOT) + "_from_" + getItemName(BSBlocks.LIVINGMETAL_BLOCK), getItemName(BSItems.LIVINGMETAL_INGOT));
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT, RecipeCategory.BUILDING_BLOCKS, BSBlocks.LIVINGMETAL_BLOCK, getItemName(BSItems.LIVINGMETAL_INGOT) + "_from_" + getItemName(BSBlocks.LIVINGMETAL_BLOCK), getItemName(BSItems.LIVINGMETAL_INGOT));
         basicHelmet(recipeOutput, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_HELMET);
         basicChestplate(recipeOutput, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_CHESTPLATE);
         basicLeggings(recipeOutput, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_LEGGINGS);
@@ -84,7 +81,7 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicHoe(recipeOutput, Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_HOE);
 
         // Biomass Recipes
-        nineBlockStorageRecipesRecipesWithCustomUnpacking(recipeOutput, RecipeCategory.MISC, BSItems.BIOMASS, RecipeCategory.BUILDING_BLOCKS, BSBlocks.BIOMASS_BLOCK, getItemName(BSItems.BIOMASS) + "_from_" + getItemName(BSBlocks.BIOMASS_BLOCK), getItemName(BSItems.BIOMASS));
+        nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, BSItems.BIOMASS, RecipeCategory.BUILDING_BLOCKS, BSBlocks.BIOMASS_BLOCK, getItemName(BSItems.BIOMASS) + "_from_" + getItemName(BSBlocks.BIOMASS_BLOCK), getItemName(BSItems.BIOMASS));
         basicHelmet(recipeOutput, BSItems.BIOMASS.get(), BSItems.BIOMASS_HELMET);
         basicChestplate(recipeOutput, BSItems.BIOMASS.get(), BSItems.BIOMASS_CHESTPLATE);
         basicLeggings(recipeOutput, BSItems.BIOMASS.get(), BSItems.BIOMASS_LEGGINGS);
@@ -110,7 +107,7 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicBigSwordTwoMat(recipeOutput, BSItems.GIANT_BLAZE_ROD.get(), Items.QUARTZ, Items.QUARTZ_BLOCK, BSItems.QUARTZ_BIG_SWORD);
         basicBigSwordTwoMat(recipeOutput, BSItems.GIANT_WOODEN_STICK.get(), BSItems.BIOMASS.get(), Items.NETHER_BRICK, BSItems.BIOMASS_BIG_SWORD);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.SKULL_BIG_SWORD)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, BSItems.SKULL_BIG_SWORD)
                 .define('#', BSItems.GIANT_WOODEN_STICK)
                 .define('B', Items.BONE)
                 .define('X', Items.BONE_BLOCK)
@@ -121,7 +118,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .unlockedBy("has_" + getItemName(Items.SKELETON_SKULL), has(Items.SKELETON_SKULL))
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.OBSIDIAN_BIG_SWORD)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, BSItems.OBSIDIAN_BIG_SWORD)
                 .define('#', BSItems.GIANT_BLAZE_ROD)
                 .define('Q', Items.OBSIDIAN)
                 .define('D', BSItems.DIAMOND_BIG_SWORD)
@@ -139,7 +136,7 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicGlaive(recipeOutput, Items.STICK, Items.DIAMOND, BSItems.DIAMOND_GLAIVE);
         basicGlaive(recipeOutput, Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_GLAIVE);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.BIOMASS_GLAIVE)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, BSItems.BIOMASS_GLAIVE)
                 .define('#', Items.STICK)
                 .define('X', BSItems.BIOMASS)
                 .define('Y', Items.NETHER_BRICK)
@@ -157,7 +154,7 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicScythe(recipeOutput, Items.STICK, Items.DIAMOND, BSItems.DIAMOND_SCYTHE);
         basicScythe(recipeOutput, Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_SCYTHE);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.BIOMASS_SCYTHE)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, BSItems.BIOMASS_SCYTHE)
                 .define('#', Items.STICK)
                 .define('X', BSItems.BIOMASS)
                 .define('Y', Items.NETHER_BRICK)
@@ -167,7 +164,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .unlockedBy("has_" + getItemName(BSItems.BIOMASS), has(BSItems.BIOMASS))
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.BONE_SCYTHE)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, BSItems.BONE_SCYTHE)
                 .define('#', Items.BONE)
                 .define('Y', Items.BONE_BLOCK)
                 .pattern("###")
@@ -185,7 +182,7 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicShield(recipeOutput, BSItems.BIOMASS.get(), BSItems.BIOMASS_SHIELD);
         basicShield(recipeOutput, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_SHIELD);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.PATCHWORK_SHIELD)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, BSItems.PATCHWORK_SHIELD)
                 .define('X', Items.ROTTEN_FLESH)
                 .pattern("XXX")
                 .pattern("XXX")
@@ -193,7 +190,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .unlockedBy("has_" + getItemName(Items.ROTTEN_FLESH), has(Items.ROTTEN_FLESH))
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.SKULL_SHIELD)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, BSItems.SKULL_SHIELD)
                 .define('X', Items.BONE)
                 .define('S', Items.SKELETON_SKULL)
                 .define('#', Items.LEATHER)
@@ -215,7 +212,7 @@ public class CraftingRecipes extends BSRecipeProvider {
         basicGildedShield(recipeOutput, BSItems.BIOMASS_SHIELD, BSItems.GILDED_BIOMASS_SHIELD);
         basicGildedShield(recipeOutput, BSItems.LIVINGMETAL_SHIELD, BSItems.GILDED_LIVINGMETAL_SHIELD);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, BSItems.GILDED_SKULL_SHIELD)
+        ShapedRecipeBuilder.shaped(items, RecipeCategory.COMBAT, BSItems.GILDED_SKULL_SHIELD)
                 .define('#', BSItems.SKULL_SHIELD)
                 .define('X', Items.GOLD_INGOT)
                 .define('S', Items.WITHER_SKELETON_SKULL)

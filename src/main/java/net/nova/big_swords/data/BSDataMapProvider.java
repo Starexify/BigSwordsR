@@ -15,7 +15,7 @@ public class BSDataMapProvider extends DataMapProvider {
     }
 
     @Override
-    protected void gather() {
+    protected void gather(HolderLookup.Provider provider) {
         builder(NeoForgeDataMaps.FURNACE_FUELS)
                 .add(BSItems.GIANT_WOODEN_STICK, new FurnaceFuel(700), false)
                 .add(BSItems.GIANT_BLAZE_ROD, new FurnaceFuel(16800), false)

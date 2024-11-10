@@ -9,11 +9,8 @@ import net.nova.big_swords.init.BSItems;
 import java.util.concurrent.CompletableFuture;
 
 public class BSSmithingRecipes extends BSRecipeProvider {
-    public final RecipeOutput recipeOutput;
-
-    public BSSmithingRecipes(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, RecipeOutput recipeOutput) {
-        super(output, lookupProvider);
-        this.recipeOutput = recipeOutput;
+    public BSSmithingRecipes(HolderLookup.Provider lookupProvider, RecipeOutput recipeOutput) {
+        super(lookupProvider, recipeOutput);
     }
 
     public void build() {

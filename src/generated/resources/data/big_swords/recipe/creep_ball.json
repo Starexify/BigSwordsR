@@ -3,15 +3,9 @@
   "category": "misc",
   "group": "creep_ball",
   "key": {
-    "#": {
-      "item": "minecraft:slime_ball"
-    },
-    "O": {
-      "item": "minecraft:rotten_flesh"
-    },
-    "X": {
-      "item": "minecraft:spider_eye"
-    }
+    "#": "minecraft:slime_ball",
+    "O": "minecraft:rotten_flesh",
+    "X": "minecraft:spider_eye"
   },
   "pattern": [
     "XOX",

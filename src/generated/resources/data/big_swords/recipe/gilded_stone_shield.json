@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "big_swords:stone_shield"
-    },
-    "X": {
-      "item": "minecraft:gold_ingot"
-    }
+    "#": "big_swords:stone_shield",
+    "X": "minecraft:gold_ingot"
   },
   "pattern": [
     "XXX",

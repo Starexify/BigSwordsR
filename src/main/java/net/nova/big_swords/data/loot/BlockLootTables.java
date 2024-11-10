@@ -6,6 +6,7 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
@@ -36,6 +37,8 @@ public class BlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        HolderLookup.RegistryLookup<Item> itemHolder = registries.lookupOrThrow(Registries.ITEM);
+
         dropSelf(BSBlocks.LIVINGMETAL_BLOCK.get());
         dropSelf(BSBlocks.BIOMASS_BLOCK.get());
 
@@ -46,7 +49,7 @@ public class BlockLootTables extends BlockLootSubProvider {
         LootItemCondition.Builder lootitemcondition$builder1 = LootItemBlockStatePropertyCondition.hasBlockStateProperties(BSBlocks.BIOMASS.get())
                 .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropBlock.AGE, 3));
         LootItemCondition.Builder scytheCondition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().equipment(
-                EntityEquipmentPredicate.Builder.equipment().mainhand(ItemPredicate.Builder.item().of(Tags.BSItemTags.SCYTHES)).build()).build());
+                EntityEquipmentPredicate.Builder.equipment().mainhand(ItemPredicate.Builder.item().of(itemHolder, Tags.BSItemTags.SCYTHES)).build()).build());
 
         add(BSBlocks.BIOMASS.get(), createBiomassDrops(BSBlocks.BIOMASS.get(), BSItems.BIOMASS.get(), BSItems.BIOMASS_SEED.get(), lootitemcondition$builder1, scytheCondition));
     }

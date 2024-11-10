@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "minecraft:bone"
-    },
-    "Y": {
-      "item": "minecraft:bone_block"
-    }
+    "#": "minecraft:bone",
+    "Y": "minecraft:bone_block"
   },
   "pattern": [
     "###",

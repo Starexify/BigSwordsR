@@ -166,10 +166,10 @@
   "item.big_swords.wooden_shield": "Wooden Shield",
   "resourcePack.big_swords.big_swords_r_16x.description": "16x version of the Big Swords",
   "resourcePack.big_swords.big_swords_r_16x.name": "Big Swords R 16x",
-  "sounds.big_swords.glaive_hit": "Glaive Hit",
-  "sounds.big_swords.glaive_swing": "Glaive Swing",
-  "sounds.big_swords.reaper_slash": "Reaper Slash",
-  "sounds.big_swords.scythe_slash": "Scythe Slash",
+  "sounds.big_swords.big_swords:glaive_hit": "Glaive Hit",
+  "sounds.big_swords.big_swords:glaive_swing": "Glaive Swing",
+  "sounds.big_swords.big_swords:reaper_slash": "Reaper Slash",
+  "sounds.big_swords.big_swords:scythe_slash": "Scythe Slash",
   "trim_material.big_swords.livingmetal": "Livingmetal Material",
   "upgrade.big_swords.ender_upgrade": "Ender Upgrade"
 }

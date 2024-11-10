@@ -2,23 +2,15 @@ package net.nova.big_swords.item;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -33,14 +25,14 @@ import java.util.function.Predicate;
 
 import static net.nova.big_swords.BigSwordsR.playSound;
 
-public class GlaiveItem extends TieredItem {
+public class GlaiveItem extends Item {
     private final float minDamage;
     private final float maxDamage;
     private final Random random = new Random();
     private final float range = 5.0f; // 5 block range
 
-    public GlaiveItem(Tier pTier, Item.Properties pProperties, float minDamage, float maxDamage) {
-        super(pTier, pProperties.component(DataComponents.TOOL, createToolProperties()));
+    public GlaiveItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage, Properties properties) {
+        super(toolMaterial.applySwordProperties(properties, attackDamage, attackSpeed));
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
     }
@@ -70,16 +62,14 @@ public class GlaiveItem extends TieredItem {
             creepBlock.tillBlock(level, blockpos, state);
             itemStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()));
 
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return InteractionResult.SUCCESS;
         }
         return super.useOn(context);
     }
 
     // Glaive Mechanic
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        ItemStack itemstack = player.getItemInHand(usedHand);
-
+    public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
         // Check if the player is looking at a CreepBlock and pass if a CreepBlock is hit
         BlockHitResult blockHit = level.clip(new ClipContext(
                 player.getEyePosition(1.0F),
@@ -89,18 +79,18 @@ public class GlaiveItem extends TieredItem {
                 player
         ));
         if (blockHit.getType() == HitResult.Type.BLOCK && level.getBlockState(blockHit.getBlockPos()).getBlock() instanceof CreepBlock) {
-            return InteractionResultHolder.pass(itemstack);
+            return InteractionResult.PASS;
         }
 
         player.startUsingItem(usedHand);
-        return InteractionResultHolder.consume(itemstack);
+        return InteractionResult.CONSUME;
     }
 
     @Override
-    public void releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
         if (entity instanceof Player player) {
             int i = this.getUseDuration(stack, entity) - timeLeft;
-            if (i < 20) return; // Require a minimum charge time
+            if (i < 20) return false; // Require a minimum charge time
 
             if (!level.isClientSide) {
                 Vec3 startVec = player.getEyePosition(1.0F);
@@ -117,35 +107,37 @@ public class GlaiveItem extends TieredItem {
                     BlockHitResult blockHit = level.clip(new ClipContext(startVec, target.getEyePosition(1.0F), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
 
                     if (blockHit.getType() == HitResult.Type.MISS) {
-                        glaiveHits(level, player, stack, target);
+                        glaiveHits(stack, level, player, target);
                     } else {
-                        glaiveMiss(player, level);
+                        glaiveMiss(stack, player, level);
                     }
                 } else {
-                    glaiveMiss(player, level);
+                    glaiveMiss(stack, player, level);
                 }
             }
         }
+        return false;
     }
 
-    private void glaiveHits(Level level, Player player, ItemStack stack, LivingEntity target) {
+    public boolean glaiveHits(ItemStack stack, Level level, Player player, LivingEntity target) {
         float damage = minDamage + random.nextFloat() * (maxDamage - minDamage);
         damage = Math.round(damage * 10.0f) / 10.0f;
         target.hurt(player.damageSources().playerAttack(player), damage);
 
         stack.hurtAndBreak(3, player, EquipmentSlot.MAINHAND);
-        player.getCooldowns().addCooldown(this, 40);
+        player.getCooldowns().addCooldown(stack, 40);
         playSound(level, player, Sounds.GLAIVE_HIT.get());
-
+        return true;
         // player.sendSystemMessage(Component.literal("Hit entity with dmg: " + damage)); // Debug output
     }
 
-    private void glaiveMiss(Player player, Level level) {
-        player.getCooldowns().addCooldown(this, 10);
+    public boolean glaiveMiss(ItemStack stack, Player player, Level level) {
+        player.getCooldowns().addCooldown(stack, 10);
         playSound(level, player, Sounds.GLAIVE_SWING.get());
+        return false;
     }
 
-    private EntityHitResult getEntityHitResult(Vec3 startVec, Vec3 endVec, List<LivingEntity> entities) {
+    public EntityHitResult getEntityHitResult(Vec3 startVec, Vec3 endVec, List<LivingEntity> entities) {
         for (LivingEntity entity : entities) {
             AABB entityBoundingBox = entity.getBoundingBox();
             if (entityBoundingBox.clip(startVec, endVec).isPresent()) {
@@ -155,49 +147,25 @@ public class GlaiveItem extends TieredItem {
         return null;
     }
 
+    // Bow-like Item Stuff
     @Override
-    public void postHurtEnemy(ItemStack pStack, LivingEntity pTarget, LivingEntity pAttacker) {
-        pStack.hurtAndBreak(1, pAttacker, EquipmentSlot.MAINHAND);
-    }
-
-    @Override
-    public UseAnim getUseAnimation(ItemStack pStack) {
-        return UseAnim.BOW;
-    }
-
-    @Override
-    public int getUseDuration(ItemStack pStack, LivingEntity pEntity) {
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 72000;
     }
 
+    @Override
+    public ItemUseAnimation getUseAnimation(ItemStack p_40678_) {
+        return ItemUseAnimation.BOW;
+    }
+
     // Sword-like Item Stuff
-    public static Tool createToolProperties() {
-        return new Tool(List.of(Tool.Rule.overrideSpeed(BlockTags.SWORD_EFFICIENT, 1.5F)), 1.0F, 2);
-    }
-
-    public static ItemAttributeModifiers createAttributes(Tier pTier, int pAttackDamage, float pAttackSpeed) {
-        return createAttributes(pTier, (float) pAttackDamage, pAttackSpeed);
-    }
-
-    public static ItemAttributeModifiers createAttributes(Tier p_330371_, float p_331976_, float p_332104_) {
-        return ItemAttributeModifiers.builder()
-                .add(
-                        Attributes.ATTACK_DAMAGE,
-                        new AttributeModifier(
-                                BASE_ATTACK_DAMAGE_ID, (double) ((float) p_331976_ + p_330371_.getAttackDamageBonus()), AttributeModifier.Operation.ADD_VALUE
-                        ),
-                        EquipmentSlotGroup.MAINHAND
-                )
-                .add(
-                        Attributes.ATTACK_SPEED,
-                        new AttributeModifier(BASE_ATTACK_SPEED_ID, (double) p_332104_, AttributeModifier.Operation.ADD_VALUE),
-                        EquipmentSlotGroup.MAINHAND
-                )
-                .build();
+    @Override
+    public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
     }
 
     @Override
-    public boolean canAttackBlock(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer) {
-        return !pPlayer.isCreative();
+    public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {
+        return !player.isCreative();
     }
 }

@@ -15,6 +15,16 @@ public class Tags {
         public static final TagKey<Item> GLAIVES = itemTag("glaives");
         public static final TagKey<Item> SCYTHES = itemTag("scythes");
         public static final TagKey<Item> SHIELDS = itemTag("shields");
+        public static final TagKey<Item> REPAIRS_LIVINGMETAL_ARMOR = itemTag("repairs_livingmetal_armor");
+        public static final TagKey<Item> REPAIRS_BIOMASS_ARMOR = itemTag("repairs_biomass_armor");
+        public static final TagKey<Item> PATCHWORK_TOOL_MATERIALS = itemTag("patchwork_tool_materials");
+        public static final TagKey<Item> SKULL_TOOL_MATERIALS = itemTag("skull_tool_materials");
+        public static final TagKey<Item> QUARTZ_TOOL_MATERIALS = itemTag("quartz_tool_materials");
+        public static final TagKey<Item> OBSIDIAN_TOOL_MATERIALS = itemTag("obsidian_tool_materials");
+        public static final TagKey<Item> ENDER_TOOL_MATERIALS = itemTag("ender_tool_materials");
+        public static final TagKey<Item> LIVINGMETAL_TOOL_MATERIALS = itemTag("livingmetal_tool_materials");
+        public static final TagKey<Item> BIOMASS_TOOL_MATERIALS = itemTag("biomass_tool_materials");
+        public static final TagKey<Item> REAPER_TOOL_MATERIALS = itemTag("reaper_tool_materials");
     }
 
     public static class EnchantmentTags {

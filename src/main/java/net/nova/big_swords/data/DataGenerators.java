@@ -3,6 +3,7 @@ package net.nova.big_swords.data;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -36,7 +37,7 @@ public class DataGenerators {
             generator.addProvider(true, new BlockStateAndModelProvider(output, existingFileHelper));
             generator.addProvider(true, new BSItemModelProvider(output, existingFileHelper));
 
-            generator.addProvider(true, new BSRecipeProvider(output, lookupProvider));
+            generator.addProvider(true, new BSRecipeProvider.Runner(output, lookupProvider));
 
             BSBlockTagsProvider modBlockTagsProvider = new BSBlockTagsProvider(output, lookupProvider, existingFileHelper);
             generator.addProvider(true, modBlockTagsProvider);

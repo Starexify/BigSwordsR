@@ -2,12 +2,8 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "minecraft:leather"
-    },
-    "X": {
-      "item": "minecraft:iron_ingot"
-    }
+    "#": "minecraft:leather",
+    "X": "minecraft:iron_ingot"
   },
   "pattern": [
     "XXX",

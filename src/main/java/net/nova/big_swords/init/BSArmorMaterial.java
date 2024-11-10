@@ -1,47 +1,45 @@
 package net.nova.big_swords.init;
 
+import com.google.common.base.Suppliers;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.equipment.ArmorMaterial;
+import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.nova.big_swords.BigSwordsR;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class BSArmorMaterial {
-    public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS = DeferredRegister.create(Registries.ARMOR_MATERIAL, MODID);
 
-    public static Holder<ArmorMaterial> LIVINGMETAL = ARMOR_MATERIALS.register("livingmetal", () -> new ArmorMaterial(
-            Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                map.put(ArmorItem.Type.BOOTS, 3);
-                map.put(ArmorItem.Type.LEGGINGS, 5);
-                map.put(ArmorItem.Type.CHESTPLATE, 7);
-                map.put(ArmorItem.Type.HELMET, 3);
-                map.put(ArmorItem.Type.BODY, 5);
-            }), 12, SoundEvents.ARMOR_EQUIP_IRON, () -> Ingredient.of(BSItems.LIVINGMETAL_INGOT),
-            List.of(new ArmorMaterial.Layer(
-                    BigSwordsR.rl("livingmetal")
-            )), 0.5F, 0.0F
+    public static Supplier<ArmorMaterial> LIVINGMETAL = Suppliers.memoize(() -> new ArmorMaterial(
+            29,
+            Util.make(new EnumMap<>(ArmorType.class), map -> {
+                map.put(ArmorType.BOOTS, 3);
+                map.put(ArmorType.LEGGINGS, 5);
+                map.put(ArmorType.CHESTPLATE, 7);
+                map.put(ArmorType.HELMET, 3);
+                map.put(ArmorType.BODY, 5);
+            }), 12, SoundEvents.ARMOR_EQUIP_IRON, 0.5F, 0.0F, Tags.BSItemTags.REPAIRS_LIVINGMETAL_ARMOR, BigSwordsR.rl("livingmetal")
     ));
 
-    public static Holder<ArmorMaterial> BIOMASS = ARMOR_MATERIALS.register("biomass", () -> new ArmorMaterial(
-            Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
-                map.put(ArmorItem.Type.BOOTS, 2);
-                map.put(ArmorItem.Type.LEGGINGS, 5);
-                map.put(ArmorItem.Type.CHESTPLATE, 7);
-                map.put(ArmorItem.Type.HELMET, 3);
-                map.put(ArmorItem.Type.BODY, 5);
-            }), 14, SoundEvents.ARMOR_EQUIP_GENERIC, () -> Ingredient.of(BSItems.BIOMASS),
-            List.of(new ArmorMaterial.Layer(
-                    BigSwordsR.rl("biomass")
-            )), 0.0F, 0.0F
+    public static Supplier<ArmorMaterial> BIOMASS = Suppliers.memoize(() -> new ArmorMaterial(
+            29,
+            Util.make(new EnumMap<>(ArmorType.class), map -> {
+                map.put(ArmorType.BOOTS, 2);
+                map.put(ArmorType.LEGGINGS, 5);
+                map.put(ArmorType.CHESTPLATE, 7);
+                map.put(ArmorType.HELMET, 3);
+                map.put(ArmorType.BODY, 5);
+            }), 14, SoundEvents.ARMOR_EQUIP_GENERIC, 0.0F, 0.0F, Tags.BSItemTags.REPAIRS_BIOMASS_ARMOR, BigSwordsR.rl("biomass")
     ));
-
 }

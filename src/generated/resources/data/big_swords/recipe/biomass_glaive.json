@@ -2,15 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "#": {
-      "item": "minecraft:stick"
-    },
-    "X": {
-      "item": "big_swords:biomass"
-    },
-    "Y": {
-      "item": "minecraft:nether_brick"
-    }
+    "#": "minecraft:stick",
+    "X": "big_swords:biomass",
+    "Y": "minecraft:nether_brick"
   },
   "pattern": [
     "XX ",

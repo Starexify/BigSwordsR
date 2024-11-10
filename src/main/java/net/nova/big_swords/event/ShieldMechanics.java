@@ -7,6 +7,7 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
@@ -137,7 +138,7 @@ public class ShieldMechanics {
                     if (sourceEntity instanceof Projectile originalProjectile && !(originalProjectile instanceof ThrownTrident)) {
                         boolean wasOnFire = originalProjectile.isOnFire();
                         originalProjectile.discard();
-                        Projectile newProjectile = (Projectile) originalProjectile.getType().create(player.level());
+                        Projectile newProjectile = (Projectile) originalProjectile.getType().create(player.level(), EntitySpawnReason.EVENT);
 
                         if (newProjectile != null && attacker != null) {
                             newProjectile.setPos(player.getX(), originalProjectile.getY(), player.getZ());
@@ -175,7 +176,7 @@ public class ShieldMechanics {
 
                     // Weakness
                     if (randomChanceE < cooldownChance) {
-                        player.getCooldowns().addCooldown(shield.getItem(), cooldownTime);
+                        player.getCooldowns().addCooldown(shield, cooldownTime);
                         player.stopUsingItem();
                     }
                 }

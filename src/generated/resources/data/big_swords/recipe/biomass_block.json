@@ -1,18 +1,12 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "building",
-  "key": {
-    "#": {
-      "item": "big_swords:biomass"
-    }
-  },
-  "pattern": [
-    "###",
-    "###",
-    "###"
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "biomass",
+  "ingredients": [
+    "big_swords:biomass_block"
   ],
   "result": {
-    "count": 1,
-    "id": "big_swords:biomass_block"
+    "count": 9,
+    "id": "big_swords:biomass"
   }
 }

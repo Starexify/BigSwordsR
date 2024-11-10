@@ -4,6 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Tags;
@@ -64,5 +65,17 @@ public class BSItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.DURABILITY_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);
 
         tag(ItemTags.TRIM_MATERIALS).add(BSItems.LIVINGMETAL_INGOT.get());
+
+        tag(Tags.BSItemTags.REPAIRS_LIVINGMETAL_ARMOR).add(BSItems.LIVINGMETAL_INGOT.get());
+        tag(Tags.BSItemTags.REPAIRS_BIOMASS_ARMOR).add(BSItems.BIOMASS.get());
+
+        tag(Tags.BSItemTags.PATCHWORK_TOOL_MATERIALS).add(Items.ROTTEN_FLESH);
+        tag(Tags.BSItemTags.SKULL_TOOL_MATERIALS).add(Items.BONE);
+        tag(Tags.BSItemTags.QUARTZ_TOOL_MATERIALS).add(Items.QUARTZ);
+        tag(Tags.BSItemTags.OBSIDIAN_TOOL_MATERIALS).add(Items.OBSIDIAN);
+        tag(Tags.BSItemTags.ENDER_TOOL_MATERIALS).add(Items.ENDER_EYE);
+        tag(Tags.BSItemTags.LIVINGMETAL_TOOL_MATERIALS).add(BSItems.LIVINGMETAL_INGOT.get());
+        tag(Tags.BSItemTags.BIOMASS_TOOL_MATERIALS).add(BSItems.BIOMASS.get());
+        tag(Tags.BSItemTags.REAPER_TOOL_MATERIALS).add(Items.BONE);
     }
 }

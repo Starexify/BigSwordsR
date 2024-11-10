@@ -5,6 +5,7 @@ import net.minecraft.Util;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlag;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SmithingTemplateItem;
 import net.nova.big_swords.BigSwordsR;
 
@@ -48,19 +49,19 @@ public class EnderSmithingTemplate extends SmithingTemplateItem {
     public static final ResourceLocation EMPTY_SLOT_BIG_SWORD = BigSwordsR.rl("item/empty_slot_big_sword");
     public static final ResourceLocation EMPTY_SLOT_INGOT = ResourceLocation.withDefaultNamespace("item/empty_slot_ingot");
 
-    public EnderSmithingTemplate(Component pAppliesTo, Component pIngredients, Component pUpgradeDescription, Component pBaseSlotDescription, Component pAdditionsSlotDescription, List<ResourceLocation> pBaseSlotEmptyIcons, List<ResourceLocation> pAdditionalSlotEmptyIcons, FeatureFlag... pRequiredFeatures) {
-        super(pAppliesTo, pIngredients, pUpgradeDescription, pBaseSlotDescription, pAdditionsSlotDescription, pBaseSlotEmptyIcons, pAdditionalSlotEmptyIcons, pRequiredFeatures);
+    public EnderSmithingTemplate(Component appliesTo, Component ingredients, Component baseSlotDescription, Component additionsSlotDescription, List<ResourceLocation> upgradeIconList, List<ResourceLocation> upgradeMaterialList, Properties properties) {
+        super(appliesTo, ingredients, baseSlotDescription, additionsSlotDescription, upgradeIconList, upgradeMaterialList, properties);
     }
 
-    public static EnderSmithingTemplate createEnderUpgradeTemplate() {
+    public static EnderSmithingTemplate createEnderUpgradeTemplate(Item.Properties properties) {
         return new EnderSmithingTemplate(
                 ENDER_UPGRADE_APPLIES_TO,
                 ENDER_UPGRADE_INGREDIENTS,
-                ENDER_UPGRADE,
                 ENDER_UPGRADE_BASE_SLOT_DESCRIPTION,
                 ENDER_UPGRADE_ADDITIONS_SLOT_DESCRIPTION,
                 createEnderUpgradeIconList(),
-                createEnderUpgradeMaterialList()
+                createEnderUpgradeMaterialList(),
+                properties
         );
     }
 
