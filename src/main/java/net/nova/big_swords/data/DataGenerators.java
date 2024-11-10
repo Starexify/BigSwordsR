@@ -36,6 +36,7 @@ public class DataGenerators {
 
             generator.addProvider(true, new BlockStateAndModelProvider(output, existingFileHelper));
             generator.addProvider(true, new BSItemModelProvider(output, existingFileHelper));
+            generator.addProvider(true, new BSEquipmentModelProvider(output));
 
             generator.addProvider(true, new BSRecipeProvider.Runner(output, lookupProvider));
 

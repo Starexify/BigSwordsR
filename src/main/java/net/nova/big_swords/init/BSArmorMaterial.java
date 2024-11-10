@@ -12,6 +12,7 @@ import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.nova.big_swords.BigSwordsR;
+import net.nova.big_swords.equipment.BSEquipmentModels;
 
 import java.util.EnumMap;
 import java.util.List;
@@ -29,7 +30,7 @@ public class BSArmorMaterial {
                 map.put(ArmorType.CHESTPLATE, 7);
                 map.put(ArmorType.HELMET, 3);
                 map.put(ArmorType.BODY, 5);
-            }), 12, SoundEvents.ARMOR_EQUIP_IRON, 0.5F, 0.0F, Tags.BSItemTags.REPAIRS_LIVINGMETAL_ARMOR, BigSwordsR.rl("livingmetal")
+            }), 12, SoundEvents.ARMOR_EQUIP_IRON, 0.5F, 0.0F, Tags.BSItemTags.REPAIRS_LIVINGMETAL_ARMOR, BSEquipmentModels.LIVINGMETAL
     ));
 
     public static Supplier<ArmorMaterial> BIOMASS = Suppliers.memoize(() -> new ArmorMaterial(
@@ -40,6 +41,6 @@ public class BSArmorMaterial {
                 map.put(ArmorType.CHESTPLATE, 7);
                 map.put(ArmorType.HELMET, 3);
                 map.put(ArmorType.BODY, 5);
-            }), 14, SoundEvents.ARMOR_EQUIP_GENERIC, 0.0F, 0.0F, Tags.BSItemTags.REPAIRS_BIOMASS_ARMOR, BigSwordsR.rl("biomass")
+            }), 14, SoundEvents.ARMOR_EQUIP_GENERIC, 0.0F, 0.0F, Tags.BSItemTags.REPAIRS_BIOMASS_ARMOR, BSEquipmentModels.BIOMASS
     ));
 }
