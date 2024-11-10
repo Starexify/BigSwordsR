@@ -5,6 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -31,6 +32,7 @@ public class BSEnchantments {
                         3,
                         EquipmentSlotGroup.MAINHAND
                 ))
+                .exclusiveWith(holdergetter1.getOrThrow(Tags.EnchantmentTags.SCYTHE_EXCLUSIVE))
                 .withCustomName(component -> Component.literal("Soul Stealer"))
                 .withEffect(
                         EnchantmentEffectComponents.POST_ATTACK,

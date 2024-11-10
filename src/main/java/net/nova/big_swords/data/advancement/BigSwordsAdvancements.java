@@ -79,7 +79,7 @@ public class BigSwordsAdvancements implements AdvancementProvider.AdvancementGen
                 ItemPredicate.Builder.item().of(itemGetter, BSItems.CREEP_BALL)
         )).save(save, MODID + ":root/creep_a_block");
         AdvancementHolder tillCreep = Advancement.Builder.advancement().parent(creepABlock).display(
-                BSBlocks.CREEP_BLOCK.get().defaultBlockState().setValue(CreepBlock.TILLED, false).getBlock(),
+                BSBlocks.CREEP_BLOCK,
                 Component.translatable("advancements." + MODID + ".till_creep.title"),
                 Component.translatable("advancements." + MODID + ".till_creep.description"),
                 null,
