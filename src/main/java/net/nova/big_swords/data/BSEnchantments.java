@@ -32,7 +32,6 @@ public class BSEnchantments {
                         EquipmentSlotGroup.MAINHAND
                 ))
                 .withCustomName(component -> Component.literal("Soul Stealer"))
-                .exclusiveWith(holdergetter1.getOrThrow(Tags.EnchantmentTags.SCYTHE_EXCLUSIVE))
                 .withEffect(
                         EnchantmentEffectComponents.POST_ATTACK,
                         EnchantmentTarget.ATTACKER,

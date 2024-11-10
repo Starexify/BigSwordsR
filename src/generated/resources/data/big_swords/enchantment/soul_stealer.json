@@ -13,7 +13,6 @@
       }
     ]
   },
-  "exclusive_set": "#big_swords:exclusive_set/scythe_exclusive",
   "max_cost": {
     "base": 36,
     "per_level_above_first": 8
