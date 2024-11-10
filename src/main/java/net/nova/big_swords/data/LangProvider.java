@@ -123,12 +123,11 @@ public class LangProvider extends LanguageProvider {
         add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");
 
         // Smithing Template
-        addItem(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE, "Smithing Template");
+        addItem(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE, "Ender Upgrade");
         add(EnderSmithingTemplate.ENDER_UPGRADE_ADDITIONS_SLOT_DESCRIPTION.getString(), "Add Ender Eye");
         add(EnderSmithingTemplate.ENDER_UPGRADE_APPLIES_TO.getString(), "Ender Equipment");
         add(EnderSmithingTemplate.ENDER_UPGRADE_BASE_SLOT_DESCRIPTION.getString(), "Add obsidian armor, weapon, or tool");
         add(EnderSmithingTemplate.ENDER_UPGRADE_INGREDIENTS.getString(), "Ender Eye");
-        add(EnderSmithingTemplate.ENDER_UPGRADE.getString(), "Ender Upgrade");
 
         // Sounds
         add(SoundsProvider.getSubtitle(Sounds.GLAIVE_HIT), "Glaive Hit");

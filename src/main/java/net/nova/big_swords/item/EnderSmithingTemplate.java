@@ -14,12 +14,7 @@ import java.util.List;
 import static net.nova.big_swords.BigSwordsR.rl;
 
 public class EnderSmithingTemplate extends SmithingTemplateItem {
-    public static final ChatFormatting TITLE_FORMAT = ChatFormatting.GRAY;
     public static final ChatFormatting DESCRIPTION_FORMAT = ChatFormatting.BLUE;
-
-    public static final Component ENDER_UPGRADE = Component.translatable(
-            Util.makeDescriptionId("upgrade", rl("ender_upgrade"))
-    ).withStyle(TITLE_FORMAT);
 
     public static final Component ENDER_UPGRADE_APPLIES_TO = Component.translatable(
             Util.makeDescriptionId("item", rl("smithing_template.ender_upgrade.applies_to"))
