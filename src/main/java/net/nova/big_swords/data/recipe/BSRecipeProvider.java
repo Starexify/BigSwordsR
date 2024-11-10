@@ -290,7 +290,7 @@ public class BSRecipeProvider extends RecipeProvider {
 
     @Override
     protected void nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory pUnpackedCategory, ItemLike pUnpacked, RecipeCategory pPackedCategory, ItemLike pPacked, String pUnpackedName, String pUnpackedGroup) {
-        super.nineBlockStorageRecipesRecipesWithCustomUnpacking(pUnpackedCategory, pUnpacked, pPackedCategory, pPacked, path + getSimpleRecipeName(pPacked), pUnpackedGroup);
+        this.nineBlockStorageRecipes(pUnpackedCategory, pUnpacked, pPackedCategory, pPacked, path + getSimpleRecipeName(pPacked), null, path + pUnpackedName, pUnpackedGroup);
     }
 
     public static class Runner extends RecipeProvider.Runner {

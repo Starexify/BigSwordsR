@@ -1,12 +1,16 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "group": "biomass",
-  "ingredients": [
-    "big_swords:biomass_block"
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "big_swords:biomass"
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
   ],
   "result": {
-    "count": 9,
-    "id": "big_swords:biomass"
+    "count": 1,
+    "id": "big_swords:biomass_block"
   }
 }

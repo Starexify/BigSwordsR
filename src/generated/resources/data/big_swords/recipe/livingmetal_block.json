@@ -1,12 +1,16 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "group": "livingmetal_ingot",
-  "ingredients": [
-    "big_swords:livingmetal_block"
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "big_swords:livingmetal_ingot"
+  },
+  "pattern": [
+    "###",
+    "###",
+    "###"
   ],
   "result": {
-    "count": 9,
-    "id": "big_swords:livingmetal_ingot"
+    "count": 1,
+    "id": "big_swords:livingmetal_block"
   }
 }
