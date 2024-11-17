@@ -19,23 +19,23 @@ public class BSItems {
 
     // Extra
     public static DeferredItem<Item> BIOMASS_SEED = registerItem("biomass_seed", properties -> createBlockItemWithCustomItemName(BSBlocks.BIOMASS.get(), properties));
-    public static DeferredItem<Item> CREEP_BALL = registerItem("creep_ball", properties -> new CreepBall(properties));
-    public static DeferredItem<Item> SOUL = registerItem("soul", properties -> new Soul(properties));
+    public static DeferredItem<Item> CREEP_BALL = registerItem("creep_ball", CreepBall::new);
+    public static DeferredItem<Item> SOUL = registerItem("soul", Soul::new);
 
     // Sticks
-    public static DeferredItem<Item> GIANT_WOODEN_STICK = registerItem("giant_wooden_stick", properties -> new Item(properties));
-    public static DeferredItem<Item> GIANT_BLAZE_ROD = registerItem("giant_blaze_rod", properties -> new Item(properties));
-    public static DeferredItem<Item> GIANT_LIVINGMETAL_HANDLE = registerItem("giant_livingmetal_handle", properties -> new Item(properties));
+    public static DeferredItem<Item> GIANT_WOODEN_STICK = registerItem("giant_wooden_stick", Item::new);
+    public static DeferredItem<Item> GIANT_BLAZE_ROD = registerItem("giant_blaze_rod", Item::new);
+    public static DeferredItem<Item> GIANT_LIVINGMETAL_HANDLE = registerItem("giant_livingmetal_handle", Item::new);
 
     // Ender Template
-    public static DeferredItem<Item> ENDER_UPGRADE_SMITHING_TEMPLATE = registerItem("ender_upgrade_smithing_template", properties -> EnderSmithingTemplate.createEnderUpgradeTemplate(properties));
+    public static DeferredItem<Item> ENDER_UPGRADE_SMITHING_TEMPLATE = registerItem("ender_upgrade_smithing_template", EnderSmithingTemplate::createEnderUpgradeTemplate);
 
     // Livingmetal Stuff
-    public static DeferredItem<Item> LIVINGMETAL_INGOT = registerItem("livingmetal_ingot", properties -> new Item(properties));
-    public static DeferredItem<Item> LIVINGMETAL_HELMET = registerItem("livingmetal_helmet", properties -> new ArmorItem(BSArmorMaterial.LIVINGMETAL.get(), ArmorType.HELMET, properties));
-    public static DeferredItem<Item> LIVINGMETAL_CHESTPLATE = registerItem("livingmetal_chestplate", properties -> new ArmorItem(BSArmorMaterial.LIVINGMETAL.get(), ArmorType.CHESTPLATE, properties));
-    public static DeferredItem<Item> LIVINGMETAL_LEGGINGS = registerItem("livingmetal_leggings", properties -> new ArmorItem(BSArmorMaterial.LIVINGMETAL.get(), ArmorType.LEGGINGS, properties));
-    public static DeferredItem<Item> LIVINGMETAL_BOOTS = registerItem("livingmetal_boots", properties -> new ArmorItem(BSArmorMaterial.LIVINGMETAL.get(), ArmorType.BOOTS, properties));
+    public static DeferredItem<Item> LIVINGMETAL_INGOT = registerItem("livingmetal_ingot", Item::new);
+    public static DeferredItem<Item> LIVINGMETAL_HELMET = registerItem("livingmetal_helmet", properties -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, ArmorType.HELMET, properties));
+    public static DeferredItem<Item> LIVINGMETAL_CHESTPLATE = registerItem("livingmetal_chestplate", properties -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, ArmorType.CHESTPLATE, properties));
+    public static DeferredItem<Item> LIVINGMETAL_LEGGINGS = registerItem("livingmetal_leggings", properties -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, ArmorType.LEGGINGS, properties));
+    public static DeferredItem<Item> LIVINGMETAL_BOOTS = registerItem("livingmetal_boots", properties -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, ArmorType.BOOTS, properties));
     public static DeferredItem<Item> LIVINGMETAL_SWORD = registerItem("livingmetal_sword", properties -> new SwordItem(BSToolMaterial.LIVINGMETAL, 3.0F, 2.4F, properties));
     public static DeferredItem<Item> LIVINGMETAL_PICKAXE = registerItem("livingmetal_pickaxe", properties -> new PickaxeItem(BSToolMaterial.LIVINGMETAL, 1.0F, -2.8F, properties));
     public static DeferredItem<Item> LIVINGMETAL_AXE = registerItem("livingmetal_axe", properties -> new AxeItem(BSToolMaterial.LIVINGMETAL, 6.0F, -3.0F, properties));
@@ -43,11 +43,11 @@ public class BSItems {
     public static DeferredItem<Item> LIVINGMETAL_HOE = registerItem("livingmetal_hoe", properties -> new HoeItem(BSToolMaterial.LIVINGMETAL, -2.5F, 0.0F, properties));
 
     // Biomass Stuff
-    public static DeferredItem<Item> BIOMASS = registerItem("biomass", properties -> new Item(properties));
-    public static DeferredItem<Item> BIOMASS_HELMET = registerItem("biomass_helmet", properties -> new ArmorItem(BSArmorMaterial.BIOMASS.get(), ArmorType.HELMET, properties));
-    public static DeferredItem<Item> BIOMASS_CHESTPLATE = registerItem("biomass_chestplate", properties -> new ArmorItem(BSArmorMaterial.BIOMASS.get(), ArmorType.CHESTPLATE, properties));
-    public static DeferredItem<Item> BIOMASS_LEGGINGS = registerItem("biomass_leggings", properties -> new ArmorItem(BSArmorMaterial.BIOMASS.get(), ArmorType.LEGGINGS, properties));
-    public static DeferredItem<Item> BIOMASS_BOOTS = registerItem("biomass_boots", properties -> new ArmorItem(BSArmorMaterial.BIOMASS.get(), ArmorType.BOOTS, properties));
+    public static DeferredItem<Item> BIOMASS = registerItem("biomass", Item::new);
+    public static DeferredItem<Item> BIOMASS_HELMET = registerItem("biomass_helmet", properties -> new ArmorItem(BSArmorMaterial.BIOMASS, ArmorType.HELMET, properties));
+    public static DeferredItem<Item> BIOMASS_CHESTPLATE = registerItem("biomass_chestplate", properties -> new ArmorItem(BSArmorMaterial.BIOMASS, ArmorType.CHESTPLATE, properties));
+    public static DeferredItem<Item> BIOMASS_LEGGINGS = registerItem("biomass_leggings", properties -> new ArmorItem(BSArmorMaterial.BIOMASS, ArmorType.LEGGINGS, properties));
+    public static DeferredItem<Item> BIOMASS_BOOTS = registerItem("biomass_boots", properties -> new ArmorItem(BSArmorMaterial.BIOMASS, ArmorType.BOOTS, properties));
     public static DeferredItem<Item> BIOMASS_SWORD = registerItem("biomass_sword", properties -> new SwordItem(BSToolMaterial.BIOMASS, 3.0F, -2.4F, properties));
     public static DeferredItem<Item> BIOMASS_PICKAXE = registerItem("biomass_pickaxe", properties -> new PickaxeItem(BSToolMaterial.BIOMASS, 1.0F, -2.8F, properties));
     public static DeferredItem<Item> BIOMASS_AXE = registerItem("biomass_axe", properties -> new AxeItem(BSToolMaterial.BIOMASS, 6.0F, -3.0F, properties));
