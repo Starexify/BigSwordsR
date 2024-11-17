@@ -160,7 +160,9 @@ public class LangProvider extends LanguageProvider {
 
         // Resourcepacks
         add(BigSwordsRClient.RP_16x_NAME, "Big Swords R 16x");
-        add(BigSwordsRClient.RP_16x_DESC, "16x version of the Big Swords");
+        add(BigSwordsRClient.RP_16x_DESC, "16x textures for Big Swords");
+        add(BigSwordsRClient.RP_old_NAME, "Big Swords R Old");
+        add(BigSwordsRClient.RP_old_DESC, "The classic look of Big Swords");
     }
 
     public void addAdvancement(String advancementName, String title, String description) {

@@ -22,23 +22,29 @@ import static net.nova.big_swords.BigSwordsR.MODID;
 @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class BigSwordsRClient {
 
-    public static String RP_16x_NAME = "resourcePack." + MODID + ".big_swords_r_16x.name";
-    public static String RP_16x_DESC = "resourcePack." + MODID + ".big_swords_r_16x.description";
+    public static final String[] RESOURCE_PACKS = {"big_swords_r_16x", "big_swords_r_old"};
+    public static final String RP_16x = RESOURCE_PACKS[0];
+    public static final String RP_old = RESOURCE_PACKS[1];
+    public static String RP_16x_NAME = "resourcePack." + MODID + "." + RP_16x + ".name";
+    public static String RP_16x_DESC = "resourcePack." + MODID + "." + RP_16x + ".description";
+    public static String RP_old_NAME = "resourcePack." + MODID + "." + RP_old + ".name";
+    public static String RP_old_DESC = "resourcePack." + MODID + "." + RP_old + ".description";
 
     // Integrated Resourcepack
     @SubscribeEvent
     public static void onAddPackFinders(AddPackFindersEvent event) {
-        String packId = MODID + ":big_swords_r_16x";
+        if (event.getPackType() != PackType.CLIENT_RESOURCES) return;
 
-        if (event.getPackType() == PackType.CLIENT_RESOURCES) {
-            ModList.get().getModContainerById(MODID).ifPresent(modContainer -> {
-                event.addRepositorySource((packConsumer) -> {
-                    Path resourcePath = ModList.get().getModFileById(MODID).getFile().findResource("resourcepacks/big_swords_r_16x");
-                    Pack.ResourcesSupplier resourcesSupplier = (suppliedPackId) -> new PathPackResources(packId, resourcePath, true);
+        ModList.get().getModContainerById(MODID).ifPresent(modContainer -> {
+            event.addRepositorySource((packConsumer) -> {
+                for (String packId : RESOURCE_PACKS) {
+                    String fullPackId = MODID + ":" + packId;
 
+                    Path resourcePath = ModList.get().getModFileById(MODID).getFile().findResource("resourcepacks/" + packId);
+                    Pack.ResourcesSupplier resourcesSupplier = (suppliedPackId) -> new PathPackResources(fullPackId, resourcePath, true);
                     int currentPackVersion = SharedConstants.getCurrentVersion().getPackVersion(PackType.CLIENT_RESOURCES);
                     Pack.Info packInfo = new Pack.Info(
-                            Component.translatable(RP_16x_DESC),
+                            Component.translatable("resourcePack." + MODID + "." + packId + ".description"),
                             currentPackVersion,
                             currentPackVersion,
                             FeatureFlagSet.of(),
@@ -46,8 +52,8 @@ public class BigSwordsRClient {
                     );
 
                     Pack pack = Pack.create(
-                            packId,
-                            Component.translatable(RP_16x_NAME),
+                            fullPackId,
+                            Component.translatable("resourcePack." + MODID + "." + packId + ".name"),
                             false,
                             resourcesSupplier,
                             packInfo,
@@ -58,9 +64,9 @@ public class BigSwordsRClient {
                     );
 
                     packConsumer.accept(pack);
-                });
+                }
             });
-        }
+        });
     }
 
     @SubscribeEvent

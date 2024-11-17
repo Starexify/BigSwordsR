@@ -162,8 +162,10 @@
   "item.big_swords.wooden_scythe": "Wooden Scythe",
   "item.big_swords.wooden_shield": "Wooden Shield",
   "item.minecraft.smithing_template": "Smithing Template",
-  "resourcePack.big_swords.big_swords_r_16x.description": "16x version of the Big Swords",
+  "resourcePack.big_swords.big_swords_r_16x.description": "16x textures for Big Swords",
   "resourcePack.big_swords.big_swords_r_16x.name": "Big Swords R 16x",
+  "resourcePack.big_swords.big_swords_r_old.description": "The classic look of Big Swords",
+  "resourcePack.big_swords.big_swords_r_old.name": "Big Swords R Old",
   "trim_material.big_swords.livingmetal": "Livingmetal Material",
   "upgrade.big_swords.ender_upgrade": "Ender Upgrade"
 }
