@@ -28,14 +28,14 @@ public class LangProvider extends LanguageProvider {
         addItem(BSItems.GIANT_LIVINGMETAL_HANDLE, "Giant Livingmetal Handle");
 
         // Extra Stuff
-        addBlockItem(BSBlocks.CREEP_BLOCK, "Creep Block");
+        addBlock(BSBlocks.CREEP_BLOCK, "Creep Block");
         addItem(BSItems.CREEP_BALL, "Creep Ball");
         addItem(BSItems.BIOMASS_SEED, "Biomass Seed");
         addItem(BSItems.SOUL, "Soul");
 
         // Livingmetal Lang
         addItem(BSItems.LIVINGMETAL_INGOT, "Livingmetal Ingot");
-        addBlockItem(BSBlocks.LIVINGMETAL_BLOCK, "Livingmetal Block");
+        addBlock(BSBlocks.LIVINGMETAL_BLOCK, "Livingmetal Block");
         addItem(BSItems.LIVINGMETAL_HELMET, "Livingmetal Helmet");
         addItem(BSItems.LIVINGMETAL_CHESTPLATE, "Livingmetal Chestplate");
         addItem(BSItems.LIVINGMETAL_LEGGINGS, "Livingmetal Leggings");
@@ -48,7 +48,7 @@ public class LangProvider extends LanguageProvider {
 
         // Biomass Lang
         addItem(BSItems.BIOMASS, "Biomass");
-        addBlockItem(BSBlocks.BIOMASS_BLOCK, "Biomass Block");
+        addBlock(BSBlocks.BIOMASS_BLOCK, "Biomass Block");
         addItem(BSItems.BIOMASS_HELMET, "Biomass Helmet");
         addItem(BSItems.BIOMASS_CHESTPLATE, "Biomass Chestplate");
         addItem(BSItems.BIOMASS_LEGGINGS, "Biomass Leggings");
@@ -174,10 +174,6 @@ public class LangProvider extends LanguageProvider {
     }
 
     // Methods
-    public void addBlockItem(Supplier<? extends Block> key, String name) {
-        add(key.get().asItem(), name);
-    }
-
     public void addAdvancement(String advancementName, String title, String description) {
         add("advancements." + MODID + "." + advancementName + ".title", title);
         add("advancements." + MODID + "." + advancementName + ".description", description);

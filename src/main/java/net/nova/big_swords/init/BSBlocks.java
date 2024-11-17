@@ -72,6 +72,6 @@ public class BSBlocks {
     }
 
     public static <T extends Block> void registerBlockItems(String name, DeferredBlock<T> block) {
-        BSItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().setId(itemId(name))));
+        BSItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties().setId(itemId(name)).useBlockDescriptionPrefix()));
     }
 }

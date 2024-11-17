@@ -10,6 +10,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.nova.big_swords.init.BSItems;
 
@@ -17,8 +18,7 @@ import java.util.concurrent.CompletableFuture;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
-public class BSRecipeProvider extends RecipeProvider {
-    public final RecipeOutput recipeOutput;
+public class BSRecipeProvider extends RecipeProvider implements IConditionBuilder {
     public final HolderLookup.Provider lookupProvider;
     public static String path = MODID + ":";
     public static HolderGetter<Item> items;
@@ -26,15 +26,14 @@ public class BSRecipeProvider extends RecipeProvider {
     public BSRecipeProvider(HolderLookup.Provider lookupProvider, RecipeOutput recipeOutput) {
         super(lookupProvider, recipeOutput);
         this.lookupProvider = lookupProvider;
-        this.recipeOutput = recipeOutput;
         items = lookupProvider.lookupOrThrow(Registries.ITEM);
     }
 
     @Override
     protected void buildRecipes() {
-        new CraftingRecipes(lookupProvider, recipeOutput).build();
-        new FurnaceRecipes(lookupProvider, recipeOutput).build();
-        new BSSmithingRecipes(lookupProvider, recipeOutput).build();
+        new CraftingRecipes(lookupProvider, output).build();
+        new FurnaceRecipes(lookupProvider, output).build();
+        new BSSmithingRecipes(lookupProvider, output).build();
     }
 
     // Recipes
