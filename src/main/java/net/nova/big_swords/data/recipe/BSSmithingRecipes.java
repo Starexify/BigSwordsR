@@ -1,12 +1,9 @@
 package net.nova.big_swords.data.recipe;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.nova.big_swords.init.BSItems;
-
-import java.util.concurrent.CompletableFuture;
 
 public class BSSmithingRecipes extends BSRecipeProvider {
     public BSSmithingRecipes(HolderLookup.Provider lookupProvider, RecipeOutput recipeOutput) {

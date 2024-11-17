@@ -21,7 +21,6 @@ import java.util.function.Supplier;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class BSArmorMaterial {
-
     public static Supplier<ArmorMaterial> LIVINGMETAL = Suppliers.memoize(() -> new ArmorMaterial(
             29,
             Util.make(new EnumMap<>(ArmorType.class), map -> {

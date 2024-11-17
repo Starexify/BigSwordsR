@@ -1,15 +1,12 @@
 package net.nova.big_swords.data.recipe;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.nova.big_swords.init.BSItems;
-
-import java.util.concurrent.CompletableFuture;
 
 public class FurnaceRecipes extends BSRecipeProvider {
     public FurnaceRecipes(HolderLookup.Provider lookupProvider, RecipeOutput recipeOutput) {
