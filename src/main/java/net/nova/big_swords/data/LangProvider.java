@@ -168,7 +168,7 @@ public class LangProvider extends LanguageProvider {
         add(BigSwordsRClient.RP_old_DESC, "The classic look of Big Swords");
 
         // Mod Menu
-        add(MODID + "modrinth", "Modrinth Link");
+        add(MODID + ".modrinth", "Modrinth Link");
         add(MODID + ".curseforge", "CurseForge Link");
         add(MODID + ".wiki", "Wiki Link");
     }
