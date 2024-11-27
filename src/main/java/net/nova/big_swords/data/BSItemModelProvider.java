@@ -44,6 +44,7 @@ public class BSItemModelProvider extends ItemModelProvider {
         basicItem(BSItems.BIOMASS_SEED.get());
         basicItem(BSItems.CREEP_BALL.get());
         basicItem(BSItems.SOUL.get());
+        bloodVial(BSItems.BLOOD_VIAL.get());
 
         // Sticks
         basicItem(BSItems.GIANT_WOODEN_STICK.get());
@@ -139,6 +140,12 @@ public class BSItemModelProvider extends ItemModelProvider {
     }
 
     // Models
+    public void bloodVial(Item item) {
+        getBuilder(getItemName(item))
+                .parent(getExistingFile(mcLoc("item/generated")))
+                .texture("layer0", "item/" + getItemName(item) + "_empty");
+    }
+
     public void shieldItem(Item item) {
         getBuilder(getItemName(item) + "_blocking")
                 .parent(getExistingFile(modLoc("item/template_shield_blocking")))
