@@ -23,6 +23,10 @@ public class BSEntityTypeTagsProvider extends EntityTypeTagsProvider {
         tag(Tags.EntityTypeTags.SOULLESS)
                 .addTags(EntityTypeTags.UNDEAD)
                 .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GIANT);
+        tag(Tags.EntityTypeTags.BLOODLESS)
+                .addTags(EntityTypeTags.SKELETONS)
+                .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN);
+
         tag(Tags.EntityTypeTags.HALLOWEEN_MOB).addTags(EntityTypeTags.SKELETONS);
     }
 }

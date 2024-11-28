@@ -146,7 +146,7 @@ public class BSItemModelProvider extends ItemModelProvider {
         if (item instanceof BloodVial bloodVial) {
             for (int bloodLevel = 0; bloodLevel <= bloodVial.getMaxBloodLevel(); bloodLevel++) {
                 String modelName = bloodLevel == 0 ?
-                        getItemName(item) + "_empty" :
+                        "vial" :
                         getItemName(item) + "_" + (bloodLevel - 1);
 
                 getBuilder(getItemName(item)).override()

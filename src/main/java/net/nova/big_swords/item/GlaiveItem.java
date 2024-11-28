@@ -27,6 +27,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
 import net.nova.big_swords.block.CreepBlock;
 import net.nova.big_swords.init.Sounds;
+import net.nova.big_swords.init.Tags;
 
 import java.util.List;
 import java.util.Random;
@@ -139,7 +140,7 @@ public class GlaiveItem extends TieredItem {
         playSound(level, player, Sounds.GLAIVE_HIT.get());
 
         // Blood Vial Mechanics
-        if (target.isDeadOrDying()) {
+        if (target.isDeadOrDying() && target.getType().is(Tags.EntityTypeTags.BLOODLESS)) {
             BloodVial.incrementBloodVialInBothHands(player);
         }
 
