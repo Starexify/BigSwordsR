@@ -33,30 +33,34 @@ public class BloodVial extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        ItemStack bloodVialStack = usedHand == InteractionHand.MAIN_HAND ?
-                player.getMainHandItem() : player.getOffhandItem();
-        ItemStack otherHandStack = usedHand == InteractionHand.MAIN_HAND ?
-                player.getOffhandItem() : player.getMainHandItem();
+        ItemStack bloodVialStack = player.getItemInHand(usedHand);
+        ItemStack otherHandStack = player.getItemInHand(usedHand == InteractionHand.MAIN_HAND ?
+                InteractionHand.OFF_HAND :
+                InteractionHand.MAIN_HAND);
 
-        if (bloodVialStack.getItem() instanceof BloodVial &&
-                otherHandStack.is(Items.SLIME_BALL) &&
-                getBloodLevel(bloodVialStack) >= 1) {
-
-            if (!level.isClientSide) {
-                otherHandStack.shrink(1);
-                bloodVialStack.set(BSDataComponents.BLOOD_LEVEL, getBloodLevel(bloodVialStack) - 1);
-
-                ItemStack creepBall = new ItemStack(BSItems.CREEP_BALL.get());
-                player.addItem(creepBall);
+        if (bloodVialStack.getItem() instanceof BloodVial) {
+            if (otherHandStack.is(Items.SLIME_BALL) && getBloodLevel(bloodVialStack) >= 1) {
+                return processInteraction(level, player, bloodVialStack, otherHandStack, BSItems.CREEP_BALL.get());
             }
 
-            return InteractionResultHolder.success(bloodVialStack);
+            if (otherHandStack.is(Items.TORCHFLOWER_SEEDS) && getBloodLevel(bloodVialStack) >= 1) {
+                return processInteraction(level, player, bloodVialStack, otherHandStack, BSItems.BIOMASS_SEED.get());
+            }
         }
 
         return super.use(level, player, usedHand);
     }
 
     // Methods
+    public InteractionResultHolder<ItemStack> processInteraction(Level level, Player player, ItemStack bloodVialStack, ItemStack otherHandStack, Item resultItem) {
+        if (!level.isClientSide) {
+            otherHandStack.shrink(1);
+            bloodVialStack.set(BSDataComponents.BLOOD_LEVEL, getBloodLevel(bloodVialStack) - 1);
+            player.addItem(new ItemStack(resultItem));
+        }
+        return InteractionResultHolder.success(bloodVialStack);
+    }
+
     public void incrementBloodLevel(ItemStack stack) {
         int currentLevel = getBloodLevel(stack);
         if (currentLevel < MAX_BLOOD_LEVEL) {

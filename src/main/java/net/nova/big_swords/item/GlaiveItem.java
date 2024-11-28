@@ -140,7 +140,7 @@ public class GlaiveItem extends TieredItem {
         playSound(level, player, Sounds.GLAIVE_HIT.get());
 
         // Blood Vial Mechanics
-        if (target.isDeadOrDying() && target.getType().is(Tags.EntityTypeTags.BLOODLESS)) {
+        if (target.isDeadOrDying() && !target.getType().is(Tags.EntityTypeTags.BLOODLESS)) {
             BloodVial.incrementBloodVialInBothHands(player);
         }
 

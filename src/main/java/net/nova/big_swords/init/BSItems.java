@@ -70,7 +70,7 @@ public class BSItems {
     public static DeferredItem<Item> GOLDEN_GLAIVE = ITEMS.register("golden_glaive", () -> new GlaiveItem(Tiers.GOLD, new Item.Properties().attributes(GlaiveItem.createAttributes(Tiers.GOLD, 2, -2.2F)), 3F, 4F));
     public static DeferredItem<Item> DIAMOND_GLAIVE = ITEMS.register("diamond_glaive", () -> new GlaiveItem(Tiers.DIAMOND, new Item.Properties().attributes(GlaiveItem.createAttributes(Tiers.DIAMOND, 2, -2.2F)), 4.5F, 5.5F));
     public static DeferredItem<Item> NETHERITE_GLAIVE = ITEMS.register("netherite_glaive", () -> new GlaiveItem(Tiers.NETHERITE, new Item.Properties().attributes(GlaiveItem.createAttributes(Tiers.NETHERITE, 2, -2.2F)).fireResistant(), 5.5F, 6.5F));
-    public static DeferredItem<Item> BIOMASS_GLAIVE = ITEMS.register("biomass_glaive", () -> new GlaiveItem(BSTiers.BIOMASS, new Item.Properties().attributes(GlaiveItem.createAttributes(BSTiers.BIOMASS, 2, -2.2F)), 4F, 4.5F));
+    public static DeferredItem<Item> BIOMASS_GLAIVE = ITEMS.register("biomass_glaive", () -> new GlaiveItem(BSTiers.BIOMASS, new Item.Properties().attributes(GlaiveItem.createAttributes(BSTiers.BIOMASS, 2, -2.2F)), 5.4F, 6.0F));
     public static DeferredItem<Item> LIVINGMETAL_GLAIVE = ITEMS.register("livingmetal_glaive", () -> new GlaiveItem(BSTiers.LIVINGMETAL, new Item.Properties().attributes(GlaiveItem.createAttributes(BSTiers.LIVINGMETAL, 2, -2.2F)), 4.5F, 5.5F));
 
     // Scythes

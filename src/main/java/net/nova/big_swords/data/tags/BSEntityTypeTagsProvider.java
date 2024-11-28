@@ -25,7 +25,8 @@ public class BSEntityTypeTagsProvider extends EntityTypeTagsProvider {
                 .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GIANT);
         tag(Tags.EntityTypeTags.BLOODLESS)
                 .addTags(EntityTypeTags.SKELETONS)
-                .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN);
+                .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GHAST,
+                        EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.BREEZE, EntityType.WITHER, EntityType.VEX, EntityType.ALLAY);
 
         tag(Tags.EntityTypeTags.HALLOWEEN_MOB).addTags(EntityTypeTags.SKELETONS);
     }
