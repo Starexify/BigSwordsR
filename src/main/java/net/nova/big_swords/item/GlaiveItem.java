@@ -46,14 +46,14 @@ public class GlaiveItem extends TieredItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
-        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
 
-        pTooltipComponents.add(Component.empty());
-        pTooltipComponents.add(Component.literal("Special:").withStyle(ChatFormatting.GRAY));
-        pTooltipComponents.add(Component.literal(" " + this.minDamage + " - " + this.maxDamage + " Charged Damage").withStyle(ChatFormatting.DARK_GREEN));
-        pTooltipComponents.add(Component.literal(" " + this.range + " Range").withStyle(ChatFormatting.DARK_GREEN));
-        pTooltipComponents.add(Component.empty());
+        tooltipComponents.add(Component.empty());
+        tooltipComponents.add(Component.literal("Special:").withStyle(ChatFormatting.GRAY));
+        tooltipComponents.add(Component.literal(" " + this.minDamage + " - " + this.maxDamage + " Charged Damage").withStyle(ChatFormatting.DARK_GREEN));
+        tooltipComponents.add(Component.literal(" " + this.range + " Range").withStyle(ChatFormatting.DARK_GREEN));
+        tooltipComponents.add(Component.empty());
     }
 
     // Tilling Creep

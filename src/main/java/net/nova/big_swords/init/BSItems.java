@@ -14,7 +14,7 @@ public class BSItems {
     public static DeferredItem<Item> BIOMASS_SEED = ITEMS.register("biomass_seed", () -> new ItemNameBlockItem(BSBlocks.BIOMASS.get(), new Item.Properties()));
     public static DeferredItem<Item> CREEP_BALL = ITEMS.register("creep_ball", () -> new CreepBall(new Item.Properties()));
     public static DeferredItem<Item> SOUL = ITEMS.register("soul", () -> new Soul(new Item.Properties()));
-    public static DeferredItem<Item> BLOOD_VIAL = ITEMS.register("blood_vial", () -> new Item(new Item.Properties()));
+    public static DeferredItem<Item> BLOOD_VIAL = ITEMS.register("blood_vial", () -> new BloodVial(new Item.Properties().stacksTo(1)));
 
     // Sticks
     public static DeferredItem<Item> GIANT_WOODEN_STICK = ITEMS.register("giant_wooden_stick", () -> new Item(new Item.Properties()));

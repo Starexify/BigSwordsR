@@ -11,8 +11,11 @@ import net.minecraft.world.item.armortrim.TrimMaterials;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.client.renderer.item.BSItemProperties;
+import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
+import net.nova.big_swords.item.BloodVial;
 
 import java.util.LinkedHashMap;
 
@@ -141,9 +144,22 @@ public class BSItemModelProvider extends ItemModelProvider {
 
     // Models
     public void bloodVial(Item item) {
-        getBuilder(getItemName(item))
-                .parent(getExistingFile(mcLoc("item/generated")))
-                .texture("layer0", "item/" + getItemName(item) + "_empty");
+        if (item instanceof BloodVial bloodVial) {
+            for (int bloodLevel = 0; bloodLevel <= bloodVial.getMaxBloodLevel(); bloodLevel++) {
+                String modelName = bloodLevel == 0 ?
+                        getItemName(item) + "_empty" :
+                        getItemName(item) + "_" + (bloodLevel - 1);
+
+                getBuilder(getItemName(item)).override()
+                        .predicate(BSItemProperties.bloodPredicate, bloodLevel)
+                        .model(new ModelFile.UncheckedModelFile(BigSwordsR.rl("item/" + modelName)))
+                        .end();
+
+                getBuilder("item/" + modelName)
+                        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                        .texture("layer0", BigSwordsR.rl("item/" + modelName));
+            }
+        }
     }
 
     public void shieldItem(Item item) {

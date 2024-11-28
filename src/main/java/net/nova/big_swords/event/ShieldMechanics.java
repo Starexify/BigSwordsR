@@ -28,9 +28,12 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.nova.big_swords.BigSwordsR;
+import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
+import net.nova.big_swords.item.BloodVial;
 
 import java.util.Random;
 
@@ -40,6 +43,7 @@ import static net.nova.big_swords.BigSwordsR.playSound;
 @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.GAME)
 public class ShieldMechanics {
 
+    // Shield Mechanics
     @SubscribeEvent
     public static void onShieldBlock(LivingShieldBlockEvent event) {
         if (event.getEntity() instanceof Player player && event.getBlocked()) {
@@ -317,7 +321,22 @@ public class ShieldMechanics {
         }
     }
 
-    private static void setNearestTarget(Mob mob, Player blockingPlayer) {
+    // Blood Vial Mechanics
+    @SubscribeEvent
+    public static void onEntityKilled(LivingDeathEvent event) {
+        DamageSource source = event.getSource();
+
+        if (source.getEntity() instanceof Player player) {
+            ItemStack mainhandItem = player.getMainHandItem();
+
+            if (mainhandItem.getItem() instanceof BloodVial bloodVial) {
+                bloodVial.incrementBloodLevel(mainhandItem);
+            }
+        }
+    }
+
+    // Methods
+    public static void setNearestTarget(Mob mob, Player blockingPlayer) {
         double SEARCH_RANGE = 16.0;
         Level level = mob.level();
         AABB boundingBox = new AABB(
@@ -339,11 +358,10 @@ public class ShieldMechanics {
             }
         }
 
-        // Set the nearest non-player entity as the target
         if (nearestEntity != null) {
             mob.setTarget(nearestEntity);
         } else {
-            mob.setTarget(null); // Optional: Clear target if no valid target is found
+            mob.setTarget(null);
         }
     }
 }
