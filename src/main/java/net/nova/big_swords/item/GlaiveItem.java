@@ -3,6 +3,7 @@ package net.nova.big_swords.item;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -128,7 +129,7 @@ public class GlaiveItem extends TieredItem {
         }
     }
 
-    private void glaiveHits(Level level, Player player, ItemStack stack, LivingEntity target) {
+    public void glaiveHits(Level level, Player player, ItemStack stack, LivingEntity target) {
         float damage = minDamage + random.nextFloat() * (maxDamage - minDamage);
         damage = Math.round(damage * 10.0f) / 10.0f;
         target.hurt(player.damageSources().playerAttack(player), damage);
@@ -136,6 +137,11 @@ public class GlaiveItem extends TieredItem {
         stack.hurtAndBreak(3, player, EquipmentSlot.MAINHAND);
         player.getCooldowns().addCooldown(this, 40);
         playSound(level, player, Sounds.GLAIVE_HIT.get());
+
+        // Blood Vial Mechanics
+        if (target.isDeadOrDying()) {
+            BloodVial.incrementBloodVialInBothHands(player);
+        }
 
         // player.sendSystemMessage(Component.literal("Hit entity with dmg: " + damage)); // Debug output
     }

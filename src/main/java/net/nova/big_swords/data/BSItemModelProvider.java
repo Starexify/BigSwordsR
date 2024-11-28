@@ -13,7 +13,6 @@ import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.client.renderer.item.BSItemProperties;
-import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.item.BloodVial;
 

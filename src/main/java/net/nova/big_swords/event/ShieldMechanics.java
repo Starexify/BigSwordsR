@@ -321,20 +321,6 @@ public class ShieldMechanics {
         }
     }
 
-    // Blood Vial Mechanics
-    @SubscribeEvent
-    public static void onEntityKilled(LivingDeathEvent event) {
-        DamageSource source = event.getSource();
-
-        if (source.getEntity() instanceof Player player) {
-            ItemStack mainhandItem = player.getMainHandItem();
-
-            if (mainhandItem.getItem() instanceof BloodVial bloodVial) {
-                bloodVial.incrementBloodLevel(mainhandItem);
-            }
-        }
-    }
-
     // Methods
     public static void setNearestTarget(Mob mob, Player blockingPlayer) {
         double SEARCH_RANGE = 16.0;
