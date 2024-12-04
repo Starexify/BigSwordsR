@@ -5,6 +5,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.BSItems;
 
@@ -15,33 +16,13 @@ public class CraftingRecipes extends BSRecipeProvider {
 
     public void build() {
         // Extra Recipes
-        shaped(RecipeCategory.MISC, BSItems.CREEP_BALL)
-                .group(getItemName(BSItems.CREEP_BALL))
-                .define('#', Items.SLIME_BALL)
-                .define('O', Items.ROTTEN_FLESH)
-                .define('X', Items.SPIDER_EYE)
-                .pattern("XOX")
-                .pattern("O#O")
-                .pattern("XOX")
-                .unlockedBy("has_" + getItemName(Items.SLIME_BALL), has(Items.SLIME_BALL))
-                .save(output);
-        shaped(RecipeCategory.MISC, BSItems.CREEP_BALL)
-                .group(getItemName(BSItems.CREEP_BALL))
-                .define('#', Items.SLIME_BALL)
-                .define('O', Items.ROTTEN_FLESH)
-                .define('X', Items.SPIDER_EYE)
-                .pattern("OXO")
-                .pattern("X#X")
-                .pattern("OXO")
-                .unlockedBy("has_" + getItemName(Items.SLIME_BALL), has(Items.SLIME_BALL))
-                .save(output, path + getItemName(BSItems.CREEP_BALL) + "_2");
-
-        shapeless(RecipeCategory.MISC, BSItems.BIOMASS_SEED)
-                .requires(Items.FERMENTED_SPIDER_EYE)
-                .requires(Items.NETHER_WART)
-                .unlockedBy("has_" + getItemName(Items.FERMENTED_SPIDER_EYE), has(Items.FERMENTED_SPIDER_EYE))
-                .save(output);
-
+        shaped(RecipeCategory.MISC, BSItems.BLOOD_VIAL)
+                .define('X', Blocks.GLASS)
+                .pattern("XXX")
+                .pattern("X X")
+                .pattern(" X ")
+                .unlockedBy("has_" + getItemName(Blocks.GLASS), has(Blocks.GLASS))
+                .save(output, path + getItemName(BSItems.BLOOD_VIAL) + "_recipe");
 
         // Sticks
         basicGiantStick(Items.STICK, BSItems.GIANT_WOODEN_STICK);

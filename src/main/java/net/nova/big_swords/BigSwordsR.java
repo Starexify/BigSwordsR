@@ -25,6 +25,7 @@ public class BigSwordsR {
 
     public BigSwordsR(IEventBus bus) {
         CreativeTab.CREATIVE_TAB.register(bus);
+        BSDataComponents.COMPONENTS.register(bus);
         BSItems.ITEMS.register(bus);
         BSBlocks.BLOCKS.register(bus);
         Sounds.SOUND_EVENTS.register(bus);
