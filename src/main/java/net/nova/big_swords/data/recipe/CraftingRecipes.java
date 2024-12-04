@@ -23,13 +23,13 @@ public class CraftingRecipes extends BSRecipeProvider {
 
     public void build() {
         // Extra Recipes
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BSItems.BLOOD_VIAL)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, BSItems.BLOOD_VIAL.get())
                 .define('X', Blocks.GLASS)
                 .pattern("XXX")
                 .pattern("X X")
                 .pattern(" X ")
                 .unlockedBy("has_" + getItemName(Blocks.GLASS), has(Blocks.GLASS))
-                .save(recipeOutput, path + getItemName(BSItems.BLOOD_VIAL) + "_recipe");
+                .save(recipeOutput, path + getItemName(BSItems.BLOOD_VIAL.get()) + "_recipe");
 
         // Sticks
         basicGiantStick(recipeOutput, Items.STICK, BSItems.GIANT_WOODEN_STICK);

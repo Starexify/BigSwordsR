@@ -46,6 +46,7 @@ public class CreativeTab {
                 output.accept(BSBlocks.CREEP_BLOCK.get());
                 output.accept(BSItems.BIOMASS_SEED.get());
                 output.accept(BSItems.SOUL.get());
+                output.accept(BSItems.BLOOD_VIAL.get());
 
                 // Materials
                 output.accept(BSBlocks.BIOMASS_BLOCK.get());

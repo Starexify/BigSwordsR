@@ -1,0 +1,64 @@
+{
+  "overrides": [
+    {
+      "model": "big_swords:item/vial",
+      "predicate": {
+        "big_swords:blood": 0.0
+      }
+    },
+    {
+      "model": "big_swords:item/blood_vial_0",
+      "predicate": {
+        "big_swords:blood": 1.0
+      }
+    },
+    {
+      "model": "big_swords:item/blood_vial_1",
+      "predicate": {
+        "big_swords:blood": 2.0
+      }
+    },
+    {
+      "model": "big_swords:item/blood_vial_2",
+      "predicate": {
+        "big_swords:blood": 3.0
+      }
+    },
+    {
+      "model": "big_swords:item/blood_vial_3",
+      "predicate": {
+        "big_swords:blood": 4.0
+      }
+    },
+    {
+      "model": "big_swords:item/blood_vial_4",
+      "predicate": {
+        "big_swords:blood": 5.0
+      }
+    },
+    {
+      "model": "big_swords:item/blood_vial_5",
+      "predicate": {
+        "big_swords:blood": 6.0
+      }
+    },
+    {
+      "model": "big_swords:item/blood_vial_6",
+      "predicate": {
+        "big_swords:blood": 7.0
+      }
+    },
+    {
+      "model": "big_swords:item/blood_vial_7",
+      "predicate": {
+        "big_swords:blood": 8.0
+      }
+    },
+    {
+      "model": "big_swords:item/blood_vial_8",
+      "predicate": {
+        "big_swords:blood": 9.0
+      }
+    }
+  ]
+}
