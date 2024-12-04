@@ -90,14 +90,6 @@ The mod also adds two new types of weapons, Glaives and Scythes. And the long aw
   </tbody>
 </table>
 
-
-## 🗓️ Planned Updates
-
-In the upcoming updates I plan to add:
-
-- <!-- Biomass? -->
-
-
 ## ❓ Frequently Asked Questions
 
 **Q:** Will you port the mod to Fabric? \
