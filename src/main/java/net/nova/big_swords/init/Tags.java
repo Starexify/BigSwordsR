@@ -34,6 +34,7 @@ public class Tags {
 
     public static class EntityTypeTags {
         public static final TagKey<EntityType<?>> SOULLESS = entityTypeTag("soulless");
+        public static final TagKey<EntityType<?>> BLOODLESS = entityTypeTag("bloodless");
         public static final TagKey<EntityType<?>> HALLOWEEN_MOB = entityTypeTag("halloween_mob");
     }
 

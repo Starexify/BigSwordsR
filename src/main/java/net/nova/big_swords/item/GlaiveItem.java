@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.*;
 import net.nova.big_swords.block.CreepBlock;
 import net.nova.big_swords.init.Sounds;
+import net.nova.big_swords.init.Tags;
 
 import java.util.List;
 import java.util.Random;
@@ -127,6 +128,12 @@ public class GlaiveItem extends Item {
         stack.hurtAndBreak(3, player, EquipmentSlot.MAINHAND);
         player.getCooldowns().addCooldown(stack, 40);
         playSound(level, player, Sounds.GLAIVE_HIT.get());
+
+        // Blood Vial Mechanics
+        if (target.isDeadOrDying() && !target.getType().is(Tags.EntityTypeTags.BLOODLESS)) {
+            BloodVial.incrementBloodVialInBothHands(player);
+        }
+
         return true;
         // player.sendSystemMessage(Component.literal("Hit entity with dmg: " + damage)); // Debug output
     }
