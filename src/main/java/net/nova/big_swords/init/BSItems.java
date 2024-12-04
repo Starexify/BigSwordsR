@@ -21,6 +21,7 @@ public class BSItems {
     public static DeferredItem<Item> BIOMASS_SEED = registerItem("biomass_seed", properties -> createBlockItemWithCustomItemName(BSBlocks.BIOMASS.get(), properties));
     public static DeferredItem<Item> CREEP_BALL = registerItem("creep_ball", CreepBall::new);
     public static DeferredItem<Item> SOUL = registerItem("soul", Soul::new);
+    public static DeferredItem<Item> BLOOD_VIAL = registerItem("blood_vial", BloodVial::new);
 
     // Sticks
     public static DeferredItem<Item> GIANT_WOODEN_STICK = registerItem("giant_wooden_stick", Item::new);
@@ -61,8 +62,8 @@ public class BSItems {
     public static DeferredItem<Item> GOLDEN_BIG_SWORD = registerItem("golden_big_sword", properties -> new BigSwordItem(ToolMaterial.GOLD, 6.5F, -2.8F, properties));
     public static DeferredItem<Item> DIAMOND_BIG_SWORD = registerItem("diamond_big_sword", properties -> new BigSwordItem(ToolMaterial.DIAMOND, 6.5F, -2.8F, properties));
     public static DeferredItem<Item> NETHERITE_BIG_SWORD = registerItem("netherite_big_sword", properties -> new BigSwordItem(ToolMaterial.NETHERITE, 6.5F, -2.8F, properties.fireResistant()));
-    public static DeferredItem<Item> PATCHWORK_BIG_SWORD = registerItem("patchwork_big_sword", properties -> new BigSwordItem(BSToolMaterial.PATCHWORK, 6.5F, -2.8F, properties));
-    public static DeferredItem<Item> SKULL_BIG_SWORD = registerItem("skull_big_sword", properties -> new BigSwordItem(BSToolMaterial.SKULL, 6.5F, -2.8F, properties));
+    public static DeferredItem<Item> PATCHWORK_BIG_SWORD = registerItem("patchwork_big_sword", properties -> new BigSwordItem(BSToolMaterial.PATCHWORK, 6.5F, -2.4F, properties));
+    public static DeferredItem<Item> SKULL_BIG_SWORD = registerItem("skull_big_sword", properties -> new BigSwordItem(BSToolMaterial.SKULL, 6.5F, -2.6F, properties));
     public static DeferredItem<Item> QUARTZ_BIG_SWORD = registerItem("quartz_big_sword", properties -> new BigSwordItem(BSToolMaterial.QUARTZ, 6.5F, -2.8F, properties));
     public static DeferredItem<Item> OBSIDIAN_BIG_SWORD = registerItem("obsidian_big_sword", properties -> new BigSwordItem(BSToolMaterial.OBSIDIAN, 6.5F, -2.8F, properties));
     public static DeferredItem<Item> ENDER_BIG_SWORD = registerItem("ender_big_sword", properties -> new BigSwordItem(BSToolMaterial.ENDER, 6.5F, -2.8F, properties.fireResistant()));
@@ -76,7 +77,7 @@ public class BSItems {
     public static DeferredItem<Item> GOLDEN_GLAIVE = registerItem("golden_glaive", properties -> new GlaiveItem(ToolMaterial.GOLD, 2, -2.2F, 3F, 4F, properties));
     public static DeferredItem<Item> DIAMOND_GLAIVE = registerItem("diamond_glaive", properties -> new GlaiveItem(ToolMaterial.DIAMOND, 2, -2.2F, 4.5F, 5.5F, properties));
     public static DeferredItem<Item> NETHERITE_GLAIVE = registerItem("netherite_glaive", properties -> new GlaiveItem(ToolMaterial.NETHERITE, 2, -2.2F, 5.5F, 6.5F, properties.fireResistant()));
-    public static DeferredItem<Item> BIOMASS_GLAIVE = registerItem("biomass_glaive", properties -> new GlaiveItem(BSToolMaterial.BIOMASS, 2, -2.2F, 4F, 4.5F, properties));
+    public static DeferredItem<Item> BIOMASS_GLAIVE = registerItem("biomass_glaive", properties -> new GlaiveItem(BSToolMaterial.BIOMASS, 2, -2.2F, 5.4F, 6.0F, properties));
     public static DeferredItem<Item> LIVINGMETAL_GLAIVE = registerItem("livingmetal_glaive", properties -> new GlaiveItem(BSToolMaterial.LIVINGMETAL, 2, -2.2F, 4.5F, 5.5F, properties));
 
     // Scythes
