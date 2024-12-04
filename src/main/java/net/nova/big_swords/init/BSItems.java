@@ -15,6 +15,8 @@ public class BSItems {
     public static RegistryObject<Item> BIOMASS_SEED = ITEMS.register("biomass_seed", () -> new ItemNameBlockItem(BSBlocks.BIOMASS.get(), new Item.Properties()));
     public static RegistryObject<Item> CREEP_BALL = ITEMS.register("creep_ball", () -> new CreepBall(new Item.Properties()));
     public static RegistryObject<Item> SOUL = ITEMS.register("soul", () -> new Soul(new Item.Properties()));
+    public static RegistryObject<Item> BLOOD_VIAL = ITEMS.register("blood_vial", () -> new BloodVial(new Item.Properties().stacksTo(1)));
+
 
     // Sticks
     public static RegistryObject<Item> GIANT_WOODEN_STICK = ITEMS.register("giant_wooden_stick", () -> new BurnItem(new Item.Properties(), 700));
@@ -55,8 +57,8 @@ public class BSItems {
     public static RegistryObject<Item> GOLDEN_BIG_SWORD = ITEMS.register("golden_big_sword", () -> new BigSwordItem(Tiers.GOLD, 6.5F, -2.8F, new Item.Properties()));
     public static RegistryObject<Item> DIAMOND_BIG_SWORD = ITEMS.register("diamond_big_sword", () -> new BigSwordItem(Tiers.DIAMOND, 6.5F, -2.8F, new Item.Properties()));
     public static RegistryObject<Item> NETHERITE_BIG_SWORD = ITEMS.register("netherite_big_sword", () -> new BigSwordItem(Tiers.NETHERITE, 6.5F, -2.8F, new Item.Properties().fireResistant()));
-    public static RegistryObject<Item> PATCHWORK_BIG_SWORD = ITEMS.register("patchwork_big_sword", () -> new BigSwordItem(BSTiers.PATCHWORK, 6.5F, -2.8F, new Item.Properties()));
-    public static RegistryObject<Item> SKULL_BIG_SWORD = ITEMS.register("skull_big_sword", () -> new BigSwordItem(BSTiers.SKULL, 6.5F, -2.8F, new Item.Properties()));
+    public static RegistryObject<Item> PATCHWORK_BIG_SWORD = ITEMS.register("patchwork_big_sword", () -> new BigSwordItem(BSTiers.PATCHWORK, 6.5F, -2.4F, new Item.Properties()));
+    public static RegistryObject<Item> SKULL_BIG_SWORD = ITEMS.register("skull_big_sword", () -> new BigSwordItem(BSTiers.SKULL, 6.5F, -2.6F, new Item.Properties()));
     public static RegistryObject<Item> QUARTZ_BIG_SWORD = ITEMS.register("quartz_big_sword", () -> new BigSwordItem(BSTiers.QUARTZ, 6.5F, -2.8F, new Item.Properties()));
     public static RegistryObject<Item> OBSIDIAN_BIG_SWORD = ITEMS.register("obsidian_big_sword", () -> new BigSwordItem(BSTiers.OBSIDIAN, 6.5F, -2.8F, new Item.Properties()));
     public static RegistryObject<Item> ENDER_BIG_SWORD = ITEMS.register("ender_big_sword", () -> new BigSwordItem(BSTiers.ENDER, 6.5F, -2.8F, new Item.Properties().fireResistant()));
@@ -70,7 +72,7 @@ public class BSItems {
     public static RegistryObject<Item> GOLDEN_GLAIVE = ITEMS.register("golden_glaive", () -> new GlaiveItem(Tiers.GOLD, 2, -2.2F, new Item.Properties(), 3F, 4F));
     public static RegistryObject<Item> DIAMOND_GLAIVE = ITEMS.register("diamond_glaive", () -> new GlaiveItem(Tiers.DIAMOND, 2, -2.2F, new Item.Properties(), 4.5F, 5.5F));
     public static RegistryObject<Item> NETHERITE_GLAIVE = ITEMS.register("netherite_glaive", () -> new GlaiveItem(Tiers.NETHERITE, 2, -2.2F, new Item.Properties().fireResistant(), 5.5F, 6.5F));
-    public static RegistryObject<Item> BIOMASS_GLAIVE = ITEMS.register("biomass_glaive", () -> new GlaiveItem(BSTiersV.BIOMASS, 2, -2.2F, new Item.Properties(), 4F, 4.5F));
+    public static RegistryObject<Item> BIOMASS_GLAIVE = ITEMS.register("biomass_glaive", () -> new GlaiveItem(BSTiersV.BIOMASS, 2, -2.2F, new Item.Properties(), 5.4F, 6.0F));
     public static RegistryObject<Item> LIVINGMETAL_GLAIVE = ITEMS.register("livingmetal_glaive", () -> new GlaiveItem(BSTiersV.LIVINGMETAL, 2, -2.2F, new Item.Properties(), 4.5F, 5.5F));
 
     // Scythes

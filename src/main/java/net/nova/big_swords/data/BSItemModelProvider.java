@@ -12,8 +12,10 @@ import net.minecraft.world.item.armortrim.TrimMaterials;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.client.renderer.item.BSItemProperties;
 import net.nova.big_swords.init.BSItems;
+import net.nova.big_swords.item.BloodVial;
 
 import java.util.LinkedHashMap;
 
@@ -45,6 +47,7 @@ public class BSItemModelProvider extends ItemModelProvider {
         basicItem(BSItems.BIOMASS_SEED.get());
         basicItem(BSItems.CREEP_BALL.get());
         basicItem(BSItems.SOUL.get());
+        bloodVial(BSItems.BLOOD_VIAL.get());
 
         // Sticks
         basicItem(BSItems.GIANT_WOODEN_STICK.get());
@@ -140,7 +143,26 @@ public class BSItemModelProvider extends ItemModelProvider {
     }
 
     // Models
-    private void shieldItem(Item item) {
+    public void bloodVial(Item item) {
+        if (item instanceof BloodVial bloodVial) {
+            for (int bloodLevel = 0; bloodLevel <= bloodVial.getMaxBloodLevel(); bloodLevel++) {
+                String modelName = bloodLevel == 0 ?
+                        "vial" :
+                        getItemName(item) + "_" + (bloodLevel - 1);
+
+                getBuilder(getItemName(item)).override()
+                        .predicate(BSItemProperties.bloodPredicate, bloodLevel)
+                        .model(new ModelFile.UncheckedModelFile(BigSwordsR.rl("item/" + modelName)))
+                        .end();
+
+                getBuilder("item/" + modelName)
+                        .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                        .texture("layer0", BigSwordsR.rl("item/" + modelName));
+            }
+        }
+    }
+
+    public void shieldItem(Item item) {
         getBuilder(getItemName(item) + "_blocking")
                 .parent(getExistingFile(modLoc("item/template_shield_blocking")))
                 .texture("layer0", "item/" + getItemName(item));
@@ -152,19 +174,19 @@ public class BSItemModelProvider extends ItemModelProvider {
                 .model(getExistingFile(modLoc("item/" + getItemName(item) + "_blocking")));
     }
 
-    private void handheldGlaive(Item item) {
+    public void handheldGlaive(Item item) {
         getBuilder(getItemName(item))
                 .parent(getExistingFile(modLoc("item/handheld_glaive")))
                 .texture("layer0", "item/" + getItemName(item));
     }
 
-    private void handheldItem(Item item) {
+    public void handheldItem(Item item) {
         getBuilder(getItemName(item))
                 .parent(getExistingFile(mcLoc("item/handheld")))
                 .texture("layer0", "item/" + getItemName(item));
     }
 
-    private void trimmableArmorItem(Item item) {
+    public void trimmableArmorItem(Item item) {
         if (item instanceof ArmorItem armorItem) {
             String name = getItemName(item);
             String itemName = "item/" + name;
@@ -202,7 +224,7 @@ public class BSItemModelProvider extends ItemModelProvider {
         }
     }
 
-    private String getItemName(Item item) {
+    public String getItemName(Item item) {
         return BuiltInRegistries.ITEM.getKey(item).toString().replace(MODID + ":", "");
     }
 }
