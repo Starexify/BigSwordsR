@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_fermented_spider_eye": {
+    "has_glass": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:fermented_spider_eye"
+            "items": "minecraft:glass"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "big_swords:biomass_seed"
+        "recipe": "big_swords:blood_vial_recipe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_fermented_spider_eye"
+      "has_glass"
     ]
   ],
   "rewards": {
     "recipes": [
-      "big_swords:biomass_seed"
+      "big_swords:blood_vial_recipe"
     ]
   }
 }
