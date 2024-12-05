@@ -9,6 +9,8 @@ import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.nova.big_swords.data.advancement.BSAdvancementsProvider;
 import net.nova.big_swords.data.loot.BSLootTableProvider;
 import net.nova.big_swords.data.loot.GlobalLootModifier;
+import net.nova.big_swords.data.models.BSEquipmentModelProvider;
+import net.nova.big_swords.data.models.BSModelProvider;
 import net.nova.big_swords.data.recipe.BSRecipeProvider;
 import net.nova.big_swords.data.tags.BSBlockTagsProvider;
 import net.nova.big_swords.data.tags.BSEnchantmentTagsProvider;
@@ -31,6 +33,7 @@ public class DataGenerators {
 
         event.addProvider(new BlockStateAndModelProvider(output, existingFileHelper));
         //event.addProvider(new BSItemModelProvider(output, existingFileHelper));
+        event.addProvider(new BSModelProvider(output));
         event.addProvider(new BSEquipmentModelProvider(output));
 
         event.addProvider(new BSRecipeProvider.Runner(output, lookupProvider));

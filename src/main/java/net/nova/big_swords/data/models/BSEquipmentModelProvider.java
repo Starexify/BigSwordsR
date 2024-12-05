@@ -1,4 +1,4 @@
-package net.nova.big_swords.data;
+package net.nova.big_swords.data.models;
 
 import net.minecraft.client.data.models.EquipmentAssetProvider;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
