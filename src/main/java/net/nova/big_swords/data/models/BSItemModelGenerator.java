@@ -1,16 +1,23 @@
 package net.nova.big_swords.data.models;
 
+import com.mojang.serialization.MapCodec;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.item.RangeSelectItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperty;
+import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty;
 import net.minecraft.client.renderer.item.properties.select.TrimMaterialProperty;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.world.item.equipment.Equippable;
@@ -18,13 +25,19 @@ import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimMaterials;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.equipment.BSEquipmentAssets;
+import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
+import net.nova.big_swords.item.BloodVial;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
+
+import static net.nova.big_swords.BigSwordsR.MODID;
 
 @OnlyIn(Dist.CLIENT)
 public class BSItemModelGenerator {
@@ -55,7 +68,7 @@ public class BSItemModelGenerator {
         generateFlatItem(BSItems.BIOMASS_SEED.get(), ModelTemplates.FLAT_ITEM);
         generateFlatItem(BSItems.CREEP_BALL.get(), ModelTemplates.FLAT_ITEM);
         generateFlatItem(BSItems.SOUL.get(), ModelTemplates.FLAT_ITEM);
-        //bloodVial(BSItems.BLOOD_VIAL.get());
+        generateBloodVial(BSItems.BLOOD_VIAL.get());
 
         // Sticks
         generateFlatItem(BSItems.GIANT_WOODEN_STICK.get(), ModelTemplates.FLAT_ITEM);
@@ -75,6 +88,7 @@ public class BSItemModelGenerator {
         generateFlatItem(BSItems.LIVINGMETAL_HOE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
         // Biomass Models
+        generateFlatItem(BSItems.BIOMASS.get(), ModelTemplates.FLAT_ITEM);
         generateTrimmableItem(BSItems.BIOMASS_HELMET.get(), BSEquipmentAssets.BIOMASS);
         generateTrimmableItem(BSItems.BIOMASS_CHESTPLATE.get(), BSEquipmentAssets.BIOMASS);
         generateTrimmableItem(BSItems.BIOMASS_LEGGINGS.get(), BSEquipmentAssets.BIOMASS);
@@ -148,9 +162,6 @@ public class BSItemModelGenerator {
         generateShield(BSItems.GILDED_BIOMASS_SHIELD.get());
         generateShield(BSItems.LIVINGMETAL_SHIELD.get());
         generateShield(BSItems.GILDED_LIVINGMETAL_SHIELD.get());
-
-        // Blocks
-
     }
 
     // Methods
@@ -219,9 +230,49 @@ public class BSItemModelGenerator {
         this.output.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), itemmodel$unbaked1, list));
     }
 
+    public void generateBloodVial(Item item) {
+        ResourceLocation resourcelocation = ModelLocationUtils.getModelLocation(item);
+        ItemModel.Unbaked flatModel = ItemModelUtils.plainModel(this.createFlatItemModel(item, ModelTemplates.FLAT_ITEM));
+        List<RangeSelectItemModel.Entry> bloodLevelEntries = new ArrayList<>();
+
+        for (int bloodLevel = 0; bloodLevel <= BloodVial.getMaxBloodLevel(); bloodLevel++) {
+            // Create a model for each blood level
+            String modelName = bloodLevel == 0 ?
+                    "vial" :
+                    getItemName(item) + "_" + (bloodLevel - 1);
+
+            ItemModel.Unbaked levelModel = ItemModelUtils.plainModel(BigSwordsR.rl("item/" + modelName));
+
+            // Create an entry for this blood level
+            bloodLevelEntries.add(ItemModelUtils.override(levelModel, bloodLevel));
+        }
+
+        ItemModel.Unbaked finalModel = ItemModelUtils.rangeSelect(
+                new RangeSelectItemModelProperty(BSDataComponents.BLOOD_LEVEL.get()) {
+                    @Override
+                    public float get(ItemStack p_388695_, @Nullable ClientLevel p_388363_, @Nullable LivingEntity p_387282_, int p_386614_) {
+                        return 0;
+                    }
+
+                    @Override
+                    public MapCodec<? extends RangeSelectItemModelProperty> type() {
+                        return null;
+                    }
+                },
+                flatModel,  // Default model when no specific override applies
+                bloodLevelEntries
+        );
+
+        this.output.accept(item, finalModel);
+    }
+
+    public String getItemName(Item item) {
+        return BuiltInRegistries.ITEM.getKey(item).toString().replace(MODID + ":", "");
+    }
+
     @OnlyIn(Dist.CLIENT)
-    static record TrimMaterialData(String name, ResourceKey<TrimMaterial> materialKey,
-                                   Map<ResourceKey<EquipmentAsset>, String> overrideArmorMaterials) {
+    record TrimMaterialData(String name, ResourceKey<TrimMaterial> materialKey,
+                            Map<ResourceKey<EquipmentAsset>, String> overrideArmorMaterials) {
         public String textureName(ResourceKey<EquipmentAsset> p_387088_) {
             return this.overrideArmorMaterials.getOrDefault(p_387088_, this.name);
         }
