@@ -187,50 +187,46 @@ public class BSItemModelProvider extends ItemModelProvider {
         String itemName = "item/" + name;
         ModelFile mcItem = getExistingFile(mcLoc("item/generated"));
 
-        if (item instanceof ArmorItem armorItem) {
-            trimMaterials.forEach((key, value) -> {
-                // Variables
-                Equippable equippable = item.getDefaultInstance().get(DataComponents.EQUIPPABLE);
-                if (equippable != null) {
-                    EquipmentSlot slot = equippable.slot();
+        trimMaterials.forEach((key, value) -> {
+            // Variables
+            Equippable equippable = item.getDefaultInstance().get(DataComponents.EQUIPPABLE);
+            EquipmentSlot slot = equippable.slot();
 
-                    String armorType = switch (slot) {
-                        case HEAD -> "helmet";
-                        case CHEST -> "chestplate";
-                        case LEGS -> "leggings";
-                        case FEET -> "boots";
-                        default -> "";
-                    };
+            String armorType = switch (slot) {
+                case HEAD -> "helmet";
+                case CHEST -> "chestplate";
+                case LEGS -> "leggings";
+                case FEET -> "boots";
+                default -> "";
+            };
 
-                    String trimType = key.location().getPath();
-                    float trimValue = value;
-                    ResourceLocation textureLocation;
-                    if (key.location().getNamespace().equals("minecraft")) { // Vanilla trims
-                        textureLocation = mcLoc("trims/items/" + armorType + "_trim_" + trimType);
-                    } else { // Modded trims
-                        textureLocation = modLoc("trims/items/" + armorType + "_trim_" + trimType);
-                    }
+            String trimType = key.location().getPath();
+            float trimValue = value;
+            ResourceLocation textureLocation;
+            if (key.location().getNamespace().equals("minecraft")) { // Vanilla trims
+                textureLocation = mcLoc("trims/items/" + armorType + "_trim_" + trimType);
+            } else { // Modded trims
+                textureLocation = modLoc("trims/items/" + armorType + "_trim_" + trimType);
+            }
 
-                    ModelFile model = new ModelFile.UncheckedModelFile(modLoc(itemName + "_" + trimType + "_trim"));
+            ModelFile model = new ModelFile.UncheckedModelFile(modLoc(itemName + "_" + trimType + "_trim"));
 
-                    //existingFileHelper.trackGenerated(textureLocation, PackType.CLIENT_RESOURCES, ".png", "textures");
+            //existingFileHelper.trackGenerated(textureLocation, PackType.CLIENT_RESOURCES, ".png", "textures");
 
-                    // Trimmed parts
-                    getBuilder(name + "_" + trimType + "_trim")
-                            .parent(mcItem)
-                            .texture("layer0", itemName)
-                            .texture("layer1", textureLocation);
+            // Trimmed parts
+            getBuilder(name + "_" + trimType + "_trim")
+                    .parent(mcItem)
+                    .texture("layer0", itemName)
+                    .texture("layer1", textureLocation);
 
-                    // Armor with trimmed parts
-                    getBuilder(name)
-                            .parent(mcItem)
-                            .override()
-                            .predicate(ResourceLocation.parse("trim_type"), trimValue)
-                            .model(model).end()
-                            .texture("layer0", modLoc(itemName));
-                }
-            });
-        }
+            // Armor with trimmed parts
+            getBuilder(name)
+                    .parent(mcItem)
+                    .override()
+                    .predicate(ResourceLocation.parse("trim_type"), trimValue)
+                    .model(model).end()
+                    .texture("layer0", modLoc(itemName));
+        });
     }
 
     public String getItemName(Item item) {
