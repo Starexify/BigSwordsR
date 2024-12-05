@@ -2,6 +2,9 @@ package net.nova.big_swords.data.models;
 
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperty;
+import net.minecraft.client.renderer.special.ShieldSpecialRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
@@ -96,28 +99,28 @@ public class BSItemModelGenerator {
         generateFlatItem(BSItems.SOUL_REAPER.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
         // Shields
-        //shieldItem(BSItems.WOODEN_SHIELD.get());
-        //shieldItem(BSItems.GILDED_WOODEN_SHIELD.get());
-        //shieldItem(BSItems.STONE_SHIELD.get());
-        //shieldItem(BSItems.GILDED_STONE_SHIELD.get());
-        //shieldItem(BSItems.IRON_SHIELD.get());
-        //shieldItem(BSItems.GILDED_IRON_SHIELD.get());
-        //shieldItem(BSItems.DIAMOND_SHIELD.get());
-        //shieldItem(BSItems.GILDED_DIAMOND_SHIELD.get());
-        //shieldItem(BSItems.NETHERITE_SHIELD.get());
-        //shieldItem(BSItems.GILDED_NETHERITE_SHIELD.get());
-        //shieldItem(BSItems.ENDER_SHIELD.get());
-        //shieldItem(BSItems.GILDED_ENDER_SHIELD.get());
-        //shieldItem(BSItems.QUARTZ_SHIELD.get());
-        //shieldItem(BSItems.GILDED_QUARTZ_SHIELD.get());
-        //shieldItem(BSItems.PATCHWORK_SHIELD.get());
-        //shieldItem(BSItems.GILDED_PATCHWORK_SHIELD.get());
-        //shieldItem(BSItems.SKULL_SHIELD.get());
-        //shieldItem(BSItems.GILDED_SKULL_SHIELD.get());
-        //shieldItem(BSItems.BIOMASS_SHIELD.get());
-        //shieldItem(BSItems.GILDED_BIOMASS_SHIELD.get());
-        //shieldItem(BSItems.LIVINGMETAL_SHIELD.get());
-        //shieldItem(BSItems.GILDED_LIVINGMETAL_SHIELD.get());
+        generateShield(BSItems.WOODEN_SHIELD.get());
+        generateShield(BSItems.GILDED_WOODEN_SHIELD.get());
+        generateShield(BSItems.STONE_SHIELD.get());
+        generateShield(BSItems.GILDED_STONE_SHIELD.get());
+        generateShield(BSItems.IRON_SHIELD.get());
+        generateShield(BSItems.GILDED_IRON_SHIELD.get());
+        generateShield(BSItems.DIAMOND_SHIELD.get());
+        generateShield(BSItems.GILDED_DIAMOND_SHIELD.get());
+        generateShield(BSItems.NETHERITE_SHIELD.get());
+        generateShield(BSItems.GILDED_NETHERITE_SHIELD.get());
+        generateShield(BSItems.ENDER_SHIELD.get());
+        generateShield(BSItems.GILDED_ENDER_SHIELD.get());
+        generateShield(BSItems.QUARTZ_SHIELD.get());
+        generateShield(BSItems.GILDED_QUARTZ_SHIELD.get());
+        generateShield(BSItems.PATCHWORK_SHIELD.get());
+        generateShield(BSItems.GILDED_PATCHWORK_SHIELD.get());
+        generateShield(BSItems.SKULL_SHIELD.get());
+        generateShield(BSItems.GILDED_SKULL_SHIELD.get());
+        generateShield(BSItems.BIOMASS_SHIELD.get());
+        generateShield(BSItems.GILDED_BIOMASS_SHIELD.get());
+        generateShield(BSItems.LIVINGMETAL_SHIELD.get());
+        generateShield(BSItems.GILDED_LIVINGMETAL_SHIELD.get());
     }
 
     // Methods
@@ -125,7 +128,17 @@ public class BSItemModelGenerator {
         return template.create(ModelLocationUtils.getModelLocation(item), TextureMapping.layer0(item), this.modelOutput);
     }
 
+    public void generateBooleanDispatch(Item item, ConditionalItemModelProperty p_388865_, ItemModel.Unbaked p_387060_, ItemModel.Unbaked p_388146_) {
+        this.output.accept(item, ItemModelUtils.conditional(p_388865_, p_387060_, p_388146_));
+    }
+
     public void generateFlatItem(Item item, ModelTemplate template) {
         this.output.accept(item, ItemModelUtils.plainModel(this.createFlatItemModel(item, template)));
+    }
+
+    public void generateShield(Item item) {
+        ItemModel.Unbaked itemmodel$unbaked = ItemModelUtils.plainModel(this.createFlatItemModel(item, BSModelTemplates.FLAT_HANDHELD_SHIELD_ITEM));
+        ItemModel.Unbaked itemmodel$unbaked1 = ItemModelUtils.plainModel(this.createFlatItemModel(item, BSModelTemplates.FLAT_HANDHELD_SHIELD_BLOCKING_ITEM));
+        this.generateBooleanDispatch(item, ItemModelUtils.isUsingItem(), itemmodel$unbaked1, itemmodel$unbaked);
     }
 }
