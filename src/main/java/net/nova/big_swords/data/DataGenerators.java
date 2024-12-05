@@ -27,9 +27,9 @@ public class DataGenerators {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-        //event.addProvider(new LangProvider(output));
+        event.addProvider(new LangProvider(output));
 
-        //event.addProvider(new BlockStateAndModelProvider(output, existingFileHelper));
+        event.addProvider(new BlockStateAndModelProvider(output, existingFileHelper));
         //event.addProvider(new BSItemModelProvider(output, existingFileHelper));
         event.addProvider(new BSEquipmentModelProvider(output));
 

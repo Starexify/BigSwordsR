@@ -36,22 +36,17 @@ public class BlockStateAndModelProvider extends BlockStateProvider {
             throw new IllegalArgumentException("Number of ages and visual stages must match");
         }
 
-        getVariantBuilder(pCropBlock)
-                .forAllStates(state -> {
-                    int age = state.getValue(pAgeProperty);
-                    String stageName = "stage" + pAgeToVisualStageMapping[age];
-                    return ConfiguredModel.builder()
-                            .modelFile(models().cross(name(pCropBlock) + "_" + stageName, modLoc("block/" + name(pCropBlock) + "_" + stageName)).renderType(RenderType.CUTOUT.name))
-                            .build();
-                });
-
-        itemModels().getBuilder(name(pCropBlock))
-                .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", modLoc("item/" + name(pCropBlock)));
+        getVariantBuilder(pCropBlock).forAllStates(state -> {
+            int age = state.getValue(pAgeProperty);
+            String stageName = "stage" + pAgeToVisualStageMapping[age];
+            return ConfiguredModel.builder()
+                    .modelFile(models().cross(name(pCropBlock) + "_" + stageName, modLoc("block/" + name(pCropBlock) + "_" + stageName)).renderType(RenderType.CUTOUT.name))
+                    .build();
+        });
     }
 
     public void normalBlock(Block block) {
-        simpleBlockWithItem(block, models().cubeAll(name(block), modLoc("block/" + name(block))));
+        simpleBlock(block, models().cubeAll(name(block), modLoc("block/" + name(block))));
     }
 
     public void creepBlock(Block block) {
@@ -69,8 +64,6 @@ public class BlockStateAndModelProvider extends BlockStateProvider {
                     .modelFile(model)
                     .build();
         });
-
-        simpleBlockItem(block, new ModelFile.UncheckedModelFile(modLoc("block/" + name(block))));
     }
 
     // Other stuff
