@@ -128,6 +128,14 @@ public class BSItemModelGenerator {
         return template.create(ModelLocationUtils.getModelLocation(item), TextureMapping.layer0(item), this.modelOutput);
     }
 
+    public ResourceLocation createFlatItemModel(Item p_387652_, String p_387410_, ModelTemplate p_386738_) {
+        return p_386738_.create(
+                ModelLocationUtils.getModelLocation(p_387652_, p_387410_),
+                TextureMapping.layer0(TextureMapping.getItemTexture(p_387652_, p_387410_)),
+                this.modelOutput
+        );
+    }
+
     public void generateBooleanDispatch(Item item, ConditionalItemModelProperty p_388865_, ItemModel.Unbaked p_387060_, ItemModel.Unbaked p_388146_) {
         this.output.accept(item, ItemModelUtils.conditional(p_388865_, p_387060_, p_388146_));
     }
@@ -138,7 +146,7 @@ public class BSItemModelGenerator {
 
     public void generateShield(Item item) {
         ItemModel.Unbaked itemmodel$unbaked = ItemModelUtils.plainModel(this.createFlatItemModel(item, BSModelTemplates.FLAT_HANDHELD_SHIELD_ITEM));
-        ItemModel.Unbaked itemmodel$unbaked1 = ItemModelUtils.plainModel(this.createFlatItemModel(item, BSModelTemplates.FLAT_HANDHELD_SHIELD_BLOCKING_ITEM));
+        ItemModel.Unbaked itemmodel$unbaked1 = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_blocking", BSModelTemplates.FLAT_HANDHELD_SHIELD_BLOCKING_ITEM));
         this.generateBooleanDispatch(item, ItemModelUtils.isUsingItem(), itemmodel$unbaked1, itemmodel$unbaked);
     }
 }
