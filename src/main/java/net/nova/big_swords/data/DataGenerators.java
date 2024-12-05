@@ -33,7 +33,7 @@ public class DataGenerators {
         //event.addProvider(new BSItemModelProvider(output, existingFileHelper));
         event.addProvider(new BSEquipmentModelProvider(output));
 
-        //event.addProvider(new BSRecipeProvider.Runner(output, lookupProvider));
+        event.addProvider(new BSRecipeProvider.Runner(output, lookupProvider));
 
         //BSBlockTagsProvider modBlockTagsProvider = new BSBlockTagsProvider(output, lookupProvider, existingFileHelper);
         //event.addProvider(modBlockTagsProvider);
