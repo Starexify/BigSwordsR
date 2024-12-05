@@ -1,14 +1,11 @@
 package net.nova.big_swords.data.models;
 
-import net.minecraft.client.color.item.Dye;
-import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperty;
 import net.minecraft.client.renderer.item.properties.select.TrimMaterialProperty;
-import net.minecraft.client.renderer.special.ShieldSpecialRenderer;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -34,7 +31,7 @@ public class BSItemModelGenerator {
     public final ItemModelOutput output;
     public final BiConsumer<ResourceLocation, ModelInstance> modelOutput;
 
-    private static final List<BSItemModelGenerator.TrimMaterialData> TRIM_MATERIAL_MODELS = List.of(
+    public static final List<BSItemModelGenerator.TrimMaterialData> TRIM_MATERIAL_MODELS = List.of(
             new BSItemModelGenerator.TrimMaterialData("quartz", TrimMaterials.QUARTZ, Map.of()),
             new BSItemModelGenerator.TrimMaterialData("iron", TrimMaterials.IRON, Map.of(EquipmentAssets.IRON, "iron_darker")),
             new BSItemModelGenerator.TrimMaterialData("netherite", TrimMaterials.NETHERITE, Map.of(EquipmentAssets.NETHERITE, "netherite_darker")),
@@ -151,6 +148,9 @@ public class BSItemModelGenerator {
         generateShield(BSItems.GILDED_BIOMASS_SHIELD.get());
         generateShield(BSItems.LIVINGMETAL_SHIELD.get());
         generateShield(BSItems.GILDED_LIVINGMETAL_SHIELD.get());
+
+        // Blocks
+
     }
 
     // Methods

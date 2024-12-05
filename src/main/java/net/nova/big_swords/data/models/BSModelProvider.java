@@ -47,6 +47,7 @@ public class BSModelProvider implements DataProvider {
 
         new BSItemModelGenerator(itemInfoCollector, simpleModelCollector).run();
 
+        itemInfoCollector.generateBlockItems();
         //itemInfoCollector.finalizeAndValidate();
         return CompletableFuture.allOf(
                 simpleModelCollector.save(output, this.modelPathProvider),
@@ -85,7 +86,7 @@ public class BSModelProvider implements DataProvider {
             copies.put(target, source);
         }
 
-        public void finalizeAndValidate() {
+        public void generateBlockItems() {
             BuiltInRegistries.ITEM.forEach(item -> {
                 if (item.builtInRegistryHolder().key().location().getNamespace().equals(BigSwordsR.MODID)) {
                     if (!this.copies.containsKey(item)) {
@@ -96,7 +97,9 @@ public class BSModelProvider implements DataProvider {
                     }
                 }
             });
+        }
 
+        public void finalizeAndValidate() {
             Map<Item, Item> modCopies = this.copies.entrySet().stream()
                     .filter(entry ->
                             entry.getKey().builtInRegistryHolder().key().location().getNamespace().equals(BigSwordsR.MODID) &&
