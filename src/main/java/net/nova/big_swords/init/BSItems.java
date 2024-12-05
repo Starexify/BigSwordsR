@@ -29,7 +29,7 @@ public class BSItems {
     public static DeferredItem<Item> GIANT_LIVINGMETAL_HANDLE = registerItem("giant_livingmetal_handle", Item::new);
 
     // Ender Template
-    public static DeferredItem<Item> ENDER_UPGRADE_SMITHING_TEMPLATE = registerItem("ender_upgrade_smithing_template", EnderSmithingTemplate::createEnderUpgradeTemplate);
+    public static DeferredItem<Item> ENDER_UPGRADE_SMITHING_TEMPLATE = registerItem("ender_upgrade_smithing_template", properties -> EnderSmithingTemplate.createEnderUpgradeTemplate(properties.rarity(Rarity.RARE)));
 
     // Livingmetal Stuff
     public static DeferredItem<Item> LIVINGMETAL_INGOT = registerItem("livingmetal_ingot", Item::new);
