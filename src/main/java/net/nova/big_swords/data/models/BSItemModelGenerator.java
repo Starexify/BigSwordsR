@@ -74,14 +74,14 @@ public class BSItemModelGenerator {
         generateFlatItem(BSItems.BIOMASS_BIG_SWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
 
         // Glaives
-        //handheldGlaive(BSItems.WOODEN_GLAIVE.get());
-        //handheldGlaive(BSItems.STONE_GLAIVE.get());
-        //handheldGlaive(BSItems.IRON_GLAIVE.get());
-        //handheldGlaive(BSItems.GOLDEN_GLAIVE.get());
-        //handheldGlaive(BSItems.DIAMOND_GLAIVE.get());
-        //handheldGlaive(BSItems.NETHERITE_GLAIVE.get());
-        //handheldGlaive(BSItems.BIOMASS_GLAIVE.get());
-        //handheldGlaive(BSItems.LIVINGMETAL_GLAIVE.get());
+        generateFlatItem(BSItems.WOODEN_GLAIVE.get(), BSModelTemplates.FLAT_HANDHELD_GLAIVE_ITEM);
+        generateFlatItem(BSItems.STONE_GLAIVE.get(), BSModelTemplates.FLAT_HANDHELD_GLAIVE_ITEM);
+        generateFlatItem(BSItems.IRON_GLAIVE.get(), BSModelTemplates.FLAT_HANDHELD_GLAIVE_ITEM);
+        generateFlatItem(BSItems.GOLDEN_GLAIVE.get(), BSModelTemplates.FLAT_HANDHELD_GLAIVE_ITEM);
+        generateFlatItem(BSItems.DIAMOND_GLAIVE.get(), BSModelTemplates.FLAT_HANDHELD_GLAIVE_ITEM);
+        generateFlatItem(BSItems.NETHERITE_GLAIVE.get(), BSModelTemplates.FLAT_HANDHELD_GLAIVE_ITEM);
+        generateFlatItem(BSItems.BIOMASS_GLAIVE.get(), BSModelTemplates.FLAT_HANDHELD_GLAIVE_ITEM);
+        generateFlatItem(BSItems.LIVINGMETAL_GLAIVE.get(), BSModelTemplates.FLAT_HANDHELD_GLAIVE_ITEM);
 
         // Scythes
         generateFlatItem(BSItems.WOODEN_SCYTHE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
