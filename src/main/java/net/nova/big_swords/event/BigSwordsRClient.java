@@ -13,9 +13,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
-import net.nova.big_swords.client.renderer.item.BSItemProperties;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -52,10 +50,5 @@ public class BigSwordsRClient {
                 }
             });
         });
-    }
-
-    @SubscribeEvent
-    public static void setupClient(FMLClientSetupEvent event) {
-        event.enqueueWork(BSItemProperties::addCustomItemProperties);
     }
 }

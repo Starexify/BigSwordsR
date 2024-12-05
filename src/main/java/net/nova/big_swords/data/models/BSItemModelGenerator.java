@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperty;
 import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty;
 import net.minecraft.client.renderer.item.properties.select.TrimMaterialProperty;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
@@ -248,10 +249,12 @@ public class BSItemModelGenerator {
         }
 
         ItemModel.Unbaked finalModel = ItemModelUtils.rangeSelect(
-                new RangeSelectItemModelProperty(BSDataComponents.BLOOD_LEVEL.get()) {
+                new RangeSelectItemModelProperty() {
+                    private DataComponentType<Integer> componentType;
+
                     @Override
-                    public float get(ItemStack p_388695_, @Nullable ClientLevel p_388363_, @Nullable LivingEntity p_387282_, int p_386614_) {
-                        return 0;
+                    public float get(ItemStack itemStack, @Nullable ClientLevel p_388363_, @Nullable LivingEntity p_387282_, int p_386614_) {
+                        return BloodVial.getBloodLevel(itemStack);
                     }
 
                     @Override
@@ -259,7 +262,7 @@ public class BSItemModelGenerator {
                         return null;
                     }
                 },
-                flatModel,  // Default model when no specific override applies
+                flatModel,
                 bloodLevelEntries
         );
 
