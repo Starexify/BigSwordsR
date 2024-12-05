@@ -38,21 +38,21 @@ public class DataGenerators {
         BSBlockTagsProvider modBlockTagsProvider = new BSBlockTagsProvider(output, lookupProvider, existingFileHelper);
         event.addProvider(modBlockTagsProvider);
         event.addProvider(new BSItemTagsProvider(output, lookupProvider, modBlockTagsProvider, existingFileHelper));
-        //event.addProvider(new BSEntityTypeTagsProvider(output, lookupProvider, existingFileHelper));
-        //event.addProvider(new BSEnchantmentTagsProvider(output, lookupProvider, existingFileHelper));
+        event.addProvider(new BSEntityTypeTagsProvider(output, lookupProvider, existingFileHelper));
+        event.addProvider(new BSEnchantmentTagsProvider(output, lookupProvider, existingFileHelper));
 
-        //event.addProvider(new BSLootTableProvider(output, lookupProvider));
+        event.addProvider(new BSLootTableProvider(output, lookupProvider));
 
-        //event.addProvider(new BSDataMapProvider(output, lookupProvider));
+        event.addProvider(new BSDataMapProvider(output, lookupProvider));
 
-        //event.addProvider(new SoundsProvider(output, existingFileHelper));
+        event.addProvider(new SoundsProvider(output, existingFileHelper));
 
-        //event.addProvider(new BSAdvancementsProvider(output, lookupProvider, existingFileHelper));
+        event.addProvider(new BSAdvancementsProvider(output, lookupProvider, existingFileHelper));
 
-        //event.addProvider(new GlobalLootModifier(output, lookupProvider));
+        event.addProvider(new GlobalLootModifier(output, lookupProvider));
 
-        //event.addProvider(new DatapackProvider(output, lookupProvider));
+        event.addProvider(new DatapackProvider(output, lookupProvider));
 
-        //event.addProvider(new AtlasesProvider(output, lookupProvider, existingFileHelper));
+        event.addProvider(new AtlasesProvider(output, lookupProvider, existingFileHelper));
     }
 }
