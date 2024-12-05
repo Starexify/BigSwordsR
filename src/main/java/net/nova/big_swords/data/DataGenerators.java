@@ -31,7 +31,7 @@ public class DataGenerators {
 
         //event.addProvider(new BlockStateAndModelProvider(output, existingFileHelper));
         //event.addProvider(new BSItemModelProvider(output, existingFileHelper));
-        //event.addProvider(new BSEquipmentModelProvider(output));
+        event.addProvider(new BSEquipmentModelProvider(output));
 
         //event.addProvider(new BSRecipeProvider.Runner(output, lookupProvider));
 

@@ -6,8 +6,8 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.equipment.BSEquipmentAssets;
 
 import java.util.HashMap;
@@ -28,8 +28,8 @@ public class BSEquipmentModelProvider extends EquipmentAssetProvider {
         consumer.accept(BSEquipmentAssets.BIOMASS, onlyHumanoid("biomass"));
     }
 
-    private static EquipmentClientInfo onlyHumanoid(String name) {
-        return EquipmentClientInfo.builder().addHumanoidLayers(ResourceLocation.withDefaultNamespace(name)).build();
+    public static EquipmentClientInfo onlyHumanoid(String name) {
+        return EquipmentClientInfo.builder().addHumanoidLayers(BigSwordsR.rl(name)).build();
     }
 
     @Override

@@ -31,8 +31,6 @@ public class BigSwordsR {
         Sounds.SOUND_EVENTS.register(bus);
         BSLootModifier.LOOT_MODIFIERS.register(bus);
         BSEnchantmentEntityEffects.ENTITY_EFFECT.register(bus);
-
-        bus.addListener(DataGenerators::gatherData);
     }
 
     // Util
