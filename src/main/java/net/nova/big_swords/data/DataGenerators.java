@@ -1,14 +1,11 @@
 package net.nova.big_swords.data;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.data.advancement.BSAdvancementsProvider;
 import net.nova.big_swords.data.loot.BSLootTableProvider;
 import net.nova.big_swords.data.loot.GlobalLootModifier;
@@ -25,43 +22,37 @@ import static net.nova.big_swords.BigSwordsR.MODID;
 @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        try {
-            DataGenerator generator = event.getGenerator();
-            PackOutput output = generator.getPackOutput();
-            ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-            CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+    public static void gatherData(GatherDataEvent.Client event) {
+        PackOutput output = event.getGenerator().getPackOutput();
+        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
-            generator.addProvider(true, new LangProvider(output));
+        //event.addProvider(new LangProvider(output));
 
-            generator.addProvider(true, new BlockStateAndModelProvider(output, existingFileHelper));
-            generator.addProvider(true, new BSItemModelProvider(output, existingFileHelper));
-            generator.addProvider(true, new BSEquipmentModelProvider(output));
+        //event.addProvider(new BlockStateAndModelProvider(output, existingFileHelper));
+        //event.addProvider(new BSItemModelProvider(output, existingFileHelper));
+        //event.addProvider(new BSEquipmentModelProvider(output));
 
-            generator.addProvider(true, new BSRecipeProvider.Runner(output, lookupProvider));
+        //event.addProvider(new BSRecipeProvider.Runner(output, lookupProvider));
 
-            BSBlockTagsProvider modBlockTagsProvider = new BSBlockTagsProvider(output, lookupProvider, existingFileHelper);
-            generator.addProvider(true, modBlockTagsProvider);
-            generator.addProvider(true, new BSItemTagsProvider(output, lookupProvider, modBlockTagsProvider, existingFileHelper));
-            generator.addProvider(true, new BSEntityTypeTagsProvider(output, lookupProvider, existingFileHelper));
-            generator.addProvider(true, new BSEnchantmentTagsProvider(output, lookupProvider, existingFileHelper));
+        //BSBlockTagsProvider modBlockTagsProvider = new BSBlockTagsProvider(output, lookupProvider, existingFileHelper);
+        //event.addProvider(modBlockTagsProvider);
+        //event.addProvider(new BSItemTagsProvider(output, lookupProvider, modBlockTagsProvider, existingFileHelper));
+        //event.addProvider(new BSEntityTypeTagsProvider(output, lookupProvider, existingFileHelper));
+        //event.addProvider(new BSEnchantmentTagsProvider(output, lookupProvider, existingFileHelper));
 
-            generator.addProvider(true, new BSLootTableProvider(output, lookupProvider));
+        //event.addProvider(new BSLootTableProvider(output, lookupProvider));
 
-            generator.addProvider(true, new BSDataMapProvider(output, lookupProvider));
+        //event.addProvider(new BSDataMapProvider(output, lookupProvider));
 
-            generator.addProvider(true, new SoundsProvider(output, existingFileHelper));
+        //event.addProvider(new SoundsProvider(output, existingFileHelper));
 
-            generator.addProvider(true, new BSAdvancementsProvider(output, lookupProvider, existingFileHelper));
+        //event.addProvider(new BSAdvancementsProvider(output, lookupProvider, existingFileHelper));
 
-            generator.addProvider(true, new GlobalLootModifier(output, lookupProvider));
+        //event.addProvider(new GlobalLootModifier(output, lookupProvider));
 
-            generator.addProvider(true, new DatapackProvider(output, lookupProvider));
+        //event.addProvider(new DatapackProvider(output, lookupProvider));
 
-            generator.addProvider(true, new AtlasesProvider(output, lookupProvider, existingFileHelper));
-
-        } catch (RuntimeException e) {
-            BigSwordsR.logger.error("Cosmicore failed to gather data", e);
-        }
+        //event.addProvider(new AtlasesProvider(output, lookupProvider, existingFileHelper));
     }
 }

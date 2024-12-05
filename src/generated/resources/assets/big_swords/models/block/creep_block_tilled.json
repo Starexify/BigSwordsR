@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/cube_bottom_top",
-  "textures": {
-    "bottom": "minecraft:block/soul_sand",
-    "side": "big_swords:block/creep_block_side",
-    "top": "big_swords:block/creep_block_top_tilled"
-  }
-}

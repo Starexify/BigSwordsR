@@ -1,6 +1,5 @@
 package net.nova.big_swords.client.renderer.item;
 
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
@@ -42,16 +41,16 @@ public class BSItemProperties {
     }
 
     public static void makeShield(Item item) {
-        ItemProperties.register(item, blockingPredicate,
+        /*ItemProperties.register(item, blockingPredicate,
                 (p_174575_, p_174576_, p_174577_, p_174578_) -> p_174577_ != null && p_174577_.isUsingItem() && p_174577_.getUseItem() == p_174575_ ? 1.0F : 0.0F
-        );
+        );*/
     }
 
     public static void bloodVial(Item item) {
         if (item instanceof BloodVial bloodVial) {
-            ItemProperties.register(item, bloodPredicate,
+            /*ItemProperties.register(item, bloodPredicate,
                     (stack, level, entity, p_174578_) -> bloodVial.getBloodLevel(stack)
-            );
+            );*/
         }
     }
 }
