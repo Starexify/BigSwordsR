@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.world.item.equipment.Equippable;
@@ -21,6 +22,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.client.renderer.item.BloodLevelModelProperty;
+import net.nova.big_swords.data.BSTrimMaterials;
 import net.nova.big_swords.equipment.BSEquipmentAssets;
 import net.nova.big_swords.init.BSItems;
 
@@ -45,7 +47,8 @@ public class BSItemModelGenerator {
             new BSItemModelGenerator.TrimMaterialData("diamond", TrimMaterials.DIAMOND, Map.of(EquipmentAssets.DIAMOND, "diamond_darker")),
             new BSItemModelGenerator.TrimMaterialData("lapis", TrimMaterials.LAPIS, Map.of()),
             new BSItemModelGenerator.TrimMaterialData("amethyst", TrimMaterials.AMETHYST, Map.of()),
-            new BSItemModelGenerator.TrimMaterialData("resin", TrimMaterials.RESIN, Map.of())
+            new BSItemModelGenerator.TrimMaterialData("resin", TrimMaterials.RESIN, Map.of()),
+            new BSItemModelGenerator.TrimMaterialData("livingmetal", BSTrimMaterials.LIVINGMETAL, Map.of(BSEquipmentAssets.LIVINGMETAL, "livingmetal_darker"))
     );
 
     public BSItemModelGenerator(ItemModelOutput output, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
@@ -209,7 +212,6 @@ public class BSItemModelGenerator {
             this.generateLayeredItem(resourcelocation3, resourcelocation1, resourcelocation4);
             itemmodel$unbaked = ItemModelUtils.plainModel(resourcelocation3);
 
-
             list.add(ItemModelUtils.when(trimMaterial.materialKey, itemmodel$unbaked));
         }
 
@@ -217,32 +219,31 @@ public class BSItemModelGenerator {
         ModelTemplates.FLAT_ITEM.create(resourcelocation, TextureMapping.layer0(resourcelocation1), this.modelOutput);
         basicModel = ItemModelUtils.plainModel(resourcelocation);
 
-        this.output.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), basicModel, list));
+        output.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), basicModel, list));
     }
 
     public void generateBloodVial(Item item) {
         List<RangeSelectItemModel.Entry> list = new ArrayList<>();
         ItemModel.Unbaked basicModel = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(
-                ModelLocationUtils.decorateItemModelLocation("vial"),
+                BigSwordsR.rl("item/vial"),
                 TextureMapping.layer0(BigSwordsR.rl("item/vial")),
                 this.modelOutput
         ));
         list.add(ItemModelUtils.override(basicModel, 0.0F));
 
         for (int i = 1; i < 10; i++) {
-            ItemModel.Unbaked itemmodel$unbaked1 = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(
+            ItemModel.Unbaked bloodModel = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(
                     ModelLocationUtils.getModelLocation(item, "_" + i),
                     TextureMapping.layer0(TextureMapping.getItemTexture(item, "_" + (i - 1))),
                     this.modelOutput
             ));
-            list.add(ItemModelUtils.override(itemmodel$unbaked1, (float) i));
+            list.add(ItemModelUtils.override(bloodModel, (float) i));
         }
         output.accept(item, ItemModelUtils.rangeSelect(new BloodLevelModelProperty(), list));
     }
 
     @OnlyIn(Dist.CLIENT)
-    record TrimMaterialData(String name, ResourceKey<TrimMaterial> materialKey,
-                            Map<ResourceKey<EquipmentAsset>, String> overrideArmorMaterials) {
+    record TrimMaterialData(String name, ResourceKey<TrimMaterial> materialKey, Map<ResourceKey<EquipmentAsset>, String> overrideArmorMaterials) {
         public String textureName(ResourceKey<EquipmentAsset> p_387088_) {
             return this.overrideArmorMaterials.getOrDefault(p_387088_, this.name);
         }
