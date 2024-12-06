@@ -220,7 +220,7 @@ public class BSItemModelGenerator {
         this.output.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), basicModel, list));
     }
 
-    public List<RangeSelectItemModel.Entry> createBloodVialModels(Item item) {
+    public void generateBloodVial(Item item) {
         List<RangeSelectItemModel.Entry> list = new ArrayList<>();
         ItemModel.Unbaked basicModel = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(
                 ModelLocationUtils.decorateItemModelLocation("vial"),
@@ -237,12 +237,6 @@ public class BSItemModelGenerator {
             ));
             list.add(ItemModelUtils.override(itemmodel$unbaked1, (float) i));
         }
-
-        return list;
-    }
-
-    public void generateBloodVial(Item item) {
-        List<RangeSelectItemModel.Entry> list = this.createBloodVialModels(item);
         output.accept(item, ItemModelUtils.rangeSelect(new BloodLevelModelProperty(), list));
     }
 
