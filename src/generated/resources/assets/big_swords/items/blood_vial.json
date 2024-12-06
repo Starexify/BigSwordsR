@@ -5,7 +5,7 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "big_swords:item/blood_vial_vial"
+          "model": "big_swords:vial"
         },
         "threshold": 0.0
       },
@@ -69,13 +69,6 @@
         "model": {
           "type": "minecraft:model",
           "model": "big_swords:item/blood_vial_9"
-        },
-        "threshold": 9.0
-      },
-      {
-        "model": {
-          "type": "minecraft:model",
-          "model": "big_swords:item/blood_vial_vial"
         },
         "threshold": 9.0
       }
