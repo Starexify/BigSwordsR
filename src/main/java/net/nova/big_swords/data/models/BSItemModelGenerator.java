@@ -1,25 +1,17 @@
 package net.nova.big_swords.data.models;
 
-import com.mojang.serialization.MapCodec;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.RangeSelectItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperty;
-import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperty;
 import net.minecraft.client.renderer.item.properties.select.TrimMaterialProperty;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.world.item.equipment.Equippable;
@@ -30,18 +22,12 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.client.renderer.item.BloodLevelModelProperty;
 import net.nova.big_swords.equipment.BSEquipmentAssets;
-import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
-import net.nova.big_swords.item.BloodVial;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiConsumer;
-
-import static net.nova.big_swords.BigSwordsR.MODID;
 
 @OnlyIn(Dist.CLIENT)
 public class BSItemModelGenerator {
@@ -238,7 +224,7 @@ public class BSItemModelGenerator {
         List<RangeSelectItemModel.Entry> list = new ArrayList<>();
         ItemModel.Unbaked basicModel = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(
                 ModelLocationUtils.decorateItemModelLocation("vial"),
-                TextureMapping.layer0(BigSwordsR.rl("vial")),
+                TextureMapping.layer0(BigSwordsR.rl("item/vial")),
                 this.modelOutput
         ));
         list.add(ItemModelUtils.override(basicModel, 0.0F));
@@ -246,7 +232,7 @@ public class BSItemModelGenerator {
         for (int i = 1; i < 10; i++) {
             ItemModel.Unbaked itemmodel$unbaked1 = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(
                     ModelLocationUtils.getModelLocation(item, "_" + i),
-                    TextureMapping.layer0(TextureMapping.getItemTexture(item, "_" + i)),
+                    TextureMapping.layer0(TextureMapping.getItemTexture(item, "_" + (i - 1))),
                     this.modelOutput
             ));
             list.add(ItemModelUtils.override(itemmodel$unbaked1, (float) i));
