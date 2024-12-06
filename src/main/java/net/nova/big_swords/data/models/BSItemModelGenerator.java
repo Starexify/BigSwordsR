@@ -238,16 +238,18 @@ public class BSItemModelGenerator {
         List<RangeSelectItemModel.Entry> list = new ArrayList<>();
         ItemModel.Unbaked basicModel = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(
                 ModelLocationUtils.decorateItemModelLocation("vial"),
-                TextureMapping.layer0( BigSwordsR.rl("vial")),
+                TextureMapping.layer0(BigSwordsR.rl("vial")),
                 this.modelOutput
         ));
         list.add(ItemModelUtils.override(basicModel, 0.0F));
 
         for (int i = 1; i < 10; i++) {
-            ItemModel.Unbaked itemmodel$unbaked1 = ItemModelUtils.plainModel(
-                    this.createFlatItemModel(item, "_" + i, ModelTemplates.FLAT_ITEM)
-            );
-            list.add(ItemModelUtils.override(itemmodel$unbaked1, (float)i));
+            ItemModel.Unbaked itemmodel$unbaked1 = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(
+                    ModelLocationUtils.getModelLocation(item, "_" + i),
+                    TextureMapping.layer0(TextureMapping.getItemTexture(item, "_" + i)),
+                    this.modelOutput
+            ));
+            list.add(ItemModelUtils.override(itemmodel$unbaked1, (float) i));
         }
 
         return list;
@@ -256,9 +258,7 @@ public class BSItemModelGenerator {
     public void generateBloodVial(Item item) {
         ItemModel.Unbaked unbakedModel = ItemModelUtils.plainModel(this.createFlatItemModel(item, ModelTemplates.FLAT_ITEM));
         List<RangeSelectItemModel.Entry> list = this.createBloodVialModels(item);
-        output.accept(item, ItemModelUtils.rangeSelect(
-                new BloodLevelModelProperty(), unbakedModel, list
-        ));
+        output.accept(item, ItemModelUtils.rangeSelect(new BloodLevelModelProperty(), unbakedModel, list));
     }
 
     @OnlyIn(Dist.CLIENT)

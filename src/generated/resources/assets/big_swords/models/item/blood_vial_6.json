@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "big_swords:item/blood_vial"
+    "layer0": "big_swords:item/blood_vial_6"
   }
 }
