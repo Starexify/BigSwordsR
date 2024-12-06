@@ -1,6 +1,8 @@
 package net.nova.big_swords.event;
 
+import net.minecraft.client.renderer.item.properties.numeric.RangeSelectItemModelProperties;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackLocationInfo;
 import net.minecraft.server.packs.PackSelectionConfig;
 import net.minecraft.server.packs.PackType;
@@ -13,7 +15,11 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterRangeSelectItemModelPropertyEvent;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
+import net.nova.big_swords.BigSwordsR;
+import net.nova.big_swords.client.renderer.item.BloodLevelModelProperty;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -29,7 +35,6 @@ public class BigSwordsRClient {
     public static String RP_16x_DESC = "resourcePack." + MODID + "." + RP_16x + ".description";
     public static String RP_old_NAME = "resourcePack." + MODID + "." + RP_old + ".name";
     public static String RP_old_DESC = "resourcePack." + MODID + "." + RP_old + ".description";
-
 
     // Integrated Resourcepack
     @SubscribeEvent
@@ -50,5 +55,10 @@ public class BigSwordsRClient {
                 }
             });
         });
+    }
+
+    @SubscribeEvent
+    public static void addItemProperty(RegisterRangeSelectItemModelPropertyEvent event) {
+        event.register(BigSwordsR.rl("blood_level"), BloodLevelModelProperty.MAP_CODEC);
     }
 }

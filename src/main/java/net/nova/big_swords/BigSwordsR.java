@@ -11,7 +11,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.nova.big_swords.data.DataGenerators;
 import net.nova.big_swords.init.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

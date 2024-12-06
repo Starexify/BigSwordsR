@@ -7,18 +7,21 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.Nullable;
+import net.nova.big_swords.item.BloodVial;
+
+import javax.annotation.Nullable;
 
 @OnlyIn(Dist.CLIENT)
 public class BloodLevelModelProperty implements RangeSelectItemModelProperty {
+    public static final MapCodec<BloodLevelModelProperty> MAP_CODEC = MapCodec.unit(new BloodLevelModelProperty());
 
     @Override
-    public float get(ItemStack p_388695_, @Nullable ClientLevel p_388363_, @Nullable LivingEntity p_387282_, int p_386614_) {
-        return 0;
+    public float get(ItemStack item, @javax.annotation.Nullable ClientLevel clientLevel, @Nullable LivingEntity entity, int p_388371_) {
+        return BloodVial.getBloodLevel(item);
     }
 
     @Override
     public MapCodec<? extends RangeSelectItemModelProperty> type() {
-        return null;
+        return MAP_CODEC;
     }
 }

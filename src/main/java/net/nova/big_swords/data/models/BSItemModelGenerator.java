@@ -15,6 +15,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
@@ -36,6 +37,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
@@ -211,10 +213,10 @@ public class BSItemModelGenerator {
             default -> "";
         };
 
-        for (BSItemModelGenerator.TrimMaterialData itemmodelgenerators$trimmaterialdata : TRIM_MATERIAL_MODELS) {
-            ResourceLocation resourcelocation3 = resourcelocation.withSuffix("_" + itemmodelgenerators$trimmaterialdata.name() + "_trim");
+        for (BSItemModelGenerator.TrimMaterialData trimMaterial : TRIM_MATERIAL_MODELS) {
+            ResourceLocation resourcelocation3 = resourcelocation.withSuffix("_" + trimMaterial.name() + "_trim");
             ResourceLocation resourcelocation4 = ResourceLocation.withDefaultNamespace(
-                    "trims/items/" + armorType + "_trim_" + itemmodelgenerators$trimmaterialdata.textureName(equipmentAsset)
+                    "trims/items/" + armorType + "_trim_" + trimMaterial.textureName(equipmentAsset)
             );
             ItemModel.Unbaked itemmodel$unbaked;
 
@@ -222,26 +224,39 @@ public class BSItemModelGenerator {
             itemmodel$unbaked = ItemModelUtils.plainModel(resourcelocation3);
 
 
-            list.add(ItemModelUtils.when(itemmodelgenerators$trimmaterialdata.materialKey, itemmodel$unbaked));
+            list.add(ItemModelUtils.when(trimMaterial.materialKey, itemmodel$unbaked));
         }
 
-        ItemModel.Unbaked itemmodel$unbaked1;
+        ItemModel.Unbaked basicModel;
         ModelTemplates.FLAT_ITEM.create(resourcelocation, TextureMapping.layer0(resourcelocation1), this.modelOutput);
-        itemmodel$unbaked1 = ItemModelUtils.plainModel(resourcelocation);
+        basicModel = ItemModelUtils.plainModel(resourcelocation);
 
-        this.output.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), itemmodel$unbaked1, list));
+        this.output.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), basicModel, list));
+    }
+
+    private List<RangeSelectItemModel.Entry> createBloodVialModels(Item item) {
+        List<RangeSelectItemModel.Entry> list = new ArrayList<>();
+        ItemModel.Unbaked itemmodel$unbaked = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_16", ModelTemplates.FLAT_ITEM));
+        list.add(ItemModelUtils.override(itemmodel$unbaked, 0.0F));
+
+        for (int i = 1; i < 32; i++) {
+            int j = Mth.positiveModulo(i - 16, 32);
+            ItemModel.Unbaked itemmodel$unbaked1 = ItemModelUtils.plainModel(
+                    this.createFlatItemModel(item, String.format(Locale.ROOT, "_%02d", j), ModelTemplates.FLAT_ITEM)
+            );
+            list.add(ItemModelUtils.override(itemmodel$unbaked1, (float)i - 0.5F));
+        }
+
+        list.add(ItemModelUtils.override(itemmodel$unbaked, 31.5F));
+        return list;
     }
 
     public void generateBloodVial(Item item) {
-/*        output.accept(item, ItemModelUtils.rangeSelect(
-                BloodLevelModelProperty,
-                8.0F,
-                ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item)),
-                *(1..8).map {
-            val model = ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item, "_$it"))
-            ItemModelUtils.override(model, it.toFloat())
-        }.toTypedArray()
-                ));*/
+        ItemModel.Unbaked unbakedModel = ItemModelUtils.plainModel(this.createFlatItemModel(item, ModelTemplates.FLAT_ITEM));
+        List<RangeSelectItemModel.Entry> list = this.createBloodVialModels(item);
+        output.accept(item, ItemModelUtils.rangeSelect(
+                new BloodLevelModelProperty(), unbakedModel, list
+        ));
     }
 
     @OnlyIn(Dist.CLIENT)
