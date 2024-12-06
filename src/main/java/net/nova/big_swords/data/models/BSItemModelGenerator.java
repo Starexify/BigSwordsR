@@ -237,7 +237,7 @@ public class BSItemModelGenerator {
     public List<RangeSelectItemModel.Entry> createBloodVialModels(Item item) {
         List<RangeSelectItemModel.Entry> list = new ArrayList<>();
         ItemModel.Unbaked basicModel = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(
-                BigSwordsR.rl("vial"),
+                ModelLocationUtils.decorateItemModelLocation("vial"),
                 TextureMapping.layer0( BigSwordsR.rl("vial")),
                 this.modelOutput
         ));
