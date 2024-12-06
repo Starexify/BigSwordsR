@@ -242,9 +242,8 @@ public class BSItemModelGenerator {
     }
 
     public void generateBloodVial(Item item) {
-        ItemModel.Unbaked unbakedModel = ItemModelUtils.plainModel(this.createFlatItemModel(item, ModelTemplates.FLAT_ITEM));
         List<RangeSelectItemModel.Entry> list = this.createBloodVialModels(item);
-        output.accept(item, ItemModelUtils.rangeSelect(new BloodLevelModelProperty(), unbakedModel, list));
+        output.accept(item, ItemModelUtils.rangeSelect(new BloodLevelModelProperty(), list));
     }
 
     @OnlyIn(Dist.CLIENT)
