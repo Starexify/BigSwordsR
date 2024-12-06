@@ -234,20 +234,19 @@ public class BSItemModelGenerator {
         this.output.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), basicModel, list));
     }
 
-    private List<RangeSelectItemModel.Entry> createBloodVialModels(Item item) {
+    public List<RangeSelectItemModel.Entry> createBloodVialModels(Item item) {
         List<RangeSelectItemModel.Entry> list = new ArrayList<>();
-        ItemModel.Unbaked itemmodel$unbaked = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_16", ModelTemplates.FLAT_ITEM));
+        ItemModel.Unbaked itemmodel$unbaked = ItemModelUtils.plainModel(this.createFlatItemModel(item, "", ModelTemplates.FLAT_ITEM));
         list.add(ItemModelUtils.override(itemmodel$unbaked, 0.0F));
 
-        for (int i = 1; i < 32; i++) {
-            int j = Mth.positiveModulo(i - 16, 32);
+        for (int i = 1; i < 10; i++) {
             ItemModel.Unbaked itemmodel$unbaked1 = ItemModelUtils.plainModel(
-                    this.createFlatItemModel(item, String.format(Locale.ROOT, "_%02d", j), ModelTemplates.FLAT_ITEM)
+                    this.createFlatItemModel(item, "_" + i, ModelTemplates.FLAT_ITEM)
             );
-            list.add(ItemModelUtils.override(itemmodel$unbaked1, (float)i - 0.5F));
+            list.add(ItemModelUtils.override(itemmodel$unbaked1, (float)i));
         }
 
-        list.add(ItemModelUtils.override(itemmodel$unbaked, 31.5F));
+        list.add(ItemModelUtils.override(itemmodel$unbaked, 9.0F));
         return list;
     }
 
