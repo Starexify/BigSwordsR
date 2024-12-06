@@ -27,6 +27,7 @@ import net.minecraft.world.item.equipment.trim.TrimMaterials;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.nova.big_swords.BigSwordsR;
+import net.nova.big_swords.client.renderer.item.BloodLevelModelProperty;
 import net.nova.big_swords.equipment.BSEquipmentAssets;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
@@ -232,45 +233,15 @@ public class BSItemModelGenerator {
     }
 
     public void generateBloodVial(Item item) {
-        ResourceLocation resourcelocation = ModelLocationUtils.getModelLocation(item);
-        ItemModel.Unbaked flatModel = ItemModelUtils.plainModel(this.createFlatItemModel(item, ModelTemplates.FLAT_ITEM));
-        List<RangeSelectItemModel.Entry> bloodLevelEntries = new ArrayList<>();
-
-        for (int bloodLevel = 0; bloodLevel <= BloodVial.getMaxBloodLevel(); bloodLevel++) {
-            // Create a model for each blood level
-            String modelName = bloodLevel == 0 ?
-                    "vial" :
-                    getItemName(item) + "_" + (bloodLevel - 1);
-
-            ItemModel.Unbaked levelModel = ItemModelUtils.plainModel(BigSwordsR.rl("item/" + modelName));
-
-            // Create an entry for this blood level
-            bloodLevelEntries.add(ItemModelUtils.override(levelModel, bloodLevel));
-        }
-
-        ItemModel.Unbaked finalModel = ItemModelUtils.rangeSelect(
-                new RangeSelectItemModelProperty() {
-                    private DataComponentType<Integer> componentType;
-
-                    @Override
-                    public float get(ItemStack itemStack, @Nullable ClientLevel p_388363_, @Nullable LivingEntity p_387282_, int p_386614_) {
-                        return BloodVial.getBloodLevel(itemStack);
-                    }
-
-                    @Override
-                    public MapCodec<? extends RangeSelectItemModelProperty> type() {
-                        return null;
-                    }
-                },
-                flatModel,
-                bloodLevelEntries
-        );
-
-        this.output.accept(item, finalModel);
-    }
-
-    public String getItemName(Item item) {
-        return BuiltInRegistries.ITEM.getKey(item).toString().replace(MODID + ":", "");
+/*        output.accept(item, ItemModelUtils.rangeSelect(
+                BloodLevelModelProperty,
+                8.0F,
+                ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item)),
+                *(1..8).map {
+            val model = ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item, "_$it"))
+            ItemModelUtils.override(model, it.toFloat())
+        }.toTypedArray()
+                ));*/
     }
 
     @OnlyIn(Dist.CLIENT)
