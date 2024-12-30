@@ -1,0 +1,139 @@
+[05Dec2024 13:53:43.500] [main/DEBUG] [io.netty.util.internal.logging.InternalLoggerFactory/]: Using SLF4J as the default logging framework
+[05Dec2024 13:53:43.504] [main/DEBUG] [io.netty.util.ResourceLeakDetector/]: -Dio.netty.leakDetection.level: simple
+[05Dec2024 13:53:43.504] [main/DEBUG] [io.netty.util.ResourceLeakDetector/]: -Dio.netty.leakDetection.targetRecords: 4
+[05Dec2024 13:53:44.203] [main/INFO] [net.neoforged.neoforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [big_swords]
+[05Dec2024 13:53:44.271] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.4.1).
+[05Dec2024 13:53:44.275] [main/DEBUG] [mixin/]: Registering new injector for @SugarWrapper with com.llamalad7.mixinextras.sugar.impl.SugarWrapperInjectionInfo
+[05Dec2024 13:53:44.277] [main/DEBUG] [mixin/]: Registering new injector for @FactoryRedirectWrapper with com.llamalad7.mixinextras.wrapper.factory.FactoryRedirectWrapperInjectionInfo
+[05Dec2024 13:53:44.286] [main/DEBUG] [mixin/]: Mixing MappedRegistryAccessor from neoforge.mixins.json into net.minecraft.core.MappedRegistry
+[05Dec2024 13:53:44.292] [main/DEBUG] [mixin/]: neoforge.mixins.json:MappedRegistryAccessor from mod neoforge: Class version 65 required is higher than the class version supported by the current version of Mixin (JAVA_16 supports class version 60)
+[05Dec2024 13:53:46.020] [main/DEBUG] [mixin/]: Mixing BlockEntityTypeAccessor from neoforge.mixins.json into net.minecraft.world.level.block.entity.BlockEntityType
+[05Dec2024 13:53:46.021] [main/DEBUG] [mixin/]: neoforge.mixins.json:BlockEntityTypeAccessor from mod neoforge: Class version 65 required is higher than the class version supported by the current version of Mixin (JAVA_16 supports class version 60)
+[05Dec2024 13:53:47.524] [main/DEBUG] [io.netty.util.internal.PlatformDependent0/]: -Dio.netty.noUnsafe: false
+[05Dec2024 13:53:47.525] [main/DEBUG] [io.netty.util.internal.PlatformDependent0/]: Java version: 21
+[05Dec2024 13:53:47.526] [main/DEBUG] [io.netty.util.internal.PlatformDependent0/]: sun.misc.Unsafe.theUnsafe: available
+[05Dec2024 13:53:47.526] [main/DEBUG] [io.netty.util.internal.PlatformDependent0/]: sun.misc.Unsafe.copyMemory: available
+[05Dec2024 13:53:47.527] [main/DEBUG] [io.netty.util.internal.PlatformDependent0/]: sun.misc.Unsafe.storeFence: available
+[05Dec2024 13:53:47.527] [main/DEBUG] [io.netty.util.internal.PlatformDependent0/]: java.nio.Buffer.address: available
+[05Dec2024 13:53:47.528] [main/DEBUG] [io.netty.util.internal.PlatformDependent0/]: java.nio.Bits.unaligned: available, true
+[05Dec2024 13:53:47.542] [main/DEBUG] [io.netty.util.internal.PlatformDependent0/]: java.nio.DirectByteBuffer.<init>(long, {int,long}): unavailable
+[05Dec2024 13:53:47.542] [main/DEBUG] [io.netty.util.internal.PlatformDependent/]: sun.misc.Unsafe: available
+[05Dec2024 13:53:47.543] [main/DEBUG] [io.netty.util.internal.PlatformDependent/]: maxDirectMemory: 8568963072 bytes (maybe)
+[05Dec2024 13:53:47.543] [main/DEBUG] [io.netty.util.internal.PlatformDependent/]: -Dio.netty.tmpdir: C:\Users\Nova\AppData\Local\Temp (java.io.tmpdir)
+[05Dec2024 13:53:47.543] [main/DEBUG] [io.netty.util.internal.PlatformDependent/]: -Dio.netty.bitMode: 64 (sun.arch.data.model)
+[05Dec2024 13:53:47.544] [main/DEBUG] [io.netty.util.internal.PlatformDependent/]: Platform: Windows
+[05Dec2024 13:53:47.545] [main/DEBUG] [io.netty.util.internal.PlatformDependent/]: -Dio.netty.maxDirectMemory: -1 bytes
+[05Dec2024 13:53:47.545] [main/DEBUG] [io.netty.util.internal.PlatformDependent/]: -Dio.netty.uninitializedArrayAllocationThreshold: -1
+[05Dec2024 13:53:47.547] [main/DEBUG] [io.netty.util.internal.CleanerJava9/]: java.nio.ByteBuffer.cleaner(): available
+[05Dec2024 13:53:47.548] [main/DEBUG] [io.netty.util.internal.PlatformDependent/]: -Dio.netty.noPreferDirect: false
+[05Dec2024 13:53:50.340] [main/DEBUG] [net.neoforged.neoforge.registries.GameData/REGISTRIES]: Creating vanilla freeze snapshot
+[05Dec2024 13:53:50.369] [main/DEBUG] [net.neoforged.neoforge.registries.GameData/REGISTRIES]: Vanilla freeze snapshot created
+[05Dec2024 13:53:50.385] [main/DEBUG] [net.neoforged.fml.ModWorkManager/LOADING]: Using 12 threads for parallel mod-loading
+[05Dec2024 13:53:50.400] [main/DEBUG] [net.neoforged.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for [net.nova.big_swords.BigSwordsR]
+[05Dec2024 13:53:50.408] [main/DEBUG] [net.neoforged.fml.javafmlmod.FMLModContainer/LOADING]: Creating FMLModContainer instance for [net.neoforged.neoforge.common.NeoForgeMod, net.neoforged.neoforge.client.ClientNeoForgeMod]
+[05Dec2024 13:53:50.433] [modloading-worker-0/DEBUG] [net.neoforged.neoforge.internal.versions.neoforge.NeoForgeVersion/CORE]: Found NeoForge version 21.3.57
+[05Dec2024 13:53:50.434] [modloading-worker-0/DEBUG] [net.neoforged.neoforge.internal.versions.neoforge.NeoForgeVersion/CORE]: Found FML version 5.0.6
+[05Dec2024 13:53:50.434] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.3.57, for MC 1.21.3
+[05Dec2024 13:53:50.468] [modloading-worker-0/DEBUG] [net.neoforged.fml.config.ConfigTracker/CONFIG]: Config file neoforge-client.toml for neoforge tracking
+[05Dec2024 13:53:50.469] [modloading-worker-0/DEBUG] [net.neoforged.fml.config.ConfigTracker/CONFIG]: Config file neoforge-server.toml for neoforge tracking
+[05Dec2024 13:53:50.469] [modloading-worker-0/DEBUG] [net.neoforged.fml.config.ConfigTracker/CONFIG]: Config file neoforge-common.toml for neoforge tracking
+[05Dec2024 13:53:50.472] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for big_swords
+[05Dec2024 13:53:50.475] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.nova.big_swords.data.DataGenerators to MOD
+[05Dec2024 13:53:50.476] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.nova.big_swords.event.BigSwordsRClient to MOD
+[05Dec2024 13:53:50.479] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.nova.big_swords.event.HalloweenStuff to GAME
+[05Dec2024 13:53:50.481] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.nova.big_swords.event.ShieldMechanics to GAME
+[05Dec2024 13:53:50.565] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Attempting to inject @EventBusSubscriber classes into the eventbus for neoforge
+[05Dec2024 13:53:50.566] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.neoforged.neoforge.server.command.ConfigCommand to GAME
+[05Dec2024 13:53:50.568] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.neoforged.neoforge.network.filters.GenericPacketSplitter to MOD
+[05Dec2024 13:53:50.618] [modloading-worker-0/DEBUG] [io.netty.buffer.AbstractByteBuf/]: -Dio.netty.buffer.checkAccessible: true
+[05Dec2024 13:53:50.618] [modloading-worker-0/DEBUG] [io.netty.buffer.AbstractByteBuf/]: -Dio.netty.buffer.checkBounds: true
+[05Dec2024 13:53:50.619] [modloading-worker-0/DEBUG] [io.netty.util.ResourceLeakDetectorFactory/]: Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@65e78d95
+[05Dec2024 13:53:50.629] [modloading-worker-0/DEBUG] [io.netty.util.internal.InternalThreadLocalMap/]: -Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+[05Dec2024 13:53:50.629] [modloading-worker-0/DEBUG] [io.netty.util.internal.InternalThreadLocalMap/]: -Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+[05Dec2024 13:53:50.632] [modloading-worker-0/DEBUG] [io.netty.buffer.PooledByteBufAllocator/]: -Dio.netty.allocator.numHeapArenas: 24
+[05Dec2024 13:53:50.633] [modloading-worker-0/DEBUG] [io.netty.buffer.PooledByteBufAllocator/]: -Dio.netty.allocator.numDirectArenas: 24
+[05Dec2024 13:53:50.633] [modloading-worker-0/DEBUG] [io.netty.buffer.PooledByteBufAllocator/]: -Dio.netty.allocator.pageSize: 8192
+[05Dec2024 13:53:50.633] [modloading-worker-0/DEBUG] [io.netty.buffer.PooledByteBufAllocator/]: -Dio.netty.allocator.maxOrder: 9
+[05Dec2024 13:53:50.633] [modloading-worker-0/DEBUG] [io.netty.buffer.PooledByteBufAllocator/]: -Dio.netty.allocator.chunkSize: 4194304
+[05Dec2024 13:53:50.633] [modloading-worker-0/DEBUG] [io.netty.buffer.PooledByteBufAllocator/]: -Dio.netty.allocator.smallCacheSize: 256
+[05Dec2024 13:53:50.634] [modloading-worker-0/DEBUG] [io.netty.buffer.PooledByteBufAllocator/]: -Dio.netty.allocator.normalCacheSize: 64
+[05Dec2024 13:53:50.634] [modloading-worker-0/DEBUG] [io.netty.buffer.PooledByteBufAllocator/]: -Dio.netty.allocator.maxCachedBufferCapacity: 32768
+[05Dec2024 13:53:50.634] [modloading-worker-0/DEBUG] [io.netty.buffer.PooledByteBufAllocator/]: -Dio.netty.allocator.cacheTrimInterval: 8192
+[05Dec2024 13:53:50.635] [modloading-worker-0/DEBUG] [io.netty.buffer.PooledByteBufAllocator/]: -Dio.netty.allocator.cacheTrimIntervalMillis: 0
+[05Dec2024 13:53:50.635] [modloading-worker-0/DEBUG] [io.netty.buffer.PooledByteBufAllocator/]: -Dio.netty.allocator.useCacheForAllThreads: false
+[05Dec2024 13:53:50.635] [modloading-worker-0/DEBUG] [io.netty.buffer.PooledByteBufAllocator/]: -Dio.netty.allocator.maxCachedByteBuffersPerChunk: 1023
+[05Dec2024 13:53:50.648] [modloading-worker-0/DEBUG] [io.netty.buffer.ByteBufUtil/]: -Dio.netty.allocator.type: pooled
+[05Dec2024 13:53:50.649] [modloading-worker-0/DEBUG] [io.netty.buffer.ByteBufUtil/]: -Dio.netty.threadLocalDirectBufferSize: 0
+[05Dec2024 13:53:50.649] [modloading-worker-0/DEBUG] [io.netty.buffer.ByteBufUtil/]: -Dio.netty.maxThreadLocalCharBufferSize: 16384
+[05Dec2024 13:53:50.665] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.neoforged.neoforge.network.NetworkInitialization to MOD
+[05Dec2024 13:53:50.666] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.neoforged.neoforge.network.ConfigurationInitialization to MOD
+[05Dec2024 13:53:50.671] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.neoforged.neoforge.common.MonsterRoomHooks to GAME
+[05Dec2024 13:53:50.673] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.neoforged.neoforge.client.model.data.ModelDataManager to GAME
+[05Dec2024 13:53:50.675] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.neoforged.neoforge.client.ParticleBoundsDebugRenderer to GAME
+[05Dec2024 13:53:50.686] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.neoforged.neoforge.client.ClientHooks$ClientEvents to MOD
+[05Dec2024 13:53:50.703] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.neoforged.neoforge.client.BlockEntityRenderBoundsDebugRenderer to GAME
+[05Dec2024 13:53:50.705] [modloading-worker-0/DEBUG] [net.neoforged.fml.javafmlmod.AutomaticEventSubscriber/LOADING]: Auto-subscribing net.neoforged.neoforge.attachment.AttachmentInternals to GAME
+[05Dec2024 13:53:50.735] [modloading-sync-worker/DEBUG] [net.neoforged.neoforge.registries.GameData/REGISTRIES]: Unfreezing registries
+[05Dec2024 13:53:50.874] [modloading-sync-worker/DEBUG] [net.neoforged.neoforge.registries.GameData/REGISTRIES]: Freezing registries
+[05Dec2024 13:53:50.914] [modloading-sync-worker/DEBUG] [net.neoforged.neoforge.registries.GameData/REGISTRIES]: All registries frozen
+[05Dec2024 13:53:51.061] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/D:/McModding/NeoForge%201.21/BigSwordsR/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/21.3.57/neoforge-21.3.57.jar%23221!/assets/.mcassetsroot' uses unexpected schema
+[05Dec2024 13:53:51.062] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/D:/McModding/NeoForge%201.21/BigSwordsR/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/21.3.57/neoforge-21.3.57.jar%23221!/data/.mcassetsroot' uses unexpected schema
+[05Dec2024 13:53:51.368] [main/ERROR] [net.nova.big_swords.BigSwordsR/]: Cosmicore failed to gather data
+java.lang.IllegalStateException: Duplicate provider: Languages: en_us for mod: big_swords
+	at TRANSFORMER/minecraft@1.21.3/net.minecraft.data.DataGenerator.addProvider(DataGenerator.java:88) ~[neoforge-21.3.57.jar%23221!/:?]
+	at TRANSFORMER/big_swords@2.0.0/net.nova.big_swords.data.DataGenerators.gatherData(DataGenerators.java:35) ~[%23223!/:?]
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:350) ~[bus-8.0.2.jar%23181!/:?]
+	at MC-BOOTSTRAP/net.neoforged.bus/net.neoforged.bus.EventBus.post(EventBus.java:329) ~[bus-8.0.2.jar%23181!/:?]
+	at MC-BOOTSTRAP/fml_loader@5.0.6/net.neoforged.fml.ModContainer.acceptEvent(ModContainer.java:177) ~[loader-5.0.6.jar%23177!/:5.0]
+	at MC-BOOTSTRAP/fml_loader@5.0.6/net.neoforged.fml.ModLoader.runEventGenerator(ModLoader.java:347) ~[loader-5.0.6.jar%23177!/:5.0]
+	at TRANSFORMER/neoforge@21.3.57/net.neoforged.neoforge.data.loading.DatagenModLoader.begin(DatagenModLoader.java:62) ~[neoforge-21.3.57.jar%23222!/:?]
+	at TRANSFORMER/minecraft@1.21.3/net.minecraft.data.Main.main(Main.java:110) ~[neoforge-21.3.57.jar%23221!/:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at MC-BOOTSTRAP/fml_loader@5.0.6/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-5.0.6.jar%23177!/:5.0]
+	at MC-BOOTSTRAP/fml_loader@5.0.6/net.neoforged.fml.loading.targets.CommonLaunchHandler.dataService(CommonLaunchHandler.java:132) ~[loader-5.0.6.jar%23177!/:5.0]
+	at MC-BOOTSTRAP/fml_loader@5.0.6/net.neoforged.fml.loading.targets.NeoForgeDataDevLaunchHandler.runService(NeoForgeDataDevLaunchHandler.java:28) ~[loader-5.0.6.jar%23177!/:5.0]
+	at MC-BOOTSTRAP/fml_loader@5.0.6/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-5.0.6.jar%23177!/:5.0]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.4/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.4.jar%23156!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.4.jar%23156!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.4/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.4.jar%23156!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.4/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.4.jar%23156!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.4/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.4.jar%23156!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.4/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.4.jar%23156!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.4/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.4.jar%23156!/:?]
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?]
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?]
+[05Dec2024 13:53:51.589] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Languages: en_us for mod: big_swords
+[05Dec2024 13:53:51.684] [main/INFO] [net.minecraft.data.DataGenerator/]: Languages: en_us for mod: big_swords finished after 94 ms
+[05Dec2024 13:53:51.685] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: big_swords
+[05Dec2024 13:53:51.886] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: big_swords finished after 200 ms
+[05Dec2024 13:53:51.887] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: big_swords
+[05Dec2024 13:53:52.052] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: big_swords finished after 164 ms
+[05Dec2024 13:53:52.052] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Big Swords Equipment Model Definitions
+[05Dec2024 13:53:52.100] [main/INFO] [net.minecraft.data.DataGenerator/]: Big Swords Equipment Model Definitions finished after 47 ms
+[05Dec2024 13:53:52.100] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Big Swords R Recipes
+[05Dec2024 13:53:52.360] [main/INFO] [net.minecraft.data.DataGenerator/]: Big Swords R Recipes finished after 258 ms
+[05Dec2024 13:53:52.360] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:block mod id big_swords
+[05Dec2024 13:53:52.405] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:block mod id big_swords finished after 44 ms
+[05Dec2024 13:53:52.406] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:item mod id big_swords
+[05Dec2024 13:53:52.423] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:item mod id big_swords finished after 16 ms
+[05Dec2024 13:53:52.423] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:entity_type mod id big_swords
+[05Dec2024 13:53:52.429] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:entity_type mod id big_swords finished after 5 ms
+[05Dec2024 13:53:52.429] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:enchantment mod id big_swords
+[05Dec2024 13:53:52.431] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:enchantment mod id big_swords finished after 1 ms
+[05Dec2024 13:53:52.431] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
+[05Dec2024 13:53:52.478] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 46 ms
+[05Dec2024 13:53:52.478] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Data Maps
+[05Dec2024 13:53:52.494] [main/INFO] [net.minecraft.data.DataGenerator/]: Data Maps finished after 15 ms
+[05Dec2024 13:53:52.495] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Sound Definitions
+[05Dec2024 13:53:52.513] [main/INFO] [net.minecraft.data.DataGenerator/]: Sound Definitions finished after 17 ms
+[05Dec2024 13:53:52.513] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Advancements
+[05Dec2024 13:53:52.563] [main/INFO] [net.minecraft.data.DataGenerator/]: Advancements finished after 49 ms
+[05Dec2024 13:53:52.563] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Global Loot Modifiers : big_swords
+[05Dec2024 13:53:52.573] [main/INFO] [net.minecraft.data.DataGenerator/]: Global Loot Modifiers : big_swords finished after 10 ms
+[05Dec2024 13:53:52.574] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Registries
+[05Dec2024 13:53:52.584] [main/INFO] [net.minecraft.data.DataGenerator/]: Registries finished after 9 ms
+[05Dec2024 13:53:52.585] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: atlases generator for big_swords
+[05Dec2024 13:53:52.596] [main/INFO] [net.minecraft.data.DataGenerator/]: atlases generator for big_swords finished after 12 ms
+[05Dec2024 13:53:52.598] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 1009 ms
+[05Dec2024 13:53:52.681] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 458, old count: 0, new count: 459, removed stale: 0, written: 458

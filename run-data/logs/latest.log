@@ -1,0 +1,72 @@
+[04Dec2024 22:28:37.305] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, D:\McModding\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.3.12, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, big_swords, --all, --output, D:\McModding\NeoForge 1.21\BigSwordsR\src\generated\resources, --existing, D:\McModding\NeoForge 1.21\BigSwordsR\src\main\resources]
+[04Dec2024 22:28:37.314] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.13 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[04Dec2024 22:28:37.452] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
+[04Dec2024 22:28:37.505] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/D:/McModding/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
+[04Dec2024 22:28:37.812] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file D:\McModding\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.3.12\f6b9f7f45e33548b47f78d9f54c7b4eb1e94e9bd\javafmllanguage-1.20.1-47.3.12.jar is missing mods.toml file
+[04Dec2024 22:28:37.817] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file D:\McModding\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.3.12\81de74e1180787af25604b6ecb3728fc485bd3c7\lowcodelanguage-1.20.1-47.3.12.jar is missing mods.toml file
+[04Dec2024 22:28:37.823] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file D:\McModding\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.3.12\1ff4ed058e0774b82d8da352d9e051e6d2a154eb\mclanguage-1.20.1-47.3.12.jar is missing mods.toml file
+[04Dec2024 22:28:37.829] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file D:\McModding\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.3.12\9a4d9f99e106aa2358cdbe6777921855d353371\fmlcore-1.20.1-47.3.12.jar is missing mods.toml file
+[04Dec2024 22:28:37.908] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[04Dec2024 22:28:39.324] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, D:\McModding\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, big_swords, --all, --output, D:\McModding\NeoForge 1.21\BigSwordsR\src\generated\resources, --existing, D:\McModding\NeoForge 1.21\BigSwordsR\src\main\resources]
+[04Dec2024 22:28:39.675] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [big_swords]
+[04Dec2024 22:28:44.291] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.3.12, for MC 1.20.1 with MCP 20230612.114412
+[04Dec2024 22:28:44.295] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.3.12 Initialized
+[04Dec2024 22:28:44.790] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/D:/McModding/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.12_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.3.12_mapped_parchment_2023.09.03-1.20.1.jar%23191!/assets/.mcassetsroot' uses unexpected schema
+[04Dec2024 22:28:44.791] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/D:/McModding/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.3.12_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.3.12_mapped_parchment_2023.09.03-1.20.1.jar%23191!/data/.mcassetsroot' uses unexpected schema
+[04Dec2024 22:28:44.935] [main/ERROR] [net.nova.big_swords.BigSwordsR/]: Cosmicore failed to gather data
+java.lang.IllegalStateException: Duplicate provider: Languages: en_us
+	at net.minecraft.data.DataGenerator.addProvider(DataGenerator.java:83) ~[forge-1.20.1-47.3.12_mapped_parchment_2023.09.03-1.20.1.jar%23191!/:?]
+	at net.nova.big_swords.data.DataGenerators.gatherData(DataGenerators.java:33) ~[%23196!/:?]
+	at net.nova.big_swords.data.__DataGenerators_gatherData_GatherDataEvent.invoke(.dynamic) ~[%23196!/:?]
+	at net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:73) ~[eventbus-6.0.5.jar:?]
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:315) ~[eventbus-6.0.5.jar:?]
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:296) ~[eventbus-6.0.5.jar:?]
+	at net.minecraftforge.fml.javafmlmod.FMLModContainer.acceptEvent(FMLModContainer.java:121) ~[javafmllanguage-1.20.1-47.3.12.jar:?]
+	at net.minecraftforge.fml.ModLoader.lambda$runEventGenerator$28(ModLoader.java:318) ~[fmlcore-1.20.1-47.3.12.jar:?]
+	at java.lang.Iterable.forEach(Iterable.java:75) ~[?:?]
+	at net.minecraftforge.fml.ModList.forEachModInOrder(ModList.java:227) ~[fmlcore-1.20.1-47.3.12.jar:?]
+	at net.minecraftforge.fml.ModLoader.runEventGenerator(ModLoader.java:318) ~[fmlcore-1.20.1-47.3.12.jar:?]
+	at net.minecraftforge.data.loading.DatagenModLoader.begin(DatagenModLoader.java:52) ~[forge-1.20.1-47.3.12_mapped_parchment_2023.09.03-1.20.1.jar:?]
+	at net.minecraft.data.Main.main(Main.java:90) ~[forge-1.20.1-47.3.12_mapped_parchment_2023.09.03-1.20.1.jar:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:569) ~[?:?]
+	at net.minecraftforge.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:111) ~[fmlloader-1.20.1-47.3.12.jar:?]
+	at net.minecraftforge.fml.loading.targets.CommonLaunchHandler.dataService(CommonLaunchHandler.java:107) ~[fmlloader-1.20.1-47.3.12.jar:?]
+	at net.minecraftforge.fml.loading.targets.ForgeDataUserdevLaunchHandler.devService(ForgeDataUserdevLaunchHandler.java:22) ~[fmlloader-1.20.1-47.3.12.jar:?]
+	at net.minecraftforge.fml.loading.targets.CommonDevLaunchHandler.lambda$makeService$7(CommonDevLaunchHandler.java:135) ~[fmlloader-1.20.1-47.3.12.jar:?]
+	at cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.Launcher.run(Launcher.java:108) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.Launcher.main(Launcher.java:78) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:141) ~[bootstraplauncher-1.1.2.jar:?]
+[04Dec2024 22:28:45.010] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Languages: en_us
+[04Dec2024 22:28:45.020] [main/INFO] [net.minecraft.data.DataGenerator/]: Languages: en_us finished after 9 ms
+[04Dec2024 22:28:45.020] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Block States: big_swords
+[04Dec2024 22:28:45.258] [main/INFO] [net.minecraft.data.DataGenerator/]: Block States: big_swords finished after 238 ms
+[04Dec2024 22:28:45.258] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: big_swords
+[04Dec2024 22:28:45.456] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: big_swords finished after 196 ms
+[04Dec2024 22:28:45.456] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
+[04Dec2024 22:28:45.541] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 85 ms
+[04Dec2024 22:28:45.541] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:block mod id big_swords
+[04Dec2024 22:28:45.557] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:block mod id big_swords finished after 15 ms
+[04Dec2024 22:28:45.557] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:item mod id big_swords
+[04Dec2024 22:28:45.562] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:item mod id big_swords finished after 5 ms
+[04Dec2024 22:28:45.563] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Tags for minecraft:entity_type mod id big_swords
+[04Dec2024 22:28:45.565] [main/INFO] [net.minecraft.data.DataGenerator/]: Tags for minecraft:entity_type mod id big_swords finished after 2 ms
+[04Dec2024 22:28:45.566] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Loot Tables
+[04Dec2024 22:28:45.670] [main/INFO] [net.minecraft.data.DataGenerator/]: Loot Tables finished after 103 ms
+[04Dec2024 22:28:45.670] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Sound Definitions
+[04Dec2024 22:28:45.675] [main/INFO] [net.minecraft.data.DataGenerator/]: Sound Definitions finished after 4 ms
+[04Dec2024 22:28:45.675] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Advancements
+[04Dec2024 22:28:45.718] [main/INFO] [net.minecraft.data.DataGenerator/]: Advancements finished after 42 ms
+[04Dec2024 22:28:45.718] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Global Loot Modifiers : big_swords
+[04Dec2024 22:28:45.723] [main/INFO] [net.minecraft.data.DataGenerator/]: Global Loot Modifiers : big_swords finished after 6 ms
+[04Dec2024 22:28:45.724] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: atlases generator for big_swords
+[04Dec2024 22:28:45.729] [main/INFO] [net.minecraft.data.DataGenerator/]: atlases generator for big_swords finished after 4 ms
+[04Dec2024 22:28:45.729] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 719 ms
+[04Dec2024 22:28:45.755] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 441, old count: 0, new count: 436, removed stale: 6, written: 435

@@ -1,0 +1,131 @@
+[15:16:41] [main/INFO]: ModLauncher running: args [--launchTarget, neoforgeclientdev, --version, 21.4.9-beta, --assetIndex, asset-index, --assetsDir, D:\McModding\.gradle\caches\minecraft\assets, --gameDir, ., --fml.fmlVersion, 6.0.4, --fml.mcVersion, 1.21.4, --fml.neoForgeVersion, 21.4.9-beta, --fml.neoFormVersion, 20241203.161809]
+[15:16:41] [main/INFO]: JVM identified as Eclipse Adoptium OpenJDK 64-Bit Server VM 21.0.5+11-LTS
+[15:16:41] [main/INFO]: ModLauncher 11.0.4+main.d2e20e43 starting: java version 21.0.5 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[15:16:42] [main/WARN]: Configuration file D:\McModding\NeoForge 1.21\BigSwordsR\runs\client\config\fml.toml is not correct. Correcting
+[15:16:42] [main/INFO]: Loading ImmediateWindowProvider fmlearlywindow
+[15:16:42] [main/INFO]: Trying GL version 4.6
+[15:16:42] [main/INFO]: Requested GL version 4.6 got version 4.6
+[15:16:42] [main/INFO]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/D:/McModding/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/2af2f021d8e02a0220dc27a7a72b4666d66d44ca/sponge-mixin-0.15.2+mixin.0.8.7.jar%23166!/ Service=ModLauncher Env=CLIENT
+[15:16:42] [main/WARN]: Configuration file D:\McModding\NeoForge 1.21\BigSwordsR\runs\client\config\fml.toml is not correct. Correcting
+[15:16:42] [pool-2-thread-1/INFO]: GL info: NVIDIA GeForce RTX 2060/PCIe/SSE2 GL version 4.6.0 NVIDIA 560.94, NVIDIA Corporation
+[15:16:42] [main/INFO]: Found mod file "neoforge-21.4.9-beta.jar" [locator: neoforge devenv provider ([D:\McModding\NeoForge 1.21\BigSwordsR\.gradle\repositories\ng_dummy_ng\net\neoforged\neoforge\21.4.9-beta\neoforge-21.4.9-beta.jar])]
+[15:16:42] [main/INFO]: Found mod file "neoforge-21.4.9-beta.jar" [locator: neoforge devenv provider ([D:\McModding\NeoForge 1.21\BigSwordsR\.gradle\repositories\ng_dummy_ng\net\neoforged\neoforge\21.4.9-beta\neoforge-21.4.9-beta.jar])]
+[15:16:42] [main/INFO]: Found mod file "main" [locator: userdev mods and services, reader: mod manifest]
+[15:16:42] [main/INFO]: Found mod file "neoforge-21.4.9-beta.jar" [locator: userdev mods and services, reader: mod manifest]
+[15:16:43] [main/INFO]: Found gamelibrary file "mixinextras-neoforge-0.4.1.jar" [locator: userdev mods and services, reader: mod manifest]
+[15:16:43] [main/WARN]: Attempted to select a dependency jar for JarJar which was passed in as source: library:mixinextras.neoforge. Using Mod File: D:\McModding\.gradle\caches\modules-2\files-2.1\io.github.llamalad7\mixinextras-neoforge\0.4.1\eff97772ecd0dcf8e52cdbafd3b3ccec425f8314\mixinextras-neoforge-0.4.1.jar
+[15:16:43] [main/INFO]: Found 1 dependencies adding them to mods collection
+[15:16:43] [main/INFO]: Found library file "net.neoforged.neoforge-coremods-21.4.9-beta.jar" [parent: neoforge-21.4.9-beta.jar, locator: jarinjar, reader: mod manifest]
+[15:16:43] [main/INFO]: 
+     Mod List:
+		Name Version (Mod Id)
+
+		Big Swords R 1.0.0 (big_swords)
+		Minecraft 1.21.4 (minecraft)
+		NeoForge 21.4.9-beta (neoforge)
+[15:16:43] [main/INFO]: Launching target 'neoforgeclientdev' with arguments [--version, 21.4.9-beta, --gameDir, ., --assetsDir, D:\McModding\.gradle\caches\minecraft\assets, --assetIndex, asset-index]
+[06Dec2024 15:16:45.649] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 246 Datafixer optimizations took 759 milliseconds
+[06Dec2024 15:16:45.833] [pool-7-thread-1/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.4.1).
+[06Dec2024 15:16:51.262] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[06Dec2024 15:16:51.265] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[06Dec2024 15:16:51.271] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[06Dec2024 15:16:51.274] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[06Dec2024 15:16:51.276] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[06Dec2024 15:16:51.439] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/D:/McModding/NeoForge%201.21/BigSwordsR/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/21.4.9-beta/neoforge-21.4.9-beta.jar%23221!/assets/.mcassetsroot' uses unexpected schema
+[06Dec2024 15:16:51.439] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/D:/McModding/NeoForge%201.21/BigSwordsR/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/21.4.9-beta/neoforge-21.4.9-beta.jar%23221!/data/.mcassetsroot' uses unexpected schema
+[06Dec2024 15:16:51.472] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[06Dec2024 15:16:51.484] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
+[06Dec2024 15:16:51.597] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.3+5
+[06Dec2024 15:16:51.821] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.4.9-beta, for MC 1.21.4
+[06Dec2024 15:16:52.882] [Render thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: []
+[06Dec2024 15:16:53.039] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources, mod/big_swords, mod/neoforge
+[06Dec2024 15:16:53.162] [resourceLoad/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.05.hex, loading
+[06Dec2024 15:16:53.163] [resourceLoad/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_jp_patch-15.1.05.hex, loading
+[06Dec2024 15:16:54.836] [Render thread/ERROR] [net.minecraft.client.sounds.SoundManager/]: Missing subtitle translation{key='subtitles.ambient.cave', args=[]} for sound event: minecraft:ambient.cave
+[06Dec2024 15:16:54.837] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:ui.hud.bubble_pop
+[06Dec2024 15:16:54.838] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.creaking.ambient
+[06Dec2024 15:16:54.838] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.creaking.activate
+[06Dec2024 15:16:54.838] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.creaking.deactivate
+[06Dec2024 15:16:54.838] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.creaking.attack
+[06Dec2024 15:16:54.838] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.creaking.death
+[06Dec2024 15:16:54.838] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.creaking.step
+[06Dec2024 15:16:54.839] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.creaking.freeze
+[06Dec2024 15:16:54.839] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.creaking.unfreeze
+[06Dec2024 15:16:54.839] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.creaking.spawn
+[06Dec2024 15:16:54.839] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.creaking.sway
+[06Dec2024 15:16:54.839] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.creaking.twitch
+[06Dec2024 15:16:54.839] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.creaking_heart.break
+[06Dec2024 15:16:54.840] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.creaking_heart.fall
+[06Dec2024 15:16:54.840] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.creaking_heart.hit
+[06Dec2024 15:16:54.840] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.creaking_heart.hurt
+[06Dec2024 15:16:54.840] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.creaking_heart.place
+[06Dec2024 15:16:54.841] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.creaking_heart.step
+[06Dec2024 15:16:54.841] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.creaking_heart.idle
+[06Dec2024 15:16:54.841] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.creaking_heart.spawn
+[06Dec2024 15:16:54.841] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.eyeblossom.open_long
+[06Dec2024 15:16:54.841] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.eyeblossom.open
+[06Dec2024 15:16:54.842] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.eyeblossom.close_long
+[06Dec2024 15:16:54.842] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.eyeblossom.close
+[06Dec2024 15:16:54.842] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.eyeblossom.idle
+[06Dec2024 15:16:54.842] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.pale_hanging_moss.idle
+[06Dec2024 15:16:54.842] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.parrot.imitate.creaking
+[06Dec2024 15:16:54.842] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.spawner.fall
+[06Dec2024 15:16:54.842] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.resin.break
+[06Dec2024 15:16:54.843] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.resin.fall
+[06Dec2024 15:16:54.843] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.resin.place
+[06Dec2024 15:16:54.843] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.resin.step
+[06Dec2024 15:16:54.843] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.resin_bricks.break
+[06Dec2024 15:16:54.843] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.resin_bricks.fall
+[06Dec2024 15:16:54.843] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.resin_bricks.hit
+[06Dec2024 15:16:54.843] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.resin_bricks.place
+[06Dec2024 15:16:54.843] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:block.resin_bricks.step
+[06Dec2024 15:16:54.907] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on Kopfhörer (CORSAIR HS80 RGB Wireless Gaming Headset)
+[06Dec2024 15:16:54.909] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[06Dec2024 15:16:55.068] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x4 minecraft:textures/atlas/blocks.png-atlas
+[06Dec2024 15:16:55.083] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[06Dec2024 15:16:55.083] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[06Dec2024 15:16:55.084] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[06Dec2024 15:16:55.085] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[06Dec2024 15:16:55.112] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[06Dec2024 15:16:55.112] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[06Dec2024 15:16:55.113] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[06Dec2024 15:16:55.114] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[06Dec2024 15:16:55.116] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[06Dec2024 15:16:55.265] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[06Dec2024 15:16:55.266] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[06Dec2024 15:16:55.267] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[06Dec2024 15:16:55.267] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
+[06Dec2024 15:16:55.273] [Render thread/INFO] [net.neoforged.neoforge.client.entity.animation.json.AnimationLoader/]: Loaded 0 entity animations
+[06Dec2024 15:16:59.180] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 1460 recipes
+[06Dec2024 15:16:59.195] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 1586 advancements
+[06Dec2024 15:16:59.333] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.21.4
+[06Dec2024 15:16:59.334] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[06Dec2024 15:16:59.639] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[06Dec2024 15:17:00.649] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[06Dec2024 15:17:00.649] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[06Dec2024 15:17:00.668] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[06Dec2024 15:17:00.793] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[06Dec2024 15:17:00.807] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 1141 ms
+[06Dec2024 15:17:00.875] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 12, from 10
+[06Dec2024 15:17:00.875] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
+[06Dec2024 15:17:01.932] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:d2c09877] logged in with entity id 55 at (3.0513688979121616, 71.0, 66.37710932270588)
+[06Dec2024 15:17:01.972] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev joined the game
+[06Dec2024 15:17:02.107] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 293 advancements
+[06Dec2024 15:17:15.147] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
+[06Dec2024 15:17:15.173] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[06Dec2024 15:17:15.198] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[06Dec2024 15:17:15.198] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[06Dec2024 15:17:15.217] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev lost connection: Disconnected
+[06Dec2024 15:17:15.218] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev left the game
+[06Dec2024 15:17:15.236] [Server thread/INFO] [net.minecraft.server.network.ServerCommonPacketListenerImpl/]: Stopping singleplayer server as player logged out
+[06Dec2024 15:17:15.251] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[06Dec2024 15:17:15.252] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[06Dec2024 15:17:15.252] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[06Dec2024 15:17:15.323] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[06Dec2024 15:17:15.395] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[06Dec2024 15:17:15.397] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[06Dec2024 15:17:15.404] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (New World): All chunks are saved
+[06Dec2024 15:17:15.404] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[06Dec2024 15:17:15.404] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[06Dec2024 15:17:15.404] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[06Dec2024 15:17:15.684] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!
