@@ -34,8 +34,8 @@ run/*
 
 # other
 eclipse
-runs
-run-data
+runs/*
+run-data/*
 
 # java
 
