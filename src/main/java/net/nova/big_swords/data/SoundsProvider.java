@@ -2,7 +2,6 @@ package net.nova.big_swords.data;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.sounds.SoundEvent;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 import net.nova.big_swords.init.Sounds;
 
@@ -11,8 +10,8 @@ import java.util.function.Supplier;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class SoundsProvider extends SoundDefinitionsProvider {
-    protected SoundsProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, MODID, existingFileHelper);
+    protected SoundsProvider(PackOutput output) {
+        super(output, MODID);
     }
 
     @Override

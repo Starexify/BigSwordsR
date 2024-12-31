@@ -17,7 +17,6 @@ import net.nova.big_swords.block.BiomassCrop;
 import net.nova.big_swords.block.CreepBlock;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 

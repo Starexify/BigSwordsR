@@ -8,13 +8,12 @@ import net.minecraft.advancements.critereon.*;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.data.AdvancementProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.block.CreepBlock;
 import net.nova.big_swords.init.BSBlocks;
@@ -25,9 +24,9 @@ import java.util.function.Consumer;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
-public class BigSwordsAdvancements implements AdvancementProvider.AdvancementGenerator {
+public class BigSwordsAdvancements implements AdvancementSubProvider {
     @Override
-    public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> save, ExistingFileHelper existingFileHelper) {
+    public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> save) {
         HolderGetter<Block> blockGetter = registries.lookupOrThrow(Registries.BLOCK);
         HolderGetter<Item> itemGetter = registries.lookupOrThrow(Registries.ITEM);
 

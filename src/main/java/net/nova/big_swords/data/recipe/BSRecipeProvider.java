@@ -11,7 +11,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.nova.big_swords.init.BSItems;
 
@@ -19,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
-public class BSRecipeProvider extends RecipeProvider implements IConditionBuilder {
+public class BSRecipeProvider extends RecipeProvider {
     public final HolderLookup.Provider lookupProvider;
     public static String path = MODID + ":";
 

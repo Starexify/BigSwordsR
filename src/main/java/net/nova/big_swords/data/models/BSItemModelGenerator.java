@@ -1,18 +1,17 @@
 package net.nova.big_swords.data.models;
 
+import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.RangeSelectItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
-import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperty;
 import net.minecraft.client.renderer.item.properties.select.TrimMaterialProperty;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.world.item.equipment.Equippable;
@@ -32,10 +31,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 @OnlyIn(Dist.CLIENT)
-public class BSItemModelGenerator {
-    public final ItemModelOutput output;
-    public final BiConsumer<ResourceLocation, ModelInstance> modelOutput;
-
+public class BSItemModelGenerator extends ItemModelGenerators {
     public static final List<BSItemModelGenerator.TrimMaterialData> TRIM_MATERIAL_MODELS = List.of(
             new BSItemModelGenerator.TrimMaterialData("quartz", TrimMaterials.QUARTZ, Map.of()),
             new BSItemModelGenerator.TrimMaterialData("iron", TrimMaterials.IRON, Map.of(EquipmentAssets.IRON, "iron_darker")),
@@ -51,14 +47,13 @@ public class BSItemModelGenerator {
             new BSItemModelGenerator.TrimMaterialData("livingmetal", BSTrimMaterials.LIVINGMETAL, Map.of(BSEquipmentAssets.LIVINGMETAL, "livingmetal_darker"))
     );
 
-    public BSItemModelGenerator(ItemModelOutput output, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
-        this.output = output;
-        this.modelOutput = modelOutput;
+    public BSItemModelGenerator(ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
+        super(itemModelOutput, modelOutput);
     }
 
+    @Override
     public void run() {
         // Extra
-        generateFlatItem(BSItems.BIOMASS_SEED.get(), ModelTemplates.FLAT_ITEM);
         generateFlatItem(BSItems.CREEP_BALL.get(), ModelTemplates.FLAT_ITEM);
         generateFlatItem(BSItems.SOUL.get(), ModelTemplates.FLAT_ITEM);
         generateBloodVial(BSItems.BLOOD_VIAL.get());
@@ -158,34 +153,19 @@ public class BSItemModelGenerator {
     }
 
     // Methods
-    public ResourceLocation createFlatItemModel(Item item, ModelTemplate template) {
-        return template.create(ModelLocationUtils.getModelLocation(item), TextureMapping.layer0(item), this.modelOutput);
-    }
 
-    public ResourceLocation createFlatItemModel(Item item, String name, ModelTemplate template) {
-        return template.create(
+    public ResourceLocation createFlatItemModel(Item item, String name, ModelTemplate modelTemplate) {
+        return modelTemplate.create(
                 ModelLocationUtils.getModelLocation(item, name),
                 TextureMapping.layer0(TextureMapping.getItemTexture(item)),
                 this.modelOutput
         );
     }
 
-    public void generateBooleanDispatch(Item item, ConditionalItemModelProperty p_388865_, ItemModel.Unbaked p_387060_, ItemModel.Unbaked p_388146_) {
-        this.output.accept(item, ItemModelUtils.conditional(p_388865_, p_387060_, p_388146_));
-    }
-
-    public void generateFlatItem(Item item, ModelTemplate template) {
-        this.output.accept(item, ItemModelUtils.plainModel(this.createFlatItemModel(item, template)));
-    }
-
     public void generateShield(Item item) {
-        ItemModel.Unbaked flatModel = ItemModelUtils.plainModel(this.createFlatItemModel(item, BSModelTemplates.FLAT_HANDHELD_SHIELD_ITEM));
-        ItemModel.Unbaked blockingModel = ItemModelUtils.plainModel(this.createFlatItemModel(item, "_blocking", BSModelTemplates.FLAT_HANDHELD_SHIELD_BLOCKING_ITEM));
-        this.generateBooleanDispatch(item, ItemModelUtils.isUsingItem(), blockingModel, flatModel);
-    }
-
-    public ResourceLocation generateLayeredItem(ResourceLocation p_386992_, ResourceLocation p_386528_, ResourceLocation p_386966_) {
-        return ModelTemplates.TWO_LAYERED_ITEM.create(p_386992_, TextureMapping.layered(p_386528_, p_386966_), this.modelOutput);
+        ItemModel.Unbaked flatModel = ItemModelUtils.plainModel(createFlatItemModel(item, BSModelTemplates.FLAT_HANDHELD_SHIELD_ITEM));
+        ItemModel.Unbaked blockingModel = ItemModelUtils.plainModel(createFlatItemModel(item, "_blocking", BSModelTemplates.FLAT_HANDHELD_SHIELD_BLOCKING_ITEM));
+        generateBooleanDispatch(item, ItemModelUtils.isUsingItem(), blockingModel, flatModel);
     }
 
     public void generateTrimmableItem(Item item, ResourceKey<EquipmentAsset> equipmentAsset) {
@@ -209,17 +189,17 @@ public class BSItemModelGenerator {
             );
             ItemModel.Unbaked itemmodel$unbaked;
 
-            this.generateLayeredItem(resourcelocation3, resourcelocation1, resourcelocation4);
+            generateLayeredItem(resourcelocation3, resourcelocation1, resourcelocation4);
             itemmodel$unbaked = ItemModelUtils.plainModel(resourcelocation3);
 
             list.add(ItemModelUtils.when(trimMaterial.materialKey, itemmodel$unbaked));
         }
 
         ItemModel.Unbaked basicModel;
-        ModelTemplates.FLAT_ITEM.create(resourcelocation, TextureMapping.layer0(resourcelocation1), this.modelOutput);
+        ModelTemplates.FLAT_ITEM.create(resourcelocation, TextureMapping.layer0(resourcelocation1), modelOutput);
         basicModel = ItemModelUtils.plainModel(resourcelocation);
 
-        output.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), basicModel, list));
+        itemModelOutput.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), basicModel, list));
     }
 
     public void generateBloodVial(Item item) {
@@ -227,7 +207,7 @@ public class BSItemModelGenerator {
         ItemModel.Unbaked basicModel = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(
                 BigSwordsR.rl("item/vial"),
                 TextureMapping.layer0(BigSwordsR.rl("item/vial")),
-                this.modelOutput
+                modelOutput
         ));
         list.add(ItemModelUtils.override(basicModel, 0.0F));
 
@@ -235,17 +215,17 @@ public class BSItemModelGenerator {
             ItemModel.Unbaked bloodModel = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(
                     ModelLocationUtils.getModelLocation(item, "_" + i),
                     TextureMapping.layer0(TextureMapping.getItemTexture(item, "_" + (i - 1))),
-                    this.modelOutput
+                    modelOutput
             ));
             list.add(ItemModelUtils.override(bloodModel, (float) i));
         }
-        output.accept(item, ItemModelUtils.rangeSelect(new BloodLevelModelProperty(), list));
+        itemModelOutput.accept(item, ItemModelUtils.rangeSelect(new BloodLevelModelProperty(), list));
     }
 
     @OnlyIn(Dist.CLIENT)
     record TrimMaterialData(String name, ResourceKey<TrimMaterial> materialKey, Map<ResourceKey<EquipmentAsset>, String> overrideArmorMaterials) {
         public String textureName(ResourceKey<EquipmentAsset> p_387088_) {
-            return this.overrideArmorMaterials.getOrDefault(p_387088_, this.name);
+            return overrideArmorMaterials.getOrDefault(p_387088_, name);
         }
     }
 }
