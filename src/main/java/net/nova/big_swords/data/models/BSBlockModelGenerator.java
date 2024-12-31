@@ -1,12 +1,16 @@
 package net.nova.big_swords.data.models;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.blockstates.*;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.nova.big_swords.block.CreepBlock;
@@ -23,34 +27,50 @@ public class BSBlockModelGenerator extends BlockModelGenerators {
 
     @Override
     public void run() {
-        createTrivialCube(BSBlocks.CREEP_BLOCK.get());
+        createCreepBlock();
         createTrivialCube(BSBlocks.LIVINGMETAL_BLOCK.get());
         createTrivialCube(BSBlocks.BIOMASS_BLOCK.get());
-        createCropBlock(BSBlocks.BIOMASS.get(), BlockStateProperties.AGE_3, 0, 1, 2, 3);
+        createCrossCropBlock(BSBlocks.BIOMASS.get(), BlockStateProperties.AGE_3, 0, 1, 2, 3);
+    }
+
+    // Models
+    public void createCrossCropBlock(Block cropBlock, Property<Integer> ageProperty, int... ageToVisualStageMapping) {
+        if (ageProperty.getPossibleValues().size() != ageToVisualStageMapping.length) {
+            throw new IllegalArgumentException();
+        } else {
+            Int2ObjectMap<ResourceLocation> int2objectmap = new Int2ObjectOpenHashMap<>();
+            PropertyDispatch propertydispatch = PropertyDispatch.property(ageProperty)
+                    .generate(p_388091_ -> {
+                        int i = ageToVisualStageMapping[p_388091_];
+                        ResourceLocation resourcelocation = int2objectmap.computeIfAbsent(
+                                i, p_387534_ -> this.createSuffixedVariant(cropBlock, "_stage" + i, ModelTemplates.CROSS.extend().renderType("cutout").build(), TextureMapping::cross)
+                        );
+                        return Variant.variant().with(VariantProperties.MODEL, resourcelocation);
+                    });
+            this.registerSimpleFlatItemModel(cropBlock.asItem());
+            this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(cropBlock).with(propertydispatch));
+        }
     }
 
     public void createCreepBlock() {
-        TextureMapping texturemapping = new TextureMapping()
-                .put(TextureSlot.DIRT, TextureMapping.getBlockTexture(Blocks.NETHERRACK))
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(Blocks.FARMLAND));
-        TextureMapping texturemapping1 = new TextureMapping()
-                .put(TextureSlot.DIRT, TextureMapping.getBlockTexture(Blocks.NETHERRACK))
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_tilled"));
-        ResourceLocation resourcelocation = ModelTemplates.FARMLAND.create(BSBlocks.CREEP_BLOCK.get(), texturemapping, modelOutput);
-        ResourceLocation resourcelocation1 = ModelTemplates.FARMLAND
-                .create(TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_tilled"), texturemapping1, modelOutput);
+        TextureMapping normalMapping = new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_top"))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(Blocks.SOUL_SAND))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_side"));
 
-        this.blockStateOutput
-                .accept(
-                        MultiVariantGenerator.multiVariant(BSBlocks.CREEP_BLOCK.get()).with(PropertyDispatch.property(CreepBlock.TILLED).select(
-                                false, Variant.variant().with(VariantProperties.MODEL, TexturedModel.CUBE_TOP_BOTTOM.create(BSBlocks.CREEP_BLOCK.get(), modelOutput))
-                        ).select(true,
-                                Variant.variant().with(
-                                        VariantProperties.MODEL, TexturedModel.CUBE_TOP_BOTTOM
-                                                .get(BSBlocks.CREEP_BLOCK.get())
-                                                .updateTextures(p_386917_ -> p_386917_.put(TextureSlot.TOP, resourcelocation))
-                                                .createWithSuffix(BSBlocks.CREEP_BLOCK.get(), "_tilled", modelOutput)
-                                )))
-                );
+        TextureMapping tilledMapping = new TextureMapping()
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_top_tilled"))
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(Blocks.SOUL_SAND))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_side"));
+
+        ResourceLocation normalModel = ModelTemplates.CUBE_BOTTOM_TOP.create(
+                BSBlocks.CREEP_BLOCK.get(), normalMapping, this.modelOutput);
+        ResourceLocation tilledModel = ModelTemplates.CUBE_BOTTOM_TOP.create(
+                TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_tilled"), tilledMapping, this.modelOutput);
+
+        this.blockStateOutput.accept(MultiVariantGenerator.multiVariant(BSBlocks.CREEP_BLOCK.get())
+                .with(PropertyDispatch.property(CreepBlock.TILLED)
+                        .select(false, Variant.variant().with(VariantProperties.MODEL, normalModel))
+                        .select(true, Variant.variant().with(VariantProperties.MODEL, tilledModel))));
     }
 }
