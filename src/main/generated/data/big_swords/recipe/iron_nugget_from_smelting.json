@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": [
+    "big_swords:iron_glaive",
+    "big_swords:iron_scythe"
+  ],
+  "result": {
+    "id": "minecraft:iron_nugget"
+  }
+}

@@ -32,6 +32,7 @@ public class BSSmithingRecipes extends RecipeGenerator {
         enderSmithing(BSItems.GILDED_NETHERITE_SHIELD, RecipeCategory.COMBAT, BSItems.GILDED_ENDER_SHIELD);
     }
 
+    // Recipes
     public void netheriteBlockSmithing(Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
         SmithingTransformRecipeJsonBuilder.create(
                         Ingredient.ofItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.ofItem(pIngredientItem), Ingredient.ofItem(Items.NETHERITE_BLOCK), pCategory, pResultItem

@@ -1,9 +1,13 @@
 package net.nova;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.condition.RandomChanceLootCondition;
+import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
@@ -32,6 +36,16 @@ public class BigSwordsR implements ModInitializer {
             builder.add(BSItems.WOODEN_BIG_SWORD, 200);
             builder.add(BSItems.WOODEN_SCYTHE, 200);
             builder.add(BSItems.WOODEN_GLAIVE, 200);
+        });
+
+        // Loot Table Modifier
+        LootTableEvents.MODIFY.register((registryKey, builder, lootTableSource, wrapperLookup) -> {
+            if (lootTableSource.isBuiltin() && Identifier.ofVanilla("chests/end_city_treasure").equals(registryKey)) {
+                LootPool.Builder poolBuilder = LootPool.builder()
+                        .conditionally(RandomChanceLootCondition.builder(0.35f))
+                        .with(ItemEntry.builder(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE));
+                builder.pool(poolBuilder);
+            }
         });
     }
 
