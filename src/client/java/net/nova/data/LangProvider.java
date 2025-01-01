@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.sound.SoundEvent;
 import net.nova.init.BSBlocks;
 import net.nova.init.BSItems;
 import net.nova.init.CreativeTab;
@@ -12,9 +11,6 @@ import net.nova.init.Sounds;
 import net.nova.item.EnderSmithingTemplate;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Supplier;
-
-import static net.nova.BigSwordsR.MODID;
 
 public class LangProvider extends FabricLanguageProvider {
     public LangProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {

@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class BSTrimMaterials extends FabricDynamicRegistryProvider {
-    public static final RegistryKey<ArmorTrimMaterial> LIVINGMETAL = of("livingmetal");
+    public static RegistryKey<ArmorTrimMaterial> LIVINGMETAL = of("livingmetal");
 
     public BSTrimMaterials(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
