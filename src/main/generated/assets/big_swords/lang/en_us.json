@@ -1,8 +1,4 @@
 {
-  "big_swords.glaive_hit": "Glaive Hit",
-  "big_swords.glaive_swing": "Glaive Swing",
-  "big_swords.reaper_slash": "Reaper Slash",
-  "big_swords.scythe_slash": "Scythe Slash",
   "big_swords:biomass_shield.perk": "Special Perk: Vitality Transfer",
   "big_swords:biomass_shield.weakness": "Weakness: Life Leech",
   "big_swords:diamond_shield.perk": "Special Perk: Counter Reflect",
@@ -136,5 +132,9 @@
   "item.big_swords.wooden_scythe": "Wooden Scythe",
   "item.big_swords.wooden_shield": "Wooden Shield",
   "itemgroup.big_swords.big_swords_tab": "Big Swords R",
+  "sounds.big_swords.big_swords:glaive_hit": "Glaive Hit",
+  "sounds.big_swords.big_swords:glaive_swing": "Glaive Swing",
+  "sounds.big_swords.big_swords:reaper_slash": "Reaper Slash",
+  "sounds.big_swords.big_swords:scythe_slash": "Scythe Slash",
   "trim_material.big_swords.livingmetal": "Livingmetal Material"
 }

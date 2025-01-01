@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.sound.SoundEvent;
 import net.nova.init.BSBlocks;
 import net.nova.init.BSItems;
 import net.nova.init.CreativeTab;
@@ -11,6 +12,9 @@ import net.nova.init.Sounds;
 import net.nova.item.EnderSmithingTemplate;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
+
+import static net.nova.BigSwordsR.MODID;
 
 public class LangProvider extends FabricLanguageProvider {
     public LangProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
@@ -129,10 +133,10 @@ public class LangProvider extends FabricLanguageProvider {
         translationBuilder.add(EnderSmithingTemplate.ENDER_UPGRADE_INGREDIENTS.getString(), "Ender Eye");
 
         // Sounds
-        translationBuilder.add(Sounds.GLAIVE_HIT.id().toTranslationKey(), "Glaive Hit");
-        translationBuilder.add(Sounds.GLAIVE_SWING.id().toTranslationKey(), "Glaive Swing");
-        translationBuilder.add(Sounds.SCYTHE_SLASH.id().toTranslationKey(), "Scythe Slash");
-        translationBuilder.add(Sounds.REAPER_SLASH.id().toTranslationKey(), "Reaper Slash");
+        translationBuilder.add(SoundsProvider.getSubtitle(Sounds.GLAIVE_HIT), "Glaive Hit");
+        translationBuilder.add(SoundsProvider.getSubtitle(Sounds.GLAIVE_SWING), "Glaive Swing");
+        translationBuilder.add(SoundsProvider.getSubtitle(Sounds.SCYTHE_SLASH), "Scythe Slash");
+        translationBuilder.add(SoundsProvider.getSubtitle(Sounds.REAPER_SLASH), "Reaper Slash");
 
         // Advancements
 /*        addAdvancement("root", "The root of Big Swords R", "");

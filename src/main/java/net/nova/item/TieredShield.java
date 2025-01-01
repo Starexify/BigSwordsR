@@ -35,12 +35,8 @@ public class TieredShield extends ShieldItem {
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         super.appendTooltip(stack, context, tooltip, type);
 
-        //String id = .ITEM.getKey(item).toString().replace(MODID + ":", "");
-        String perk = id + ".perk";
-        String weakness = id + ".weakness";
-
-        tooltip.add(Text.translatable(perk).formatted(Formatting.GRAY));
-        tooltip.add(Text.translatable(weakness).formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable(this + ".perk").formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable(this + ".weakness").formatted(Formatting.GRAY));
         tooltip.add(Text.empty());
     }
 
