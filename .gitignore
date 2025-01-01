@@ -30,7 +30,9 @@ bin/
 
 # run
 run/*
+runs/*
 !run/options.txt
+!runs/client/options.txt
 
 # java
 
@@ -38,3 +40,6 @@ hs_err_*.log
 replay_*.log
 *.hprof
 *.jfr
+
+# generated/resources
+*.cache
