@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.EnchantmentTags;
-import net.nova.data.BSEnchantments;
+import net.nova.init.BSEnchantmentEffects;
 import net.nova.init.Tags;
 
 import java.util.concurrent.CompletableFuture;
@@ -16,7 +16,7 @@ public class BSEnchantmentTagsProvider extends FabricTagProvider.EnchantmentTagP
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        getOrCreateTagBuilder(EnchantmentTags.IN_ENCHANTING_TABLE).addOptional(BSEnchantments.SOUL_STEALER);
-        getOrCreateTagBuilder(Tags.EnchantmentTags.SCYTHE_EXCLUSIVE).addOptional(BSEnchantments.SOUL_STEALER);
+        getOrCreateTagBuilder(EnchantmentTags.IN_ENCHANTING_TABLE).addOptional(BSEnchantmentEffects.SOUL_STEALER);
+        getOrCreateTagBuilder(Tags.EnchantmentTags.SCYTHE_EXCLUSIVE).addOptional(BSEnchantmentEffects.SOUL_STEALER);
     }
 }

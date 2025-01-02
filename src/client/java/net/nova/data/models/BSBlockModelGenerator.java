@@ -45,9 +45,9 @@ public class BSBlockModelGenerator extends BlockStateModelGenerator {
             BlockStateVariantMap blockStateVariantMap = BlockStateVariantMap.create(ageProperty)
                     .register(integer -> {
                         int i = ageTextureIndices[integer];
-                        Identifier identifier = int2ObjectMap.computeIfAbsent(
-                                i, (Int2ObjectFunction<? extends Identifier>) (j -> this.createSubModel(crop, "_stage" + i, Models.CROSS, TextureMap::cross))
-                        );
+                        Identifier identifier = int2ObjectMap.computeIfAbsent(i, (Int2ObjectFunction<? extends Identifier>) (j ->
+                                createSubModel(crop, "_stage" + i, Models.CROSS, TextureMap::cross)
+                        ));
                         return BlockStateVariant.create().put(VariantSettings.MODEL, identifier);
                     });
             registerItemModel(crop.asItem());

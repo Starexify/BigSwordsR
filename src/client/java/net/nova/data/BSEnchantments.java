@@ -12,15 +12,13 @@ import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
-import net.nova.BigSwordsR;
 import net.nova.enchantments.effects.SoulStealEffect;
+import net.nova.init.BSEnchantmentEffects;
 import net.nova.init.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
 public class BSEnchantments extends FabricDynamicRegistryProvider {
-    public static final RegistryKey<Enchantment> SOUL_STEALER = of("soul_stealer");
-
     public BSEnchantments(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
     }
@@ -30,7 +28,7 @@ public class BSEnchantments extends FabricDynamicRegistryProvider {
         RegistryEntryLookup<Enchantment> registryEntryLookup = wrapperLookup.getOrThrow(RegistryKeys.ENCHANTMENT);
         RegistryEntryLookup<Item> registryEntryLookup1 = wrapperLookup.getOrThrow(RegistryKeys.ITEM);
 
-        register(entries, SOUL_STEALER, Enchantment.builder(
+        register(entries, BSEnchantmentEffects.SOUL_STEALER, Enchantment.builder(
                         Enchantment.definition(
                                 registryEntryLookup1.getOrThrow(Tags.BSItemTags.SCYTHES),
                                 2,
@@ -50,16 +48,12 @@ public class BSEnchantments extends FabricDynamicRegistryProvider {
         );
     }
 
-    @Override
-    public String getName() {
-        return "BSR EnchantmentGenerator";
-    }
-
     public void register(Entries entries, RegistryKey<Enchantment> key, Enchantment.Builder builder, ResourceCondition... resourceConditions) {
         entries.add(key, builder.build(key.getValue()), resourceConditions);
     }
 
-    public static RegistryKey<Enchantment> of(String id) {
-        return RegistryKey.of(RegistryKeys.ENCHANTMENT, BigSwordsR.rl(id));
+    @Override
+    public String getName() {
+        return "BSR EnchantmentGenerator";
     }
 }

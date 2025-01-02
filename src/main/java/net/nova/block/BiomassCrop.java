@@ -38,7 +38,7 @@ public class BiomassCrop extends CropBlock {
     // Crop Stuff
     @Override
     protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.getBlock() instanceof CreepBlock && floor.contains(CreepBlock.TILLED);
+        return floor.getBlock() instanceof CreepBlock && floor.get(CreepBlock.TILLED);
     }
 
     @Override

@@ -29,7 +29,7 @@ screenEffectScale:1.0
 soundDevice:""
 autoJump:false
 rotateWithMinecart:false
-operatorItemsTab:false
+operatorItemsTab:true
 autoSuggestions:true
 chatColors:true
 chatLinks:true

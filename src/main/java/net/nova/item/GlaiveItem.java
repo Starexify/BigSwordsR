@@ -66,7 +66,7 @@ public class GlaiveItem extends Item {
         PlayerEntity player = context.getPlayer();
         ItemStack itemStack = context.getStack();
 
-        if (state.getBlock() instanceof CreepBlock creepBlock && !state.contains(CreepBlock.TILLED)) {
+        if (state.getBlock() instanceof CreepBlock creepBlock && !state.get(CreepBlock.TILLED)) {
             level.playSound(null, blockpos, SoundEvents.PARTICLE_SOUL_ESCAPE.value(), SoundCategory.PLAYERS, 1.0F, 1.0F);
             creepBlock.tillBlock(level, blockpos, state);
             itemStack.damage(1, player);

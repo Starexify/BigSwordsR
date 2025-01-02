@@ -1,7 +1,7 @@
 {
   "sources": [
     {
-      "type": "paletted_permutation",
+      "type": "paletted_permutations",
       "palette_key": "minecraft:trims/color_palettes/trim_palette",
       "permutations": {
         "livingmetal": "big_swords:trims/color_palettes/livingmetal",

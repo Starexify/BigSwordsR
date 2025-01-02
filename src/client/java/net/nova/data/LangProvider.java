@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryWrapper;
+import net.nova.BSClient;
 import net.nova.init.BSBlocks;
 import net.nova.init.BSItems;
 import net.nova.init.CreativeTab;
@@ -11,6 +12,8 @@ import net.nova.init.Sounds;
 import net.nova.item.EnderSmithingTemplate;
 
 import java.util.concurrent.CompletableFuture;
+
+import static net.nova.BigSwordsR.MODID;
 
 public class LangProvider extends FabricLanguageProvider {
     public LangProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
@@ -135,40 +138,49 @@ public class LangProvider extends FabricLanguageProvider {
         translationBuilder.add(SoundsProvider.getSubtitle(Sounds.REAPER_SLASH), "Reaper Slash");
 
         // Advancements
-/*        addAdvancement("root", "The root of Big Swords R", "");
-        addAdvancement("first_big_sword", "Big Swords", "Your very first Big Sword");
-        addAdvancement("get_netherite_big_sword", "Equipped with Debris", "Obtain the mighty Netherite Big Sword");
-        addAdvancement("get_ender_big_sword", "Blade of the Void", "The Endermen last resort");
+        addAdvancement(translationBuilder, "root", "The root of Big Swords R", "");
+        addAdvancement(translationBuilder, "first_big_sword", "Big Swords", "Your very first Big Sword");
+        addAdvancement(translationBuilder, "get_netherite_big_sword", "Equipped with Debris", "Obtain the mighty Netherite Big Sword");
+        addAdvancement(translationBuilder, "get_ender_big_sword", "Blade of the Void", "The Endermen last resort");
 
-        addAdvancement("first_scythe", "Scythes", "Your very first Scythe");
-        addAdvancement("get_netherite_scythe", "Harvest Enemies with Debris", "Obtain the formidable Netherite Scythe");
-        addAdvancement("get_soul_reaper", "Grim Reaper's Touch", "Reap them of their souls");
+        addAdvancement(translationBuilder, "first_scythe", "Scythes", "Your very first Scythe");
+        addAdvancement(translationBuilder, "get_netherite_scythe", "Harvest Enemies with Debris", "Obtain the formidable Netherite Scythe");
+        addAdvancement(translationBuilder, "get_soul_reaper", "Grim Reaper's Touch", "Reap them of their souls");
 
-        addAdvancement("first_glaive", "Glaives", "Your very first Glaive");
-        addAdvancement("get_netherite_glaive", "Reaching with Debris", "Obtain the imposing Netherite Glaive");
+        addAdvancement(translationBuilder, "first_glaive", "Glaives", "Your very first Glaive");
+        addAdvancement(translationBuilder, "get_netherite_glaive", "Reaching with Debris", "Obtain the imposing Netherite Glaive");
 
-        addAdvancement("first_shield", "Shields", "Your very first Shield");
-        addAdvancement("get_netherite_shield", "Protected with Debris", "Obtain the unyielding Netherite Shield");
-        addAdvancement("get_ender_shield", "Warped Protection", "Obtain the teleporting Ender Shield");
+        addAdvancement(translationBuilder, "first_shield", "Shields", "Your very first Shield");
+        addAdvancement(translationBuilder, "get_netherite_shield", "Protected with Debris", "Obtain the unyielding Netherite Shield");
+        addAdvancement(translationBuilder, "get_ender_shield", "Warped Protection", "Obtain the teleporting Ender Shield");
 
-        addAdvancement("creep_a_block", "Creep-A-Block", "Use a Creeper Ball on Soul Sand to create a Creep Block");
-        addAdvancement("till_creep", "Till Creep Blocks", "Use a Glaive on Creep Blocks to till them and start your biomass farm");
+        addAdvancement(translationBuilder, "creep_a_block", "Creep-A-Block", "Use a Creeper Ball on Soul Sand to create a Creep Block");
+        addAdvancement(translationBuilder, "till_creep", "Till Creep Blocks", "Use a Glaive on Creep Blocks to till them and start your biomass farm");
 
-        addAdvancement("soul_harvesting", "Soul Harvesting", "Claim the essence of your first fallen foe");*/
+        addAdvancement(translationBuilder, "soul_harvesting", "Soul Harvesting", "Claim the essence of your first fallen foe");
 
         // Trim Material
         translationBuilder.add("trim_material.big_swords.livingmetal", "Livingmetal Material");
 
+        // Enchantments
+        translationBuilder.add("enchantment.big_swords.soul_stealer", "Soul Stealer");
+
         // Resourcepacks
-/*        add(BigSwordsRClient.RP_16x_NAME, "Big Swords R 16x");
-        add(BigSwordsRClient.RP_16x_DESC, "16x textures for Big Swords");
-        add(BigSwordsRClient.RP_old_NAME, "Big Swords R Old");
-        add(BigSwordsRClient.RP_old_DESC, "The classic look of Big Swords");*/
+        translationBuilder.add(BSClient.RP_16x_NAME, "Big Swords R 16x");
+        translationBuilder.add(BSClient.RP_16x_DESC, "16x textures for Big Swords");
+        translationBuilder.add(BSClient.RP_old_NAME, "Big Swords R Old");
+        translationBuilder.add(BSClient.RP_old_DESC, "The classic look of Big Swords");
 
         // Mod Menu
 /*        add(MODID + ".modrinth", "Modrinth Link");
         add(MODID + ".curseforge", "CurseForge Link");
         add(MODID + ".wiki", "Wiki Link");*/
+    }
+
+    // Methods
+    public void addAdvancement(TranslationBuilder translationBuilder, String advancementName, String title, String description) {
+        translationBuilder.add("advancements." + MODID + "." + advancementName + ".title", title);
+        translationBuilder.add("advancements." + MODID + "." + advancementName + ".description", description);
     }
 
     public void addShield(TranslationBuilder translationBuilder, Item key, String name, String perk, String weakness) {

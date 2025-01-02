@@ -19,7 +19,7 @@ public class AtlasesProvider implements DataProvider {
     public final FabricDataOutput output;
     public final Map<Identifier, JsonObject> atlas = new HashMap<>();
 
-    protected static final Identifier BLOCKS_ATLAS = Identifier.ofVanilla("block_atlas");
+    protected static final Identifier BLOCKS_ATLAS = Identifier.ofVanilla("blocks");
     protected static final Identifier ARMOR_TRIMS = Identifier.ofVanilla("armor_trims");
 
     public AtlasesProvider(FabricDataOutput output) {
@@ -81,7 +81,7 @@ public class AtlasesProvider implements DataProvider {
 
     private JsonObject createPalettedPermutationsSource(List<Identifier> textures, Identifier palette, Map<String, Identifier> permutations) {
         JsonObject source = new JsonObject();
-        source.addProperty("type", "paletted_permutation");
+        source.addProperty("type", "paletted_permutations");
 
         // Add textures array
         JsonArray texturesArray = new JsonArray();

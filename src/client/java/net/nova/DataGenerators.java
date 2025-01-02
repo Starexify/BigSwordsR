@@ -3,6 +3,7 @@ package net.nova;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.nova.data.*;
+import net.nova.data.advancement.BSAdvancementsProvider;
 import net.nova.data.loot.BlockLootTables;
 import net.nova.data.models.BSEquipmentModelProvider;
 import net.nova.data.models.BSModelProvider;
@@ -35,9 +36,9 @@ public class DataGenerators implements DataGeneratorEntrypoint {
         pack.addProvider(SoundsProvider::new);
 
         pack.addProvider(BlockLootTables::new);
-		/*
-		event.addProvider(new BSLootTableProvider(output, lookupProvider));
 
+        pack.addProvider(BSAdvancementsProvider::create);
+		/*
 		event.addProvider(BSAdvancementsProvider.create(output, lookupProvider));
 
 		event.addProvider(new DatapackProvider(output, lookupProvider));*/

@@ -38,7 +38,7 @@ public class BSTrimMaterials extends FabricDynamicRegistryProvider {
     public static void register(Entries entries, RegistryKey<ArmorTrimMaterial> materialKey, Item ingredient, Style style, Map<RegistryKey<EquipmentAsset>, String> overrideArmorMaterials) {
         ArmorTrimMaterial trimMaterial = ArmorTrimMaterial.of(
                 materialKey.getValue().getPath(), ingredient,
-                Text.translatable(Util.createTranslationKey("trim_material", materialKey.getRegistry())).fillStyle(style), overrideArmorMaterials
+                Text.translatable(Util.createTranslationKey("trim_material", materialKey.getValue())).fillStyle(style), overrideArmorMaterials
         );
         entries.add(materialKey, trimMaterial);
     }

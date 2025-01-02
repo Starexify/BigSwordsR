@@ -1,20 +1,32 @@
 package net.nova;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 import net.nova.init.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoField;
 
 public class BigSwordsR implements ModInitializer {
     public static final String MODID = "big_swords";
@@ -27,7 +39,9 @@ public class BigSwordsR implements ModInitializer {
         BSItems.initialize();
         BSBlocks.initialize();
         Sounds.initialize();
-        BSEnchantmentEntityEffects.initialize();
+        BSEnchantmentEffects.initialize();
+
+        ShieldMechanics.register();
 
         // Fuels
         FuelRegistryEvents.BUILD.register((builder, context) -> {
@@ -47,6 +61,27 @@ public class BigSwordsR implements ModInitializer {
                 builder.pool(poolBuilder);
             }
         });
+
+        // Halloween Stuff
+        ServerEntityEvents.ENTITY_LOAD.register((entity, serverWorld) -> {
+            if (entity.getType().isIn(Tags.EntityTypeTags.HALLOWEEN_MOB) && entity instanceof MobEntity mob)
+                halloweenDrop(mob, serverWorld, new ItemStack(BSItems.SOUL_REAPER));
+        });
+    }
+
+    public static void halloweenDrop(MobEntity entity, World world, ItemStack stack) {
+        LocalDate localDate = LocalDate.now();
+        Random random = world.getRandom();
+        int i = localDate.get(ChronoField.DAY_OF_MONTH);
+        int j = localDate.get(ChronoField.MONTH_OF_YEAR);
+        if (j == 10 && i == 31 && random.nextFloat() < 0.25F) {
+            entity.equipStack(EquipmentSlot.MAINHAND, stack);
+            entity.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0.05F);
+        }
+    }
+
+    public static RegistryEntry<Enchantment> getEnchantment(World level, RegistryKey<Enchantment> enchantment) {
+        return level.getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(enchantment);
     }
 
     public static void playSound(World level, PlayerEntity player, SoundEvent sound) {

@@ -1,6 +1,8 @@
 package net.nova.item;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.enchantment.EnchantmentEffectContext;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,6 +24,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.nova.BigSwordsR;
+import net.nova.enchantments.effects.SoulStealEffect;
+import net.nova.init.BSEnchantmentEffects;
 import net.nova.init.BSItems;
 import net.nova.init.Sounds;
 
@@ -94,16 +98,14 @@ public class ScytheItem extends HoeItem {
                             scytheHits(level, player, target);
                             entitiesHit++;
 
-/*                            int soulStealerEnchantment = stack.getEnchantmentLevel(BigSwordsR.getEnchantment(level, BSEnchantments.SOUL_STEALER));
+                            int soulStealerEnchantment = EnchantmentHelper.getLevel(BigSwordsR.getEnchantment(level, BSEnchantmentEffects.SOUL_STEALER), stack);
                             if (soulStealerEnchantment > 0) {
                                 SoulStealEffect soulStealEffect = new SoulStealEffect(200);
-                                soulStealEffect.apply((ServerLevel) level,
-                                        soulStealerEnchantment,
-                                        new EnchantedItemInUse(stack, entity.getEquipmentSlotForItem(stack), entity),
-                                        target,
-                                        target.position()
+                                soulStealEffect.apply((ServerWorld) level, soulStealerEnchantment,
+                                        new EnchantmentEffectContext(stack, entity.getPreferredEquipmentSlot(stack), entity),
+                                        target, target.getPos()
                                 );
-                            }*/
+                            }
                         }
                     }
                 }

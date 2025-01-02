@@ -12,7 +12,7 @@ public class CreativeTab {
     public static String BIG_SWORDS_TAB_TITLE = "itemgroup.big_swords.big_swords_tab";
 
     public static final ItemGroup BIG_SWORDS_TAB = Registry.register(Registries.ITEM_GROUP, BigSwordsR.rl("big_swords_tab"),
-            FabricItemGroup.builder().icon(() -> new ItemStack(BSItems.BIOMASS_SEED))
+            FabricItemGroup.builder().icon(() -> new ItemStack(BSItems.ENDER_BIG_SWORD))
                     .displayName(Text.translatable(BIG_SWORDS_TAB_TITLE))
                     .entries(((displayContext, entries) -> {
                         // Biomass

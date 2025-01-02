@@ -172,13 +172,13 @@ public class BSItemModelGenerator extends ItemModelGenerator {
         output.accept(item, ItemModels.rangeDispatch(new BloodLevelModelProperty(), list));
     }
 
-    public Identifier registerSubModel(Item item, Model model) {
-        return model.upload(ModelIds.getItemModelId(item), TextureMap.layer0(TextureMap.getId(item)), this.modelCollector);
+    public Identifier registerSubModelWith(Item item, String suffix, Model model) {
+        return model.upload(ModelIds.getItemSubModelId(item, suffix), TextureMap.layer0(TextureMap.getId(item)), this.modelCollector);
     }
 
     public void generateShield(Item item) {
-        ItemModel.Unbaked flatModel = ItemModels.basic(registerSubModel(item, BSModels.HANDHELD_SHIELD));
-        ItemModel.Unbaked blockingModel = ItemModels.basic(registerSubModel(item, "_blocking", BSModels.HANDHELD_SHIELD_BLOCKING));
+        ItemModel.Unbaked flatModel = ItemModels.basic(uploadWithTextureSource(item, item, BSModels.HANDHELD_SHIELD));
+        ItemModel.Unbaked blockingModel = ItemModels.basic(registerSubModelWith(item, "_blocking", BSModels.HANDHELD_SHIELD_BLOCKING));
         registerCondition(item, new UsingItemProperty(), blockingModel, flatModel);
     }
 
