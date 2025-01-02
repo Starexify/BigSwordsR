@@ -131,7 +131,7 @@ public class BigSwordsAdvancements implements AdvancementSubProvider {
                         false,
                         false
                 )
-                .addCriterion("get_" + displayItem, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(itemGetter, criterionItem))) // Example of using a specific item instead of TagKey
+                .addCriterion("get_" + displayItem, InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(itemGetter, criterionItem)))
                 .save(save, MODID + ":root/" + name);
 
         return advancement;
