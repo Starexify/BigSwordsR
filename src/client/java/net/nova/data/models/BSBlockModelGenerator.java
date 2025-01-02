@@ -26,12 +26,17 @@ public class BSBlockModelGenerator extends BlockStateModelGenerator {
     @Override
     public void register() {
         registerCreepBlock();
-        registerSimpleState(BSBlocks.LIVINGMETAL_BLOCK);
-        registerSimpleState(BSBlocks.BIOMASS_BLOCK);
+        registerSimpleBlock(BSBlocks.LIVINGMETAL_BLOCK);
+        registerSimpleBlock(BSBlocks.BIOMASS_BLOCK);
         createCrossCrop(BSBlocks.BIOMASS, Properties.AGE_3, 0, 1, 2, 3);
     }
 
     // Models
+    public void registerSimpleBlock(Block block) {
+        registerSimpleCubeAll(block);
+        registerParentedItemModel(block, ModelIds.getBlockModelId(block));
+    }
+
     public void createCrossCrop(Block crop, Property<Integer> ageProperty, int... ageTextureIndices) {
         if (ageProperty.getValues().size() != ageTextureIndices.length) {
             throw new IllegalArgumentException();
@@ -45,7 +50,7 @@ public class BSBlockModelGenerator extends BlockStateModelGenerator {
                         );
                         return BlockStateVariant.create().put(VariantSettings.MODEL, identifier);
                     });
-            this.registerItemModel(crop.asItem());
+            registerItemModel(crop.asItem());
             this.blockStateCollector.accept(VariantsBlockStateSupplier.create(crop).coordinate(blockStateVariantMap));
         }
     }
@@ -66,6 +71,7 @@ public class BSBlockModelGenerator extends BlockStateModelGenerator {
         Identifier tilledModel = Models.CUBE_BOTTOM_TOP.upload(
                 TextureMap.getSubId(BSBlocks.CREEP_BLOCK, "_tilled"), tilledMapping, this.modelCollector);
 
+        registerParentedItemModel(BSBlocks.CREEP_BLOCK, ModelIds.getBlockModelId(BSBlocks.CREEP_BLOCK));
         this.blockStateCollector.accept(VariantsBlockStateSupplier.create(BSBlocks.CREEP_BLOCK)
                 .coordinate(BlockStateVariantMap.create(CreepBlock.TILLED)
                         .register(false, BlockStateVariant.create().put(VariantSettings.MODEL, normalModel))

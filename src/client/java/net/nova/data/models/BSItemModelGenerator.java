@@ -4,6 +4,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.*;
 import net.minecraft.client.render.item.model.ItemModel;
+import net.minecraft.client.render.item.model.RangeDispatchItemModel;
 import net.minecraft.client.render.item.model.SelectItemModel;
 import net.minecraft.client.render.item.property.bool.UsingItemProperty;
 import net.minecraft.client.render.item.property.select.TrimMaterialProperty;
@@ -17,6 +18,8 @@ import net.minecraft.item.equipment.trim.ArmorTrimMaterial;
 import net.minecraft.item.equipment.trim.ArmorTrimMaterials;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
+import net.nova.BigSwordsR;
+import net.nova.client.render.item.BloodLevelModelProperty;
 import net.nova.data.BSTrimMaterials;
 import net.nova.equipment.BSEquipmentAssets;
 import net.nova.init.BSItems;
@@ -52,7 +55,7 @@ public class BSItemModelGenerator extends ItemModelGenerator {
         // Extra
         register(BSItems.CREEP_BALL, Models.GENERATED);
         register(BSItems.SOUL, Models.GENERATED);
-        //generateBloodVial(BSItems.BLOOD_VIAL);
+        registerBloodVial(BSItems.BLOOD_VIAL);
 
         // Sticks
         register(BSItems.GIANT_WOODEN_STICK, Models.GENERATED);
@@ -149,6 +152,26 @@ public class BSItemModelGenerator extends ItemModelGenerator {
     }
 
     // Methods
+    public void registerBloodVial(Item item) {
+        List<RangeDispatchItemModel.Entry> list = new ArrayList<>();
+        ItemModel.Unbaked basicModel = ItemModels.basic(Models.GENERATED.upload(
+                BigSwordsR.rl("item/vial"),
+                TextureMap.layer0(BigSwordsR.rl("item/vial")),
+                modelCollector
+        ));
+        list.add(ItemModels.rangeDispatchEntry(basicModel, 0.0F));
+
+        for (int i = 1; i < 10; i++) {
+            ItemModel.Unbaked bloodModel = ItemModels.basic(Models.GENERATED.upload(
+                    ModelIds.getItemSubModelId(item, "_" + i),
+                    TextureMap.layer0(TextureMap.getSubId(item, "_" + (i - 1))),
+                    modelCollector
+            ));
+            list.add(ItemModels.rangeDispatchEntry(bloodModel, (float) i));
+        }
+        output.accept(item, ItemModels.rangeDispatch(new BloodLevelModelProperty(), list));
+    }
+
     public Identifier registerSubModel(Item item, Model model) {
         return model.upload(ModelIds.getItemModelId(item), TextureMap.layer0(TextureMap.getId(item)), this.modelCollector);
     }
@@ -190,8 +213,7 @@ public class BSItemModelGenerator extends ItemModelGenerator {
     }
 
     @Environment(EnvType.CLIENT)
-    record TrimMaterial(String name, RegistryKey<ArmorTrimMaterial> materialKey,
-                        Map<RegistryKey<EquipmentAsset>, String> overrideArmorMaterials) {
+    record TrimMaterial(String name, RegistryKey<ArmorTrimMaterial> materialKey, Map<RegistryKey<EquipmentAsset>, String> overrideArmorMaterials) {
         public String texture(RegistryKey<EquipmentAsset> equipmentKey) {
             return overrideArmorMaterials.getOrDefault(equipmentKey, this.name);
         }

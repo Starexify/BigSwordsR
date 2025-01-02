@@ -48,7 +48,7 @@ public class BSBlocks {
     // Methods
     public static Block registerBlock(String name, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
         Block block = register(name, factory, settings);
-        BSItems.registerItem(name, properties -> new BlockItem(block, properties));
+        BSItems.registerItem(name, properties -> new BlockItem(block, properties.useBlockPrefixedTranslationKey()));
         return block;
     }
 

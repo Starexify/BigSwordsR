@@ -1,10 +1,12 @@
 package net.nova;
 
 import net.fabricmc.api.ClientModInitializer;
+import net.minecraft.client.render.item.property.numeric.NumericProperties;
+import net.nova.client.render.item.BloodLevelModelProperty;
 
 public class BSClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
+		NumericProperties.ID_MAPPER.put(BigSwordsR.rl("blood_level"), BloodLevelModelProperty.CODEC);
 	}
 }
