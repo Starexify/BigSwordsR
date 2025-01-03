@@ -19,19 +19,17 @@ import java.util.concurrent.CompletableFuture;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class BSRecipeProvider extends RecipeProvider {
-    public final HolderLookup.Provider lookupProvider;
     public static String path = MODID + ":";
 
     public BSRecipeProvider(HolderLookup.Provider lookupProvider, RecipeOutput recipeOutput) {
         super(lookupProvider, recipeOutput);
-        this.lookupProvider = lookupProvider;
     }
 
     @Override
     protected void buildRecipes() {
-        new CraftingRecipes(lookupProvider, output).build();
-        new FurnaceRecipes(lookupProvider, output).build();
-        new BSSmithingRecipes(lookupProvider, output).build();
+        new CraftingRecipes(registries, output).build();
+        new FurnaceRecipes(registries, output).build();
+        new BSSmithingRecipes(registries, output).build();
     }
 
     // Recipes
