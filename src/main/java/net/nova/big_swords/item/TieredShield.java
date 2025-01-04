@@ -1,6 +1,7 @@
 package net.nova.big_swords.item;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
@@ -9,13 +10,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.nova.big_swords.init.BSItems;
 
 import java.util.List;
 
 public class TieredShield extends ShieldItem {
-    private final ToolMaterial toolMaterial;
+    public final ToolMaterial toolMaterial;
 
     public TieredShield(ToolMaterial toolMaterial, Properties properties) {
         this(toolMaterial, properties, 1, 0);
@@ -27,7 +29,9 @@ public class TieredShield extends ShieldItem {
     }
 
     public TieredShield(ToolMaterial toolMaterial, Properties properties, int durabilityMultiplier, int additionalDurability) {
-        super(properties.durability(toolMaterial.durability() * durabilityMultiplier + additionalDurability));
+        super(properties.durability(toolMaterial.durability() * durabilityMultiplier + additionalDurability)
+                .enchantable(toolMaterial.enchantmentValue())
+                .repairable(toolMaterial.repairItems()));
         this.toolMaterial = toolMaterial;
     }
 
@@ -42,17 +46,6 @@ public class TieredShield extends ShieldItem {
         pTooltipComponents.add(Component.translatable(weakness).withStyle(ChatFormatting.GRAY));
         pTooltipComponents.add(Component.empty());
     }
-
-    // Tier Stuff
-/*    @Override
-    public int getEnchantmentValue() {
-        return this.toolMaterial.enchantmentValue();
-    }
-
-    @Override
-    public boolean isValidRepairItem(ItemStack pToRepair, ItemStack pRepair) {
-        return this.toolMaterial.rp().test(pRepair) || super.isValidRepairItem(pToRepair, pRepair);
-    }*/
 
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity entity, int pSlotId, boolean pIsSelected) {

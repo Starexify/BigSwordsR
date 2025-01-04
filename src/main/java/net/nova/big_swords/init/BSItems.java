@@ -115,6 +115,7 @@ public class BSItems {
     public static DeferredItem<Item> LIVINGMETAL_SHIELD = ITEMS.registerItem("livingmetal_shield", properties -> new TieredShield(BSToolMaterial.LIVINGMETAL, properties, 1));
     public static DeferredItem<Item> GILDED_LIVINGMETAL_SHIELD = ITEMS.registerItem("gilded_livingmetal_shield", properties -> new TieredShield(BSToolMaterial.LIVINGMETAL, properties, 2, BSToolMaterial.LIVINGMETAL.durability() / 2));
 
+    // Register
     public static DeferredItem<BlockItem> registerSimpleBlockItem(String name, Supplier<? extends Block> block) {
         return ITEMS.register(name, key -> new BlockItem(block.get(), new Item.Properties().setId(ResourceKey.create(Registries.ITEM, key))));
     }
