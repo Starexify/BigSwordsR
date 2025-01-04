@@ -8,12 +8,10 @@ import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
-import net.minecraft.world.World;
 import net.nova.init.BSItems;
 
-import java.util.Random;
-
 public class ShieldMechanics {
+    public static final ThreadLocal<Integer> blockedDamage = new ThreadLocal<>();
 
     public static void register() {
         ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, damageSource, baseDamageTaken, damageTaken, blocked) -> {
@@ -22,13 +20,11 @@ public class ShieldMechanics {
                 Entity attacker = damageSource.getAttacker();
                 Entity sourceEntity = damageSource.getSource();
                 double randomChance = Math.random();
-                double randomChanceE = Math.random();
-                Random random = new Random();
-                World level = player.getWorld();
+                if (blockedDamage.get() == null) blockedDamage.set(0);
 
                 boolean isWoodenShield = shield.isOf(BSItems.WOODEN_SHIELD);
                 boolean isGildedWoodenShield = shield.isOf(BSItems.GILDED_WOODEN_SHIELD);
-                if ((isWoodenShield || isGildedWoodenShield)) {
+                if (isWoodenShield || isGildedWoodenShield) {
                     if (damageSource.isOf(DamageTypes.ARROW) && sourceEntity instanceof ArrowEntity arrow) {
                         // Perk
                         double catchChance = isGildedWoodenShield ? 0.7 : 0.4;
@@ -43,8 +39,10 @@ public class ShieldMechanics {
 
                         // Weakness
                         if (arrow.isOnFire()) {
-                            player.damageShield(baseDamageTaken * 4);
-                            shield.damage((int) (baseDamageTaken * 4), player);
+                            player.sendMessage(Text.literal("Took damage" + blockedDamage.get()), false);
+                            player.damageShield(blockedDamage.get() * 4);
+                            //player.blockedByShield(damageSource);
+                            player.sendMessage(Text.literal("Took damage" + blockedDamage.get()), false);
                         }
                     }
                 }
