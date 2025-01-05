@@ -11,6 +11,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTables;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.registry.RegistryKey;
@@ -54,13 +55,14 @@ public class BigSwordsR implements ModInitializer {
 
         // Loot Table Modifier
         LootTableEvents.MODIFY.register((registryKey, builder, lootTableSource, wrapperLookup) -> {
-            if (lootTableSource.isBuiltin() && Identifier.ofVanilla("chests/end_city_treasure").equals(registryKey)) {
+            if (lootTableSource.isBuiltin() && LootTables.END_CITY_TREASURE_CHEST.equals(registryKey)) {
                 LootPool.Builder poolBuilder = LootPool.builder()
                         .conditionally(RandomChanceLootCondition.builder(0.35f))
                         .with(ItemEntry.builder(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE));
                 builder.pool(poolBuilder);
             }
         });
+
 
         // Halloween Stuff
         ServerEntityEvents.ENTITY_LOAD.register((entity, serverWorld) -> {
