@@ -213,10 +213,6 @@ public class ShieldMechanics {
                             attacker.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
                         }
                     }
-                    // Weakness
-                    if (attacker instanceof EndermanEntity || attacker instanceof EnderDragonEntity || attacker instanceof EndermiteEntity) {
-                        //event.setBlocked(false);
-                    }
                 }
 
                 // Quartz Shields
@@ -246,12 +242,6 @@ public class ShieldMechanics {
                     float perkChance = isGildedPatchworkShield ? 0.5f : 0.25f;
                     if (randomChance < perkChance && attacker instanceof LivingEntity livingAttacker) {
                         livingAttacker.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 10 * 20, 0, false, false));
-                    }
-
-                    // Weakness
-                    float weaknessChance = isGildedPatchworkShield ? 0.25f : 0.5f;
-                    if (randomChanceE < weaknessChance) {
-                        //event.setBlocked(false);
                     }
                 }
 
