@@ -38,9 +38,5 @@ public class DataGenerators implements DataGeneratorEntrypoint {
         pack.addProvider(BlockLootTables::new);
 
         pack.addProvider(BSAdvancementsProvider::create);
-		/*
-		event.addProvider(BSAdvancementsProvider.create(output, lookupProvider));
-
-		event.addProvider(new DatapackProvider(output, lookupProvider));*/
     }
 }

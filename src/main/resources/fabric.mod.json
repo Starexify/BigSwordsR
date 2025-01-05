@@ -26,11 +26,7 @@
 		]
 	},
 	"mixins": [
-		"big_swords.mixins.json",
-		{
-			"config": "big_swords.client.mixins.json",
-			"environment": "client"
-		}
+		"big_swords.mixins.json"
 	],
 	"depends": {
 		"fabricloader": ">=0.16.9",
