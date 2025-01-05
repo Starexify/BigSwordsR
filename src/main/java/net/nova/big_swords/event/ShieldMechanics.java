@@ -102,13 +102,13 @@ public class ShieldMechanics {
                     int fireAspectLevel = attackerWeapon.getEnchantmentLevel(BigSwordsR.getEnchantment(level, Enchantments.FIRE_ASPECT));
                     if (fireAspectLevel > 0) {
                         event.setShieldDamage(0);
-                        playSound(player.level(), player, SoundEvents.FIRE_EXTINGUISH);
+                        playSound(level, player, SoundEvents.FIRE_EXTINGUISH);
                     }
                 }
                 if (sourceEntity instanceof Fireball || (sourceEntity instanceof Projectile projectile && projectile.isOnFire())) {
                     event.setShieldDamage(0);
                     sourceEntity.remove(Entity.RemovalReason.DISCARDED);
-                    playSound(player.level(), player, SoundEvents.FIRE_EXTINGUISH);
+                    playSound(level, player, SoundEvents.FIRE_EXTINGUISH);
                 }
 
                 // Weakness
@@ -138,7 +138,7 @@ public class ShieldMechanics {
                     if (sourceEntity instanceof Projectile originalProjectile && !(originalProjectile instanceof ThrownTrident)) {
                         boolean wasOnFire = originalProjectile.isOnFire();
                         originalProjectile.discard();
-                        Projectile newProjectile = (Projectile) originalProjectile.getType().create(player.level(), EntitySpawnReason.EVENT);
+                        Projectile newProjectile = (Projectile) originalProjectile.getType().create(level, EntitySpawnReason.EVENT);
 
                         if (newProjectile != null && attacker != null) {
                             newProjectile.setPos(player.getX(), originalProjectile.getY(), player.getZ());
@@ -153,7 +153,7 @@ public class ShieldMechanics {
                             float velocity = 1.0f;
                             newProjectile.shoot(directionToAttacker.x, directionToAttacker.y, directionToAttacker.z, velocity, 0.0f);
 
-                            player.level().addFreshEntity(newProjectile);
+                            level.addFreshEntity(newProjectile);
                         }
 
                         // Weakness
@@ -209,7 +209,7 @@ public class ShieldMechanics {
 
                     // Adjust Y position to find a safe spot
                     BlockPos blockPos = new BlockPos((int) Math.floor(newAttackerPosition.x), (int) Math.floor(newAttackerPosition.y), (int) Math.floor(newAttackerPosition.z));
-                    BlockPos safePos = player.level().getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, blockPos);
+                    BlockPos safePos = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING, blockPos);
 
                     attacker.teleportTo(safePos.getX() + 0.5, safePos.getY(), safePos.getZ() + 0.5);
                     attacker.playSound(SoundEvents.ENDERMAN_TELEPORT);

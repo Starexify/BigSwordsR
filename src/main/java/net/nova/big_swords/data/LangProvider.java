@@ -102,7 +102,7 @@ public class LangProvider extends LanguageProvider {
         addShield(BSItems.GILDED_WOODEN_SHIELD, "Gilded Wooden Shield", "Special Perk: Arrow Catch", "Weakness: Flammable");
         addShield(BSItems.STONE_SHIELD, "Stone Shield", "Special Perk: Fire Resistant", "Weakness: Shattered Defense");
         addShield(BSItems.GILDED_STONE_SHIELD, "Gilded Stone Shield", "Special Perk: Fire Resistant", "Weakness: Shattered Defense");
-        addShield(BSItems.IRON_SHIELD, "Gilded Iron Shield", "Special Perk: Explosive Resistant", "Weakness: Rusting");
+        addShield(BSItems.IRON_SHIELD, "Iron Shield", "Special Perk: Explosive Resistant", "Weakness: Rusting");
         addShield(BSItems.GILDED_IRON_SHIELD, "Gilded Iron Shield", "Special Perk: Explosive Resistant", "Weakness: Rusting");
         addShield(BSItems.DIAMOND_SHIELD, "Diamond Shield", "Special Perk: Counter Reflect", "Weakness: Reflective Impact");
         addShield(BSItems.GILDED_DIAMOND_SHIELD, "Gilded Diamond Shield", "Special Perk: Counter Reflect", "Weakness: Reflective Impact");
@@ -112,7 +112,7 @@ public class LangProvider extends LanguageProvider {
         addShield(BSItems.GILDED_ENDER_SHIELD, "Gilded Ender Shield", "Special Perk: Teleport Displace", "Weakness: Ender Damage");
         addShield(BSItems.QUARTZ_SHIELD, "Quartz Shield", "Special Perk: Quartz Barrier", "Weakness: Hunger Toll");
         addShield(BSItems.GILDED_QUARTZ_SHIELD, "Gilded Quartz Shield", "Special Perk: Quartz Barrier", "Weakness: Hunger Toll");
-        addShield(BSItems.PATCHWORK_SHIELD, "Gilded Patchwork Shield", "Special Perk: Necrotic Weaken", "Weakness: Rotten Defense");
+        addShield(BSItems.PATCHWORK_SHIELD, "Patchwork Shield", "Special Perk: Necrotic Weaken", "Weakness: Rotten Defense");
         addShield(BSItems.GILDED_PATCHWORK_SHIELD, "Gilded Patchwork Shield", "Special Perk: Necrotic Weaken", "Weakness: Rotten Defense");
         addShield(BSItems.SKULL_SHIELD, "Skull Shield", "Special Perk: Fear", "Weakness: Brittle Bones");
         addShield(BSItems.GILDED_SKULL_SHIELD, "Gilded Skull Shield", "Special Perk: Fear", "Weakness: Brittle Bones");
