@@ -10,7 +10,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Rarity;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.item.*;
-import net.nova.item.*;
 
 import java.util.function.Function;
 

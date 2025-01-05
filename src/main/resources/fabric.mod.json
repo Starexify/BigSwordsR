@@ -19,10 +19,10 @@
 			"net.nova.big_swords.BigSwordsR"
 		],
 		"client": [
-			"net.nova.BSClient"
+			"net.nova.big_swords.BSClient"
 		],
 		"fabric-datagen": [
-			"net.nova.DataGenerators"
+			"net.nova.big_swords.DataGenerators"
 		]
 	},
 	"mixins": [
