@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_skull_shield": {
+      "conditions": {
+        "items": [
+          {
+            "items": "big_swords:skull_shield"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "big_swords:gilded_skull_shield"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_skull_shield"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "big_swords:gilded_skull_shield"
+    ]
+  }
+}

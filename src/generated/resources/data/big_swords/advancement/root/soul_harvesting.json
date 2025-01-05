@@ -1,0 +1,34 @@
+{
+  "parent": "big_swords:root",
+  "criteria": {
+    "get_DeferredHolder{ResourceKey[minecraft:item / big_swords:soul]}": {
+      "conditions": {
+        "items": [
+          {
+            "items": "big_swords:soul"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.big_swords.soul_harvesting.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "big_swords:soul"
+    },
+    "title": {
+      "translate": "advancements.big_swords.soul_harvesting.title"
+    }
+  },
+  "requirements": [
+    [
+      "get_DeferredHolder{ResourceKey[minecraft:item / big_swords:soul]}"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
