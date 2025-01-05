@@ -16,7 +16,7 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.nova.BigSwordsR"
+			"net.nova.big_swords.BigSwordsR"
 		],
 		"client": [
 			"net.nova.BSClient"

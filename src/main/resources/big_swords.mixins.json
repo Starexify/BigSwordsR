@@ -1,10 +1,10 @@
 {
 	"required": true,
-	"package": "net.nova.mixin",
+	"package": "net.nova.big_swords.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"LivingEntityMixin",
-		"PlayerEntityMixin"
+      "LivingEntityMixin",
+      "PlayerEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
