@@ -45,10 +45,8 @@ public class SoundsProvider implements DataProvider {
         JsonArray soundsArray = new JsonArray();
 
         soundsArray.add(new JsonPrimitive(soundEvent.id().toString()));
-
         definition.add("sounds", soundsArray);
         definition.addProperty("subtitle", getSubtitle(soundEvent));
-
         sounds.put(soundEvent.id(), definition);
     }
 
