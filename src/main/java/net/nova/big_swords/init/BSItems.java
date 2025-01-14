@@ -30,42 +30,42 @@ public class BSItems {
 
     // Livingmetal Stuff
     public static Item LIVINGMETAL_INGOT = registerItem("livingmetal_ingot", Item::new);
-    public static Item LIVINGMETAL_HELMET = registerItem("livingmetal_helmet", properties -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, EquipmentType.HELMET, properties));
-    public static Item LIVINGMETAL_CHESTPLATE = registerItem("livingmetal_chestplate", properties -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, EquipmentType.CHESTPLATE, properties));
-    public static Item LIVINGMETAL_LEGGINGS = registerItem("livingmetal_leggings", properties -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, EquipmentType.LEGGINGS, properties));
-    public static Item LIVINGMETAL_BOOTS = registerItem("livingmetal_boots", properties -> new ArmorItem(BSArmorMaterial.LIVINGMETAL, EquipmentType.BOOTS, properties));
-    public static Item LIVINGMETAL_SWORD = registerItem("livingmetal_sword", properties -> new SwordItem(BSToolMaterial.LIVINGMETAL, 3.0F, 2.4F, properties));
-    public static Item LIVINGMETAL_PICKAXE = registerItem("livingmetal_pickaxe", properties -> new PickaxeItem(BSToolMaterial.LIVINGMETAL, 1.0F, -2.8F, properties));
+    public static Item LIVINGMETAL_HELMET = registerItem("livingmetal_helmet", new Item.Settings().armor(BSArmorMaterial.LIVINGMETAL, EquipmentType.HELMET));
+    public static Item LIVINGMETAL_CHESTPLATE = registerItem("livingmetal_chestplate", new Item.Settings().armor(BSArmorMaterial.LIVINGMETAL, EquipmentType.CHESTPLATE));
+    public static Item LIVINGMETAL_LEGGINGS = registerItem("livingmetal_leggings", new Item.Settings().armor(BSArmorMaterial.LIVINGMETAL, EquipmentType.LEGGINGS));
+    public static Item LIVINGMETAL_BOOTS = registerItem("livingmetal_boots", new Item.Settings().armor(BSArmorMaterial.LIVINGMETAL, EquipmentType.BOOTS));
+    public static Item LIVINGMETAL_SWORD = registerItem("livingmetal_sword", new Item.Settings().sword(BSToolMaterial.LIVINGMETAL, 3.0F, 2.4F));
+    public static Item LIVINGMETAL_PICKAXE = registerItem("livingmetal_pickaxe", new Item.Settings().pickaxe(BSToolMaterial.LIVINGMETAL, 1.0F, -2.8F));
     public static Item LIVINGMETAL_AXE = registerItem("livingmetal_axe", properties -> new AxeItem(BSToolMaterial.LIVINGMETAL, 6.0F, -3.0F, properties));
     public static Item LIVINGMETAL_SHOVEL = registerItem("livingmetal_shovel", properties -> new ShovelItem(BSToolMaterial.LIVINGMETAL, 1.5F, -3.0F, properties));
     public static Item LIVINGMETAL_HOE = registerItem("livingmetal_hoe", properties -> new HoeItem(BSToolMaterial.LIVINGMETAL, -2.5F, 0.0F, properties));
 
     // Biomass Stuff
     public static Item BIOMASS = registerItem("biomass", Item::new);
-    public static Item BIOMASS_HELMET = registerItem("biomass_helmet", properties -> new ArmorItem(BSArmorMaterial.BIOMASS, EquipmentType.HELMET, properties));
-    public static Item BIOMASS_CHESTPLATE = registerItem("biomass_chestplate", properties -> new ArmorItem(BSArmorMaterial.BIOMASS, EquipmentType.CHESTPLATE, properties));
-    public static Item BIOMASS_LEGGINGS = registerItem("biomass_leggings", properties -> new ArmorItem(BSArmorMaterial.BIOMASS, EquipmentType.LEGGINGS, properties));
-    public static Item BIOMASS_BOOTS = registerItem("biomass_boots", properties -> new ArmorItem(BSArmorMaterial.BIOMASS, EquipmentType.BOOTS, properties));
-    public static Item BIOMASS_SWORD = registerItem("biomass_sword", properties -> new SwordItem(BSToolMaterial.BIOMASS, 3.0F, -2.4F, properties));
-    public static Item BIOMASS_PICKAXE = registerItem("biomass_pickaxe", properties -> new PickaxeItem(BSToolMaterial.BIOMASS, 1.0F, -2.8F, properties));
+    public static Item BIOMASS_HELMET = registerItem("biomass_helmet", new Item.Settings().armor(BSArmorMaterial.BIOMASS, EquipmentType.HELMET));
+    public static Item BIOMASS_CHESTPLATE = registerItem("biomass_chestplate", new Item.Settings().armor(BSArmorMaterial.BIOMASS, EquipmentType.CHESTPLATE));
+    public static Item BIOMASS_LEGGINGS = registerItem("biomass_leggings", new Item.Settings().armor(BSArmorMaterial.BIOMASS, EquipmentType.LEGGINGS));
+    public static Item BIOMASS_BOOTS = registerItem("biomass_boots", new Item.Settings().armor(BSArmorMaterial.BIOMASS, EquipmentType.BOOTS));
+    public static Item BIOMASS_SWORD = registerItem("biomass_sword", new Item.Settings().sword(BSToolMaterial.BIOMASS, 3.0F, -2.4F));
+    public static Item BIOMASS_PICKAXE = registerItem("biomass_pickaxe", new Item.Settings().pickaxe(BSToolMaterial.BIOMASS, 1.0F, -2.8F));
     public static Item BIOMASS_AXE = registerItem("biomass_axe", properties -> new AxeItem(BSToolMaterial.BIOMASS, 6.0F, -3.0F, properties));
     public static Item BIOMASS_SHOVEL = registerItem("biomass_shovel", properties -> new ShovelItem(BSToolMaterial.BIOMASS, 1.5F, -3.0F, properties));
     public static Item BIOMASS_HOE = registerItem("biomass_hoe", properties -> new HoeItem(BSToolMaterial.BIOMASS, -2.0F, -0.5F, properties));
 
     // Big Swords
-    public static Item WOODEN_BIG_SWORD = registerItem("wooden_big_sword", properties -> new BigSwordItem(ToolMaterial.WOOD, 6.5F, -2.8F, properties));
-    public static Item STONE_BIG_SWORD = registerItem("stone_big_sword", properties -> new BigSwordItem(ToolMaterial.STONE, 6.5F, -2.8F, properties));
-    public static Item IRON_BIG_SWORD = registerItem("iron_big_sword", properties -> new BigSwordItem(ToolMaterial.IRON, 6.5F, -2.8F, properties));
-    public static Item GOLDEN_BIG_SWORD = registerItem("golden_big_sword", properties -> new BigSwordItem(ToolMaterial.GOLD, 6.5F, -2.8F, properties));
-    public static Item DIAMOND_BIG_SWORD = registerItem("diamond_big_sword", properties -> new BigSwordItem(ToolMaterial.DIAMOND, 6.5F, -2.8F, properties));
-    public static Item NETHERITE_BIG_SWORD = registerItem("netherite_big_sword", properties -> new BigSwordItem(ToolMaterial.NETHERITE, 6.5F, -2.8F, properties.fireproof()));
-    public static Item PATCHWORK_BIG_SWORD = registerItem("patchwork_big_sword", properties -> new BigSwordItem(BSToolMaterial.PATCHWORK, 6.5F, -2.4F, properties));
-    public static Item SKULL_BIG_SWORD = registerItem("skull_big_sword", properties -> new BigSwordItem(BSToolMaterial.SKULL, 6.5F, -2.6F, properties));
-    public static Item QUARTZ_BIG_SWORD = registerItem("quartz_big_sword", properties -> new BigSwordItem(BSToolMaterial.QUARTZ, 6.5F, -2.8F, properties));
-    public static Item OBSIDIAN_BIG_SWORD = registerItem("obsidian_big_sword", properties -> new BigSwordItem(BSToolMaterial.OBSIDIAN, 6.5F, -2.8F, properties));
-    public static Item ENDER_BIG_SWORD = registerItem("ender_big_sword", properties -> new BigSwordItem(BSToolMaterial.ENDER, 6.5F, -2.8F, properties.fireproof()));
-    public static Item LIVINGMETAL_BIG_SWORD = registerItem("livingmetal_big_sword", properties -> new BigSwordItem(BSToolMaterial.LIVINGMETAL, 6.5F, -2.8F, properties));
-    public static Item BIOMASS_BIG_SWORD = registerItem("biomass_big_sword", properties -> new BigSwordItem(BSToolMaterial.BIOMASS, 6.5F, -2.8F, properties));
+    public static Item WOODEN_BIG_SWORD = registerItem("wooden_big_sword", new Item.Settings().sword(ToolMaterial.WOOD, 6.5F, -2.8F).maxDamage(ToolMaterial.WOOD.durability() * 2));
+    public static Item STONE_BIG_SWORD = registerItem("stone_big_sword", new Item.Settings().sword(ToolMaterial.STONE, 6.5F, -2.8F).maxDamage(ToolMaterial.STONE.durability() * 2));
+    public static Item IRON_BIG_SWORD = registerItem("iron_big_sword", new Item.Settings().sword(ToolMaterial.IRON, 6.5F, -2.8F).maxDamage(ToolMaterial.IRON.durability() * 2));
+    public static Item GOLDEN_BIG_SWORD = registerItem("golden_big_sword", new Item.Settings().sword(ToolMaterial.GOLD, 6.5F, -2.8F).maxDamage(ToolMaterial.GOLD.durability() * 2));
+    public static Item DIAMOND_BIG_SWORD = registerItem("diamond_big_sword", new Item.Settings().sword(ToolMaterial.DIAMOND, 6.5F, -2.8F).maxDamage(ToolMaterial.DIAMOND.durability() * 2));
+    public static Item NETHERITE_BIG_SWORD = registerItem("netherite_big_sword", new Item.Settings().sword(ToolMaterial.NETHERITE, 6.5F, -2.8F).maxDamage(ToolMaterial.NETHERITE.durability() * 2).fireproof());
+    public static Item PATCHWORK_BIG_SWORD = registerItem("patchwork_big_sword", new Item.Settings().sword(BSToolMaterial.PATCHWORK, 6.5F, -2.4F).maxDamage(BSToolMaterial.PATCHWORK.durability() * 2));
+    public static Item SKULL_BIG_SWORD = registerItem("skull_big_sword", new Item.Settings().sword(BSToolMaterial.SKULL, 6.5F, -2.6F).maxDamage(BSToolMaterial.SKULL.durability() * 2));
+    public static Item QUARTZ_BIG_SWORD = registerItem("quartz_big_sword", new Item.Settings().sword(BSToolMaterial.QUARTZ, 6.5F, -2.8F).maxDamage(BSToolMaterial.QUARTZ.durability() * 2));
+    public static Item OBSIDIAN_BIG_SWORD = registerItem("obsidian_big_sword", new Item.Settings().sword(BSToolMaterial.OBSIDIAN, 6.5F, -2.8F).maxDamage(BSToolMaterial.OBSIDIAN.durability() * 2));
+    public static Item ENDER_BIG_SWORD = registerItem("ender_big_sword", new Item.Settings().sword(BSToolMaterial.ENDER, 6.5F, -2.8F).fireproof().maxDamage(BSToolMaterial.ENDER.durability() * 2));
+    public static Item LIVINGMETAL_BIG_SWORD = registerItem("livingmetal_big_sword", new Item.Settings().sword(BSToolMaterial.LIVINGMETAL, 6.5F, -2.8F).maxDamage(BSToolMaterial.LIVINGMETAL.durability() * 2));
+    public static Item BIOMASS_BIG_SWORD = registerItem("biomass_big_sword", new Item.Settings().sword(BSToolMaterial.BIOMASS, 6.5F, -2.8F).maxDamage(BSToolMaterial.BIOMASS.durability() * 2));
 
     // Glaives
     public static Item WOODEN_GLAIVE = registerItem("wooden_glaive", properties -> new GlaiveItem(ToolMaterial.WOOD, 2, -2.2F, 3F, 4F, properties));
@@ -116,6 +116,10 @@ public class BSItems {
     // Methods
     public static Item registerItem(String name, Function<Item.Settings, Item> factory) {
         return register(name, factory, new Item.Settings());
+    }
+
+    public static Item registerItem(String name, Item.Settings settings) {
+        return register(name, Item::new, settings);
     }
 
     public static Item register(String name, Function<Item.Settings, Item> factory, Item.Settings settings) {
