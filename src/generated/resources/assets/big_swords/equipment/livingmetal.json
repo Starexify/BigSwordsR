@@ -2,12 +2,12 @@
   "layers": {
     "humanoid": [
       {
-        "texture": "big_swords:livingmetal"
+        "texture": "minecraft:livingmetal"
       }
     ],
     "humanoid_leggings": [
       {
-        "texture": "big_swords:livingmetal"
+        "texture": "minecraft:livingmetal"
       }
     ]
   }
