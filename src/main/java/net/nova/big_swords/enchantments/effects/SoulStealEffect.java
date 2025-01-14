@@ -22,7 +22,7 @@ public record SoulStealEffect(LevelBasedValue dropChance, ItemStack droppedItem)
 
     @Override
     public void apply(ServerLevel serverLevel, int enchantmentLevel, EnchantedItemInUse item, Entity entity, Vec3 origin) {
-        if (entity instanceof LivingEntity livingEntity && !livingEntity.getType().is(Tags.EntityTypeTags.SOULLESS) && (livingEntity.isDeadOrDying())) {
+        if (entity instanceof LivingEntity livingEntity && !livingEntity.getType().is(Tags.EntityTypeTags.SOULLESS) && (livingEntity.isDeadOrDying()) && item.itemStack().is(Tags.BSItemTags.SCYTHES)) {
             double dropChance = this.dropChance.calculate(enchantmentLevel);
             if (serverLevel.getRandom().nextDouble() < dropChance) {
                 livingEntity.spawnAtLocation(serverLevel, this.droppedItem.copy());
