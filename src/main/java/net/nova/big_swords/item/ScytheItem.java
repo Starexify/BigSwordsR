@@ -95,16 +95,9 @@ public class ScytheItem extends HoeItem {
                             scytheHits(player, target);
                             entitiesHit++;
 
-                            int soulStealerEnchantment = stack.getEnchantmentLevel(BigSwordsR.getEnchantment(level, BSEnchantments.SOUL_STEALER));
-                            if (soulStealerEnchantment > 0) {
-                                SoulStealEffect soulStealEffect = new SoulStealEffect(200);
-                                soulStealEffect.apply((ServerLevel) level,
-                                        soulStealerEnchantment,
-                                        new EnchantedItemInUse(stack, entity.getEquipmentSlotForItem(stack), entity),
-                                        target,
-                                        target.position()
-                                );
-                            }
+                            int soulStealerEnchantmentLevel = stack.getEnchantmentLevel(BigSwordsR.getEnchantment(level, BSEnchantments.SOUL_STEALER));
+                            if (soulStealerEnchantmentLevel > 0)
+                                new SoulStealEffect().apply((ServerLevel) level, soulStealerEnchantmentLevel, new EnchantedItemInUse(stack, entity.getEquipmentSlotForItem(stack), entity), target, target.position());
                         }
                     }
                 }

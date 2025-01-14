@@ -1,8 +1,6 @@
 package net.nova.big_swords.enchantments.effects;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -16,10 +14,8 @@ import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Tags;
 
-public record SoulStealEffect(int duration) implements EnchantmentEntityEffect {
-    public static final MapCodec<SoulStealEffect> CODEC = RecordCodecBuilder.mapCodec(
-            inst -> inst.group(Codec.INT.fieldOf("duration").forGetter(p_345622_ -> p_345622_.duration)).apply(inst, SoulStealEffect::new)
-    );
+public record SoulStealEffect() implements EnchantmentEntityEffect {
+    public static final MapCodec<SoulStealEffect> CODEC = MapCodec.unit(new SoulStealEffect());
 
     @Override
     public void apply(ServerLevel level, int pEnchantmentLevel, EnchantedItemInUse pItem, Entity entity, Vec3 pOrigin) {

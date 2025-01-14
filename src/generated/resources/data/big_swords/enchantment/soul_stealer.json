@@ -6,8 +6,7 @@
       {
         "affected": "victim",
         "effect": {
-          "type": "big_swords:soul_steal",
-          "duration": 0
+          "type": "big_swords:soul_steal"
         },
         "enchanted": "attacker"
       }

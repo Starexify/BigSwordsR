@@ -37,7 +37,7 @@ public class BSEnchantments {
                         EnchantmentEffectComponents.POST_ATTACK,
                         EnchantmentTarget.ATTACKER,
                         EnchantmentTarget.VICTIM,
-                        new SoulStealEffect(0)
+                        new SoulStealEffect()
                 )
         );
     }
