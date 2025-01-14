@@ -2,12 +2,12 @@
   "layers": {
     "humanoid": [
       {
-        "texture": "minecraft:biomass"
+        "texture": "big_swords:biomass"
       }
     ],
     "humanoid_leggings": [
       {
-        "texture": "minecraft:biomass"
+        "texture": "big_swords:biomass"
       }
     ]
   }

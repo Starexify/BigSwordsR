@@ -16,7 +16,7 @@ public class BSEquipmentModelProvider extends EquipmentAssetProvider {
 
     @Override
     protected void registerModels(BiConsumer<ResourceKey<EquipmentAsset>, EquipmentClientInfo> output) {
-        output.accept(BSEquipmentAssets.LIVINGMETAL, onlyHumanoid("livingmetal"));
-        output.accept(BSEquipmentAssets.BIOMASS, onlyHumanoid("biomass"));
+        output.accept(BSEquipmentAssets.LIVINGMETAL, onlyHumanoid("big_swords:livingmetal"));
+        output.accept(BSEquipmentAssets.BIOMASS, onlyHumanoid("big_swords:biomass"));
     }
 }
