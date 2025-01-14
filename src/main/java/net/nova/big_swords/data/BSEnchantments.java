@@ -7,11 +7,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentTarget;
+import net.minecraft.world.item.enchantment.LevelBasedValue;
+import net.minecraft.world.item.enchantment.effects.AddValue;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.enchantments.effects.SoulStealEffect;
+import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Tags;
 
 public class BSEnchantments {
@@ -22,22 +26,22 @@ public class BSEnchantments {
         HolderGetter<Item> holdergetter2 = context.lookup(Registries.ITEM);
 
         register(context, SOUL_STEALER, Enchantment.enchantment(
-                Enchantment.definition(
-                        holdergetter2.getOrThrow(Tags.BSItemTags.SCYTHES),
-                        2,
-                        3,
-                        Enchantment.dynamicCost(17, 8),
-                        Enchantment.dynamicCost(36, 8),
-                        3,
-                        EquipmentSlotGroup.MAINHAND
-                ))
+                        Enchantment.definition(
+                                holdergetter2.getOrThrow(Tags.BSItemTags.SCYTHES),
+                                2,
+                                3,
+                                Enchantment.dynamicCost(17, 8),
+                                Enchantment.dynamicCost(36, 8),
+                                3,
+                                EquipmentSlotGroup.MAINHAND
+                        ))
                 .exclusiveWith(holdergetter1.getOrThrow(Tags.EnchantmentTags.SCYTHE_EXCLUSIVE))
                 .withCustomName(component -> Component.literal("Soul Stealer"))
                 .withEffect(
                         EnchantmentEffectComponents.POST_ATTACK,
                         EnchantmentTarget.ATTACKER,
                         EnchantmentTarget.VICTIM,
-                        new SoulStealEffect()
+                        new SoulStealEffect(new AddValue(LevelBasedValue.perLevel(0.3F)).value(), new ItemStack(BSItems.SOUL.get()))
                 )
         );
     }

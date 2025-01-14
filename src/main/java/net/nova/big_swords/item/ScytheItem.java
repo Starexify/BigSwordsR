@@ -10,7 +10,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.enchantment.EnchantedItemInUse;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,9 +18,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.nova.big_swords.BigSwordsR;
-import net.nova.big_swords.data.BSEnchantments;
-import net.nova.big_swords.enchantments.effects.SoulStealEffect;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Sounds;
 
@@ -81,7 +78,6 @@ public class ScytheItem extends HoeItem {
                 List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, boundingBox,
                         e -> e != player && e.isPickable());
 
-                player.swing(InteractionHand.MAIN_HAND, true);
                 int entitiesHit = 0;
                 for (LivingEntity target : entities) {
                     Vec3 targetPos = target.position().add(0, target.getBbHeight() / 2, 0);
@@ -92,12 +88,12 @@ public class ScytheItem extends HoeItem {
                         BlockHitResult blockHit = level.clip(new ClipContext(playerPos, targetPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
 
                         if (blockHit.getType() == HitResult.Type.MISS) {
-                            scytheHits(player, target);
+                            scytheHits((ServerLevel) level, player, target);
                             entitiesHit++;
 
-                            int soulStealerEnchantmentLevel = stack.getEnchantmentLevel(BigSwordsR.getEnchantment(level, BSEnchantments.SOUL_STEALER));
-                            if (soulStealerEnchantmentLevel > 0)
-                                new SoulStealEffect().apply((ServerLevel) level, soulStealerEnchantmentLevel, new EnchantedItemInUse(stack, entity.getEquipmentSlotForItem(stack), entity), target, target.position());
+                            //int soulStealerEnchantmentLevel = stack.getEnchantmentLevel(BigSwordsR.getEnchantment(level, BSEnchantments.SOUL_STEALER));
+                            //if (soulStealerEnchantmentLevel > 0)
+                            //new SoulStealEffect().apply((ServerLevel) level, soulStealerEnchantmentLevel, new EnchantedItemInUse(stack, entity.getEquipmentSlotForItem(stack), entity), target, target.position());
                         }
                     }
                 }
@@ -112,12 +108,10 @@ public class ScytheItem extends HoeItem {
                 } else {
                     player.getCooldowns().addCooldown(stack, 10);
                 }
+                player.swing(InteractionHand.MAIN_HAND, true);
 
-                if (stack.is(BSItems.SOUL_REAPER)) {
-                    playSound(level, player, Sounds.REAPER_SLASH.get());
-                } else {
-                    playSound(level, player, Sounds.SCYTHE_SLASH.get());
-                }
+                if (stack.is(BSItems.SOUL_REAPER)) playSound(level, player, Sounds.REAPER_SLASH.get());
+                else playSound(level, player, Sounds.SCYTHE_SLASH.get());
             }
         }
         return false;
@@ -142,10 +136,11 @@ public class ScytheItem extends HoeItem {
         return inRadius && inFront && inHeight;
     }
 
-    public void scytheHits(Player player, LivingEntity target) {
+    public void scytheHits(ServerLevel serverLevel, Player player, LivingEntity target) {
         float damage = minDamage + random.nextFloat() * (maxDamage - minDamage);
         damage = Math.round(damage * 10.0f) / 10.0f;
-        target.hurt(player.damageSources().playerAttack(player), damage);
+        target.hurtServer(serverLevel, player.damageSources().playerAttack(player), damage);
+        EnchantmentHelper.doPostAttackEffects(serverLevel, target, player.damageSources().playerAttack(player));
     }
 
     // Bow-like Item Stuff

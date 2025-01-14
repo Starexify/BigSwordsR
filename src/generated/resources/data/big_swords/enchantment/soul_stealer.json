@@ -6,7 +6,16 @@
       {
         "affected": "victim",
         "effect": {
-          "type": "big_swords:soul_steal"
+          "type": "big_swords:soul_steal",
+          "dropChance": {
+            "type": "minecraft:linear",
+            "base": 0.3,
+            "per_level_above_first": 0.3
+          },
+          "droppedItem": {
+            "count": 1,
+            "id": "big_swords:soul"
+          }
         },
         "enchanted": "attacker"
       }
