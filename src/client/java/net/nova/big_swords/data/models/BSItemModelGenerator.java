@@ -4,9 +4,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.data.*;
 import net.minecraft.client.render.item.model.ItemModel;
-import net.minecraft.client.render.item.model.RangeDispatchItemModel;
 import net.minecraft.client.render.item.model.SelectItemModel;
 import net.minecraft.client.render.item.property.bool.UsingItemProperty;
+import net.minecraft.client.render.item.property.select.ComponentProperty;
 import net.minecraft.client.render.item.property.select.TrimMaterialProperty;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.EquippableComponent;
@@ -19,9 +19,9 @@ import net.minecraft.item.equipment.trim.ArmorTrimMaterials;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import net.nova.big_swords.BigSwordsR;
-import net.nova.big_swords.client.render.item.BloodLevelModelProperty;
 import net.nova.big_swords.data.BSTrimMaterials;
 import net.nova.big_swords.equipment.BSEquipmentAssets;
+import net.nova.big_swords.init.BSDataComponentTypes;
 import net.nova.big_swords.init.BSItems;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class BSItemModelGenerator extends ItemModelGenerator {
             new BSItemModelGenerator.TrimMaterial("lapis", ArmorTrimMaterials.LAPIS, Map.of()),
             new BSItemModelGenerator.TrimMaterial("amethyst", ArmorTrimMaterials.AMETHYST, Map.of()),
             new BSItemModelGenerator.TrimMaterial("resin", ArmorTrimMaterials.RESIN, Map.of()),
-            new BSItemModelGenerator.TrimMaterial("livingmetal", BSTrimMaterials.LIVINGMETAL, Map.of())
+            new BSItemModelGenerator.TrimMaterial("livingmetal", BSTrimMaterials.LIVINGMETAL, Map.of(BSEquipmentAssets.LIVINGMETAL, "livingmetal_darker"))
     );
 
     public BSItemModelGenerator(ItemModelOutput output, BiConsumer<Identifier, ModelSupplier> modelCollector) {
@@ -153,23 +153,22 @@ public class BSItemModelGenerator extends ItemModelGenerator {
 
     // Methods
     public void registerBloodVial(Item item) {
-        List<RangeDispatchItemModel.Entry> list = new ArrayList<>();
+        List<SelectItemModel.SwitchCase<Integer>> list = new ArrayList<>();
         ItemModel.Unbaked basicModel = ItemModels.basic(Models.GENERATED.upload(
                 BigSwordsR.rl("item/vial"),
                 TextureMap.layer0(BigSwordsR.rl("item/vial")),
                 modelCollector
         ));
-        list.add(ItemModels.rangeDispatchEntry(basicModel, 0.0F));
 
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i < 9; i++) {
             ItemModel.Unbaked bloodModel = ItemModels.basic(Models.GENERATED.upload(
                     ModelIds.getItemSubModelId(item, "_" + i),
                     TextureMap.layer0(TextureMap.getSubId(item, "_" + (i - 1))),
                     modelCollector
             ));
-            list.add(ItemModels.rangeDispatchEntry(bloodModel, (float) i));
+            list.add(ItemModels.switchCase(i, bloodModel));
         }
-        output.accept(item, ItemModels.rangeDispatch(new BloodLevelModelProperty(), list));
+        output.accept(item, ItemModels.select(new ComponentProperty<>(BSDataComponentTypes.BLOOD_LEVEL), basicModel, list));
     }
 
     public Identifier registerSubModelWith(Item item, String suffix, Model model) {
@@ -213,7 +212,8 @@ public class BSItemModelGenerator extends ItemModelGenerator {
     }
 
     @Environment(EnvType.CLIENT)
-    record TrimMaterial(String name, RegistryKey<ArmorTrimMaterial> materialKey, Map<RegistryKey<EquipmentAsset>, String> overrideArmorMaterials) {
+    record TrimMaterial(String name, RegistryKey<ArmorTrimMaterial> materialKey,
+                        Map<RegistryKey<EquipmentAsset>, String> overrideArmorMaterials) {
         public String texture(RegistryKey<EquipmentAsset> equipmentKey) {
             return overrideArmorMaterials.getOrDefault(equipmentKey, this.name);
         }

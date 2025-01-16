@@ -6,9 +6,7 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.item.property.numeric.NumericProperties;
 import net.minecraft.text.Text;
-import net.nova.big_swords.client.render.item.BloodLevelModelProperty;
 import net.nova.big_swords.init.BSBlocks;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
@@ -24,8 +22,6 @@ public class BSClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        NumericProperties.ID_MAPPER.put(BigSwordsR.rl("blood_level"), BloodLevelModelProperty.CODEC);
-
         BlockRenderLayerMap.INSTANCE.putBlock(BSBlocks.BIOMASS, RenderLayer.getCutout());
 
         for (String packId : RESOURCE_PACKS) {

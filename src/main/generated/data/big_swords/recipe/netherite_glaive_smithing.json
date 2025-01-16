@@ -3,7 +3,6 @@
   "addition": "#minecraft:netherite_tool_materials",
   "base": "big_swords:diamond_glaive",
   "result": {
-    "count": 1,
     "id": "big_swords:netherite_glaive"
   },
   "template": "minecraft:netherite_upgrade_smithing_template"
