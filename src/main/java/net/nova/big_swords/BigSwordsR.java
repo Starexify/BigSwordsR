@@ -3,7 +3,6 @@ package net.nova.big_swords;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -43,15 +42,6 @@ public class BigSwordsR implements ModInitializer {
         BSEnchantmentEffects.initialize();
 
         ShieldMechanics.register();
-
-        // Fuels
-        FuelRegistryEvents.BUILD.register((builder, context) -> {
-            builder.add(BSItems.GIANT_WOODEN_STICK, 700);
-            builder.add(BSItems.GIANT_BLAZE_ROD, 16800);
-            builder.add(BSItems.WOODEN_BIG_SWORD, 200);
-            builder.add(BSItems.WOODEN_SCYTHE, 200);
-            builder.add(BSItems.WOODEN_GLAIVE, 200);
-        });
 
         // Loot Table Modifier
         LootTableEvents.MODIFY.register((registryKey, builder, lootTableSource, wrapperLookup) -> {

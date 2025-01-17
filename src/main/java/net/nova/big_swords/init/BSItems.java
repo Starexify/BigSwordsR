@@ -1,5 +1,6 @@
 package net.nova.big_swords.init;
 
+import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.minecraft.block.Block;
 import net.minecraft.item.*;
 import net.minecraft.item.equipment.EquipmentType;
@@ -128,5 +129,14 @@ public class BSItems {
 
     public static void initialize() {
         BigSwordsR.LOGGER.info("Registering Items");
+
+        // Fuels
+        FuelRegistryEvents.BUILD.register((builder, context) -> {
+            builder.add(BSItems.GIANT_WOODEN_STICK, 700);
+            builder.add(BSItems.GIANT_BLAZE_ROD, 16800);
+            builder.add(BSItems.WOODEN_BIG_SWORD, 200);
+            builder.add(BSItems.WOODEN_SCYTHE, 200);
+            builder.add(BSItems.WOODEN_GLAIVE, 200);
+        });
     }
 }
