@@ -21,12 +21,12 @@ public class TieredShield extends ShieldItem {
     }
 
     public TieredShield(ToolMaterial toolMaterial, Settings properties, int durabilityMultiplier) {
-        super(properties.maxDamage(toolMaterial.durability() * durabilityMultiplier));
+        super(properties.maxDamage(toolMaterial.durability() * durabilityMultiplier).enchantable(toolMaterial.enchantmentValue()).repairable(toolMaterial.repairItems()));
         this.toolMaterial = toolMaterial;
     }
 
     public TieredShield(ToolMaterial toolMaterial, Settings properties, int durabilityMultiplier, int additionalDurability) {
-        super(properties.maxDamage(toolMaterial.durability() * durabilityMultiplier + additionalDurability));
+        super(properties.maxDamage(toolMaterial.durability() * durabilityMultiplier + additionalDurability).enchantable(toolMaterial.enchantmentValue()).repairable(toolMaterial.repairItems()));
         this.toolMaterial = toolMaterial;
     }
 

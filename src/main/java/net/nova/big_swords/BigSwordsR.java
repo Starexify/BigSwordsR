@@ -63,7 +63,6 @@ public class BigSwordsR implements ModInitializer {
             }
         });
 
-
         // Halloween Stuff
         ServerEntityEvents.ENTITY_LOAD.register((entity, serverWorld) -> {
             if (entity.getType().isIn(Tags.EntityTypeTags.HALLOWEEN_MOB) && entity instanceof MobEntity mob)
