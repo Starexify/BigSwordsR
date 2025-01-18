@@ -6,11 +6,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.EnchantmentTarget;
+import net.minecraft.world.item.enchantment.TargetedConditionalEffect;
+import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,9 +24,11 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Sounds;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -90,10 +98,6 @@ public class ScytheItem extends HoeItem {
                         if (blockHit.getType() == HitResult.Type.MISS) {
                             scytheHits((ServerLevel) level, player, target);
                             entitiesHit++;
-
-                            //int soulStealerEnchantmentLevel = stack.getEnchantmentLevel(BigSwordsR.getEnchantment(level, BSEnchantments.SOUL_STEALER));
-                            //if (soulStealerEnchantmentLevel > 0)
-                            //new SoulStealEffect().apply((ServerLevel) level, soulStealerEnchantmentLevel, new EnchantedItemInUse(stack, entity.getEquipmentSlotForItem(stack), entity), target, target.position());
                         }
                     }
                 }
@@ -140,7 +144,32 @@ public class ScytheItem extends HoeItem {
         float damage = minDamage + random.nextFloat() * (maxDamage - minDamage);
         damage = Math.round(damage * 10.0f) / 10.0f;
         target.hurtServer(serverLevel, player.damageSources().playerAttack(player), damage);
-        EnchantmentHelper.doPostAttackEffects(serverLevel, target, player.damageSources().playerAttack(player));
+    }
+
+    public static void doPostDeathAttack(ServerLevel level, Entity entity, DamageSource damageSource) {
+        if (damageSource.getEntity() instanceof LivingEntity livingentity) {
+            doPostAttackEffectsWithItemSourceOnBreak(level, entity, damageSource, livingentity.getWeaponItem());
+        } else {
+            doPostAttackEffectsWithItemSourceOnBreak(level, entity, damageSource, null);
+        }
+    }
+
+    public static void doPostAttackEffectsWithItemSourceOnBreak(ServerLevel level, Entity entity, DamageSource damageSource, @Nullable ItemStack itemSource) {
+        if (itemSource != null) {
+            if (damageSource.getEntity() instanceof LivingEntity livingentity1) {
+                EnchantmentHelper.runIterationOnItem(itemSource, EquipmentSlot.MAINHAND, livingentity1,
+                        (enchantmentHolder, enchantmentLevel, enchantediteminuse) -> {
+                            for (TargetedConditionalEffect<EnchantmentEntityEffect> effect : enchantmentHolder.value().effects().get(BSDataComponents.POST_DEATH.get())) {
+                                if (effect instanceof TargetedConditionalEffect<EnchantmentEntityEffect> targetedEffect) {
+                                    if (EnchantmentTarget.ATTACKER == targetedEffect.enchanted()) {
+                                        Enchantment.doPostAttack(targetedEffect, level, enchantmentLevel, enchantediteminuse, entity, damageSource);
+                                    }
+                                }
+                            }
+                        }
+                );
+            }
+        }
     }
 
     // Bow-like Item Stuff
@@ -164,4 +193,6 @@ public class ScytheItem extends HoeItem {
     public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {
         return !player.isCreative();
     }
+
+
 }

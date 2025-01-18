@@ -2,9 +2,9 @@
   "anvil_cost": 3,
   "description": "Soul Stealer",
   "effects": {
-    "minecraft:post_attack": [
+    "big_swords:post_death": [
       {
-        "affected": "victim",
+        "affected": "attacker",
         "effect": {
           "type": "big_swords:soul_steal",
           "dropChance": {
@@ -17,7 +17,7 @@
             "id": "big_swords:soul"
           }
         },
-        "enchanted": "attacker"
+        "enchanted": "victim"
       }
     ]
   },

@@ -15,6 +15,7 @@ import net.minecraft.world.item.enchantment.LevelBasedValue;
 import net.minecraft.world.item.enchantment.effects.AddValue;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.enchantments.effects.SoulStealEffect;
+import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Tags;
 
@@ -38,10 +39,10 @@ public class BSEnchantments {
                 .exclusiveWith(holdergetter1.getOrThrow(Tags.EnchantmentTags.SCYTHE_EXCLUSIVE))
                 .withCustomName(component -> Component.literal("Soul Stealer"))
                 .withEffect(
-                        EnchantmentEffectComponents.POST_ATTACK,
-                        EnchantmentTarget.ATTACKER,
+                        BSDataComponents.POST_DEATH.get(),
                         EnchantmentTarget.VICTIM,
-                        new SoulStealEffect(new AddValue(LevelBasedValue.perLevel(0.3F)).value(), new ItemStack(BSItems.SOUL.get()))
+                        EnchantmentTarget.ATTACKER,
+                        new SoulStealEffect(new AddValue(LevelBasedValue.perLevel(0.3F, 0.3F)).value(), new ItemStack(BSItems.SOUL.get()))
                 )
         );
     }
