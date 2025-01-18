@@ -123,7 +123,6 @@ public class ShieldMechanics {
             boolean isGildedIronShield = shield.is(BSItems.GILDED_IRON_SHIELD.get());
             if ((isIronShield || isGildedIronShield) && (damageSource.is(DamageTypes.EXPLOSION) || damageSource.is(DamageTypes.PLAYER_EXPLOSION))) {
                 // Perk
-                //float newShieldDamage = isGildedIronShield ? 0 : (isIronShield ? shieldDamage / 2 : shieldDamage);
                 if (isGildedIronShield) {
                     event.setShieldTakesDamage(false);
                 } else {

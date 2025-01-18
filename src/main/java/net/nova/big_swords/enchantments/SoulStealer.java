@@ -36,8 +36,6 @@ public class SoulStealer extends Enchantment {
                 if (level.getRandom().nextDouble() < dropChance) {
                     ItemStack soulItem = new ItemStack(BSItems.SOUL.get());
                     livingEntity.spawnAtLocation(soulItem);
-
-                    // Spawn soul particles
                     level.sendParticles(ParticleTypes.SOUL, pTarget.getX(), pTarget.getY(), pTarget.getZ(), 20, 0.5, 0.5, 0.5, 0.05);
                     BigSwordsR.playSound(level, livingEntity, SoundEvents.SOUL_ESCAPE);
                 }
