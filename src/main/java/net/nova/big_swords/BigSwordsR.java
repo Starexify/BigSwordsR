@@ -1,6 +1,7 @@
 package net.nova.big_swords;
 
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -51,6 +52,6 @@ public class BigSwordsR {
     }
 
     public static Holder<Enchantment> getEnchantment(Level level, ResourceKey<Enchantment> enchantment) {
-        return level.holderOrThrow(enchantment);
+        return level.holderLookup(Registries.ENCHANTMENT).get(enchantment).orElse(null);
     }
 }
