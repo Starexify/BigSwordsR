@@ -23,6 +23,7 @@ import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Sounds;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -78,6 +79,7 @@ public class ScytheItem extends HoeItem {
                 );
 
                 List<LivingEntity> entities = serverLevel.getEntitiesOfClass(LivingEntity.class, boundingBox, e -> e != player && e.isPickable());
+                List<LivingEntity> hitEntities = new ArrayList<>();
 
                 int entitiesHit = 0;
                 for (LivingEntity target : entities) {
@@ -90,8 +92,20 @@ public class ScytheItem extends HoeItem {
 
                         if (blockHit.getType() == HitResult.Type.MISS) {
                             scytheHits(serverLevel, player, target, stack);
+                            hitEntities.add(target);
                             entitiesHit++;
                         }
+                    }
+                }
+
+                if (!hitEntities.isEmpty()) {
+                    EnchantedItemInUse enchantedItemInUse = new EnchantedItemInUse(stack, player.getEquipmentSlotForItem(stack), player);
+                    for (LivingEntity target : hitEntities) {
+                        EnchantmentHelper.runIterationOnItem(stack, (enchantmentHolder, enchantmentLevel) -> {
+                            enchantmentHolder.value().effects().get(BSDataComponents.POST_DEATH.get()).forEach(targetedEffect ->
+                                    targetedEffect.effect().apply(serverLevel, enchantmentLevel, enchantedItemInUse, target, target.position())
+                            );
+                        });
                     }
                 }
 
@@ -133,12 +147,6 @@ public class ScytheItem extends HoeItem {
         float damage = minDamage + random.nextFloat() * (maxDamage - minDamage);
         damage = Math.round(damage * 10.0f) / 10.0f;
         target.hurtServer(serverLevel, player.damageSources().playerAttack(player), damage);
-        EnchantedItemInUse enchantedItemInUse = new EnchantedItemInUse(stack, player.getEquipmentSlotForItem(stack), player);
-        EnchantmentHelper.runIterationOnItem(stack, (enchantmentHolder, enchantmentLevel) -> {
-            enchantmentHolder.value().effects().get(BSDataComponents.POST_DEATH.get()).forEach(targetedEffect ->
-                    targetedEffect.effect().apply(serverLevel, enchantmentLevel, enchantedItemInUse, target, target.position())
-            );
-        });
     }
 
     // Bow-like Item Stuff
