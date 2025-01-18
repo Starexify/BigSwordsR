@@ -29,9 +29,9 @@ import java.util.Random;
 import static net.nova.big_swords.BigSwordsR.playSound;
 
 public class ScytheItem extends HoeItem {
-    private final float minDamage;
-    private final float maxDamage;
-    private final Random random = new Random();
+    public final float minDamage;
+    public final float maxDamage;
+    public final Random random = new Random();
 
     public ScytheItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage, Properties properties) {
         super(toolMaterial, attackDamage, attackSpeed, properties);
@@ -162,6 +162,4 @@ public class ScytheItem extends HoeItem {
     public boolean canAttackBlock(BlockState state, Level level, BlockPos pos, Player player) {
         return !player.isCreative();
     }
-
-
 }
