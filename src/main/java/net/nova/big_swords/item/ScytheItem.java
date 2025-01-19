@@ -90,7 +90,14 @@ public class ScytheItem extends HoeItem {
 
                         if (blockHit.getType() == HitResult.Type.MISS) {
                             scytheHits(serverLevel, player, target);
-                            postHurtEnemy(stack, target, player);
+                            EnchantedItemInUse enchantedItemInUse = new EnchantedItemInUse(stack, player.getEquipmentSlotForItem(stack), player);
+                            EnchantmentHelper.runIterationOnItem(stack, (enchantmentHolder, enchantmentLevel) -> {
+                                if (enchantmentHolder.value().effects().get(BSDataComponents.POST_DEATH.get()) != null) {
+                                    enchantmentHolder.value().effects().get(BSDataComponents.POST_DEATH.get()).forEach(targetedEffect ->
+                                            targetedEffect.effect().apply(serverLevel, enchantmentLevel, enchantedItemInUse, target, target.position())
+                                    );
+                                }
+                            });
                             entitiesHit++;
                         }
                     }
@@ -151,14 +158,6 @@ public class ScytheItem extends HoeItem {
     @Override
     public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
-        if (target.level() instanceof ServerLevel serverLevel) {
-            EnchantedItemInUse enchantedItemInUse = new EnchantedItemInUse(stack, attacker.getEquipmentSlotForItem(stack), attacker);
-            EnchantmentHelper.runIterationOnItem(stack, (enchantmentHolder, enchantmentLevel) -> {
-                enchantmentHolder.value().effects().get(BSDataComponents.POST_DEATH.get()).forEach(targetedEffect ->
-                        targetedEffect.effect().apply(serverLevel, enchantmentLevel, enchantedItemInUse, target, target.position())
-                );
-            });
-        }
     }
 
     @Override
