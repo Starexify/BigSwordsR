@@ -23,7 +23,6 @@ import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Sounds;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -69,7 +68,7 @@ public class ScytheItem extends HoeItem {
             int i = this.getUseDuration(stack, entity) - timeLeft;
             if (i < 20) return false; // Require a minimum charge time
 
-            if (!level.isClientSide && level instanceof ServerLevel serverLevel) {
+            if (level instanceof ServerLevel serverLevel) {
                 Vec3 lookVec = player.getLookAngle();
                 Vec3 playerPos = player.position().add(0, player.getEyeHeight(), 0);
                 Vec3 attackCenter = playerPos.add(lookVec.scale(distance + depth / 2));
@@ -79,9 +78,8 @@ public class ScytheItem extends HoeItem {
                 );
 
                 List<LivingEntity> entities = serverLevel.getEntitiesOfClass(LivingEntity.class, boundingBox, e -> e != player && e.isPickable());
-                List<LivingEntity> hitEntities = new ArrayList<>();
-
                 int entitiesHit = 0;
+
                 for (LivingEntity target : entities) {
                     Vec3 targetPos = target.position().add(0, target.getBbHeight() / 2, 0);
                     Vec3 toTarget = targetPos.subtract(playerPos);
@@ -91,21 +89,10 @@ public class ScytheItem extends HoeItem {
                         BlockHitResult blockHit = level.clip(new ClipContext(playerPos, targetPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
 
                         if (blockHit.getType() == HitResult.Type.MISS) {
-                            scytheHits(serverLevel, player, target, stack);
-                            hitEntities.add(target);
+                            scytheHits(serverLevel, player, target);
+                            postHurtEnemy(stack, target, player);
                             entitiesHit++;
                         }
-                    }
-                }
-
-                if (!hitEntities.isEmpty()) {
-                    EnchantedItemInUse enchantedItemInUse = new EnchantedItemInUse(stack, player.getEquipmentSlotForItem(stack), player);
-                    for (LivingEntity target : hitEntities) {
-                        EnchantmentHelper.runIterationOnItem(stack, (enchantmentHolder, enchantmentLevel) -> {
-                            enchantmentHolder.value().effects().get(BSDataComponents.POST_DEATH.get()).forEach(targetedEffect ->
-                                    targetedEffect.effect().apply(serverLevel, enchantmentLevel, enchantedItemInUse, target, target.position())
-                            );
-                        });
                     }
                 }
 
@@ -143,7 +130,7 @@ public class ScytheItem extends HoeItem {
         return inRadius && inFront && inHeight;
     }
 
-    public void scytheHits(ServerLevel serverLevel, Player player, LivingEntity target, ItemStack stack) {
+    public void scytheHits(ServerLevel serverLevel, Player player, LivingEntity target) {
         float damage = minDamage + random.nextFloat() * (maxDamage - minDamage);
         damage = Math.round(damage * 10.0f) / 10.0f;
         target.hurtServer(serverLevel, player.damageSources().playerAttack(player), damage);
@@ -164,6 +151,14 @@ public class ScytheItem extends HoeItem {
     @Override
     public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
+        if (target.level() instanceof ServerLevel serverLevel) {
+            EnchantedItemInUse enchantedItemInUse = new EnchantedItemInUse(stack, attacker.getEquipmentSlotForItem(stack), attacker);
+            EnchantmentHelper.runIterationOnItem(stack, (enchantmentHolder, enchantmentLevel) -> {
+                enchantmentHolder.value().effects().get(BSDataComponents.POST_DEATH.get()).forEach(targetedEffect ->
+                        targetedEffect.effect().apply(serverLevel, enchantmentLevel, enchantedItemInUse, target, target.position())
+                );
+            });
+        }
     }
 
     @Override

@@ -37,7 +37,6 @@ public class BigSwordsRClient {
     @SubscribeEvent
     public static void onAddPackFinders(AddPackFindersEvent event) {
         if (event.getPackType() != PackType.CLIENT_RESOURCES) return;
-
         ModList.get().getModContainerById(MODID).ifPresent(modContainer -> {
             event.addRepositorySource((packConsumer) -> {
                 for (String packId : RESOURCE_PACKS) {

@@ -23,7 +23,7 @@ public class GlobalLootModifier extends GlobalLootModifierProvider {
     protected void start() {
         add("ender_upgrade_in_end", new AddItemModifier(new LootItemCondition[]{
                 LootTableIdCondition.builder(ResourceLocation.parse("chests/end_city_treasure")).build(),
-                LootItemRandomChanceCondition.randomChance(0.35f).build()},
-                BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE.get()));
+                LootItemRandomChanceCondition.randomChance(0.35f).build()
+        }, BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE.get()));
     }
 }
