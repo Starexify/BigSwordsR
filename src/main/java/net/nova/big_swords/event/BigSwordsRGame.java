@@ -1,16 +1,11 @@
 package net.nova.big_swords.event;
 
-import com.google.common.collect.Multimap;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -18,18 +13,14 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.AddAttributeTooltipsEvent;
 import net.neoforged.neoforge.common.extensions.IAttributeExtension;
-import net.neoforged.neoforge.common.util.AttributeUtil;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
-import net.nova.big_swords.init.BSAttributes;
 import net.nova.big_swords.init.BSItems;
-import net.nova.big_swords.init.BSToolMaterial;
 import net.nova.big_swords.init.Tags;
 import net.nova.big_swords.item.GlaiveItem;
 import net.nova.big_swords.item.ScytheItem;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
-import java.util.Collection;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
@@ -69,26 +60,12 @@ public class BigSwordsRGame {
             );
         }
 
-        double minChargedDamage = 0;
-        double maxChargedDamage = 0;
-        Multimap<Holder<Attribute>, AttributeModifier> modifiers = AttributeUtil.getSortedModifiers(stack, EquipmentSlotGroup.MAINHAND);
-        Collection<AttributeModifier> chargedModifiers = modifiers.get(BSAttributes.CHARGED_DAMAGE);
-
-        for (AttributeModifier modifier : chargedModifiers) {
-            if (modifier.is(BSToolMaterial.MIN_CHARGED_DAMAGE_ID)) {
-                minChargedDamage = modifier.amount();
-            } else if (modifier.is(BSToolMaterial.MAX_CHARGED_DAMAGE_ID)) {
-                maxChargedDamage = modifier.amount();
-            }
-        }
-
-/*        event.addTooltipLines(
-                Component.literal(" " + IAttributeExtension.FORMAT.format(minChargedDamage) + "-" + IAttributeExtension.FORMAT.format(maxChargedDamage) + " ")
-                        .append(Component.translatable("attribute.name.charged_damage"))
-                        .withStyle(ChatFormatting.DARK_GREEN)
-        );*/
-
         if (item instanceof GlaiveItem glaiveItem) {
+            event.addTooltipLines(
+                    Component.literal(" " + IAttributeExtension.FORMAT.format(glaiveItem.minChargedDamage) + "-" + IAttributeExtension.FORMAT.format(glaiveItem.maxChargedDamage) + " ")
+                            .append(Component.translatable("attribute.name.charged_damage"))
+                            .withStyle(ChatFormatting.DARK_GREEN)
+            );
             event.addTooltipLines(
                     Component.literal(" " + IAttributeExtension.FORMAT.format(glaiveItem.range) + " Range").withStyle(ChatFormatting.DARK_GREEN)
             );
