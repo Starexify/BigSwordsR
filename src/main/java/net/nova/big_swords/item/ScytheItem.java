@@ -35,7 +35,7 @@ public class ScytheItem extends HoeItem {
     public final Random random = new Random();
 
     public ScytheItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Properties properties) {
-        super(toolMaterial, attackDamage, attackSpeed, properties.attributes(BSToolMaterial.createSpecialAttributes(minChargedDamage, maxChargedDamage)));
+        super(toolMaterial, attackDamage, attackSpeed, properties);
         this.minDamage = minChargedDamage;
         this.maxDamage = maxChargedDamage;
     }

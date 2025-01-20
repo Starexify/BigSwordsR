@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
-@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.GAME)
+@EventBusSubscriber(modid = MODID)
 public class BigSwordsRGame {
     @SubscribeEvent
     public static void onEntitySpawned(EntityJoinLevelEvent event) {
