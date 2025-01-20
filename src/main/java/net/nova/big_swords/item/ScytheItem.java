@@ -21,6 +21,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
+import net.nova.big_swords.init.BSToolMaterial;
 import net.nova.big_swords.init.Sounds;
 
 import java.util.List;
@@ -33,10 +34,10 @@ public class ScytheItem extends HoeItem {
     public final float maxDamage;
     public final Random random = new Random();
 
-    public ScytheItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage, Properties properties) {
-        super(toolMaterial, attackDamage, attackSpeed, properties);
-        this.minDamage = minDamage;
-        this.maxDamage = maxDamage;
+    public ScytheItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Properties properties) {
+        super(toolMaterial, attackDamage, attackSpeed, properties.attributes(BSToolMaterial.createSpecialAttributes(minChargedDamage, maxChargedDamage)));
+        this.minDamage = minChargedDamage;
+        this.maxDamage = maxChargedDamage;
     }
 
     @Override
