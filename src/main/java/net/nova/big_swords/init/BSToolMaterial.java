@@ -1,12 +1,24 @@
 package net.nova.big_swords.init;
 
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.component.Tool;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.nova.big_swords.BigSwordsR;
+
+import java.util.List;
 
 public class BSToolMaterial {
     public static final ToolMaterial PATCHWORK = new ToolMaterial(BlockTags.INCORRECT_FOR_STONE_TOOL, 30, 1.0F, -1.5F, 16, Tags.BSItemTags.PATCHWORK_TOOL_MATERIALS);
@@ -22,14 +34,35 @@ public class BSToolMaterial {
     public static final ResourceLocation MIN_CHARGED_DAMAGE_ID = BigSwordsR.rl("min_charged_damage");
     public static final ResourceLocation MAX_CHARGED_DAMAGE_ID = BigSwordsR.rl("max_charged_damage");
 
-    public static ItemAttributeModifiers createSpecialAttributes(float minDamage, float maxDamage) {
+    private static Item.Properties applyCommonProperties(Item.Properties properties, ToolMaterial toolMaterial) {
+        return properties.durability(toolMaterial.durability()).repairable(toolMaterial.repairItems()).enchantable(toolMaterial.enchantmentValue());
+    }
+
+    public static Item.Properties applyChargedProperties(Item.Properties properties, ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage) {
+        HolderGetter<Block> holdergetter = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
+        return applyCommonProperties(properties, toolMaterial)
+                .component(DataComponents.TOOL, new Tool(List.of(
+                        Tool.Rule.minesAndDrops(HolderSet.direct(new Holder[]{Blocks.COBWEB.builtInRegistryHolder()}), 15.0F),
+                        Tool.Rule.overrideSpeed(holdergetter.getOrThrow(BlockTags.SWORD_EFFICIENT), 1.5F)), 1.0F, 2))
+                .attributes(createChargedWeaponAttributes(toolMaterial, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage));
+    }
+
+    private static ItemAttributeModifiers createChargedWeaponAttributes(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage) {
         return ItemAttributeModifiers.builder().add(
-                BSAttributes.CHARGED_DAMAGE,
-                new AttributeModifier(MIN_CHARGED_DAMAGE_ID, minDamage, AttributeModifier.Operation.ADD_VALUE),
+                Attributes.ATTACK_DAMAGE,
+                new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attackDamage + toolMaterial.attackDamageBonus(), AttributeModifier.Operation.ADD_VALUE),
+                EquipmentSlotGroup.MAINHAND
+        ).add(
+                Attributes.ATTACK_SPEED,
+                new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, attackSpeed, AttributeModifier.Operation.ADD_VALUE),
                 EquipmentSlotGroup.MAINHAND
         ).add(
                 BSAttributes.CHARGED_DAMAGE,
-                new AttributeModifier(MAX_CHARGED_DAMAGE_ID, maxDamage, AttributeModifier.Operation.ADD_VALUE),
+                new AttributeModifier(MIN_CHARGED_DAMAGE_ID, minChargedDamage, AttributeModifier.Operation.ADD_VALUE),
+                EquipmentSlotGroup.MAINHAND
+        ).add(
+                BSAttributes.CHARGED_DAMAGE,
+                new AttributeModifier(MAX_CHARGED_DAMAGE_ID, maxChargedDamage, AttributeModifier.Operation.ADD_VALUE),
                 EquipmentSlotGroup.MAINHAND
         ).build();
     }

@@ -5,10 +5,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.nova.big_swords.event.BigSwordsRClient;
-import net.nova.big_swords.init.BSBlocks;
-import net.nova.big_swords.init.BSItems;
-import net.nova.big_swords.init.CreativeTab;
-import net.nova.big_swords.init.Sounds;
+import net.nova.big_swords.init.*;
 import net.nova.big_swords.item.EnderSmithingTemplate;
 
 import java.util.function.Supplier;
@@ -161,6 +158,9 @@ public class LangProvider extends LanguageProvider {
 
         // Trim Material
         add("trim_material.big_swords.livingmetal", "Livingmetal Material");
+
+        // Attributes
+        add(BSAttributes.CHARGED_DAMAGE.value().getDescriptionId(), "Charged Damage");
 
         // Resourcepacks
         add(BigSwordsRClient.RP_16x_NAME, "Big Swords R 16x");

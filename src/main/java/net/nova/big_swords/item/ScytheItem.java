@@ -1,15 +1,16 @@
 package net.nova.big_swords.item;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.HoeItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUseAnimation;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.enchantment.EnchantedItemInUse;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
@@ -21,7 +22,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
-import net.nova.big_swords.init.BSToolMaterial;
 import net.nova.big_swords.init.Sounds;
 
 import java.util.List;
@@ -30,24 +30,14 @@ import java.util.Random;
 import static net.nova.big_swords.BigSwordsR.playSound;
 
 public class ScytheItem extends HoeItem {
-    public final float minDamage;
-    public final float maxDamage;
+    public final float minChargedDamage;
+    public final float maxChargedDamage;
     public final Random random = new Random();
 
     public ScytheItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Properties properties) {
         super(toolMaterial, attackDamage, attackSpeed, properties);
-        this.minDamage = minChargedDamage;
-        this.maxDamage = maxChargedDamage;
-    }
-
-    @Override
-    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
-        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
-
-        pTooltipComponents.add(Component.empty());
-        pTooltipComponents.add(Component.literal("Special:").withStyle(ChatFormatting.GRAY));
-        pTooltipComponents.add(Component.literal(" " + this.minDamage + " - " + this.maxDamage + " Charged Damage").withStyle(ChatFormatting.DARK_GREEN));
-        pTooltipComponents.add(Component.empty());
+        this.minChargedDamage = minChargedDamage;
+        this.maxChargedDamage = maxChargedDamage;
     }
 
     // Scythe Mechanic
@@ -139,7 +129,7 @@ public class ScytheItem extends HoeItem {
     }
 
     public void scytheHits(ServerLevel serverLevel, Player player, LivingEntity target) {
-        float damage = minDamage + random.nextFloat() * (maxDamage - minDamage);
+        float damage = minChargedDamage + random.nextFloat() * (maxChargedDamage - minChargedDamage);
         damage = Math.round(damage * 10.0f) / 10.0f;
         target.hurtServer(serverLevel, player.damageSources().playerAttack(player), damage);
     }
