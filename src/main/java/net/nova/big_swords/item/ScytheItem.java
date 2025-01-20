@@ -1,11 +1,7 @@
 package net.nova.big_swords.item;
 
-import net.fabricmc.fabric.api.item.v1.FabricItem;
-import net.fabricmc.fabric.impl.item.FabricItemInternals;
 import net.minecraft.block.BlockState;
-import net.minecraft.component.ComponentChanges;
 import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.MergedComponentMap;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.enchantment.EnchantmentEffectContext;
@@ -35,7 +31,10 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.nova.big_swords.BigSwordsR;
-import net.nova.big_swords.init.*;
+import net.nova.big_swords.init.BSDataComponents;
+import net.nova.big_swords.init.BSItems;
+import net.nova.big_swords.init.BSToolMaterial;
+import net.nova.big_swords.init.Sounds;
 
 import java.util.List;
 import java.util.Random;
@@ -46,9 +45,9 @@ public class ScytheItem extends HoeItem {
     public final Random random = new Random();
 
     public ScytheItem(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Settings settings) {
-        super(material, attackDamage, attackSpeed, settings);
+        super(material, attackDamage, attackSpeed, settings.component(DataComponentTypes.ATTRIBUTE_MODIFIERS, BSToolMaterial.createScytheAttributeModifier(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage)));
 
-        AttributeModifiersComponent modifiersComponent = AttributeModifiersComponent.builder().add(
+/*     AttributeModifiersComponent.builder().add(
                 BSEntityAttributes.CHARGED_DAMAGE,
                 new EntityAttributeModifier(BSToolMaterial.MIN_CHARGED_DAMAGE_ID, minChargedDamage, EntityAttributeModifier.Operation.ADD_VALUE),
                 AttributeModifierSlot.MAINHAND
@@ -56,7 +55,7 @@ public class ScytheItem extends HoeItem {
                 BSEntityAttributes.CHARGED_DAMAGE,
                 new EntityAttributeModifier(BSToolMaterial.MAX_CHARGED_DAMAGE_ID, maxChargedDamage, EntityAttributeModifier.Operation.ADD_VALUE),
                 AttributeModifierSlot.MAINHAND
-        ).build();
+        ).build()
 
         ComponentChanges changes = ComponentChanges.builder().add(DataComponentTypes.ATTRIBUTE_MODIFIERS, modifiersComponent).build();
         MergedComponentMap components = MergedComponentMap.create(getComponents(), changes);
@@ -67,7 +66,7 @@ public class ScytheItem extends HoeItem {
                 BSEntityAttributes.CHARGED_DAMAGE,
                 new EntityAttributeModifier(BSToolMaterial.MIN_CHARGED_DAMAGE_ID, minChargedDamage, EntityAttributeModifier.Operation.ADD_VALUE),
                 AttributeModifierSlot.MAINHAND
-        ).build();
+        ).build();*/
 
         this.minDamage = minChargedDamage;
         this.maxDamage = maxChargedDamage;

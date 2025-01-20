@@ -32,6 +32,18 @@ public class BSToolMaterial {
     public static final Identifier MIN_CHARGED_DAMAGE_ID = BigSwordsR.rl("min_charged_damage");
     public static final Identifier MAX_CHARGED_DAMAGE_ID = BigSwordsR.rl("max_charged_damage");
 
+    public static AttributeModifiersComponent createScytheAttributeModifier(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage) {
+        return AttributeModifiersComponent.builder().add(
+                BSEntityAttributes.CHARGED_DAMAGE,
+                new EntityAttributeModifier(MIN_CHARGED_DAMAGE_ID, minDamage, EntityAttributeModifier.Operation.ADD_VALUE),
+                AttributeModifierSlot.MAINHAND
+        ).add(
+                BSEntityAttributes.CHARGED_DAMAGE,
+                new EntityAttributeModifier(MAX_CHARGED_DAMAGE_ID, maxDamage, EntityAttributeModifier.Operation.ADD_VALUE),
+                AttributeModifierSlot.MAINHAND
+        ).build();
+    }
+
     public static Item.Settings applyBaseSettings(Item.Settings settings, ToolMaterial toolMaterial) {
         return settings.maxDamage(toolMaterial.durability()).repairable(toolMaterial.repairItems()).enchantable(toolMaterial.enchantmentValue());
     }
