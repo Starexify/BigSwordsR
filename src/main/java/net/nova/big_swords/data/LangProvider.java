@@ -160,7 +160,8 @@ public class LangProvider extends LanguageProvider {
         add("trim_material.big_swords.livingmetal", "Livingmetal Material");
 
         // Attributes
-        add(BSAttributes.CHARGED_DAMAGE.value().getDescriptionId(), "Charged Damage");
+        add(BSAttributes.MIN_CHARGED_DAMAGE.value().getDescriptionId(), "Min Charged Damage");
+        add(BSAttributes.MAX_CHARGED_DAMAGE.value().getDescriptionId(), "Max Charged Damage");
 
         // Resourcepacks
         add(BigSwordsRClient.RP_16x_NAME, "Big Swords R 16x");

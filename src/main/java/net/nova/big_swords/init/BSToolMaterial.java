@@ -31,7 +31,6 @@ public class BSToolMaterial {
     public static final ToolMaterial BIOMASS = new ToolMaterial(BlockTags.INCORRECT_FOR_IRON_TOOL, 188, 8.0F, 2.0F, 18, Tags.BSItemTags.BIOMASS_TOOL_MATERIALS);
     public static final ToolMaterial REAPER = new ToolMaterial(BlockTags.INCORRECT_FOR_STONE_TOOL, 206, 2.0F, -0.5F, 18, Tags.BSItemTags.REAPER_TOOL_MATERIALS);
 
-
     public static final ResourceLocation MIN_CHARGED_DAMAGE_ID = BigSwordsR.rl("min_charged_damage");
     public static final ResourceLocation MAX_CHARGED_DAMAGE_ID = BigSwordsR.rl("max_charged_damage");
 
@@ -75,11 +74,11 @@ public class BSToolMaterial {
                 new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, attackSpeed, AttributeModifier.Operation.ADD_VALUE),
                 EquipmentSlotGroup.MAINHAND
         ).add(
-                BSAttributes.CHARGED_DAMAGE,
+                BSAttributes.MIN_CHARGED_DAMAGE,
                 new AttributeModifier(MIN_CHARGED_DAMAGE_ID, minChargedDamage, AttributeModifier.Operation.ADD_VALUE),
                 EquipmentSlotGroup.MAINHAND
         ).add(
-                BSAttributes.CHARGED_DAMAGE,
+                BSAttributes.MAX_CHARGED_DAMAGE,
                 new AttributeModifier(MAX_CHARGED_DAMAGE_ID, maxChargedDamage, AttributeModifier.Operation.ADD_VALUE),
                 EquipmentSlotGroup.MAINHAND
         ).build();
