@@ -10,7 +10,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
-import net.nova.big_swords.init.BSDataComponentTypes;
+import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 
 import java.util.List;
@@ -53,7 +53,7 @@ public class BloodVial extends Item {
     public ActionResult processInteraction(World level, PlayerEntity player, ItemStack bloodVialStack, ItemStack otherHandStack, Item resultItem) {
         if (!level.isClient) {
             otherHandStack.decrement(1);
-            bloodVialStack.set(BSDataComponentTypes.BLOOD_LEVEL, getBloodLevel(bloodVialStack) - 1);
+            bloodVialStack.set(BSDataComponents.BLOOD_LEVEL, getBloodLevel(bloodVialStack) - 1);
             player.giveItemStack(new ItemStack(resultItem));
         }
         return ActionResult.SUCCESS;
@@ -62,7 +62,7 @@ public class BloodVial extends Item {
     public void incrementBloodLevel(ItemStack stack) {
         int currentLevel = getBloodLevel(stack);
         if (currentLevel < MAX_BLOOD_LEVEL) {
-            stack.set(BSDataComponentTypes.BLOOD_LEVEL, currentLevel + 1);
+            stack.set(BSDataComponents.BLOOD_LEVEL, currentLevel + 1);
         }
     }
 
@@ -79,7 +79,7 @@ public class BloodVial extends Item {
     }
 
     public static int getBloodLevel(ItemStack stack) {
-        return stack.getOrDefault(BSDataComponentTypes.BLOOD_LEVEL, 0);
+        return stack.getOrDefault(BSDataComponents.BLOOD_LEVEL, 0);
     }
 
     public static int getMaxBloodLevel() {

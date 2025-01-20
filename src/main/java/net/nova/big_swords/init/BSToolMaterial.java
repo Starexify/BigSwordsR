@@ -1,7 +1,12 @@
 package net.nova.big_swords.init;
 
+import net.minecraft.component.type.AttributeModifierSlot;
+import net.minecraft.component.type.AttributeModifiersComponent;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.util.Identifier;
+import net.nova.big_swords.BigSwordsR;
 
 public class BSToolMaterial {
     public static final ToolMaterial PATCHWORK = new ToolMaterial(BlockTags.INCORRECT_FOR_STONE_TOOL, 30, 1.0F, -1.5F, 16, Tags.BSItemTags.PATCHWORK_TOOL_MATERIALS);
@@ -12,4 +17,19 @@ public class BSToolMaterial {
     public static final ToolMaterial LIVINGMETAL = new ToolMaterial(BlockTags.INCORRECT_FOR_IRON_TOOL, 375, 7.5F, 2.5F, 16, Tags.BSItemTags.LIVINGMETAL_TOOL_MATERIALS);
     public static final ToolMaterial BIOMASS = new ToolMaterial(BlockTags.INCORRECT_FOR_IRON_TOOL, 188, 8.0F, 2.0F, 18, Tags.BSItemTags.BIOMASS_TOOL_MATERIALS);
     public static final ToolMaterial REAPER = new ToolMaterial(BlockTags.INCORRECT_FOR_STONE_TOOL, 206, 2.0F, -0.5F, 18, Tags.BSItemTags.REAPER_TOOL_MATERIALS);
+
+    public static final Identifier MIN_CHARGED_DAMAGE_ID = BigSwordsR.rl("min_charged_damage");
+    public static final Identifier MAX_CHARGED_DAMAGE_ID = BigSwordsR.rl("max_charged_damage");
+
+    public static AttributeModifiersComponent createSpecialAttributeModifier(float minDamage, float maxDamage) {
+        return AttributeModifiersComponent.builder().add(
+                        BSEntityAttributes.CHARGED_DAMAGE,
+                        new EntityAttributeModifier(MIN_CHARGED_DAMAGE_ID, minDamage, EntityAttributeModifier.Operation.ADD_VALUE),
+                        AttributeModifierSlot.MAINHAND)
+                .add(
+                        BSEntityAttributes.CHARGED_DAMAGE,
+                        new EntityAttributeModifier(MAX_CHARGED_DAMAGE_ID, maxDamage, EntityAttributeModifier.Operation.ADD_VALUE),
+                        AttributeModifierSlot.MAINHAND
+                ).build();
+    }
 }

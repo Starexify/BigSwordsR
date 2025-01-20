@@ -15,6 +15,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.nova.big_swords.enchantments.effects.SoulStealEffect;
+import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSEnchantmentEffects;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Tags;
@@ -30,7 +31,6 @@ public class BSEnchantments extends FabricDynamicRegistryProvider {
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup, Entries entries) {
         RegistryEntryLookup<Enchantment> registryEntryLookup = wrapperLookup.getOrThrow(RegistryKeys.ENCHANTMENT);
         RegistryEntryLookup<Item> registryEntryLookup1 = wrapperLookup.getOrThrow(RegistryKeys.ITEM);
-
         register(entries, BSEnchantmentEffects.SOUL_STEALER, Enchantment.builder(
                         Enchantment.definition(
                                 registryEntryLookup1.getOrThrow(Tags.BSItemTags.SCYTHES),
@@ -43,7 +43,7 @@ public class BSEnchantments extends FabricDynamicRegistryProvider {
                         ))
                 .exclusiveSet(registryEntryLookup.getOrThrow(Tags.EnchantmentTags.SCYTHE_EXCLUSIVE))
                 .addEffect(
-                        EnchantmentEffectComponentTypes.POST_ATTACK,
+                        BSDataComponents.POST_DEATH,
                         EnchantmentEffectTarget.ATTACKER,
                         EnchantmentEffectTarget.VICTIM,
                         new SoulStealEffect(EnchantmentLevelBasedValue.linear(0.3F), new ItemStack(BSItems.SOUL))

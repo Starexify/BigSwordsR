@@ -1,6 +1,7 @@
 package net.nova.big_swords.item;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.enchantment.EnchantmentEffectContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -23,7 +24,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.nova.big_swords.BigSwordsR;
+import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
+import net.nova.big_swords.init.BSToolMaterial;
 import net.nova.big_swords.init.Sounds;
 
 import java.util.List;
@@ -34,10 +37,10 @@ public class ScytheItem extends HoeItem {
     public final float maxDamage;
     public final Random random = new Random();
 
-    public ScytheItem(ToolMaterial material, float attackDamage, float attackSpeed, float minDamage, float maxDamage, Settings settings) {
-        super(material, attackDamage, attackSpeed, settings);
-        this.minDamage = minDamage;
-        this.maxDamage = maxDamage;
+    public ScytheItem(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Settings settings) {
+        super(material, attackDamage, attackSpeed, settings.attributeModifiers(BSToolMaterial.createSpecialAttributeModifier(minChargedDamage, maxChargedDamage)));
+        this.minDamage = minChargedDamage;
+        this.maxDamage = maxChargedDamage;
     }
 
     @Override
@@ -69,7 +72,7 @@ public class ScytheItem extends HoeItem {
             int i = this.getMaxUseTime(stack, entity) - timeLeft;
             if (i < 20) return false; // Require a minimum charge time
 
-            if (!level.isClient) {
+            if (level instanceof ServerWorld serverLevel) {
                 Vec3d lookVec = player.getRotationVec(1.0F);
                 Vec3d playerPos = player.getPos().add(0, player.getEyeHeight(player.getPose()), 0);
                 Vec3d attackCenter = playerPos.add(lookVec.multiply(distance + depth / 2));
@@ -78,8 +81,7 @@ public class ScytheItem extends HoeItem {
                         attackCenter.x + width / 2, attackCenter.y + height / 2, attackCenter.z + width / 2
                 );
 
-                List<LivingEntity> entities = level.getEntitiesByClass(LivingEntity.class, boundingBox,
-                        e -> e != player && e.isAttackable());
+                List<LivingEntity> entities = serverLevel.getEntitiesByClass(LivingEntity.class, boundingBox, e -> e != player && e.isAttackable());
 
                 player.swingHand(Hand.MAIN_HAND, true);
                 int entitiesHit = 0;
@@ -89,10 +91,20 @@ public class ScytheItem extends HoeItem {
 
                     // Check if the entity is within the half-circle area
                     if (isInAttackArea(toTarget, lookVec)) {
-                        BlockHitResult blockHit = level.raycast(new RaycastContext(playerPos, targetPos, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, player));
+                        BlockHitResult blockHit = serverLevel.raycast(new RaycastContext(playerPos, targetPos, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, player));
 
                         if (blockHit.getType() == HitResult.Type.MISS) {
-                            scytheHits((ServerWorld) level, player, target);
+                            scytheHits(serverLevel, player, target);
+                            EnchantmentEffectContext enchantmentEffectContext = new EnchantmentEffectContext(stack, player.getPreferredEquipmentSlot(stack), entity);
+                            EnchantmentHelper.apply(stack, enchantmentHolder -> {
+                                enchantmentHolder.getEnchantments().iterator().forEachRemaining(registryEntry -> {
+                                    if (registryEntry.value().effects().get(BSDataComponents.POST_DEATH) != null) {
+                                        registryEntry.value().effects().get(BSDataComponents.POST_DEATH).forEach(targetedEffect ->
+                                                targetedEffect.effect().apply(serverLevel, enchantmentHolder.getLevel(registryEntry), enchantmentEffectContext, target, target.getPos())
+                                        );
+                                    }
+                                });
+                            });
                             entitiesHit++;
                         }
                     }
@@ -142,7 +154,6 @@ public class ScytheItem extends HoeItem {
         float damage = minDamage + random.nextFloat() * (maxDamage - minDamage);
         damage = Math.round(damage * 10.0f) / 10.0f;
         target.damage(serverLevel, serverLevel.getDamageSources().playerAttack(player), damage);
-        EnchantmentHelper.onTargetDamaged(serverLevel, target, serverLevel.getDamageSources().playerAttack(player));
     }
 
     // Bow-like Item Stuff

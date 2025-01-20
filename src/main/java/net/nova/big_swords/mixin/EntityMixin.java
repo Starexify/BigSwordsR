@@ -28,7 +28,6 @@ public abstract class EntityMixin {
     @SuppressWarnings("ConstantValue")
     @Inject(method = "tickBlockCollision(Lnet/minecraft/util/math/Vec3d;Lnet/minecraft/util/math/Vec3d;)V", at = @At("HEAD"))
     private void onTickBlockCollision(Vec3d lastRenderPos, Vec3d pos, CallbackInfo ci) {
-
         if ((Object) this instanceof ItemEntity itemEntity && shouldTickBlockCollision() && isOnGround()) {
             if (!itemEntity.getWorld().isClient()) {
                 BlockPos blockPos = itemEntity.getSteppingPos();
