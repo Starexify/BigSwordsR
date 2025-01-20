@@ -1,8 +1,12 @@
 package net.nova.big_swords.item;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.component.type.AttributeModifierSlot;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,6 +14,8 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.consume.UseAction;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -27,6 +33,7 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.block.CreepBlock;
+import net.nova.big_swords.init.BSToolMaterial;
 import net.nova.big_swords.init.Sounds;
 import net.nova.big_swords.init.Tags;
 
@@ -41,7 +48,7 @@ public class GlaiveItem extends Item {
     public final float range = 5.0f; // 5 block range
 
     public GlaiveItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage, Item.Settings settings) {
-        super(toolMaterial.applySwordSettings(settings, attackDamage, attackSpeed));
+        super(BSToolMaterial.applyChargedItemSettings(settings, toolMaterial, attackDamage, attackSpeed, minDamage, maxDamage));
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
     }
@@ -50,11 +57,41 @@ public class GlaiveItem extends Item {
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         super.appendTooltip(stack, context, tooltip, type);
 
+        stack.applyAttributeModifier(AttributeModifierSlot.MAINHAND, (attribute, modifier) -> {
+            appendAttributeModifierTooltip(tooltip, attribute, modifier);
+        });
+
         tooltip.add(Text.empty());
         tooltip.add(Text.literal("Special:").formatted(Formatting.GRAY));
         tooltip.add(Text.literal(" " + this.minDamage + " - " + this.maxDamage + " Charged Damage").formatted(Formatting.DARK_GREEN));
         tooltip.add(Text.literal(" " + this.range + " Range").formatted(Formatting.DARK_GREEN));
         tooltip.add(Text.empty());
+    }
+
+    private void appendAttributeModifierTooltip(List<Text> tooltip, RegistryEntry<EntityAttribute> attribute, EntityAttributeModifier modifier) {
+        double d = modifier.value();
+        boolean bl = false;
+
+        if (modifier.idMatches(BSToolMaterial.MIN_CHARGED_DAMAGE_ID)) {
+            bl = true;
+        } else if (modifier.idMatches(BSToolMaterial.MAX_CHARGED_DAMAGE_ID)) {
+            bl = true;
+        }
+
+        double e;
+        if (modifier.operation() != EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE && modifier.operation() != EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL) {
+            e = d;
+        } else {
+            e = d * 100.0;
+        }
+
+        if (bl) {
+            tooltip.add(ScreenTexts.space().append(Text.translatable("attribute.modifier.equals." + modifier.operation().getId(), AttributeModifiersComponent.DECIMAL_FORMAT.format(e), Text.translatable(attribute.value().getTranslationKey()))).formatted(Formatting.DARK_GREEN));
+        } else if (d > 0.0) {
+            tooltip.add(Text.translatable("attribute.modifier.plus." + modifier.operation().getId(), AttributeModifiersComponent.DECIMAL_FORMAT.format(e), Text.translatable(attribute.value().getTranslationKey())).formatted(attribute.value().getFormatting(true)));
+        } else if (d < 0.0) {
+            tooltip.add(Text.translatable("attribute.modifier.take." + modifier.operation().getId(), AttributeModifiersComponent.DECIMAL_FORMAT.format(-e), Text.translatable(attribute.value().getTranslationKey())).formatted(attribute.value().getFormatting(false)));
+        }
     }
 
     // Tilling Creep
