@@ -7,6 +7,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -34,23 +35,40 @@ public class BSToolMaterial {
     public static final ResourceLocation MIN_CHARGED_DAMAGE_ID = BigSwordsR.rl("min_charged_damage");
     public static final ResourceLocation MAX_CHARGED_DAMAGE_ID = BigSwordsR.rl("max_charged_damage");
 
-    private static Item.Properties applyCommonProperties(Item.Properties properties, ToolMaterial toolMaterial) {
+    public static Item.Properties applyCommonProperties(Item.Properties properties, ToolMaterial toolMaterial) {
         return properties.durability(toolMaterial.durability()).repairable(toolMaterial.repairItems()).enchantable(toolMaterial.enchantmentValue());
     }
 
-    public static Item.Properties applyChargedProperties(Item.Properties properties, ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage) {
+    public static Item.Properties applyChargedProperties(Item.Properties properties, ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage) {
         HolderGetter<Block> holdergetter = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
-        return applyCommonProperties(properties, toolMaterial)
+        return applyCommonProperties(properties, material)
                 .component(DataComponents.TOOL, new Tool(List.of(
                         Tool.Rule.minesAndDrops(HolderSet.direct(new Holder[]{Blocks.COBWEB.builtInRegistryHolder()}), 15.0F),
                         Tool.Rule.overrideSpeed(holdergetter.getOrThrow(BlockTags.SWORD_EFFICIENT), 1.5F)), 1.0F, 2))
-                .attributes(createChargedWeaponAttributes(toolMaterial, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage));
+                .attributes(createChargedWeaponAttributes(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage));
     }
 
-    private static ItemAttributeModifiers createChargedWeaponAttributes(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage) {
+    public static Item.Properties applyChargedToolProperties(Item.Properties properties, ToolMaterial material, TagKey<Block> mineableBlocks, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage) {
+        HolderGetter<Block> holdergetter = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
+        return applyCommonProperties(properties, material)
+                .component(
+                        DataComponents.TOOL,
+                        new Tool(
+                                List.of(
+                                        Tool.Rule.deniesDrops(holdergetter.getOrThrow(material.incorrectBlocksForDrops())),
+                                        Tool.Rule.minesAndDrops(holdergetter.getOrThrow(mineableBlocks), material.speed())
+                                ),
+                                1.0F,
+                                1
+                        )
+                )
+                .attributes(createChargedWeaponAttributes(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage));
+    }
+
+    public static ItemAttributeModifiers createChargedWeaponAttributes(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage) {
         return ItemAttributeModifiers.builder().add(
                 Attributes.ATTACK_DAMAGE,
-                new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attackDamage + toolMaterial.attackDamageBonus(), AttributeModifier.Operation.ADD_VALUE),
+                new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attackDamage + material.attackDamageBonus(), AttributeModifier.Operation.ADD_VALUE),
                 EquipmentSlotGroup.MAINHAND
         ).add(
                 Attributes.ATTACK_SPEED,

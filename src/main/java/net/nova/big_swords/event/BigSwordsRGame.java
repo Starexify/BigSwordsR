@@ -12,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.AddAttributeTooltipsEvent;
+import net.neoforged.neoforge.client.event.GatherSkippedAttributeTooltipsEvent;
 import net.neoforged.neoforge.common.extensions.IAttributeExtension;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.nova.big_swords.init.BSItems;
@@ -47,6 +48,12 @@ public class BigSwordsRGame {
     }
 
     @SubscribeEvent
+    public static void removeAttributesFromTooltip(GatherSkippedAttributeTooltipsEvent event) {
+        //event.skipId(BSToolMaterial.MIN_CHARGED_DAMAGE_ID);
+        //event.skipId(BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
+    }
+
+    @SubscribeEvent
     public static void addAttributeItemTooltips(AddAttributeTooltipsEvent event) {
         if (!event.shouldShow()) return;
 
@@ -59,6 +66,25 @@ public class BigSwordsRGame {
                             .withStyle(ChatFormatting.DARK_GREEN)
             );
         }
+
+/*
+        double minChargedDamage = 0;
+        double maxChargedDamage = 0;
+        Multimap<Holder<Attribute>, AttributeModifier> modifiers = AttributeUtil.getSortedModifiers(stack, EquipmentSlotGroup.MAINHAND);
+        Collection<AttributeModifier> chargedModifiers = modifiers.get(BSAttributes.CHARGED_DAMAGE);
+        for (AttributeModifier modifier : chargedModifiers) {
+            if (modifier.is(BSToolMaterial.MIN_CHARGED_DAMAGE_ID)) {
+                minChargedDamage = modifier.amount();
+            } else if (modifier.is(BSToolMaterial.MAX_CHARGED_DAMAGE_ID)) {
+                minChargedDamage = modifier.amount();
+            }
+        }
+        event.addTooltipLines(
+                Component.literal(" " + IAttributeExtension.FORMAT.format(minChargedDamage) + "-" + IAttributeExtension.FORMAT.format(maxChargedDamage) + " ")
+                        .append(Component.translatable("attribute.name.charged_damage"))
+                        .withStyle(ChatFormatting.DARK_GREEN)
+        );
+*/
 
         if (item instanceof GlaiveItem glaiveItem) {
             event.addTooltipLines(
