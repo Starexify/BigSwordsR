@@ -5,6 +5,7 @@
   "mixins": [
     "EntityMixin",
     "LivingEntityMixin",
+    "MiningToolItemMixin",
     "PlayerEntityMixin"
   ],
   "injectors": {

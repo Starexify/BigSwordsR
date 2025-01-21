@@ -48,7 +48,7 @@ public class GlaiveItem extends Item {
     public final float range = 5.0f; // 5 block range
 
     public GlaiveItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage, Item.Settings settings) {
-        super(BSToolMaterial.applyChargedItemSettings(settings, toolMaterial, attackDamage, attackSpeed, minDamage, maxDamage));
+        super(BSToolMaterial.applyChargedProperties(settings, toolMaterial, attackDamage, attackSpeed, minDamage, maxDamage));
         this.minDamage = minDamage;
         this.maxDamage = maxDamage;
     }

@@ -47,27 +47,6 @@ public class ScytheItem extends HoeItem {
     public ScytheItem(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Settings settings) {
         super(material, attackDamage, attackSpeed, settings.component(DataComponentTypes.ATTRIBUTE_MODIFIERS, BSToolMaterial.createScytheAttributeModifier(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage)));
 
-/*     AttributeModifiersComponent.builder().add(
-                BSEntityAttributes.CHARGED_DAMAGE,
-                new EntityAttributeModifier(BSToolMaterial.MIN_CHARGED_DAMAGE_ID, minChargedDamage, EntityAttributeModifier.Operation.ADD_VALUE),
-                AttributeModifierSlot.MAINHAND
-        ).add(
-                BSEntityAttributes.CHARGED_DAMAGE,
-                new EntityAttributeModifier(BSToolMaterial.MAX_CHARGED_DAMAGE_ID, maxChargedDamage, EntityAttributeModifier.Operation.ADD_VALUE),
-                AttributeModifierSlot.MAINHAND
-        ).build()
-
-        ComponentChanges changes = ComponentChanges.builder().add(DataComponentTypes.ATTRIBUTE_MODIFIERS, modifiersComponent).build();
-        MergedComponentMap components = MergedComponentMap.create(getComponents(), changes);
-
-        //getComponents().copy(DataComponentTypes.ATTRIBUTE_MODIFIERS).apply(components);
-
-        getComponents().get(DataComponentTypes.ATTRIBUTE_MODIFIERS).builder().add(
-                BSEntityAttributes.CHARGED_DAMAGE,
-                new EntityAttributeModifier(BSToolMaterial.MIN_CHARGED_DAMAGE_ID, minChargedDamage, EntityAttributeModifier.Operation.ADD_VALUE),
-                AttributeModifierSlot.MAINHAND
-        ).build();*/
-
         this.minDamage = minChargedDamage;
         this.maxDamage = maxChargedDamage;
     }

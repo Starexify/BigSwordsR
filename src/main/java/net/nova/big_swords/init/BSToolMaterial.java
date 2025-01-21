@@ -14,6 +14,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import net.nova.big_swords.BigSwordsR;
 
@@ -32,33 +33,38 @@ public class BSToolMaterial {
     public static final Identifier MIN_CHARGED_DAMAGE_ID = BigSwordsR.rl("min_charged_damage");
     public static final Identifier MAX_CHARGED_DAMAGE_ID = BigSwordsR.rl("max_charged_damage");
 
-    public static AttributeModifiersComponent createScytheAttributeModifier(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage) {
-        return AttributeModifiersComponent.builder().add(
-                BSEntityAttributes.CHARGED_DAMAGE,
-                new EntityAttributeModifier(MIN_CHARGED_DAMAGE_ID, minDamage, EntityAttributeModifier.Operation.ADD_VALUE),
-                AttributeModifierSlot.MAINHAND
-        ).add(
-                BSEntityAttributes.CHARGED_DAMAGE,
-                new EntityAttributeModifier(MAX_CHARGED_DAMAGE_ID, maxDamage, EntityAttributeModifier.Operation.ADD_VALUE),
-                AttributeModifierSlot.MAINHAND
-        ).build();
-    }
-
     public static Item.Settings applyBaseSettings(Item.Settings settings, ToolMaterial toolMaterial) {
         return settings.maxDamage(toolMaterial.durability()).repairable(toolMaterial.repairItems()).enchantable(toolMaterial.enchantmentValue());
     }
 
-    public static Item.Settings applyChargedItemSettings(Item.Settings settings, ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage) {
+    public static Item.Settings applyToolSettings(Item.Settings settings, ToolMaterial toolMaterial, TagKey<Block> effectiveBlocks, float attackDamage, float attackSpeed, float minDamage, float maxDamage) {
+        RegistryEntryLookup<Block> registryEntryLookup = Registries.createEntryLookup(Registries.BLOCK);
+        return applyBaseSettings(settings, toolMaterial)
+                .component(
+                        DataComponentTypes.TOOL,
+                        new ToolComponent(
+                                List.of(
+                                        ToolComponent.Rule.ofNeverDropping(registryEntryLookup.getOrThrow(this.incorrectBlocksForDrops)),
+                                        ToolComponent.Rule.ofAlwaysDropping(registryEntryLookup.getOrThrow(effectiveBlocks), this.speed)
+                                ),
+                                1.0F,
+                                1
+                        )
+                )
+                .attributeModifiers(createChargedWeaponAttributes(toolMaterial, attackDamage, attackSpeed, minDamage, maxDamage));
+    }
+
+    public static Item.Settings applyChargedProperties(Item.Settings settings, ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage) {
         RegistryEntryLookup<Block> registryEntryLookup = Registries.createEntryLookup(Registries.BLOCK);
         return applyBaseSettings(settings,
                 toolMaterial).component(DataComponentTypes.TOOL, new ToolComponent(List.of(
                         ToolComponent.Rule.ofAlwaysDropping(RegistryEntryList.of(Blocks.COBWEB.getRegistryEntry()), 15.0F),
                         ToolComponent.Rule.of(registryEntryLookup.getOrThrow(BlockTags.SWORD_EFFICIENT), 1.5F))
                         , 1.0F, 2))
-                .attributeModifiers(createChargedAttributeModifier(toolMaterial, attackDamage, attackSpeed, minDamage, maxDamage));
+                .attributeModifiers(createChargedWeaponAttributes(toolMaterial, attackDamage, attackSpeed, minDamage, maxDamage));
     }
 
-    public static AttributeModifiersComponent createChargedAttributeModifier(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage) {
+    public static AttributeModifiersComponent createChargedWeaponAttributes(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage) {
         return AttributeModifiersComponent.builder().add(
                 EntityAttributes.ATTACK_DAMAGE,
                 new EntityAttributeModifier(Item.BASE_ATTACK_DAMAGE_MODIFIER_ID, attackDamage + toolMaterial.attackDamageBonus(), EntityAttributeModifier.Operation.ADD_VALUE),
