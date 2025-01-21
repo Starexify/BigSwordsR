@@ -1,6 +1,8 @@
 package net.nova.big_swords.item;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.enchantment.EnchantmentEffectContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
@@ -32,22 +34,27 @@ import java.util.List;
 import java.util.Random;
 
 public class ScytheItem extends HoeItem {
-    public final float minChargedDamage;
-    public final float maxChargedDamage;
     public final Random random = new Random();
+    public List<AttributeModifiersComponent.Entry> modifiers = getComponents().get(DataComponentTypes.ATTRIBUTE_MODIFIERS).modifiers();
 
     public static final ThreadLocal<Boolean> isScythe = ThreadLocal.withInitial(() -> false);
     public static Settings settings;
 
     public ScytheItem(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Settings settings) {
         super(material, attackDamage, attackSpeed, settings(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage, settings));
-        this.minChargedDamage = minChargedDamage;
-        this.maxChargedDamage = maxChargedDamage;
     }
 
     public static Item.Settings settings(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Settings settings) {
         isScythe.set(true);
         return BSToolMaterial.applyToolSettings(settings, material, BlockTags.HOE_MINEABLE, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage);
+    }
+
+    public float minChargedDamage() {
+        return (float) BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
+    }
+
+    public float maxChargedDamage() {
+        return (float) BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
     }
 
     // Scythe Mechanic
@@ -148,7 +155,7 @@ public class ScytheItem extends HoeItem {
     }
 
     public void scytheHits(ServerWorld serverLevel, PlayerEntity player, LivingEntity target) {
-        float damage = minChargedDamage + random.nextFloat() * (maxChargedDamage - minChargedDamage);
+        float damage = minChargedDamage() + random.nextFloat() * (maxChargedDamage() - minChargedDamage());
         damage = Math.round(damage * 10.0f) / 10.0f;
         target.damage(serverLevel, serverLevel.getDamageSources().playerAttack(player), damage);
     }

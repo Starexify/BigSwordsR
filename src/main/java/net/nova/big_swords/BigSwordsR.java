@@ -3,6 +3,7 @@ package net.nova.big_swords;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -27,6 +28,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
+import java.util.List;
 
 public class BigSwordsR implements ModInitializer {
     public static final String MODID = "big_swords";
@@ -90,5 +92,12 @@ public class BigSwordsR implements ModInitializer {
 
     public static Identifier rl(String path) {
         return Identifier.of(MODID, path);
+    }
+
+    public static double getModifierValue(List<AttributeModifiersComponent.Entry> modifiers, Identifier modifierId) {
+        return modifiers.stream()
+                .filter(entry -> entry.modifier().idMatches(modifierId))
+                .mapToDouble(entry -> entry.modifier().value())
+                .findFirst().orElse(0.0);
     }
 }

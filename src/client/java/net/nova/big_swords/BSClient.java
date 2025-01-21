@@ -1,7 +1,5 @@
 package net.nova.big_swords;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
@@ -12,16 +10,18 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.item.property.numeric.NumericProperties;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Item;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.nova.big_swords.client.render.item.BloodLevelModelProperty;
+import net.nova.big_swords.init.BSAttributes;
 import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.BSToolMaterial;
 import net.nova.big_swords.item.GlaiveItem;
-import net.nova.big_swords.item.ScytheItem;
+
+import java.util.List;
+import java.util.Optional;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
@@ -54,35 +54,31 @@ public class BSClient implements ClientModInitializer {
 
         // Tooltip Stuff
         ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltipType, tooltip) -> {
-/*            Item item = stack.getItem();
+            Item item = stack.getItem();
 
-            if (item instanceof ScytheItem || item instanceof GlaiveItem) {
-                AttributeModifiersComponent attributeComponent = item.getComponents().get(DataComponentTypes.ATTRIBUTE_MODIFIERS);
-                Multimap<EntityAttribute, EntityAttributeModifier> modifiers = HashMultimap.create();
+            tooltip.removeIf(text -> text.getString().contains(BSAttributes.MAX_CHARGED_DAMAGE.value().getTranslationKey()));
+            Optional<Text> toModify = tooltip.stream()
+                    .filter(text -> text.getString().contains(BSAttributes.MIN_CHARGED_DAMAGE.value().getTranslationKey())).findFirst();
 
-                attributeComponent.modifiers().forEach(entry -> {
-                    modifiers.put(entry.attribute().value(), entry.modifier());
-                });
+            if (toModify.isPresent()) {
+                List<AttributeModifiersComponent.Entry> modifiers = item.getComponents().get(DataComponentTypes.ATTRIBUTE_MODIFIERS).modifiers();
+                double minChargedDamage = BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MIN_CHARGED_DAMAGE_ID);
+                double maxChargedDamage = BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
 
-                double minChargedDamage = modifiers.entries().stream()
-                        .filter(e -> e.getValue().idMatches(BSToolMaterial.MIN_CHARGED_DAMAGE_ID))
-                        .mapToDouble(e -> e.getValue().value())
-                        .findFirst().orElse(0.0);
-                double maxChargedDamage = modifiers.entries().stream()
-                        .filter(e -> e.getValue().idMatches(BSToolMaterial.MAX_CHARGED_DAMAGE_ID))
-                        .mapToDouble(e -> e.getValue().value())
-                        .findFirst().orElse(0.0);
+                int index = tooltip.indexOf(toModify.get());
+                tooltip.set(index, ScreenTexts.space().append(Text.literal(
+                                AttributeModifiersComponent.DECIMAL_FORMAT.format(minChargedDamage) + "-" +
+                                        AttributeModifiersComponent.DECIMAL_FORMAT.format(maxChargedDamage) + " ")
+                        .append(Text.translatable("attribute.name.charged_damage")).formatted(Formatting.DARK_GREEN)
+                ));
 
-                tooltip.add(Text.literal(" " + AttributeModifiersComponent.DECIMAL_FORMAT.format(minChargedDamage) + "-" + AttributeModifiersComponent.DECIMAL_FORMAT.format(maxChargedDamage) + " ")
-                        .append(Text.translatable("attribute.name.charged_damage"))
-                        .formatted(Formatting.DARK_GREEN));
+                if (item instanceof GlaiveItem glaiveItem) {
+                    tooltip.add(index + 1,
+                            ScreenTexts.space().append(AttributeModifiersComponent.DECIMAL_FORMAT.format(glaiveItem.range) + " Charged Range").formatted(Formatting.DARK_GREEN)
+                    );
+                }
             }
 
-            if (item instanceof GlaiveItem glaiveItem) {
-                tooltip.add(
-                        Text.literal(" " + AttributeModifiersComponent.DECIMAL_FORMAT.format(glaiveItem.range) + " Range").formatted(Formatting.DARK_GREEN)
-                );
-            }*/
         });
     }
 }

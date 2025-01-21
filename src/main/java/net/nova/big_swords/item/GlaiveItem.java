@@ -1,6 +1,8 @@
 package net.nova.big_swords.item;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,15 +35,20 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 public class GlaiveItem extends Item {
-    public final float minChargedDamage;
-    public final float maxChargedDamage;
     public final Random random = new Random();
     public final float range = 5.0f; // 5 block range
+    public List<AttributeModifiersComponent.Entry> modifiers = getComponents().get(DataComponentTypes.ATTRIBUTE_MODIFIERS).modifiers();
 
     public GlaiveItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Settings settings) {
         super(BSToolMaterial.applyChargedProperties(settings, toolMaterial, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage));
-        this.minChargedDamage = minChargedDamage;
-        this.maxChargedDamage = maxChargedDamage;
+    }
+
+    public float minChargedDamage() {
+        return (float) BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
+    }
+
+    public float maxChargedDamage() {
+        return (float) BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
     }
 
     // Tilling Creep
@@ -117,7 +124,7 @@ public class GlaiveItem extends Item {
     }
 
     public boolean glaiveHits(ItemStack stack, World level, PlayerEntity player, LivingEntity target) {
-        float damage = minChargedDamage + random.nextFloat() * (maxChargedDamage - minChargedDamage);
+        float damage = minChargedDamage() + random.nextFloat() * (maxChargedDamage() - minChargedDamage());
         damage = Math.round(damage * 10.0f) / 10.0f;
         if (level instanceof ServerWorld serverWorld)
             target.damage(serverWorld, level.getDamageSources().playerAttack(player), damage);
