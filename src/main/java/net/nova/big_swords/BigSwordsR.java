@@ -61,7 +61,7 @@ public class BigSwordsR {
 
     public static double getModifierValue(List<ItemAttributeModifiers.Entry> modifiers, ResourceLocation modifierId) {
         return modifiers.stream()
-                .filter(entry -> entry.modifier().id(modifierId))
+                .filter(entry -> entry.modifier().is(modifierId))
                 .mapToDouble(entry -> entry.modifier().amount())
                 .findFirst().orElse(0.0);
     }
