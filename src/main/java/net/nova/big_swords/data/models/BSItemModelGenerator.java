@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-@OnlyIn(Dist.CLIENT)
 public class BSItemModelGenerator extends ItemModelGenerators {
     public static final List<BSItemModelGenerator.TrimMaterialData> TRIM_MATERIAL_MODELS = List.of(
             new BSItemModelGenerator.TrimMaterialData("quartz", TrimMaterials.QUARTZ, Map.of()),
