@@ -1,23 +1,18 @@
 package net.nova.big_swords.item;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.AttributeModifierSlot;
-import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.enchantment.EnchantmentEffectContext;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.HoeItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.consume.UseAction;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.screen.ScreenTexts;
+import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -40,55 +35,32 @@ import java.util.List;
 import java.util.Random;
 
 public class ScytheItem extends HoeItem {
-    public final float minDamage;
-    public final float maxDamage;
+    public final float minChargedDamage;
+    public final float maxChargedDamage;
     public final Random random = new Random();
 
-    public ScytheItem(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Settings settings) {
-        super(material, attackDamage, attackSpeed, settings.component(DataComponentTypes.ATTRIBUTE_MODIFIERS, BSToolMaterial.createScytheAttributeModifier(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage)));
+    public static final ThreadLocal<Boolean> isScythe = ThreadLocal.withInitial(() -> false);
+    public static Settings settings;
 
-        this.minDamage = minChargedDamage;
-        this.maxDamage = maxChargedDamage;
+    public ScytheItem(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Settings settings) {
+        super(material, attackDamage, attackSpeed, settings(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage, settings));
+        this.minChargedDamage = minChargedDamage;
+        this.maxChargedDamage = maxChargedDamage;
+    }
+
+    public static Item.Settings settings(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Settings settings) {
+        isScythe.set(true);
+        return BSToolMaterial.applyToolSettings(settings, material, BlockTags.HOE_MINEABLE, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage);
     }
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         super.appendTooltip(stack, context, tooltip, type);
 
-        stack.applyAttributeModifier(AttributeModifierSlot.MAINHAND, (attribute, modifier) -> {
-            appendAttributeModifierTooltip(tooltip, attribute, modifier);
-        });
-
         tooltip.add(Text.empty());
         tooltip.add(Text.literal("Special:").formatted(Formatting.GRAY));
-        tooltip.add(Text.literal(" " + this.minDamage + " - " + this.maxDamage + " Charged Damage").formatted(Formatting.DARK_GREEN));
+        tooltip.add(Text.literal(" " + this.minChargedDamage + " - " + this.maxChargedDamage + " Charged Damage").formatted(Formatting.DARK_GREEN));
         tooltip.add(Text.empty());
-    }
-
-    private void appendAttributeModifierTooltip(List<Text> tooltip, RegistryEntry<EntityAttribute> attribute, EntityAttributeModifier modifier) {
-        double d = modifier.value();
-        boolean bl = false;
-
-        if (modifier.idMatches(BSToolMaterial.MIN_CHARGED_DAMAGE_ID)) {
-            bl = true;
-        } else if (modifier.idMatches(BSToolMaterial.MAX_CHARGED_DAMAGE_ID)) {
-            bl = true;
-        }
-
-        double e;
-        if (modifier.operation() != EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE && modifier.operation() != EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL) {
-            e = d;
-        } else {
-            e = d * 100.0;
-        }
-
-        if (bl) {
-            tooltip.add(ScreenTexts.space().append(Text.translatable("attribute.modifier.equals." + modifier.operation().getId(), AttributeModifiersComponent.DECIMAL_FORMAT.format(e), Text.translatable(attribute.value().getTranslationKey()))).formatted(Formatting.DARK_GREEN));
-        } else if (d > 0.0) {
-            tooltip.add(Text.translatable("attribute.modifier.plus." + modifier.operation().getId(), AttributeModifiersComponent.DECIMAL_FORMAT.format(e), Text.translatable(attribute.value().getTranslationKey())).formatted(attribute.value().getFormatting(true)));
-        } else if (d < 0.0) {
-            tooltip.add(Text.translatable("attribute.modifier.take." + modifier.operation().getId(), AttributeModifiersComponent.DECIMAL_FORMAT.format(-e), Text.translatable(attribute.value().getTranslationKey())).formatted(attribute.value().getFormatting(false)));
-        }
     }
 
     // Scythe Mechanic
@@ -189,7 +161,7 @@ public class ScytheItem extends HoeItem {
     }
 
     public void scytheHits(ServerWorld serverLevel, PlayerEntity player, LivingEntity target) {
-        float damage = minDamage + random.nextFloat() * (maxDamage - minDamage);
+        float damage = minChargedDamage + random.nextFloat() * (maxChargedDamage - minChargedDamage);
         damage = Math.round(damage * 10.0f) / 10.0f;
         target.damage(serverLevel, serverLevel.getDamageSources().playerAttack(player), damage);
     }

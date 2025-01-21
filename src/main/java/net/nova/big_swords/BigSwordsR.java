@@ -36,7 +36,7 @@ public class BigSwordsR implements ModInitializer {
     public void onInitialize() {
         CreativeTab.initialize();
         BSDataComponents.initialize();
-        BSEntityAttributes.initialize();
+        BSAttributes.initialize();
         BSItems.initialize();
         BSBlocks.initialize();
         Sounds.initialize();

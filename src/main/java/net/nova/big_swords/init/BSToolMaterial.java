@@ -37,48 +37,48 @@ public class BSToolMaterial {
         return settings.maxDamage(toolMaterial.durability()).repairable(toolMaterial.repairItems()).enchantable(toolMaterial.enchantmentValue());
     }
 
-    public static Item.Settings applyToolSettings(Item.Settings settings, ToolMaterial toolMaterial, TagKey<Block> effectiveBlocks, float attackDamage, float attackSpeed, float minDamage, float maxDamage) {
+    public static Item.Settings applyToolSettings(Item.Settings settings, ToolMaterial material, TagKey<Block> effectiveBlocks, float attackDamage, float attackSpeed, float minChargedDamage, float maxDamage) {
         RegistryEntryLookup<Block> registryEntryLookup = Registries.createEntryLookup(Registries.BLOCK);
-        return applyBaseSettings(settings, toolMaterial)
+        return applyBaseSettings(settings, material)
                 .component(
                         DataComponentTypes.TOOL,
                         new ToolComponent(
                                 List.of(
-                                        ToolComponent.Rule.ofNeverDropping(registryEntryLookup.getOrThrow(this.incorrectBlocksForDrops)),
-                                        ToolComponent.Rule.ofAlwaysDropping(registryEntryLookup.getOrThrow(effectiveBlocks), this.speed)
+                                        ToolComponent.Rule.ofNeverDropping(registryEntryLookup.getOrThrow(material.incorrectBlocksForDrops())),
+                                        ToolComponent.Rule.ofAlwaysDropping(registryEntryLookup.getOrThrow(effectiveBlocks), material.speed())
                                 ),
                                 1.0F,
                                 1
                         )
                 )
-                .attributeModifiers(createChargedWeaponAttributes(toolMaterial, attackDamage, attackSpeed, minDamage, maxDamage));
+                .attributeModifiers(createChargedWeaponAttributes(material, attackDamage, attackSpeed, minChargedDamage, maxDamage));
     }
 
-    public static Item.Settings applyChargedProperties(Item.Settings settings, ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage) {
+    public static Item.Settings applyChargedProperties(Item.Settings settings, ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxDamage) {
         RegistryEntryLookup<Block> registryEntryLookup = Registries.createEntryLookup(Registries.BLOCK);
         return applyBaseSettings(settings,
-                toolMaterial).component(DataComponentTypes.TOOL, new ToolComponent(List.of(
+                material).component(DataComponentTypes.TOOL, new ToolComponent(List.of(
                         ToolComponent.Rule.ofAlwaysDropping(RegistryEntryList.of(Blocks.COBWEB.getRegistryEntry()), 15.0F),
                         ToolComponent.Rule.of(registryEntryLookup.getOrThrow(BlockTags.SWORD_EFFICIENT), 1.5F))
                         , 1.0F, 2))
-                .attributeModifiers(createChargedWeaponAttributes(toolMaterial, attackDamage, attackSpeed, minDamage, maxDamage));
+                .attributeModifiers(createChargedWeaponAttributes(material, attackDamage, attackSpeed, minChargedDamage, maxDamage));
     }
 
-    public static AttributeModifiersComponent createChargedWeaponAttributes(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage) {
+    public static AttributeModifiersComponent createChargedWeaponAttributes(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxDamage) {
         return AttributeModifiersComponent.builder().add(
                 EntityAttributes.ATTACK_DAMAGE,
-                new EntityAttributeModifier(Item.BASE_ATTACK_DAMAGE_MODIFIER_ID, attackDamage + toolMaterial.attackDamageBonus(), EntityAttributeModifier.Operation.ADD_VALUE),
+                new EntityAttributeModifier(Item.BASE_ATTACK_DAMAGE_MODIFIER_ID, attackDamage + material.attackDamageBonus(), EntityAttributeModifier.Operation.ADD_VALUE),
                 AttributeModifierSlot.MAINHAND
         ).add(
                 EntityAttributes.ATTACK_SPEED,
                 new EntityAttributeModifier(Item.BASE_ATTACK_SPEED_MODIFIER_ID, attackSpeed, EntityAttributeModifier.Operation.ADD_VALUE),
                 AttributeModifierSlot.MAINHAND
         ).add(
-                BSEntityAttributes.CHARGED_DAMAGE,
-                new EntityAttributeModifier(MIN_CHARGED_DAMAGE_ID, minDamage, EntityAttributeModifier.Operation.ADD_VALUE),
+                BSAttributes.MIN_CHARGED_DAMAGE,
+                new EntityAttributeModifier(MIN_CHARGED_DAMAGE_ID, minChargedDamage, EntityAttributeModifier.Operation.ADD_VALUE),
                 AttributeModifierSlot.MAINHAND
         ).add(
-                BSEntityAttributes.CHARGED_DAMAGE,
+                BSAttributes.MAX_CHARGED_DAMAGE,
                 new EntityAttributeModifier(MAX_CHARGED_DAMAGE_ID, maxDamage, EntityAttributeModifier.Operation.ADD_VALUE),
                 AttributeModifierSlot.MAINHAND
         ).build();
