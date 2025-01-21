@@ -9,13 +9,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.consume.UseAction;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -45,17 +42,6 @@ public class GlaiveItem extends Item {
         super(BSToolMaterial.applyChargedProperties(settings, toolMaterial, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage));
         this.minChargedDamage = minChargedDamage;
         this.maxChargedDamage = maxChargedDamage;
-    }
-
-    @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        super.appendTooltip(stack, context, tooltip, type);
-
-        tooltip.add(Text.empty());
-        tooltip.add(Text.literal("Special:").formatted(Formatting.GRAY));
-        tooltip.add(Text.literal(" " + this.minChargedDamage + " - " + this.maxChargedDamage + " Charged Damage").formatted(Formatting.DARK_GREEN));
-        tooltip.add(Text.literal(" " + this.range + " Range").formatted(Formatting.DARK_GREEN));
-        tooltip.add(Text.empty());
     }
 
     // Tilling Creep

@@ -11,12 +11,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.consume.UseAction;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -51,16 +48,6 @@ public class ScytheItem extends HoeItem {
     public static Item.Settings settings(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Settings settings) {
         isScythe.set(true);
         return BSToolMaterial.applyToolSettings(settings, material, BlockTags.HOE_MINEABLE, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage);
-    }
-
-    @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        super.appendTooltip(stack, context, tooltip, type);
-
-        tooltip.add(Text.empty());
-        tooltip.add(Text.literal("Special:").formatted(Formatting.GRAY));
-        tooltip.add(Text.literal(" " + this.minChargedDamage + " - " + this.maxChargedDamage + " Charged Damage").formatted(Formatting.DARK_GREEN));
-        tooltip.add(Text.empty());
     }
 
     // Scythe Mechanic

@@ -165,6 +165,9 @@ public class LangProvider extends FabricLanguageProvider {
         // Enchantments
         translationBuilder.add("enchantment.big_swords.soul_stealer", "Soul Stealer");
 
+        // Attributes
+        translationBuilder.add("attribute.name.charged_damage", "Charged Damage");
+
         // Resourcepacks
         translationBuilder.add(BSClient.RP_16x_NAME, "Big Swords R 16x");
         translationBuilder.add(BSClient.RP_16x_DESC, "16x textures for Big Swords");
