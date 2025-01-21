@@ -2,6 +2,7 @@ package net.nova.big_swords.item;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -11,10 +12,11 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.EnchantedItemInUse;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -28,6 +30,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
+import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.BSToolMaterial;
@@ -40,15 +43,28 @@ import java.util.function.Predicate;
 
 import static net.nova.big_swords.BigSwordsR.playSound;
 
-public class ScytheItem extends Item {
-    public final float minChargedDamage;
-    public final float maxChargedDamage;
+public class ScytheItem extends HoeItem {
     public final Random random = new Random();
+    public List<ItemAttributeModifiers.Entry> modifiers = components().get(DataComponents.ATTRIBUTE_MODIFIERS).modifiers();
+
+    public static final ThreadLocal<Boolean> isScythe = ThreadLocal.withInitial(() -> false);
+    public static Properties properties;
 
     public ScytheItem(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Properties properties) {
-        super(BSToolMaterial.applyChargedToolProperties(properties, material, BlockTags.MINEABLE_WITH_HOE, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage));
-        this.minChargedDamage = minChargedDamage;
-        this.maxChargedDamage = maxChargedDamage;
+        super(material, attackDamage,attackSpeed, properties(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage, properties));
+    }
+
+    public static Properties properties(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Properties settings) {
+        isScythe.set(true);
+        return BSToolMaterial.applyChargedToolProperties(settings, material, BlockTags.MINEABLE_WITH_HOE, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage);
+    }
+
+    public float minChargedDamage() {
+        return (float) BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
+    }
+
+    public float maxChargedDamage() {
+        return (float) BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
     }
 
     // Scythe Mechanic
@@ -140,7 +156,7 @@ public class ScytheItem extends Item {
     }
 
     public void scytheHits(ServerLevel serverLevel, Player player, LivingEntity target) {
-        float damage = minChargedDamage + random.nextFloat() * (maxChargedDamage - minChargedDamage);
+        float damage = minChargedDamage() + random.nextFloat() * (maxChargedDamage() - minChargedDamage());
         damage = Math.round(damage * 10.0f) / 10.0f;
         target.hurtServer(serverLevel, player.damageSources().playerAttack(player), damage);
     }

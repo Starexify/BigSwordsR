@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "net.nova.big_swords.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "DiggerItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

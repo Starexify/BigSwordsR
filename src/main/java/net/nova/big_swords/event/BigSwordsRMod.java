@@ -12,7 +12,6 @@ import static net.nova.big_swords.BigSwordsR.MODID;
 public class BigSwordsRMod {
     @SubscribeEvent
     public static void attributeModificationEvent(EntityAttributeModificationEvent event) {
-        event.add(EntityType.PLAYER, BSAttributes.MIN_CHARGED_DAMAGE);
-        event.add(EntityType.PLAYER, BSAttributes.MAX_CHARGED_DAMAGE);
+
     }
 }

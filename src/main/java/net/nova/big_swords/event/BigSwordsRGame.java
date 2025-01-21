@@ -69,7 +69,6 @@ public class BigSwordsRGame {
         ItemStack stack = event.getStack();
         Item item = stack.getItem();
         if (item instanceof ScytheItem || item instanceof GlaiveItem) {
-
             Multimap<Holder<Attribute>, AttributeModifier> modifiers = AttributeUtil.getSortedModifiers(stack, EquipmentSlotGroup.MAINHAND);
             double minChargedDamage = modifiers.entries().stream()
                     .filter(e -> e.getValue().is(BSToolMaterial.MIN_CHARGED_DAMAGE_ID))

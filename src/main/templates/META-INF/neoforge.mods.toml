@@ -21,6 +21,9 @@ description='''${mod_description}'''
 links=["big_swords.modrinth=modrinth.com/mod/big-swords-r", "big_swords.curseforge=www.curseforge.com/minecraft/mc-mods/big-swords-r", "big_swords.wiki=https://github.com/Starexify/BigSwordsR/wiki"]
 sources="https://github.com/Starexify/BigSwordsR"
 
+[[mixins]]
+config="big_swords.mixins.json"
+
 # The [[accessTransformers]] block allows you to declare where your AT file is.
 # If this block is omitted, a fallback attempt will be made to load an AT from META-INF/accesstransformer.cfg
 #[[accessTransformers]]
@@ -32,6 +35,7 @@ sources="https://github.com/Starexify/BigSwordsR"
     versionRange="${neo_version_range}"
     ordering="NONE"
     side="BOTH"
+
 [[dependencies.${mod_id}]]
     modId="minecraft"
     type="required"

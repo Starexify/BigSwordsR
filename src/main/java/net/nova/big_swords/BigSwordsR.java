@@ -8,6 +8,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
@@ -15,6 +16,8 @@ import net.neoforged.fml.common.Mod;
 import net.nova.big_swords.init.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
@@ -54,5 +57,12 @@ public class BigSwordsR {
 
     public static Holder<Enchantment> getEnchantment(Level level, ResourceKey<Enchantment> enchantment) {
         return level.holderLookup(Registries.ENCHANTMENT).get(enchantment).orElse(null);
+    }
+
+    public static double getModifierValue(List<ItemAttributeModifiers.Entry> modifiers, ResourceLocation modifierId) {
+        return modifiers.stream()
+                .filter(entry -> entry.modifier().id(modifierId))
+                .mapToDouble(entry -> entry.modifier().amount())
+                .findFirst().orElse(0.0);
     }
 }
