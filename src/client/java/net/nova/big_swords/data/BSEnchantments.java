@@ -3,17 +3,20 @@ package net.nova.big_swords.data;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.fabricmc.fabric.api.resource.conditions.v1.ResourceCondition;
-import net.minecraft.component.EnchantmentEffectComponentTypes;
 import net.minecraft.component.type.AttributeModifierSlot;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentLevelBasedValue;
 import net.minecraft.enchantment.effect.EnchantmentEffectTarget;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.registry.RegistryEntryLookup;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.nova.big_swords.enchantments.effects.SoulStealEffect;
+import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSEnchantmentEffects;
+import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Tags;
 
 import java.util.concurrent.CompletableFuture;
@@ -40,10 +43,10 @@ public class BSEnchantments extends FabricDynamicRegistryProvider {
                         ))
                 .exclusiveSet(registryEntryLookup.getOrThrow(Tags.EnchantmentTags.SCYTHE_EXCLUSIVE))
                 .addEffect(
-                        EnchantmentEffectComponentTypes.POST_ATTACK,
+                        BSDataComponents.POST_DEATH,
                         EnchantmentEffectTarget.ATTACKER,
                         EnchantmentEffectTarget.VICTIM,
-                        new SoulStealEffect(0)
+                        new SoulStealEffect(EnchantmentLevelBasedValue.linear(0.3F), new ItemStack(BSItems.SOUL))
                 )
         );
     }

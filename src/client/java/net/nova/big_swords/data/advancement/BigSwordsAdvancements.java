@@ -31,7 +31,6 @@ import java.util.function.Consumer;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class BigSwordsAdvancements implements AdvancementTabGenerator {
-
     @Override
     public void accept(RegistryWrapper.WrapperLookup registries, Consumer<AdvancementEntry> exporter) {
         RegistryEntryLookup<Block> blockGetter = registries.getOrThrow(RegistryKeys.BLOCK);

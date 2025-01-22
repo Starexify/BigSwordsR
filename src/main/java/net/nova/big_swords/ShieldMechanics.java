@@ -66,7 +66,7 @@ public class ShieldMechanics {
 
                         // Weakness
                         if (arrow.isOnFire()) {
-                            player.damageShield(blockedDamage.get() * 4);
+                            //player.damageShield(blockedDamage.get() * 4);
                         }
                     }
 
@@ -76,10 +76,10 @@ public class ShieldMechanics {
                         int fireAspectLevel = attackerWeapon.getEnchantments().getLevel(BigSwordsR.getEnchantment(level, Enchantments.FIRE_ASPECT));
                         switch (fireAspectLevel) {
                             case 1:
-                                player.damageShield(blockedDamage.get() * 3);
+                                //player.damageShield(blockedDamage.get() * 3);
                                 break;
                             case 2:
-                                player.damageShield(blockedDamage.get() * 5);
+                                //player.damageShield(blockedDamage.get() * 5);
                                 break;
                         }
                     }
@@ -108,7 +108,7 @@ public class ShieldMechanics {
                         if (level instanceof ServerWorld serverWorld) {
                             player.damage(serverWorld, damageSource, damageToPlayer);
                         }
-                        player.damageShield(blockedDamage.get() + damageToPlayer);
+                        //player.damageShield(blockedDamage.get() + damageToPlayer);
                     }
                 }
 
@@ -118,7 +118,7 @@ public class ShieldMechanics {
                 if ((isIronShield || isGildedIronShield) && (damageSource.isOf(DamageTypes.EXPLOSION) || damageSource.isOf(DamageTypes.PLAYER_EXPLOSION))) {
                     // Perk
                     int newShieldDamage = isGildedIronShield ? 0 : (isIronShield ? blockedDamage.get() / 2 : blockedDamage.get());
-                    player.damageShield(newShieldDamage);
+                   // player.damageShield(newShieldDamage);
                 }
 
                 // Diamond Shields
@@ -150,7 +150,7 @@ public class ShieldMechanics {
                             }
 
                             // Weakness
-                            player.damageShield(blockedDamage.get() * 4);
+                           // player.damageShield(blockedDamage.get() * 4);
                         }
                     }
                 }
@@ -256,7 +256,7 @@ public class ShieldMechanics {
                     // Weakness
                     float weaknessChance = isGildedPatchworkShield ? 0.15f : 0.35f;
                     if (randomChance < weaknessChance) {
-                        player.damageShield(blockedDamage.get() * 3);
+                        //player.damageShield(blockedDamage.get() * 3);
                     }
                 }
 
@@ -274,7 +274,7 @@ public class ShieldMechanics {
                     if (randomChanceE < 0.15) {
                         float damagePercentage = isGildedBiomassShield ? 0.2f : 0.4f;
                         float healthToDamage = blockedDamage.get() - (blockedDamage.get() * damagePercentage);
-                        player.damageShield(healthToDamage);
+                       // player.damageShield(healthToDamage);
                     }
                 }
 

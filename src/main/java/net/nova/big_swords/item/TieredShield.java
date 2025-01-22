@@ -5,13 +5,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.item.tooltip.TooltipData;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.nova.big_swords.init.BSItems;
 
-import java.util.List;
+import java.util.Optional;
 
 public class TieredShield extends ShieldItem {
     public final ToolMaterial toolMaterial;
@@ -21,22 +21,26 @@ public class TieredShield extends ShieldItem {
     }
 
     public TieredShield(ToolMaterial toolMaterial, Settings properties, int durabilityMultiplier) {
-        super(properties.maxDamage(toolMaterial.durability() * durabilityMultiplier));
+        super(properties.maxDamage(toolMaterial.durability() * durabilityMultiplier).enchantable(toolMaterial.enchantmentValue()).repairable(toolMaterial.repairItems()));
         this.toolMaterial = toolMaterial;
     }
 
     public TieredShield(ToolMaterial toolMaterial, Settings properties, int durabilityMultiplier, int additionalDurability) {
-        super(properties.maxDamage(toolMaterial.durability() * durabilityMultiplier + additionalDurability));
+        super(properties.maxDamage(toolMaterial.durability() * durabilityMultiplier + additionalDurability).enchantable(toolMaterial.enchantmentValue()).repairable(toolMaterial.repairItems()));
         this.toolMaterial = toolMaterial;
     }
 
     @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        super.appendTooltip(stack, context, tooltip, type);
+    public Optional<TooltipData> getTooltipData(ItemStack stack) {
+        return Optional.of(new TooltipData() {
+            public Text getPerk() {
+                return Text.translatable(this + ".perk").formatted(Formatting.GRAY);
+            }
 
-        tooltip.add(Text.translatable(this + ".perk").formatted(Formatting.GRAY));
-        tooltip.add(Text.translatable(this + ".weakness").formatted(Formatting.GRAY));
-        tooltip.add(Text.empty());
+            public Text getWeakness() {
+                return Text.translatable(this + ".weakness").formatted(Formatting.GRAY);
+            }
+        });
     }
 
     @Override

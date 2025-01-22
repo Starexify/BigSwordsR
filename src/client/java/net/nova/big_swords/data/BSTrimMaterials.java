@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class BSTrimMaterials extends FabricDynamicRegistryProvider {
-    public static RegistryKey<ArmorTrimMaterial> LIVINGMETAL = of("livingmetal");
+    //public static RegistryKey<ArmorTrimMaterial> LIVINGMETAL = of("livingmetal");
 
     public BSTrimMaterials(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
@@ -28,10 +28,10 @@ public class BSTrimMaterials extends FabricDynamicRegistryProvider {
 
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup, Entries entries) {
-        register(entries, LIVINGMETAL, BSItems.LIVINGMETAL_INGOT, Style.EMPTY.withColor(TextColor.parse("#e0f9ff").getOrThrow()), Map.of(BSEquipmentAssets.LIVINGMETAL, "livingmetal_darker"));
+        //register(entries, LIVINGMETAL, BSItems.LIVINGMETAL_INGOT, Style.EMPTY.withColor(TextColor.parse("#e0f9ff").getOrThrow()), Map.of(BSEquipmentAssets.LIVINGMETAL, "livingmetal_darker"));
     }
 
-    public static void register(Entries entries, RegistryKey<ArmorTrimMaterial> materialKey, Item ingredient, Style style) {
+/*    public static void register(Entries entries, RegistryKey<ArmorTrimMaterial> materialKey, Item ingredient, Style style) {
         register(entries, materialKey, ingredient, style, Map.of());
     }
 
@@ -45,7 +45,7 @@ public class BSTrimMaterials extends FabricDynamicRegistryProvider {
 
     public static RegistryKey<ArmorTrimMaterial> of(String id) {
         return RegistryKey.of(RegistryKeys.TRIM_MATERIAL, BigSwordsR.rl(id));
-    }
+    }*/
 
     @Override
     public String getName() {

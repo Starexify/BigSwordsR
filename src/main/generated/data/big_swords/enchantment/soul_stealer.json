@@ -4,12 +4,20 @@
     "translate": "enchantment.big_swords.soul_stealer"
   },
   "effects": {
-    "minecraft:post_attack": [
+    "minecraft:post_death": [
       {
         "affected": "victim",
         "effect": {
           "type": "big_swords:soul_steal",
-          "duration": 0
+          "dropChance": {
+            "type": "minecraft:linear",
+            "base": 0.3,
+            "per_level_above_first": 0.3
+          },
+          "droppedItem": {
+            "count": 1,
+            "id": "big_swords:soul"
+          }
         },
         "enchanted": "attacker"
       }

@@ -3,8 +3,6 @@ package net.nova.big_swords.data.models;
 import it.unimi.dsi.fastutil.ints.Int2ObjectFunction;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.data.*;
@@ -17,7 +15,6 @@ import net.nova.big_swords.init.BSBlocks;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-@Environment(EnvType.CLIENT)
 public class BSBlockModelGenerator extends BlockStateModelGenerator {
     public BSBlockModelGenerator(Consumer<BlockStateSupplier> blockStateCollector, ItemModelOutput itemModelOutput, BiConsumer<Identifier, ModelSupplier> modelCollector) {
         super(blockStateCollector, itemModelOutput, modelCollector);

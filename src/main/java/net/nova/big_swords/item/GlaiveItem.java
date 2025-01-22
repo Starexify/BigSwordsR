@@ -1,6 +1,8 @@
 package net.nova.big_swords.item;
 
 import net.minecraft.block.BlockState;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,13 +11,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.consume.UseAction;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -27,6 +26,7 @@ import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.block.CreepBlock;
+import net.nova.big_swords.init.BSToolMaterial;
 import net.nova.big_swords.init.Sounds;
 import net.nova.big_swords.init.Tags;
 
@@ -35,26 +35,20 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 public class GlaiveItem extends Item {
-    public final float minDamage;
-    public final float maxDamage;
     public final Random random = new Random();
     public final float range = 5.0f; // 5 block range
+    public List<AttributeModifiersComponent.Entry> modifiers = getComponents().get(DataComponentTypes.ATTRIBUTE_MODIFIERS).modifiers();
 
-    public GlaiveItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minDamage, float maxDamage, Item.Settings settings) {
-        super(toolMaterial.applySwordSettings(settings, attackDamage, attackSpeed));
-        this.minDamage = minDamage;
-        this.maxDamage = maxDamage;
+    public GlaiveItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Settings settings) {
+        super(BSToolMaterial.applyChargedProperties(settings, toolMaterial, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage));
     }
 
-    @Override
-    public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
-        super.appendTooltip(stack, context, tooltip, type);
+    public float minChargedDamage() {
+        return (float) BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
+    }
 
-        tooltip.add(Text.empty());
-        tooltip.add(Text.literal("Special:").formatted(Formatting.GRAY));
-        tooltip.add(Text.literal(" " + this.minDamage + " - " + this.maxDamage + " Charged Damage").formatted(Formatting.DARK_GREEN));
-        tooltip.add(Text.literal(" " + this.range + " Range").formatted(Formatting.DARK_GREEN));
-        tooltip.add(Text.empty());
+    public float maxChargedDamage() {
+        return (float) BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
     }
 
     // Tilling Creep
@@ -130,7 +124,7 @@ public class GlaiveItem extends Item {
     }
 
     public boolean glaiveHits(ItemStack stack, World level, PlayerEntity player, LivingEntity target) {
-        float damage = minDamage + random.nextFloat() * (maxDamage - minDamage);
+        float damage = minChargedDamage() + random.nextFloat() * (maxChargedDamage() - minChargedDamage());
         damage = Math.round(damage * 10.0f) / 10.0f;
         if (level instanceof ServerWorld serverWorld)
             target.damage(serverWorld, level.getDamageSources().playerAttack(player), damage);

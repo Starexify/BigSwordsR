@@ -31,7 +31,7 @@ public abstract class LivingEntityMixin extends Entity {
         super(type, world);
     }
 
-    @WrapWithCondition(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damageShield(F)V"))
+/*    @WrapWithCondition(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damageShield(F)V"))
     private boolean preventShieldDamage(LivingEntity instance, float amount, @Local(argsOnly = true) DamageSource source) {
         ItemStack itemStack = instance.getBlockingItem();
         Entity attacker = source.getAttacker();
@@ -54,7 +54,7 @@ public abstract class LivingEntityMixin extends Entity {
             }
         }
         return true;
-    }
+    }*/
 
     @ModifyReturnValue(method = "blockedByShield", at = @At("RETURN"))
     private boolean preventShieldDamage(boolean original, DamageSource source) {

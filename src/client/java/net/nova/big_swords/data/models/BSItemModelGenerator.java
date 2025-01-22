@@ -21,7 +21,7 @@ import net.minecraft.util.Identifier;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.data.BSTrimMaterials;
 import net.nova.big_swords.equipment.BSEquipmentAssets;
-import net.nova.big_swords.init.BSDataComponentTypes;
+import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 
 import java.util.ArrayList;
@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-@Environment(EnvType.CLIENT)
 public class BSItemModelGenerator extends ItemModelGenerator {
     public static final List<BSItemModelGenerator.TrimMaterial> TRIM_MATERIALS = List.of(
             new BSItemModelGenerator.TrimMaterial("quartz", ArmorTrimMaterials.QUARTZ, Map.of()),
@@ -42,8 +41,8 @@ public class BSItemModelGenerator extends ItemModelGenerator {
             new BSItemModelGenerator.TrimMaterial("diamond", ArmorTrimMaterials.DIAMOND, Map.of(EquipmentAssetKeys.DIAMOND, "diamond_darker")),
             new BSItemModelGenerator.TrimMaterial("lapis", ArmorTrimMaterials.LAPIS, Map.of()),
             new BSItemModelGenerator.TrimMaterial("amethyst", ArmorTrimMaterials.AMETHYST, Map.of()),
-            new BSItemModelGenerator.TrimMaterial("resin", ArmorTrimMaterials.RESIN, Map.of()),
-            new BSItemModelGenerator.TrimMaterial("livingmetal", BSTrimMaterials.LIVINGMETAL, Map.of(BSEquipmentAssets.LIVINGMETAL, "livingmetal_darker"))
+            new BSItemModelGenerator.TrimMaterial("resin", ArmorTrimMaterials.RESIN, Map.of())
+            //new BSItemModelGenerator.TrimMaterial("livingmetal", BSTrimMaterials.LIVINGMETAL, Map.of(BSEquipmentAssets.LIVINGMETAL, "livingmetal_darker"))
     );
 
     public BSItemModelGenerator(ItemModelOutput output, BiConsumer<Identifier, ModelSupplier> modelCollector) {
@@ -168,7 +167,7 @@ public class BSItemModelGenerator extends ItemModelGenerator {
             ));
             list.add(ItemModels.switchCase(i, bloodModel));
         }
-        output.accept(item, ItemModels.select(new ComponentProperty<>(BSDataComponentTypes.BLOOD_LEVEL), basicModel, list));
+        output.accept(item, ItemModels.select(new ComponentProperty<>(BSDataComponents.BLOOD_LEVEL), basicModel, list));
     }
 
     public Identifier registerSubModelWith(Item item, String suffix, Model model) {

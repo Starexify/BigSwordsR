@@ -3,7 +3,7 @@ package net.nova.big_swords;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
+import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
+import java.util.List;
 
 public class BigSwordsR implements ModInitializer {
     public static final String MODID = "big_swords";
@@ -36,22 +37,14 @@ public class BigSwordsR implements ModInitializer {
     @Override
     public void onInitialize() {
         CreativeTab.initialize();
-        BSDataComponentTypes.initialize();
+        BSDataComponents.initialize();
+        BSAttributes.initialize();
         BSItems.initialize();
         BSBlocks.initialize();
         Sounds.initialize();
         BSEnchantmentEffects.initialize();
 
         ShieldMechanics.register();
-
-        // Fuels
-        FuelRegistryEvents.BUILD.register((builder, context) -> {
-            builder.add(BSItems.GIANT_WOODEN_STICK, 700);
-            builder.add(BSItems.GIANT_BLAZE_ROD, 16800);
-            builder.add(BSItems.WOODEN_BIG_SWORD, 200);
-            builder.add(BSItems.WOODEN_SCYTHE, 200);
-            builder.add(BSItems.WOODEN_GLAIVE, 200);
-        });
 
         // Loot Table Modifier
         LootTableEvents.MODIFY.register((registryKey, builder, lootTableSource, wrapperLookup) -> {
@@ -62,7 +55,6 @@ public class BigSwordsR implements ModInitializer {
                 builder.pool(poolBuilder);
             }
         });
-
 
         // Halloween Stuff
         ServerEntityEvents.ENTITY_LOAD.register((entity, serverWorld) -> {
@@ -100,5 +92,12 @@ public class BigSwordsR implements ModInitializer {
 
     public static Identifier rl(String path) {
         return Identifier.of(MODID, path);
+    }
+
+    public static double getModifierValue(List<AttributeModifiersComponent.Entry> modifiers, Identifier modifierId) {
+        return modifiers.stream()
+                .filter(entry -> entry.modifier().idMatches(modifierId))
+                .mapToDouble(entry -> entry.modifier().value())
+                .findFirst().orElse(0.0);
     }
 }
