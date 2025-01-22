@@ -6,8 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.tooltip.TooltipData;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.nova.big_swords.init.BSItems;
 
@@ -32,15 +30,7 @@ public class TieredShield extends ShieldItem {
 
     @Override
     public Optional<TooltipData> getTooltipData(ItemStack stack) {
-        return Optional.of(new TooltipData() {
-            public Text getPerk() {
-                return Text.translatable(this + ".perk").formatted(Formatting.GRAY);
-            }
-
-            public Text getWeakness() {
-                return Text.translatable(this + ".weakness").formatted(Formatting.GRAY);
-            }
-        });
+        return super.getTooltipData(stack);
     }
 
     @Override
