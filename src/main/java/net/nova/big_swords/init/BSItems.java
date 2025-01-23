@@ -2,17 +2,24 @@ package net.nova.big_swords.init;
 
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.minecraft.block.Block;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.BlocksAttacksComponent;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Rarity;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.equipment.BSTrimMaterials;
 import net.nova.big_swords.item.*;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 public class BSItems {

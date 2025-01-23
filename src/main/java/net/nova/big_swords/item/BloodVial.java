@@ -1,19 +1,23 @@
 package net.nova.big_swords.item;
 
+import net.minecraft.component.ComponentsAccess;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.tooltip.TooltipData;
+import net.minecraft.item.tooltip.TooltipAppender;
+import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 
-import java.util.Optional;
+import java.util.function.Consumer;
 
-public class BloodVial extends Item {
+public class BloodVial extends Item implements TooltipAppender {
     public static final int MIN_BLOOD_LEVEL = 1;
     public static final int MAX_BLOOD_LEVEL = 9;
 
@@ -22,12 +26,10 @@ public class BloodVial extends Item {
     }
 
     @Override
-    public Optional<TooltipData> getTooltipData(ItemStack stack) {
-        return super.getTooltipData(stack);
-
-/*        String bloodText = getBloodLevel(stack) == 0 ? "Empty" : "Blood Level: " + getBloodLevel(stack) + " / " + MAX_BLOOD_LEVEL;
-        tooltip.add(Text.empty());
-        tooltip.add(Text.literal(bloodText).formatted(Formatting.GRAY));*/
+    public void appendTooltip(TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
+        String bloodText = components.getOrDefault(BSDataComponents.BLOOD_LEVEL, 0) == 0 ? "Empty" : "Blood Level: " + components.getOrDefault(BSDataComponents.BLOOD_LEVEL, 0) + " / " + MAX_BLOOD_LEVEL;
+        textConsumer.accept(Text.empty());
+        textConsumer.accept(Text.literal(bloodText).formatted(Formatting.GRAY));
     }
 
     @Override

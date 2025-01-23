@@ -3,6 +3,7 @@ package net.nova.big_swords.mixin;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.component.type.BlocksAttacksComponent;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -14,6 +15,7 @@ import net.minecraft.entity.mob.EndermiteEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.init.BSItems;
@@ -31,24 +33,23 @@ public abstract class LivingEntityMixin extends Entity {
         super(type, world);
     }
 
-/*    @WrapWithCondition(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damageShield(F)V"))
-    private boolean preventShieldDamage(LivingEntity instance, float amount, @Local(argsOnly = true) DamageSource source) {
-        ItemStack itemStack = instance.getBlockingItem();
+/*    @WrapWithCondition(method = "damage", at = @At(value = "INVOKE", target = "Lnet/minecraft/component/type/BlocksAttacksComponent;onShieldHit(Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/util/Hand;F)V"))
+    private boolean preventShieldDamage(BlocksAttacksComponent instance, World world, ItemStack stack, LivingEntity entity, Hand hand, float itemDamage, @Local(argsOnly = true) DamageSource source) {
         Entity attacker = source.getAttacker();
-        Entity entity = source.getSource();
+        Entity entitySource = source.getSource();
 
-        if (itemStack != null) {
-            boolean isStoneShield = itemStack.isOf(BSItems.STONE_SHIELD);
-            boolean isGildedStoneShield = itemStack.isOf(BSItems.GILDED_STONE_SHIELD);
+        if (stack != null) {
+            boolean isStoneShield = stack.isOf(BSItems.STONE_SHIELD);
+            boolean isGildedStoneShield = stack.isOf(BSItems.GILDED_STONE_SHIELD);
             if ((isStoneShield || isGildedStoneShield)) {
                 if (attacker instanceof LivingEntity livingAttacker) {
                     ItemStack attackerWeapon = livingAttacker.getWeaponStack();
-                    int fireAspectLevel = attackerWeapon.getEnchantments().getLevel(BigSwordsR.getEnchantment(this.getWorld(), Enchantments.FIRE_ASPECT));
+                    int fireAspectLevel = attackerWeapon.getEnchantments().getLevel(BigSwordsR.getEnchantment(world, Enchantments.FIRE_ASPECT));
                     if (fireAspectLevel > 0) {
                         return false;
                     }
                 }
-                if (entity instanceof FireballEntity || (entity instanceof ProjectileEntity projectile && projectile.isOnFire())) {
+                if (entitySource instanceof FireballEntity || (entitySource instanceof ProjectileEntity projectile && projectile.isOnFire())) {
                     return false;
                 }
             }
