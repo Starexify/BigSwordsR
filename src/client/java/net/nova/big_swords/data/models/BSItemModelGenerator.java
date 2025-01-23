@@ -1,48 +1,45 @@
 package net.nova.big_swords.data.models;
 
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.data.*;
 import net.minecraft.client.render.item.model.ItemModel;
 import net.minecraft.client.render.item.model.SelectItemModel;
 import net.minecraft.client.render.item.property.bool.UsingItemProperty;
-import net.minecraft.client.render.item.property.select.ComponentProperty;
+import net.minecraft.client.render.item.property.select.ComponentSelectProperty;
 import net.minecraft.client.render.item.property.select.TrimMaterialProperty;
 import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.EquippableComponent;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.equipment.EquipmentAsset;
-import net.minecraft.item.equipment.EquipmentAssetKeys;
+import net.minecraft.item.equipment.trim.ArmorTrimAssets;
 import net.minecraft.item.equipment.trim.ArmorTrimMaterial;
 import net.minecraft.item.equipment.trim.ArmorTrimMaterials;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 import net.nova.big_swords.BigSwordsR;
-import net.nova.big_swords.data.BSTrimMaterials;
 import net.nova.big_swords.equipment.BSEquipmentAssets;
+import net.nova.big_swords.equipment.BSTrimMaterials;
+import net.nova.big_swords.equipment.BSArmorTrimAssets;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class BSItemModelGenerator extends ItemModelGenerator {
     public static final List<BSItemModelGenerator.TrimMaterial> TRIM_MATERIALS = List.of(
-            new BSItemModelGenerator.TrimMaterial("quartz", ArmorTrimMaterials.QUARTZ, Map.of()),
-            new BSItemModelGenerator.TrimMaterial("iron", ArmorTrimMaterials.IRON, Map.of(EquipmentAssetKeys.IRON, "iron_darker")),
-            new BSItemModelGenerator.TrimMaterial("netherite", ArmorTrimMaterials.NETHERITE, Map.of(EquipmentAssetKeys.NETHERITE, "netherite_darker")),
-            new BSItemModelGenerator.TrimMaterial("redstone", ArmorTrimMaterials.REDSTONE, Map.of()),
-            new BSItemModelGenerator.TrimMaterial("copper", ArmorTrimMaterials.COPPER, Map.of()),
-            new BSItemModelGenerator.TrimMaterial("gold", ArmorTrimMaterials.GOLD, Map.of(EquipmentAssetKeys.GOLD, "gold_darker")),
-            new BSItemModelGenerator.TrimMaterial("emerald", ArmorTrimMaterials.EMERALD, Map.of()),
-            new BSItemModelGenerator.TrimMaterial("diamond", ArmorTrimMaterials.DIAMOND, Map.of(EquipmentAssetKeys.DIAMOND, "diamond_darker")),
-            new BSItemModelGenerator.TrimMaterial("lapis", ArmorTrimMaterials.LAPIS, Map.of()),
-            new BSItemModelGenerator.TrimMaterial("amethyst", ArmorTrimMaterials.AMETHYST, Map.of()),
-            new BSItemModelGenerator.TrimMaterial("resin", ArmorTrimMaterials.RESIN, Map.of())
-            //new BSItemModelGenerator.TrimMaterial("livingmetal", BSTrimMaterials.LIVINGMETAL, Map.of(BSEquipmentAssets.LIVINGMETAL, "livingmetal_darker"))
+            new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.QUARTZ, ArmorTrimMaterials.QUARTZ),
+            new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.IRON, ArmorTrimMaterials.IRON),
+            new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.NETHERITE, ArmorTrimMaterials.NETHERITE),
+            new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.REDSTONE, ArmorTrimMaterials.REDSTONE),
+            new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.COPPER, ArmorTrimMaterials.COPPER),
+            new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.GOLD, ArmorTrimMaterials.GOLD),
+            new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.EMERALD, ArmorTrimMaterials.EMERALD),
+            new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.DIAMOND, ArmorTrimMaterials.DIAMOND),
+            new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.LAPIS, ArmorTrimMaterials.LAPIS),
+            new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.AMETHYST, ArmorTrimMaterials.AMETHYST),
+            new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.RESIN, ArmorTrimMaterials.RESIN),
+            new BSItemModelGenerator.TrimMaterial(BSArmorTrimAssets.LIVINGMETAL, BSTrimMaterials.LIVINGMETAL)
     );
 
     public BSItemModelGenerator(ItemModelOutput output, BiConsumer<Identifier, ModelSupplier> modelCollector) {
@@ -167,7 +164,7 @@ public class BSItemModelGenerator extends ItemModelGenerator {
             ));
             list.add(ItemModels.switchCase(i, bloodModel));
         }
-        output.accept(item, ItemModels.select(new ComponentProperty<>(BSDataComponents.BLOOD_LEVEL), basicModel, list));
+        output.accept(item, ItemModels.select(new ComponentSelectProperty<>(BSDataComponents.BLOOD_LEVEL), basicModel, list));
     }
 
     public Identifier registerSubModelWith(Item item, String suffix, Model model) {
@@ -184,8 +181,7 @@ public class BSItemModelGenerator extends ItemModelGenerator {
         Identifier identifier = ModelIds.getItemModelId(item);
         Identifier identifier2 = TextureMap.getId(item);
         List<SelectItemModel.SwitchCase<RegistryKey<ArmorTrimMaterial>>> list = new ArrayList(TRIM_MATERIALS.size());
-        EquippableComponent equippable = item.getDefaultStack().get(DataComponentTypes.EQUIPPABLE);
-        EquipmentSlot slot = equippable.slot();
+        EquipmentSlot slot = item.getDefaultStack().get(DataComponentTypes.EQUIPPABLE).slot();
         String armorType = switch (slot) {
             case HEAD -> "helmet";
             case CHEST -> "chestplate";
@@ -195,11 +191,10 @@ public class BSItemModelGenerator extends ItemModelGenerator {
         };
 
         for (BSItemModelGenerator.TrimMaterial trimMaterial : TRIM_MATERIALS) {
-            Identifier identifier3 = identifier.withSuffixedPath("_" + trimMaterial.name() + "_trim");
-            Identifier identifier4 = Identifier.ofVanilla("trims/items/" + armorType + "_trim_" + trimMaterial.texture(equipmentKey));
-            ItemModel.Unbaked unbaked;
+            Identifier identifier3 = identifier.withSuffixedPath("_" + trimMaterial.assets().base().suffix() + "_trim");
+            Identifier identifier4 = Identifier.ofVanilla("trims/items/" + armorType + "_trim_" + trimMaterial.assets().getAssetId(equipmentKey).suffix());
+            ItemModel.Unbaked unbaked = ItemModels.basic(identifier3);
             uploadArmor(identifier3, identifier2, identifier4);
-            unbaked = ItemModels.basic(identifier3);
             list.add(ItemModels.switchCase(trimMaterial.materialKey, unbaked));
         }
 
@@ -210,11 +205,6 @@ public class BSItemModelGenerator extends ItemModelGenerator {
         output.accept(item, ItemModels.select(new TrimMaterialProperty(), unbaked2, list));
     }
 
-    @Environment(EnvType.CLIENT)
-    record TrimMaterial(String name, RegistryKey<ArmorTrimMaterial> materialKey,
-                        Map<RegistryKey<EquipmentAsset>, String> overrideArmorMaterials) {
-        public String texture(RegistryKey<EquipmentAsset> equipmentKey) {
-            return overrideArmorMaterials.getOrDefault(equipmentKey, this.name);
-        }
+    public record TrimMaterial(ArmorTrimAssets assets, RegistryKey<ArmorTrimMaterial> materialKey) {
     }
 }

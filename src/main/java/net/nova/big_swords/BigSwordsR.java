@@ -22,6 +22,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import net.nova.big_swords.init.BSAttributes;
 import net.nova.big_swords.init.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

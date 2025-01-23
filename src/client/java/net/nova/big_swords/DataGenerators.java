@@ -12,6 +12,7 @@ import net.nova.big_swords.data.tags.BSBlockTagsProvider;
 import net.nova.big_swords.data.tags.BSEnchantmentTagsProvider;
 import net.nova.big_swords.data.tags.BSEntityTypeTagsProvider;
 import net.nova.big_swords.data.tags.BSItemTagsProvider;
+import net.nova.big_swords.equipment.BSTrimMaterials;
 
 public class DataGenerators implements DataGeneratorEntrypoint {
     @Override

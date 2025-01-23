@@ -78,6 +78,13 @@
           "model": "big_swords:item/livingmetal_leggings_resin_trim"
         },
         "when": "minecraft:resin"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "big_swords:item/livingmetal_leggings_livingmetal_trim"
+        },
+        "when": "big_swords:livingmetal"
       }
     ],
     "fallback": {

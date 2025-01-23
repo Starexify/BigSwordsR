@@ -10,6 +10,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Rarity;
 import net.nova.big_swords.BigSwordsR;
+import net.nova.big_swords.equipment.BSTrimMaterials;
 import net.nova.big_swords.item.*;
 
 import java.util.function.Function;
@@ -30,7 +31,7 @@ public class BSItems {
     public static Item ENDER_UPGRADE_SMITHING_TEMPLATE = registerItem("ender_upgrade_smithing_template", properties -> EnderSmithingTemplate.createEnderUpgradeTemplate(properties.rarity(Rarity.RARE)));
 
     // Livingmetal Stuff
-    public static Item LIVINGMETAL_INGOT = registerItem("livingmetal_ingot", Item::new);
+    public static Item LIVINGMETAL_INGOT = registerItem("livingmetal_ingot", properties -> new Item(properties.trimMaterial(BSTrimMaterials.LIVINGMETAL)));
     public static Item LIVINGMETAL_HELMET = registerItem("livingmetal_helmet", new Item.Settings().armor(BSArmorMaterial.LIVINGMETAL, EquipmentType.HELMET));
     public static Item LIVINGMETAL_CHESTPLATE = registerItem("livingmetal_chestplate", new Item.Settings().armor(BSArmorMaterial.LIVINGMETAL, EquipmentType.CHESTPLATE));
     public static Item LIVINGMETAL_LEGGINGS = registerItem("livingmetal_leggings", new Item.Settings().armor(BSArmorMaterial.LIVINGMETAL, EquipmentType.LEGGINGS));
