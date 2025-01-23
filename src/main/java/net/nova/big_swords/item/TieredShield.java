@@ -1,6 +1,5 @@
 package net.nova.big_swords.item;
 
-import net.minecraft.component.ComponentsAccess;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.BlocksAttacksComponent;
 import net.minecraft.entity.Entity;
@@ -9,19 +8,14 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.tooltip.TooltipAppender;
-import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import net.nova.big_swords.init.BSItems;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
-public class TieredShield extends ShieldItem implements TooltipAppender {
+public class TieredShield extends ShieldItem {
     public TieredShield(ToolMaterial toolMaterial, Settings properties) {
         this(toolMaterial, properties, 1, 0);
     }
@@ -77,10 +71,10 @@ public class TieredShield extends ShieldItem implements TooltipAppender {
         }
     }
 
-    @Override
+/*    @Override
     public void appendTooltip(TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
         textConsumer.accept(Text.translatable(this + ".perk").formatted(Formatting.GRAY));
         textConsumer.accept(Text.translatable(this + ".weakness").formatted(Formatting.GRAY));
         textConsumer.accept(Text.empty());
-    }
+    }*/
 }

@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(HoeItem.class)
-public class HoeItemMixin {
+public abstract class HoeItemMixin {
     @WrapOperation(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item$Settings;hoe(Lnet/minecraft/item/ToolMaterial;FF)Lnet/minecraft/item/Item$Settings;"))
     private static Item.Settings scytheInit(Item.Settings instance, ToolMaterial toolMaterial, float f, float g, Operation<Item.Settings> original) {
         if (ScytheItem.isScythe.get()) {
