@@ -42,7 +42,7 @@ public class BSItemModelGenerator extends ItemModelGenerator {
             new BSItemModelGenerator.TrimMaterial("lapis", ArmorTrimMaterials.LAPIS, Map.of()),
             new BSItemModelGenerator.TrimMaterial("amethyst", ArmorTrimMaterials.AMETHYST, Map.of()),
             new BSItemModelGenerator.TrimMaterial("resin", ArmorTrimMaterials.RESIN, Map.of()),
-            new BSItemModelGenerator.TrimMaterial("livingmetal", BSTrimMaterials.LIVINGMETAL, Map.of())
+            new BSItemModelGenerator.TrimMaterial("livingmetal", BSTrimMaterials.LIVINGMETAL, Map.of(BSEquipmentAssets.LIVINGMETAL, "livingmetal_darker"))
     );
 
     public BSItemModelGenerator(ItemModelOutput output, BiConsumer<Identifier, ModelSupplier> modelCollector) {
