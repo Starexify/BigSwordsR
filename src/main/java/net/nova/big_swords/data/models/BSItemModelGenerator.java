@@ -14,11 +14,8 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.EquipmentAssets;
-import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimMaterials;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.client.renderer.item.BloodLevelModelProperty;
 import net.nova.big_swords.data.BSTrimMaterials;
@@ -152,13 +149,8 @@ public class BSItemModelGenerator extends ItemModelGenerators {
     }
 
     // Methods
-
     public ResourceLocation createFlatItemModel(Item item, String name, ModelTemplate modelTemplate) {
-        return modelTemplate.create(
-                ModelLocationUtils.getModelLocation(item, name),
-                TextureMapping.layer0(TextureMapping.getItemTexture(item)),
-                this.modelOutput
-        );
+        return modelTemplate.create(ModelLocationUtils.getModelLocation(item, name), TextureMapping.layer0(TextureMapping.getItemTexture(item)), modelOutput);
     }
 
     public void generateShield(Item item) {
@@ -168,11 +160,10 @@ public class BSItemModelGenerator extends ItemModelGenerators {
     }
 
     public void generateTrimmableItem(Item item, ResourceKey<EquipmentAsset> equipmentAsset) {
-        ResourceLocation resourcelocation = ModelLocationUtils.getModelLocation(item);
-        ResourceLocation resourcelocation1 = TextureMapping.getItemTexture(item);
+        ResourceLocation modelLocation = ModelLocationUtils.getModelLocation(item);
+        ResourceLocation textureLocation = TextureMapping.getItemTexture(item);
         List<SelectItemModel.SwitchCase<ResourceKey<TrimMaterial>>> list = new ArrayList<>(TRIM_MATERIAL_MODELS.size());
-        Equippable equippable = item.getDefaultInstance().get(DataComponents.EQUIPPABLE);
-        EquipmentSlot slot = equippable.slot();
+        EquipmentSlot slot = item.getDefaultInstance().get(DataComponents.EQUIPPABLE).slot();
         String armorType = switch (slot) {
             case HEAD -> "helmet";
             case CHEST -> "chestplate";
@@ -182,23 +173,16 @@ public class BSItemModelGenerator extends ItemModelGenerators {
         };
 
         for (BSItemModelGenerator.TrimMaterialData trimMaterial : TRIM_MATERIAL_MODELS) {
-            ResourceLocation resourcelocation3 = resourcelocation.withSuffix("_" + trimMaterial.name() + "_trim");
-            ResourceLocation resourcelocation4 = ResourceLocation.withDefaultNamespace(
-                    "trims/items/" + armorType + "_trim_" + trimMaterial.textureName(equipmentAsset)
-            );
-            ItemModel.Unbaked itemmodel$unbaked;
+            ResourceLocation trimModelName = modelLocation.withSuffix("_" + trimMaterial.name() + "_trim");
+            ResourceLocation layer1Location = ResourceLocation.withDefaultNamespace("trims/items/" + armorType + "_trim_" + trimMaterial.textureName(equipmentAsset));
 
-            generateLayeredItem(resourcelocation3, resourcelocation1, resourcelocation4);
-            itemmodel$unbaked = ItemModelUtils.plainModel(resourcelocation3);
-
-            list.add(ItemModelUtils.when(trimMaterial.materialKey, itemmodel$unbaked));
+            generateLayeredItem(trimModelName, textureLocation, layer1Location);
+            list.add(ItemModelUtils.when(trimMaterial.materialKey, ItemModelUtils.plainModel(trimModelName)));
         }
 
-        ItemModel.Unbaked basicModel;
-        ModelTemplates.FLAT_ITEM.create(resourcelocation, TextureMapping.layer0(resourcelocation1), modelOutput);
-        basicModel = ItemModelUtils.plainModel(resourcelocation);
-
-        itemModelOutput.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), basicModel, list));
+        ItemModel.Unbaked basicItem = ItemModelUtils.plainModel(modelLocation);
+        ModelTemplates.FLAT_ITEM.create(modelLocation, TextureMapping.layer0(textureLocation), modelOutput);
+        itemModelOutput.accept(item, ItemModelUtils.select(new TrimMaterialProperty(), basicItem, list));
     }
 
     public void generateBloodVial(Item item) {
@@ -221,10 +205,9 @@ public class BSItemModelGenerator extends ItemModelGenerators {
         itemModelOutput.accept(item, ItemModelUtils.rangeSelect(new BloodLevelModelProperty(), list));
     }
 
-    @OnlyIn(Dist.CLIENT)
     record TrimMaterialData(String name, ResourceKey<TrimMaterial> materialKey, Map<ResourceKey<EquipmentAsset>, String> overrideArmorMaterials) {
-        public String textureName(ResourceKey<EquipmentAsset> p_387088_) {
-            return overrideArmorMaterials.getOrDefault(p_387088_, name);
+        public String textureName(ResourceKey<EquipmentAsset> key) {
+            return overrideArmorMaterials.getOrDefault(key, name);
         }
     }
 }
