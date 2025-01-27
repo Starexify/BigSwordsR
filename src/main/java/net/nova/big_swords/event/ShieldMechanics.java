@@ -80,7 +80,7 @@ public class ShieldMechanics {
                 // Weakness
                 if (attacker instanceof LivingEntity livingAttacker) {
                     ItemStack attackerWeapon = livingAttacker.getMainHandItem();
-                    int fireAspectLevel = attackerWeapon.getEnchantmentLevel(BigSwordsR.getEnchantment(level, Enchantments.FIRE_ASPECT));
+                    int fireAspectLevel = BigSwordsR.getItemEnchantmentLevel(attackerWeapon, Enchantments.FIRE_ASPECT);
                     switch (fireAspectLevel) {
                         case 1:
                             event.setShieldDamage(shieldDamage * 3);
@@ -99,7 +99,7 @@ public class ShieldMechanics {
                 // Perk
                 if (attacker instanceof LivingEntity livingAttacker) {
                     ItemStack attackerWeapon = livingAttacker.getMainHandItem();
-                    int fireAspectLevel = attackerWeapon.getEnchantmentLevel(BigSwordsR.getEnchantment(level, Enchantments.FIRE_ASPECT));
+                    int fireAspectLevel = BigSwordsR.getItemEnchantmentLevel(attackerWeapon, Enchantments.FIRE_ASPECT);
                     if (fireAspectLevel > 0) {
                         event.setShieldDamage(0);
                         playSound(level, player, SoundEvents.FIRE_EXTINGUISH);
