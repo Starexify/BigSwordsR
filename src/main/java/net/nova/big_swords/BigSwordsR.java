@@ -37,13 +37,13 @@ public class BigSwordsR implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        CreativeTab.initialize();
-        BSDataComponents.initialize();
-        BSAttributes.initialize();
-        BSItems.initialize();
-        BSBlocks.initialize();
         Sounds.initialize();
+        BSAttributes.initialize();
+        BSDataComponents.initialize();
         BSEnchantmentEffects.initialize();
+        BSBlocks.initialize();
+        BSItems.initialize();
+        CreativeTab.initialize();
 
         ShieldMechanics.register();
 

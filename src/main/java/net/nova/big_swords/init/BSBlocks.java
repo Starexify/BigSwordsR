@@ -11,6 +11,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.Pair;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.block.BiomassCrop;
 import net.nova.big_swords.block.CreepBlock;
@@ -18,25 +19,25 @@ import net.nova.big_swords.block.CreepBlock;
 import java.util.function.Function;
 
 public class BSBlocks {
-    public static Block LIVINGMETAL_BLOCK = registerBlock("livingmetal_block", Block::new, AbstractBlock.Settings.create()
+    public static Pair<Block, BlockItem> LIVINGMETAL_BLOCK = registerBlockWithItem("livingmetal_block", Block::new, AbstractBlock.Settings.create()
             .mapColor(MapColor.LIGHT_BLUE)
             .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
             .requiresTool()
             .strength(5.0F, 6.0F)
             .sounds(BSBlockSoundGroup.LIVINGMETAL_BLOCK));
 
-    public static Block BIOMASS_BLOCK = registerBlock("biomass_block", Block::new, AbstractBlock.Settings.create()
+    public static Pair<Block, BlockItem> BIOMASS_BLOCK = registerBlockWithItem("biomass_block", Block::new, AbstractBlock.Settings.create()
             .mapColor(MapColor.RED)
             .strength(4.0F, 3.0F)
             .sounds(BlockSoundGroup.WART_BLOCK));
 
-    public static Block CREEP_BLOCK = registerBlock("creep_block", CreepBlock::new, AbstractBlock.Settings.create()
+    public static Pair<Block, BlockItem> CREEP_BLOCK = registerBlockWithItem("creep_block", CreepBlock::new, AbstractBlock.Settings.create()
             .mapColor(MapColor.RED)
             .instrument(NoteBlockInstrument.COW_BELL)
             .strength(1.5F)
             .sounds(BlockSoundGroup.SOUL_SAND));
 
-    public static Block BIOMASS = register("biomass", BiomassCrop::new, AbstractBlock.Settings.create()
+    public static Block BIOMASS = registerBlock("biomass", BiomassCrop::new, AbstractBlock.Settings.create()
             .mapColor(MapColor.RED)
             .noCollision()
             .ticksRandomly()
@@ -46,14 +47,14 @@ public class BSBlocks {
     );
 
     // Methods
-    public static Block registerBlock(String name, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
-        Block block = register(name, factory, settings);
-        BSItems.registerItem(name, properties -> new BlockItem(block, properties.useBlockPrefixedTranslationKey()));
-        return block;
+    public static <T extends Block> Pair<T, BlockItem> registerBlockWithItem(String name, Function<AbstractBlock.Settings, T> factory, AbstractBlock.Settings settings) {
+        T block = registerBlock(name, factory, settings);
+        return new Pair<>(block, BSItems.registerItem(name, properties -> new BlockItem(block, properties.useBlockPrefixedTranslationKey())));
     }
 
-    public static Block register(String name, Function<AbstractBlock.Settings, Block> factory, AbstractBlock.Settings settings) {
-        return Registry.register(Registries.BLOCK, RegistryKey.of(RegistryKeys.BLOCK, BigSwordsR.rl(name)), factory.apply(settings.registryKey(RegistryKey.of(RegistryKeys.BLOCK, BigSwordsR.rl(name)))));
+    public static <T extends Block> T registerBlock(String name, Function<AbstractBlock.Settings, T> factory, AbstractBlock.Settings settings) {
+        RegistryKey<Block> key = RegistryKey.of(RegistryKeys.BLOCK, BigSwordsR.rl(name));
+        return Registry.register(Registries.BLOCK, key, factory.apply(settings.registryKey(key)));
     }
 
     public static void initialize() {

@@ -2,24 +2,17 @@ package net.nova.big_swords.init;
 
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.minecraft.block.Block;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.BlocksAttacksComponent;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Rarity;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.equipment.BSTrimMaterials;
 import net.nova.big_swords.item.*;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 
 public class BSItems {
@@ -123,7 +116,7 @@ public class BSItems {
     public static Item GILDED_LIVINGMETAL_SHIELD = registerItem("gilded_livingmetal_shield", properties -> new TieredShield(BSToolMaterial.LIVINGMETAL, properties, 2, BSToolMaterial.LIVINGMETAL.durability() / 2));
 
     // Methods
-    public static Item registerItem(String name, Function<Item.Settings, Item> factory) {
+    public static <T extends Item> T registerItem(String name, Function<Item.Settings, T> factory) {
         return register(name, factory, new Item.Settings());
     }
 
@@ -131,8 +124,9 @@ public class BSItems {
         return register(name, Item::new, settings);
     }
 
-    public static Item register(String name, Function<Item.Settings, Item> factory, Item.Settings settings) {
-        return Registry.register(Registries.ITEM, RegistryKey.of(RegistryKeys.ITEM, BigSwordsR.rl(name)), factory.apply(settings.registryKey(RegistryKey.of(RegistryKeys.ITEM, BigSwordsR.rl(name)))));
+    public static <T extends Item> T register(String name, Function<Item.Settings, T> factory, Item.Settings settings) {
+        RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, BigSwordsR.rl(name));
+        return Registry.register(Registries.ITEM, key, factory.apply(settings.registryKey(key)));
     }
 
     public static Function<Item.Settings, Item> createBlockItemWithUniqueName(Block block) {
