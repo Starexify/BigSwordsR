@@ -115,12 +115,13 @@ public class BSItems {
     public static Item GILDED_LIVINGMETAL_SHIELD = registerItem("gilded_livingmetal_shield", properties -> new TieredShield(BSToolMaterial.LIVINGMETAL, properties, 2, BSToolMaterial.LIVINGMETAL.durability() / 2));
 
     // Methods
-    public static Item registerItem(String name, Function<Item.Settings, Item> factory) {
+    public static <T extends Item> T registerItem(String name, Function<Item.Settings, T> factory) {
         return register(name, factory, new Item.Settings());
     }
 
-    public static Item register(String name, Function<Item.Settings, Item> factory, Item.Settings settings) {
-        return Registry.register(Registries.ITEM, RegistryKey.of(RegistryKeys.ITEM, BigSwordsR.rl(name)), factory.apply(settings.registryKey(RegistryKey.of(RegistryKeys.ITEM, BigSwordsR.rl(name)))));
+    public static <T extends Item> T register(String name, Function<Item.Settings, T> factory, Item.Settings settings) {
+        RegistryKey<Item> key = RegistryKey.of(RegistryKeys.ITEM, BigSwordsR.rl(name));
+        return Registry.register(Registries.ITEM, key, factory.apply(settings.registryKey(key)));
     }
 
     public static Function<Item.Settings, Item> createBlockItemWithUniqueName(Block block) {
