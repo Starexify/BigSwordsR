@@ -17,9 +17,9 @@ public abstract class PlayerEntityMixin {
         ShieldMechanics.blockedDamage.set(i);
         return i;
     }
-
+*/
     @Redirect(method = "damageShield", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z"))
     private boolean modifyShieldCheck(ItemStack stack, Item item) {
         return stack.getItem() instanceof ShieldItem;
-    }*/
+    }
 }

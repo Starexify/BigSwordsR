@@ -57,7 +57,7 @@ public abstract class LivingEntityMixin extends Entity {
         return true;
     }*/
 
-    @ModifyReturnValue(method = "blockedByShield", at = @At("RETURN"))
+/*    @ModifyReturnValue(method = "blockedByShield", at = @At("RETURN"))
     private boolean preventShieldDamage(boolean original, DamageSource source) {
         ItemStack itemStack = this.getBlockingItem();
         Entity attacker = source.getAttacker();
@@ -86,5 +86,5 @@ public abstract class LivingEntityMixin extends Entity {
             }
         }
         return original;
-    }
+    }*/
 }
