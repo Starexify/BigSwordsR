@@ -1,12 +1,12 @@
 package net.nova.big_swords.item;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.world.World;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 
@@ -14,8 +14,8 @@ public class BloodVial extends Item {
     public static final int MIN_BLOOD_LEVEL = 1;
     public static final int MAX_BLOOD_LEVEL = 9;
 
-    public BloodVial(Settings settings) {
-        super(settings.maxCount(1));
+    public BloodVial(Properties properties) {
+        super(properties.stacksTo(1));
     }
 
 /*    @Override
@@ -26,16 +26,16 @@ public class BloodVial extends Item {
     }*/
 
     @Override
-    public ActionResult use(World level, PlayerEntity player, Hand usedHand) {
-        ItemStack bloodVialStack = player.getStackInHand(usedHand);
-        ItemStack otherHandStack = player.getStackInHand(usedHand == Hand.MAIN_HAND ? Hand.OFF_HAND : Hand.MAIN_HAND);
+    public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
+        ItemStack bloodVialStack = player.getItemInHand(usedHand);
+        ItemStack otherHandStack = player.getItemInHand(usedHand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
 
         if (bloodVialStack.getItem() instanceof BloodVial) {
-            if (otherHandStack.isOf(Items.SLIME_BALL) && getBloodLevel(bloodVialStack) >= MIN_BLOOD_LEVEL) {
+            if (otherHandStack.is(Items.SLIME_BALL) && getBloodLevel(bloodVialStack) >= MIN_BLOOD_LEVEL) {
                 return processInteraction(level, player, bloodVialStack, otherHandStack, BSItems.CREEP_BALL);
             }
 
-            if (otherHandStack.isOf(Items.TORCHFLOWER_SEEDS) && getBloodLevel(bloodVialStack) >= MIN_BLOOD_LEVEL) {
+            if (otherHandStack.is(Items.TORCHFLOWER_SEEDS) && getBloodLevel(bloodVialStack) >= MIN_BLOOD_LEVEL) {
                 return processInteraction(level, player, bloodVialStack, otherHandStack, BSItems.BIOMASS_SEED);
             }
         }
@@ -44,13 +44,13 @@ public class BloodVial extends Item {
     }
 
     // Methods
-    public ActionResult processInteraction(World level, PlayerEntity player, ItemStack stack, ItemStack otherHandStack, Item resultItem) {
-        if (!level.isClient) {
-            otherHandStack.decrement(1);
+    public InteractionResult processInteraction(Level level, Player player, ItemStack stack, ItemStack otherHandStack, Item resultItem) {
+        if (!level.isClientSide) {
+            otherHandStack.shrink(1);
             stack.set(BSDataComponents.BLOOD_LEVEL, getBloodLevel(stack) - 1);
-            player.giveItemStack(new ItemStack(resultItem));
+            player.addItem(new ItemStack(resultItem));
         }
-        return ActionResult.SUCCESS;
+        return InteractionResult.SUCCESS;
     }
 
     public void incrementBloodLevel(ItemStack stack) {
@@ -59,13 +59,13 @@ public class BloodVial extends Item {
         }
     }
 
-    public static void incrementBloodVialInBothHands(PlayerEntity player) {
-        incrementBloodVialInHand(player, Hand.MAIN_HAND);
-        incrementBloodVialInHand(player, Hand.OFF_HAND);
+    public static void incrementBloodVialInBothHands(Player player) {
+        incrementBloodVialInHand(player, InteractionHand.MAIN_HAND);
+        incrementBloodVialInHand(player, InteractionHand.OFF_HAND);
     }
 
-    public static void incrementBloodVialInHand(PlayerEntity player, Hand hand) {
-        ItemStack handStack = player.getStackInHand(hand);
+    public static void incrementBloodVialInHand(Player player, InteractionHand hand) {
+        ItemStack handStack = player.getItemInHand(hand);
         if (handStack.getItem() instanceof BloodVial bloodVialItem) {
             bloodVialItem.incrementBloodLevel(handStack);
         }

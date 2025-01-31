@@ -1,29 +1,23 @@
 package net.nova.big_swords.item;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.enchantment.EnchantmentEffectContext;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.HoeItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.consume.UseAction;
-import net.minecraft.registry.tag.BlockTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.RaycastContext;
-import net.minecraft.world.World;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.enchantment.EnchantedItemInUse;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
@@ -35,18 +29,18 @@ import java.util.Random;
 
 public class ScytheItem extends HoeItem {
     public final Random random = new Random();
-    public List<AttributeModifiersComponent.Entry> modifiers = getComponents().get(DataComponentTypes.ATTRIBUTE_MODIFIERS).modifiers();
+    public List<ItemAttributeModifiers.Entry> modifiers = components().get(DataComponents.ATTRIBUTE_MODIFIERS).modifiers();
 
     public static final ThreadLocal<Boolean> isScythe = ThreadLocal.withInitial(() -> false);
-    public static Settings settings;
+    public static Properties properties;
 
-    public ScytheItem(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Settings settings) {
-        super(material, attackDamage, attackSpeed, settings(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage, settings));
+    public ScytheItem(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Properties properties) {
+        super(material, attackDamage, attackSpeed, properties(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage, properties));
     }
 
-    public static Item.Settings settings(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Settings settings) {
+    public static Item.Properties properties(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Properties properties) {
         isScythe.set(true);
-        return BSToolMaterial.applyToolSettings(settings, material, BlockTags.HOE_MINEABLE, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage);
+        return BSToolMaterial.applyToolSettings(properties, material, BlockTags.MINEABLE_WITH_HOE, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage);
     }
 
     public float minChargedDamage() {
@@ -59,9 +53,9 @@ public class ScytheItem extends HoeItem {
 
     // Scythe Mechanic
     @Override
-    public ActionResult use(World world, PlayerEntity player, Hand usedHand) {
-        player.setCurrentHand(usedHand);
-        return ActionResult.CONSUME;
+    public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
+        player.startUsingItem(usedHand);
+        return InteractionResult.CONSUME;
     }
 
     public float radius = 1.5f;  // Radius of the half-circle
@@ -71,41 +65,39 @@ public class ScytheItem extends HoeItem {
     public float distance = 0.5f; // Distance in front of the player
 
     @Override
-    public boolean onStoppedUsing(ItemStack stack, World level, LivingEntity entity, int timeLeft) {
-        if (entity instanceof PlayerEntity player) {
-            int i = this.getMaxUseTime(stack, entity) - timeLeft;
+    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+        if (entity instanceof Player player) {
+            int i = this.getUseDuration(stack, entity) - timeLeft;
             if (i < 20) return false; // Require a minimum charge time
 
-            if (level instanceof ServerWorld serverLevel) {
-                Vec3d lookVec = player.getRotationVec(1.0F);
-                Vec3d playerPos = player.getPos().add(0, player.getEyeHeight(player.getPose()), 0);
-                Vec3d attackCenter = playerPos.add(lookVec.multiply(distance + depth / 2));
-                Box boundingBox = new Box(
+            if (level instanceof ServerLevel serverLevel) {
+                Vec3 lookVec = player.getLookAngle();
+                Vec3 playerPos = player.position().add(0, player.getEyeHeight(player.getPose()), 0);
+                Vec3 attackCenter = playerPos.add(lookVec.scale(distance + depth / 2));
+                AABB boundingBox = new AABB(
                         attackCenter.x - width / 2, attackCenter.y - height / 2, attackCenter.z - width / 2,
                         attackCenter.x + width / 2, attackCenter.y + height / 2, attackCenter.z + width / 2
                 );
 
-                List<LivingEntity> entities = serverLevel.getEntitiesByClass(LivingEntity.class, boundingBox,
-                        e -> e != player && e.isAttackable());
-
-                player.swingHand(Hand.MAIN_HAND, true);
+                List<LivingEntity> entities = serverLevel.getEntitiesOfClass(LivingEntity.class, boundingBox, e -> e != player && e.isAttackable());
                 int entitiesHit = 0;
+
                 for (LivingEntity target : entities) {
-                    Vec3d targetPos = target.getPos().add(0, target.getHeight() / 2, 0);
-                    Vec3d toTarget = targetPos.subtract(playerPos);
+                    Vec3 targetPos = target.position().add(0, target.getBbHeight() / 2, 0);
+                    Vec3 toTarget = targetPos.subtract(playerPos);
 
                     // Check if the entity is within the half-circle area
                     if (isInAttackArea(toTarget, lookVec)) {
-                        BlockHitResult blockHit = serverLevel.raycast(new RaycastContext(playerPos, targetPos, RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, player));
+                        BlockHitResult blockHit = serverLevel.clip(new ClipContext(playerPos, targetPos, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
 
                         if (blockHit.getType() == HitResult.Type.MISS) {
                             scytheHits(serverLevel, player, target);
-                            EnchantmentEffectContext enchantmentEffectContext = new EnchantmentEffectContext(stack, player.getPreferredEquipmentSlot(stack), entity);
+                            EnchantedItemInUse enchantedItemInUse = new EnchantmentEffectContext(stack, player.getPreferredEquipmentSlot(stack), entity);
                             EnchantmentHelper.apply(stack, enchantmentHolder -> {
                                 enchantmentHolder.getEnchantments().iterator().forEachRemaining(registryEntry -> {
                                     if (registryEntry.value().effects().get(BSDataComponents.POST_DEATH) != null) {
                                         registryEntry.value().effects().get(BSDataComponents.POST_DEATH).forEach(targetedEffect ->
-                                                targetedEffect.effect().apply(serverLevel, enchantmentHolder.getLevel(registryEntry), enchantmentEffectContext, target, target.getPos())
+                                                targetedEffect.effect().apply(serverLevel, enchantmentHolder.getLevel(registryEntry), enchantedItemInUse, target, target.getPos())
                                         );
                                     }
                                 });
@@ -117,16 +109,16 @@ public class ScytheItem extends HoeItem {
 
                 if (entitiesHit > 0) {
                     int durabilityDamage = entitiesHit * 2;
-                    stack.damage(durabilityDamage, player, EquipmentSlot.MAINHAND);
-                    player.getItemCooldownManager().set(stack, 40);
+                    stack.hurtAndBreak(durabilityDamage, player, EquipmentSlot.MAINHAND);
+                    player.getCooldowns().addCooldown(stack, 40);
 
                     // player.sendSystemMessage(Component.literal("Hit entities with dmg: " + entitiesHit)); // Debug output
                     // player.sendSystemMessage(Component.literal("Damage dealt to Item: " + durabilityDamage)); // Debug output
                 } else {
-                    player.getItemCooldownManager().set(stack, 10);
+                    player.getCooldowns().addCooldown(stack, 10);
                 }
 
-                if (stack.isOf(BSItems.SOUL_REAPER)) {
+                if (stack.is(BSItems.SOUL_REAPER)) {
                     BigSwordsR.playSound(serverLevel, player, Sounds.REAPER_SLASH);
                 } else {
                     BigSwordsR.playSound(serverLevel, player, Sounds.SCYTHE_SLASH);
@@ -136,16 +128,16 @@ public class ScytheItem extends HoeItem {
         return false;
     }
 
-    public boolean isInAttackArea(Vec3d toTarget, Vec3d lookVec) {
+    public boolean isInAttackArea(Vec3 toTarget, Vec3 lookVec) {
         // Create a coordinate system based on the look vector
-        Vec3d up = new Vec3d(0, 1, 0);
-        Vec3d right = lookVec.crossProduct(up).normalize();
-        Vec3d adjustedUp = right.crossProduct(lookVec).normalize();
+        Vec3 up = new Vec3(0, 1, 0);
+        Vec3 right = lookVec.cross(up).normalize();
+        Vec3 adjustedUp = right.cross(lookVec).normalize();
 
         // Project the toTarget vector onto this coordinate system
-        double forwardProject = toTarget.dotProduct(lookVec);
-        double rightProject = toTarget.dotProduct(right);
-        double upProject = toTarget.dotProduct(adjustedUp);
+        double forwardProject = toTarget.dot(lookVec);
+        double rightProject = toTarget.dot(right);
+        double upProject = toTarget.dot(adjustedUp);
 
         // Check if the entity is within the half-circle area
         boolean inRadius = Math.sqrt(rightProject * rightProject + upProject * upProject) <= radius;
@@ -155,31 +147,20 @@ public class ScytheItem extends HoeItem {
         return inRadius && inFront && inHeight;
     }
 
-    public void scytheHits(ServerWorld serverLevel, PlayerEntity player, LivingEntity target) {
+    public void scytheHits(ServerLevel serverLevel, Player player, LivingEntity target) {
         float damage = minChargedDamage() + random.nextFloat() * (maxChargedDamage() - minChargedDamage());
         damage = Math.round(damage * 10.0f) / 10.0f;
-        target.damage(serverLevel, serverLevel.getDamageSources().playerAttack(player), damage);
+        target.hurtServer(serverLevel, serverLevel.damageSources().playerAttack(player), damage);
     }
 
     // Bow-like Item Stuff
     @Override
-    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
+    public int getUseDuration(ItemStack stack, LivingEntity user) {
         return 72000;
     }
 
     @Override
-    public UseAction getUseAction(ItemStack stack) {
-        return UseAction.BOW;
-    }
-
-    // Sword-like Item Stuff
-    @Override
-    public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.damage(1, attacker, EquipmentSlot.MAINHAND);
-    }
-
-    @Override
-    public boolean canMine(ItemStack stack, BlockState state, World world, BlockPos pos, LivingEntity user) {
-        return !user.isInCreativeMode();
+    public ItemUseAnimation getUseAnimation(ItemStack stack) {
+        return ItemUseAnimation.BOW;
     }
 }

@@ -2,21 +2,21 @@ package net.nova.big_swords.data.tags;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.item.Items;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Items;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
 public class BSItemTagsProvider extends FabricTagProvider.ItemTagProvider {
-    public BSItemTagsProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-        super(output, registriesFuture);
+    public BSItemTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
+        super(output, completableFuture);
     }
 
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+    protected void addTags(HolderLookup.Provider provider) {
         getOrCreateTagBuilder(Tags.BSItemTags.BIG_SWORDS).add(
                 BSItems.WOODEN_BIG_SWORD, BSItems.STONE_BIG_SWORD, BSItems.IRON_BIG_SWORD, BSItems.GOLDEN_BIG_SWORD,
                 BSItems.DIAMOND_BIG_SWORD, BSItems.NETHERITE_BIG_SWORD, BSItems.PATCHWORK_BIG_SWORD, BSItems.SKULL_BIG_SWORD,

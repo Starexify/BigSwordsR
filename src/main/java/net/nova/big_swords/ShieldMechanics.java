@@ -70,7 +70,7 @@ public class ShieldMechanics {
 
                         // Weakness
                         if (arrow.isOnFire()) {
-                            blockingComponent.onShieldHit(level, shield, entity, );
+                            //blockingComponent.onShieldHit(level, shield, entity, );
                             //player.damageShield(blockedDamage.get() * 4);
                         }
                     }

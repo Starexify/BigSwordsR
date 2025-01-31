@@ -1,33 +1,33 @@
 package net.nova.big_swords.item;
 
-import net.minecraft.block.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.nova.big_swords.init.BSBlocks;
 
 public class CreepBall extends Item {
-    public CreepBall(Settings settings) {
-        super(settings);
+    public CreepBall(Properties properties) {
+        super(properties);
     }
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        BlockPos blockpos = context.getBlockPos();
-        World level = context.getWorld();
+    public InteractionResult useOn(UseOnContext context) {
+        BlockPos blockpos = context.getClickedPos();
+        Level level = context.getLevel();
 
-        if (!level.getBlockState(blockpos).isOf(Blocks.SOUL_SAND)) {
-            return super.useOnBlock(context);
+        if (!level.getBlockState(blockpos).is(Blocks.SOUL_SAND)) {
+            return super.useOn(context);
         } else {
-            level.playSound(null, blockpos, SoundEvents.BLOCK_SOUL_SAND_BREAK, SoundCategory.PLAYERS, 1.0F, 1.0F);
-            context.getStack().decrement(1);
-            level.setBlockState(blockpos, BSBlocks.CREEP_BLOCK.getDefaultState());
+            level.playSound(null, blockpos, SoundEvents.SOUL_SAND_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
+            context.getItemInHand().shrink(1);
+            level.setBlock(blockpos, BSBlocks.CREEP_BLOCK.getDefaultState());
 
-            return ActionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
     }
 }

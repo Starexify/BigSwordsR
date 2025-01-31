@@ -1,8 +1,8 @@
 package net.nova.big_swords.init;
 
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvent;
 import net.nova.big_swords.BigSwordsR;
 
 public class Sounds {
@@ -12,7 +12,7 @@ public class Sounds {
     public static final SoundEvent REAPER_SLASH = registerSoundEvents("reaper_slash");
 
     public static SoundEvent registerSoundEvents(String id) {
-        return Registry.register(Registries.SOUND_EVENT, BigSwordsR.rl(id), SoundEvent.of(BigSwordsR.rl(id)));
+        return Registry.register(BuiltInRegistries.SOUND_EVENT, BigSwordsR.rl(id), SoundEvent.createVariableRangeEvent(BigSwordsR.rl(id)));
     }
 
     public static void initialize() {
