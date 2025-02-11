@@ -47,7 +47,7 @@ public class EnderSmithingTemplate extends SmithingTemplateItem {
 
     ));
 
-    public static final ResourceLocation EMPTY_SLOT_INGOT = ResourceLocation.withDefaultNamespace("container/slot/ingot");
+    public static final ResourceLocation EMPTY_SLOT_INGOT = BigSwordsR.rl("container/slot/eye");
 
     public EnderSmithingTemplate(Component appliesTo, Component ingredients, Component baseSlotDescription, Component additionsSlotDescription, List<ResourceLocation> upgradeIconList, List<ResourceLocation> upgradeMaterialList, Properties properties) {
         super(appliesTo, ingredients, baseSlotDescription, additionsSlotDescription, upgradeIconList, upgradeMaterialList, properties);
