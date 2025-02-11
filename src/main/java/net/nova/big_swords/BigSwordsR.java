@@ -1,16 +1,11 @@
 package net.nova.big_swords;
 
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -54,15 +49,6 @@ public class BigSwordsR {
 
     public static ResourceLocation rl(String path) {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
-    }
-
-    public static int getItemEnchantmentLevel(ItemStack item, ResourceKey<Enchantment> enchantment) {
-        return item.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY)
-                .entrySet().stream()
-                .filter(entry -> entry.getKey().equals(enchantment))
-                .findAny()
-                .map(entry -> entry.getIntValue())
-                .orElse(0);
     }
 
     public static double getModifierValue(List<ItemAttributeModifiers.Entry> modifiers, ResourceLocation modifierId) {

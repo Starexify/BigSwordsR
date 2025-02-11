@@ -9,7 +9,6 @@ import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackCompatibility;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.world.flag.FeatureFlagSet;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -23,7 +22,7 @@ import java.util.Optional;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
-@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD)
 public class BigSwordsRClient {
     public static final String[] RESOURCE_PACKS = {"big_swords_r_16x", "big_swords_r_old"};
     public static final String RP_16x = RESOURCE_PACKS[0];

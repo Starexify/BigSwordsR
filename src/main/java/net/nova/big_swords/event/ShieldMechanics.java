@@ -1,7 +1,11 @@
 package net.nova.big_swords.event;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -30,7 +34,6 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
-import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.init.BSItems;
 
 import java.util.Random;
@@ -52,8 +55,16 @@ public class ShieldMechanics {
             float shieldDamage = event.shieldDamage();
             double randomChance = Math.random();
             double randomChanceE = Math.random();
-            Random random = new Random();
             Level level = player.level();
+            RandomSource random = level.getRandom();
+            int fireAspectLevel = attacker instanceof LivingEntity livingEntity ? livingEntity.getMainHandItem().getEnchantmentLevel(player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FIRE_ASPECT)) : 0;
+            int soulFireAspectLevel = attacker instanceof LivingEntity livingEntity ?
+                    player.level().registryAccess()
+                            .lookupOrThrow(Registries.ENCHANTMENT)
+                            .get(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.withDefaultNamespace("soul_fire_aspect")))
+                            .map(enchantment -> livingEntity.getMainHandItem().getEnchantmentLevel(enchantment))
+                            .orElse(0)
+                    : 0;
 
             // Wooden Shields
             boolean isWoodenShield = shield.is(BSItems.WOODEN_SHIELD);
@@ -77,19 +88,18 @@ public class ShieldMechanics {
                     }
                 }
 
-                // Weakness
-                if (attacker instanceof LivingEntity livingAttacker) {
-                    ItemStack attackerWeapon = livingAttacker.getMainHandItem();
-                    int fireAspectLevel = BigSwordsR.getItemEnchantmentLevel(attackerWeapon, Enchantments.FIRE_ASPECT);
-                    switch (fireAspectLevel) {
-                        case 1:
-                            event.setShieldDamage(shieldDamage * 3);
-                            break;
-                        case 2:
-                            event.setShieldDamage(shieldDamage * 5);
-                            break;
-                    }
-                }
+                // Weakness (Comp with Soul fire'd)
+                if (fireAspectLevel > 0) event.setShieldDamage(shieldDamage * switch (fireAspectLevel) {
+                    case 1 -> 3;
+                    case 2 -> 5;
+                    default -> 1;
+                });
+
+                if (soulFireAspectLevel > 0) event.setShieldDamage(shieldDamage * switch (soulFireAspectLevel) {
+                    case 1 -> 6;
+                    case 2 -> 10;
+                    default -> 1;
+                });
             }
 
             // Stone Shields
@@ -97,13 +107,9 @@ public class ShieldMechanics {
             boolean isGildedStoneShield = shield.is(BSItems.GILDED_STONE_SHIELD);
             if ((isStoneShield || isGildedStoneShield)) {
                 // Perk
-                if (attacker instanceof LivingEntity livingAttacker) {
-                    ItemStack attackerWeapon = livingAttacker.getMainHandItem();
-                    int fireAspectLevel = BigSwordsR.getItemEnchantmentLevel(attackerWeapon, Enchantments.FIRE_ASPECT);
-                    if (fireAspectLevel > 0) {
-                        event.setShieldDamage(0);
-                        playSound(level, player, SoundEvents.FIRE_EXTINGUISH);
-                    }
+                if (fireAspectLevel > 0 || soulFireAspectLevel > 0) {
+                    event.setShieldDamage(0);
+                    playSound(level, player, SoundEvents.FIRE_EXTINGUISH);
                 }
                 if (sourceEntity instanceof Fireball || (sourceEntity instanceof Projectile projectile && projectile.isOnFire())) {
                     event.setShieldDamage(0);
@@ -124,7 +130,7 @@ public class ShieldMechanics {
             boolean isGildedIronShield = shield.is(BSItems.GILDED_IRON_SHIELD);
             if ((isIronShield || isGildedIronShield) && (damageSource.is(DamageTypes.EXPLOSION) || damageSource.is(DamageTypes.PLAYER_EXPLOSION))) {
                 // Perk
-                float newShieldDamage = isGildedIronShield ? 0 : (isIronShield ? shieldDamage / 2 : shieldDamage);
+                float newShieldDamage = isGildedIronShield ? 0 : shieldDamage / 2;
                 event.setShieldDamage(newShieldDamage);
             }
 
@@ -318,7 +324,7 @@ public class ShieldMechanics {
         }
     }
 
-    private static void setNearestTarget(Mob mob, Player blockingPlayer) {
+    public static void setNearestTarget(Mob mob, Player blockingPlayer) {
         double SEARCH_RANGE = 16.0;
         Level level = mob.level();
         AABB boundingBox = new AABB(
