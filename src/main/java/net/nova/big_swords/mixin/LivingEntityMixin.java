@@ -14,8 +14,8 @@ import net.minecraft.entity.mob.EndermiteEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.world.World;
-import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.init.BSItems;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -42,15 +42,11 @@ public abstract class LivingEntityMixin extends Entity {
             boolean isGildedStoneShield = itemStack.isOf(BSItems.GILDED_STONE_SHIELD);
             if ((isStoneShield || isGildedStoneShield)) {
                 if (attacker instanceof LivingEntity livingAttacker) {
-                    ItemStack attackerWeapon = livingAttacker.getWeaponStack();
-                    int fireAspectLevel = attackerWeapon.getEnchantments().getLevel(BigSwordsR.getEnchantment(this.getWorld(), Enchantments.FIRE_ASPECT));
-                    if (fireAspectLevel > 0) {
-                        return false;
-                    }
+                    int fireAspectLevel = attacker instanceof LivingEntity livingEntity ? livingEntity.getWeaponStack().getEnchantments().getLevel(livingAttacker.getWorld().getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(Enchantments.FIRE_ASPECT)) : 0;
+                    if (fireAspectLevel > 0) return false;
                 }
-                if (entity instanceof FireballEntity || (entity instanceof ProjectileEntity projectile && projectile.isOnFire())) {
+                if (entity instanceof FireballEntity || (entity instanceof ProjectileEntity projectile && projectile.isOnFire()))
                     return false;
-                }
             }
         }
         return true;
@@ -69,20 +65,15 @@ public abstract class LivingEntityMixin extends Entity {
             if ((isPatchworkShield || isGildedPatchworkShield)) {
                 // Weakness
                 float weaknessChance = isGildedPatchworkShield ? 0.25f : 0.5f;
-                if (randomChanceE < weaknessChance) {
-                    return false;
-                }
+                if (randomChanceE < weaknessChance) return false;
             }
 
             // Ender Shields
             boolean isEnderShield = itemStack.isOf(BSItems.ENDER_SHIELD);
             boolean isGildedEnderShield = itemStack.isOf(BSItems.GILDED_ENDER_SHIELD);
-            if ((isEnderShield || isGildedEnderShield)) {
-                // Weakness
-                if (attacker instanceof EndermanEntity || attacker instanceof EnderDragonEntity || attacker instanceof EndermiteEntity) {
+            if ((isEnderShield || isGildedEnderShield)) // Weakness
+                if (attacker instanceof EndermanEntity || attacker instanceof EnderDragonEntity || attacker instanceof EndermiteEntity)
                     return false;
-                }
-            }
         }
         return original;
     }

@@ -4,7 +4,6 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.mob.MobEntity;
@@ -14,9 +13,6 @@ import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTables;
 import net.minecraft.loot.condition.RandomChanceLootCondition;
 import net.minecraft.loot.entry.ItemEntry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
@@ -40,8 +36,8 @@ public class BigSwordsR implements ModInitializer {
         BSAttributes.initialize();
         BSDataComponents.initialize();
         BSEnchantmentEffects.initialize();
-        BSBlocks.initialize();
         BSItems.initialize();
+        BSBlocks.initialize();
         CreativeTab.initialize();
 
         ShieldMechanics.register();
@@ -72,10 +68,6 @@ public class BigSwordsR implements ModInitializer {
             entity.equipStack(EquipmentSlot.MAINHAND, stack);
             entity.setEquipmentDropChance(EquipmentSlot.MAINHAND, 0.05F);
         }
-    }
-
-    public static RegistryEntry<Enchantment> getEnchantment(World level, RegistryKey<Enchantment> enchantment) {
-        return level.getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(enchantment);
     }
 
     public static void playSound(World level, PlayerEntity player, SoundEvent sound) {
