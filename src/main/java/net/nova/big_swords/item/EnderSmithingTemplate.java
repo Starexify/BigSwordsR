@@ -44,7 +44,7 @@ public class EnderSmithingTemplate extends SmithingTemplateItem {
             Identifier.of("container/slot/pickaxe"),
             BigSwordsR.rl("container/slot/big_sword")
     ));
-    public static final Identifier EYE_SLOT = Identifier.ofVanilla("container/slot/eye");
+    public static final Identifier EYE_SLOT = BigSwordsR.rl("container/slot/eye");
 
     public EnderSmithingTemplate(Text appliesTo, Text ingredients, Text baseSlotDescription, Text additionsSlotDescription, List<Identifier> emptyBaseSlotTextures, List<Identifier> emptyAdditionsSlotTextures, Settings settings) {
         super(appliesTo, ingredients, baseSlotDescription, additionsSlotDescription, emptyBaseSlotTextures, emptyAdditionsSlotTextures, settings);
