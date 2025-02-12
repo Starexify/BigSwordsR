@@ -36,8 +36,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.nova.big_swords.init.BSItems;
 
-import java.util.Random;
-
 import static net.nova.big_swords.BigSwordsR.MODID;
 import static net.nova.big_swords.BigSwordsR.playSound;
 
@@ -57,12 +55,12 @@ public class ShieldMechanics {
             double randomChanceE = Math.random();
             Level level = player.level();
             RandomSource random = level.getRandom();
-            int fireAspectLevel = attacker instanceof LivingEntity livingEntity ? livingEntity.getMainHandItem().getEnchantmentLevel(player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FIRE_ASPECT)) : 0;
+            int fireAspectLevel = attacker instanceof LivingEntity livingEntity ? livingEntity.getWeaponItem().getEnchantmentLevel(player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FIRE_ASPECT)) : 0;
             int soulFireAspectLevel = attacker instanceof LivingEntity livingEntity ?
                     player.level().registryAccess()
                             .lookupOrThrow(Registries.ENCHANTMENT)
                             .get(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.withDefaultNamespace("soul_fire_aspect")))
-                            .map(enchantment -> livingEntity.getMainHandItem().getEnchantmentLevel(enchantment))
+                            .map(enchantment -> livingEntity.getWeaponItem().getEnchantmentLevel(enchantment))
                             .orElse(0)
                     : 0;
 
@@ -83,9 +81,7 @@ public class ShieldMechanics {
                     }
 
                     // Weakness
-                    if (arrow.isOnFire()) {
-                        event.setShieldDamage(shieldDamage * 4);
-                    }
+                    if (arrow.isOnFire()) event.setShieldDamage(shieldDamage * 4);
                 }
 
                 // Weakness (Comp with Soul fire'd)
@@ -150,9 +146,7 @@ public class ShieldMechanics {
                             newProjectile.setPos(player.getX(), originalProjectile.getY(), player.getZ());
                             newProjectile.setOwner(player);
 
-                            if (wasOnFire) {
-                                newProjectile.igniteForSeconds(100);
-                            }
+                            if (wasOnFire) newProjectile.igniteForSeconds(100);
 
                             Vec3 directionToAttacker = attacker.position().subtract(player.position()).normalize();
 
@@ -201,11 +195,7 @@ public class ShieldMechanics {
                     double angle = (randomChance * 90 - 45) * Math.PI / 180;
 
                     // Calculate the teleport vector
-                    Vec3 randomVector = new Vec3(
-                            Math.cos(angle),
-                            0,
-                            Math.sin(angle)
-                    ).normalize();
+                    Vec3 randomVector = new Vec3(Math.cos(angle), 0, Math.sin(angle)).normalize();
 
                     double blendFactor = 0.7; // Adjust this value to control how much it follows the player's look direction
                     Vec3 teleportVector = playerFacing.scale(blendFactor).add(randomVector.scale(1 - blendFactor)).normalize();
@@ -222,9 +212,8 @@ public class ShieldMechanics {
                 }
 
                 // Weakness
-                if (attacker instanceof EnderMan || attacker instanceof EnderDragon || attacker instanceof Endermite) {
+                if (attacker instanceof EnderMan || attacker instanceof EnderDragon || attacker instanceof Endermite)
                     event.setBlocked(false);
-                }
             }
 
             // Quartz Shields
@@ -252,15 +241,14 @@ public class ShieldMechanics {
             if ((isPatchworkShield || isGildedPatchworkShield)) {
                 // Perk
                 float perkChance = isGildedPatchworkShield ? 0.5f : 0.25f;
-                if (randomChance < perkChance && attacker instanceof LivingEntity livingAttacker) {
+                if (randomChance < perkChance && attacker instanceof LivingEntity livingAttacker)
                     livingAttacker.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10 * 20, 0, false, false));
-                }
+
 
                 // Weakness
                 float weaknessChance = isGildedPatchworkShield ? 0.25f : 0.5f;
-                if (randomChanceE < weaknessChance) {
-                    event.setBlocked(false);
-                }
+                if (randomChanceE < weaknessChance) event.setBlocked(false);
+
             }
 
             // Skull Shields
@@ -269,16 +257,11 @@ public class ShieldMechanics {
             if ((isSkullShield || isGildedSkullShield)) {
                 // Perk
                 float perkChance = isGildedPatchworkShield ? 0.25f : 0.15f;
-                if (randomChance < perkChance && attacker instanceof Mob mob) {
-                    setNearestTarget(mob, player);
-
-                }
+                if (randomChance < perkChance && attacker instanceof Mob mob) setNearestTarget(mob, player);
 
                 // Weakness
                 float weaknessChance = isGildedPatchworkShield ? 0.15f : 0.35f;
-                if (randomChance < weaknessChance) {
-                    event.setShieldDamage(shieldDamage * 3);
-                }
+                if (randomChance < weaknessChance) event.setShieldDamage(shieldDamage * 3);
             }
 
             // Biomass Shields
@@ -346,11 +329,6 @@ public class ShieldMechanics {
             }
         }
 
-        // Set the nearest non-player entity as the target
-        if (nearestEntity != null) {
-            mob.setTarget(nearestEntity);
-        } else {
-            mob.setTarget(null); // Optional: Clear target if no valid target is found
-        }
+        mob.setTarget(nearestEntity);
     }
 }
