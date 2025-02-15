@@ -6,7 +6,8 @@
     "EntityMixin",
     "LivingEntityMixin",
     "MiningToolItemMixin",
-    "PlayerEntityMixin"
+    "PlayerEntityMixin",
+    "SmithingTemplateItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1
