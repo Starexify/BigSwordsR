@@ -3,7 +3,8 @@
   "package": "net.nova.big_swords.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "DiggerItemMixin"
+    "DiggerItemMixin",
+    "SmithingTemplateItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

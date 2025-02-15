@@ -44,7 +44,6 @@ public class EnderSmithingTemplate extends SmithingTemplateItem {
             ResourceLocation.withDefaultNamespace("container/slot/shovel"),
             ResourceLocation.withDefaultNamespace("container/slot/pickaxe"),
             BigSwordsR.rl("container/slot/big_sword")
-
     ));
 
     public static final ResourceLocation EYE_SLOT = BigSwordsR.rl("container/slot/eye");
