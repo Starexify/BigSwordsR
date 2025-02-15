@@ -1,7 +1,7 @@
 package net.nova.big_swords.mixin;
 
 import com.google.common.collect.ImmutableList;
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.SmithingTemplateItem;
 import net.nova.big_swords.BigSwordsR;
@@ -20,7 +20,7 @@ public class SmithingTemplateItemMixin {
     @Unique
     private static final ResourceLocation EMPTY_SLOT_BIG_SWORD = BigSwordsR.rl("container/slot/big_sword");
 
-    @ModifyExpressionValue(method = "createNetheriteUpgradeIconList", at = @At(value = "INVOKE", target = "Ljava/util/List;of(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/util/List;"))
+    @ModifyReturnValue(method = "createNetheriteUpgradeIconList", at = @At("RETURN"))
     private static List<ResourceLocation> redirectListCreation(List<ResourceLocation> original) {
         return ImmutableList.<ResourceLocation>builder()
                 .addAll(original)
