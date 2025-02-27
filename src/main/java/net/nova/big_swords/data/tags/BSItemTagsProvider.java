@@ -3,8 +3,10 @@ package net.nova.big_swords.data.tags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Tags;
 
@@ -13,8 +15,8 @@ import java.util.concurrent.CompletableFuture;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class BSItemTagsProvider extends ItemTagsProvider {
-    public BSItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, BSBlockTagsProvider provider) {
-        super(output, lookupProvider, provider.contentsGetter(), MODID);
+    public BSItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, CompletableFuture<TagLookup<Block>> provider) {
+        super(output, lookupProvider, provider, MODID);
     }
 
     @Override
