@@ -4,7 +4,9 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
@@ -13,6 +15,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.nova.big_swords.init.BSItems;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -35,7 +38,7 @@ public class TieredShield extends ShieldItem {
         this.toolMaterial = toolMaterial;
     }
 
-    @Override
+/*    @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
 
@@ -45,18 +48,18 @@ public class TieredShield extends ShieldItem {
         pTooltipComponents.add(Component.translatable(perk).withStyle(ChatFormatting.GRAY));
         pTooltipComponents.add(Component.translatable(weakness).withStyle(ChatFormatting.GRAY));
         pTooltipComponents.add(Component.empty());
-    }
+    }*/
 
     @Override
-    public void inventoryTick(ItemStack pStack, Level pLevel, Entity entity, int pSlotId, boolean pIsSelected) {
+    public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slotId) {
         // Iron Shields Weakness
         if (entity instanceof LivingEntity livingEntity && livingEntity.isInWater()) {
-            if (pStack.getItem() == BSItems.IRON_SHIELD.get() || pStack.getItem() == BSItems.GILDED_IRON_SHIELD.get()) {
-                boolean isIronShieldInMainHand = livingEntity.getMainHandItem() == pStack;
-                boolean isIronShieldInOffHand = livingEntity.getOffhandItem() == pStack;
+            if (stack.getItem() == BSItems.IRON_SHIELD.get() || stack.getItem() == BSItems.GILDED_IRON_SHIELD.get()) {
+                boolean isIronShieldInMainHand = livingEntity.getMainHandItem() == stack;
+                boolean isIronShieldInOffHand = livingEntity.getOffhandItem() == stack;
 
-                if ((isIronShieldInMainHand || isIronShieldInOffHand) && pStack.isDamageableItem()) {
-                    pStack.hurtAndBreak(1, livingEntity, livingEntity.getEquipmentSlotForItem(pStack));
+                if ((isIronShieldInMainHand || isIronShieldInOffHand) && stack.isDamageableItem()) {
+                    stack.hurtAndBreak(1, livingEntity, livingEntity.getEquipmentSlotForItem(stack));
                 }
             }
         }

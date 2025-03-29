@@ -22,14 +22,14 @@ public class BloodVial extends Item {
         super(properties.stacksTo(1));
     }
 
-    @Override
+/*    @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         String bloodText = getBloodLevel(stack) == 0 ? "Empty" : "Blood Level: " + getBloodLevel(stack) + " / " + getMaxBloodLevel();
 
         tooltipComponents.add(Component.empty());
         tooltipComponents.add(Component.literal(bloodText).withStyle(ChatFormatting.GRAY));
-    }
+    }*/
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand usedHand) {

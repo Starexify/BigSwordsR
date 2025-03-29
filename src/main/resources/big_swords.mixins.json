@@ -2,10 +2,7 @@
   "required": true,
   "package": "net.nova.big_swords.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "DiggerItemMixin",
-    "SmithingTemplateItemMixin"
-  ],
+  "mixins": ["HoeItemMixin", "SmithingTemplateItemMixin", "ToolMaterialAccessor"],
   "injectors": {
     "defaultRequire": 1
   }

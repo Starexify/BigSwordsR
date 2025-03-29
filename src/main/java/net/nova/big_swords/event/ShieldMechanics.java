@@ -50,7 +50,7 @@ public class ShieldMechanics {
             Entity sourceEntity = event.getDamageSource().getDirectEntity();
             DamageSource damageSource = event.getDamageSource();
             float blockedDamage = event.getBlockedDamage();
-            float shieldDamage = event.shieldDamage();
+            int shieldDamage = event.shieldDamage();
             double randomChance = Math.random();
             double randomChanceE = Math.random();
             Level level = player.level();
@@ -115,20 +115,17 @@ public class ShieldMechanics {
 
                 // Weakness
                 if ((damageSource.is(DamageTypes.EXPLOSION) || damageSource.is(DamageTypes.PLAYER_EXPLOSION))) {
-                    float damageToPlayer = blockedDamage / 3;
+                    int damageToPlayer = (int) blockedDamage / 3;
                     event.setBlockedDamage(blockedDamage - damageToPlayer);
                     event.setShieldDamage(shieldDamage + damageToPlayer);
                 }
             }
 
-            // Iron Shields
+            // Iron Shields Perk
             boolean isIronShield = shield.is(BSItems.IRON_SHIELD);
             boolean isGildedIronShield = shield.is(BSItems.GILDED_IRON_SHIELD);
-            if ((isIronShield || isGildedIronShield) && (damageSource.is(DamageTypes.EXPLOSION) || damageSource.is(DamageTypes.PLAYER_EXPLOSION))) {
-                // Perk
-                float newShieldDamage = isGildedIronShield ? 0 : shieldDamage / 2;
-                event.setShieldDamage(newShieldDamage);
-            }
+            if ((isIronShield || isGildedIronShield) && (damageSource.is(DamageTypes.EXPLOSION) || damageSource.is(DamageTypes.PLAYER_EXPLOSION)))
+                event.setShieldDamage(isGildedIronShield ? 0 : shieldDamage / 2);
 
             // Diamond Shields
             boolean isDiamondShield = shield.is(BSItems.DIAMOND_SHIELD);

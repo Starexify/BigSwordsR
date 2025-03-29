@@ -1,4 +1,4 @@
-version:4189
+version:4325
 ao:true
 biomeBlendRadius:2
 enableVsync:true
@@ -51,7 +51,7 @@ damageTiltStrength:1.0
 highContrast:false
 highContrastBlockOutline:false
 narratorHotkey:true
-resourcePacks:["vanilla","mod_resources"]
+resourcePacks:["vanilla"]
 incompatibleResourcePacks:[]
 lastServer:
 lang:en_us
@@ -89,6 +89,7 @@ panoramaScrollSpeed:1.0
 telemetryOptInExtra:false
 onboardAccessibility:false
 menuBackgroundBlurriness:5
+startedCleanly:true
 key_key.attack:key.mouse.left
 key_key.use:key.mouse.right
 key_key.forward:key.keyboard.w
