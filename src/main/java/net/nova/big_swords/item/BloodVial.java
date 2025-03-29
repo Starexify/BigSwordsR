@@ -1,21 +1,17 @@
 package net.nova.big_swords.item;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 
-import java.util.List;
-
 public class BloodVial extends Item {
+    public static final int MIN_BLOOD_LEVEL = 1;
     public static final int MAX_BLOOD_LEVEL = 9;
 
     public BloodVial(Properties properties) {
@@ -34,18 +30,14 @@ public class BloodVial extends Item {
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
         ItemStack bloodVialStack = player.getItemInHand(usedHand);
-        ItemStack otherHandStack = player.getItemInHand(usedHand == InteractionHand.MAIN_HAND ?
-                InteractionHand.OFF_HAND :
-                InteractionHand.MAIN_HAND);
+        ItemStack otherHandStack = player.getItemInHand(usedHand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
 
         if (bloodVialStack.getItem() instanceof BloodVial) {
-            if (otherHandStack.is(Items.SLIME_BALL) && getBloodLevel(bloodVialStack) >= 1) {
+            if (otherHandStack.is(Items.SLIME_BALL) && getBloodLevel(bloodVialStack) >= MIN_BLOOD_LEVEL)
                 return processInteraction(level, player, bloodVialStack, otherHandStack, BSItems.CREEP_BALL.get());
-            }
 
-            if (otherHandStack.is(Items.TORCHFLOWER_SEEDS) && getBloodLevel(bloodVialStack) >= 1) {
+            if (otherHandStack.is(Items.TORCHFLOWER_SEEDS) && getBloodLevel(bloodVialStack) >= MIN_BLOOD_LEVEL)
                 return processInteraction(level, player, bloodVialStack, otherHandStack, BSItems.BIOMASS_SEED.get());
-            }
         }
 
         return super.use(level, player, usedHand);
@@ -62,10 +54,7 @@ public class BloodVial extends Item {
     }
 
     public void incrementBloodLevel(ItemStack stack) {
-        int currentLevel = getBloodLevel(stack);
-        if (currentLevel < MAX_BLOOD_LEVEL) {
-            stack.set(BSDataComponents.BLOOD_LEVEL, currentLevel + 1);
-        }
+        if (getBloodLevel(stack) < MAX_BLOOD_LEVEL) stack.set(BSDataComponents.BLOOD_LEVEL, getBloodLevel(stack) + 1);
     }
 
     public static void incrementBloodVialInBothHands(Player player) {
@@ -75,16 +64,10 @@ public class BloodVial extends Item {
 
     public static void incrementBloodVialInHand(Player player, InteractionHand hand) {
         ItemStack handStack = player.getItemInHand(hand);
-        if (handStack.getItem() instanceof BloodVial bloodVialItem) {
-            bloodVialItem.incrementBloodLevel(handStack);
-        }
+        if (handStack.getItem() instanceof BloodVial bloodVialItem) bloodVialItem.incrementBloodLevel(handStack);
     }
 
     public static int getBloodLevel(ItemStack stack) {
         return stack.getOrDefault(BSDataComponents.BLOOD_LEVEL, 0);
-    }
-
-    public static int getMaxBloodLevel() {
-        return MAX_BLOOD_LEVEL;
     }
 }

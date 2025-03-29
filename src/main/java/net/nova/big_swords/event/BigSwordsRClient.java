@@ -12,10 +12,7 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.client.event.RegisterRangeSelectItemModelPropertyEvent;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
-import net.nova.big_swords.BigSwordsR;
-import net.nova.big_swords.client.renderer.item.BloodLevelModelProperty;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -50,10 +47,5 @@ public class BigSwordsRClient {
                 }
             });
         });
-    }
-
-    @SubscribeEvent
-    public static void addItemProperty(RegisterRangeSelectItemModelPropertyEvent event) {
-        event.register(BigSwordsR.rl("blood_level"), BloodLevelModelProperty.MAP_CODEC);
     }
 }

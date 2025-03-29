@@ -1,14 +1,20 @@
 package net.nova.big_swords.init;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.nova.big_swords.item.*;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
@@ -92,28 +98,226 @@ public class BSItems {
     public static DeferredItem<Item> SOUL_REAPER = ITEMS.registerItem("soul_reaper", properties -> new ScytheItem(BSToolMaterial.REAPER, 1, -2.0F, 9F, 10F, properties.rarity(Rarity.EPIC).fireResistant()));
 
     // Shields
-    public static DeferredItem<Item> WOODEN_SHIELD = ITEMS.registerItem("wooden_shield", properties -> new TieredShield(ToolMaterial.WOOD, properties, 2));
-    public static DeferredItem<Item> GILDED_WOODEN_SHIELD = ITEMS.registerItem("gilded_wooden_shield", properties -> new TieredShield(ToolMaterial.WOOD, properties, 4));
-    public static DeferredItem<Item> STONE_SHIELD = ITEMS.registerItem("stone_shield", properties -> new TieredShield(ToolMaterial.STONE, properties));
-    public static DeferredItem<Item> GILDED_STONE_SHIELD = ITEMS.registerItem("gilded_stone_shield", properties -> new TieredShield(ToolMaterial.STONE, properties, 2));
-    public static DeferredItem<Item> IRON_SHIELD = ITEMS.registerItem("iron_shield", properties -> new TieredShield(ToolMaterial.IRON, properties));
-    public static DeferredItem<Item> GILDED_IRON_SHIELD = ITEMS.registerItem("gilded_iron_shield", properties -> new TieredShield(ToolMaterial.IRON, properties, 1, ToolMaterial.IRON.durability() / 2));
-    public static DeferredItem<Item> DIAMOND_SHIELD = ITEMS.registerItem("diamond_shield", properties -> new TieredShield(ToolMaterial.DIAMOND, properties, 1, -(ToolMaterial.DIAMOND.durability() / 2)));
-    public static DeferredItem<Item> GILDED_DIAMOND_SHIELD = ITEMS.registerItem("gilded_diamond_shield", properties -> new TieredShield(ToolMaterial.DIAMOND, properties, 1, -653));
-    public static DeferredItem<Item> NETHERITE_SHIELD = ITEMS.registerItem("netherite_shield", properties -> new TieredShield(ToolMaterial.NETHERITE, properties, 1, -(ToolMaterial.NETHERITE.durability() / 2)));
-    public static DeferredItem<Item> GILDED_NETHERITE_SHIELD = ITEMS.registerItem("gilded_netherite_shield", properties -> new TieredShield(ToolMaterial.NETHERITE, properties, 1, -793));
-    public static DeferredItem<Item> ENDER_SHIELD = ITEMS.registerItem("ender_shield", properties -> new TieredShield(BSToolMaterial.ENDER, properties, 1, -(BSToolMaterial.ENDER.durability() / 2)));
-    public static DeferredItem<Item> GILDED_ENDER_SHIELD = ITEMS.registerItem("gilded_ender_shield", properties -> new TieredShield(BSToolMaterial.ENDER, properties, 1, -1190));
-    public static DeferredItem<Item> QUARTZ_SHIELD = ITEMS.registerItem("quartz_shield", properties -> new TieredShield(BSToolMaterial.QUARTZ, properties));
-    public static DeferredItem<Item> GILDED_QUARTZ_SHIELD = ITEMS.registerItem("gilded_quartz_shield", properties -> new TieredShield(BSToolMaterial.QUARTZ, properties, 2));
-    public static DeferredItem<Item> PATCHWORK_SHIELD = ITEMS.registerItem("patchwork_shield", properties -> new TieredShield(BSToolMaterial.PATCHWORK, properties, 2));
-    public static DeferredItem<Item> GILDED_PATCHWORK_SHIELD = ITEMS.registerItem("gilded_patchwork_shield", properties -> new TieredShield(BSToolMaterial.PATCHWORK, properties, 3));
-    public static DeferredItem<Item> SKULL_SHIELD = ITEMS.registerItem("skull_shield", properties -> new TieredShield(BSToolMaterial.SKULL, properties, 2));
-    public static DeferredItem<Item> GILDED_SKULL_SHIELD = ITEMS.registerItem("gilded_skull_shield", properties -> new TieredShield(BSToolMaterial.SKULL, properties, 3, BSToolMaterial.SKULL.durability() / 2));
-    public static DeferredItem<Item> BIOMASS_SHIELD = ITEMS.registerItem("biomass_shield", properties -> new TieredShield(BSToolMaterial.BIOMASS, properties, 1, BSToolMaterial.BIOMASS.durability() / 2));
-    public static DeferredItem<Item> GILDED_BIOMASS_SHIELD = ITEMS.registerItem("gilded_biomass_shield", properties -> new TieredShield(BSToolMaterial.BIOMASS, properties, 2));
-    public static DeferredItem<Item> LIVINGMETAL_SHIELD = ITEMS.registerItem("livingmetal_shield", properties -> new TieredShield(BSToolMaterial.LIVINGMETAL, properties, 1));
-    public static DeferredItem<Item> GILDED_LIVINGMETAL_SHIELD = ITEMS.registerItem("gilded_livingmetal_shield", properties -> new TieredShield(BSToolMaterial.LIVINGMETAL, properties, 2, BSToolMaterial.LIVINGMETAL.durability() / 2));
+    public static DeferredItem<Item> WOODEN_SHIELD = ITEMS.registerItem("wooden_shield", properties -> new TieredShield(ToolMaterial.WOOD,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 2));
+    public static DeferredItem<Item> GILDED_WOODEN_SHIELD = ITEMS.registerItem("gilded_wooden_shield", properties -> new TieredShield(ToolMaterial.WOOD,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 4));
+    public static DeferredItem<Item> STONE_SHIELD = ITEMS.registerItem("stone_shield", properties -> new TieredShield(ToolMaterial.STONE,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            ))));
+    public static DeferredItem<Item> GILDED_STONE_SHIELD = ITEMS.registerItem("gilded_stone_shield", properties -> new TieredShield(ToolMaterial.STONE,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 2));
+    public static DeferredItem<Item> IRON_SHIELD = ITEMS.registerItem("iron_shield", properties -> new TieredShield(ToolMaterial.IRON,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            ))));
+    public static DeferredItem<Item> GILDED_IRON_SHIELD = ITEMS.registerItem("gilded_iron_shield", properties -> new TieredShield(ToolMaterial.IRON,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 1, ToolMaterial.IRON.durability() / 2));
+    public static DeferredItem<Item> DIAMOND_SHIELD = ITEMS.registerItem("diamond_shield", properties -> new TieredShield(ToolMaterial.DIAMOND,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 1, -(ToolMaterial.DIAMOND.durability() / 2)));
+    public static DeferredItem<Item> GILDED_DIAMOND_SHIELD = ITEMS.registerItem("gilded_diamond_shield", properties -> new TieredShield(ToolMaterial.DIAMOND,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 1, -653));
+    public static DeferredItem<Item> NETHERITE_SHIELD = ITEMS.registerItem("netherite_shield", properties -> new TieredShield(ToolMaterial.NETHERITE,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 1, -(ToolMaterial.NETHERITE.durability() / 2)));
+    public static DeferredItem<Item> GILDED_NETHERITE_SHIELD = ITEMS.registerItem("gilded_netherite_shield", properties -> new TieredShield(ToolMaterial.NETHERITE,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 1, -793));
+    public static DeferredItem<Item> ENDER_SHIELD = ITEMS.registerItem("ender_shield", properties -> new TieredShield(BSToolMaterial.ENDER,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 1, -(BSToolMaterial.ENDER.durability() / 2)));
+    public static DeferredItem<Item> GILDED_ENDER_SHIELD = ITEMS.registerItem("gilded_ender_shield", properties -> new TieredShield(BSToolMaterial.ENDER,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 1, -1190));
+    public static DeferredItem<Item> QUARTZ_SHIELD = ITEMS.registerItem("quartz_shield", properties -> new TieredShield(BSToolMaterial.QUARTZ,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            ))));
+    public static DeferredItem<Item> GILDED_QUARTZ_SHIELD = ITEMS.registerItem("gilded_quartz_shield", properties -> new TieredShield(BSToolMaterial.QUARTZ,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 2));
+    public static DeferredItem<Item> PATCHWORK_SHIELD = ITEMS.registerItem("patchwork_shield", properties -> new TieredShield(BSToolMaterial.PATCHWORK,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 2));
+    public static DeferredItem<Item> GILDED_PATCHWORK_SHIELD = ITEMS.registerItem("gilded_patchwork_shield", properties -> new TieredShield(BSToolMaterial.PATCHWORK,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 3));
+    public static DeferredItem<Item> SKULL_SHIELD = ITEMS.registerItem("skull_shield", properties -> new TieredShield(BSToolMaterial.SKULL,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 2));
+    public static DeferredItem<Item> GILDED_SKULL_SHIELD = ITEMS.registerItem("gilded_skull_shield", properties -> new TieredShield(BSToolMaterial.SKULL,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 3, BSToolMaterial.SKULL.durability() / 2));
+    public static DeferredItem<Item> BIOMASS_SHIELD = ITEMS.registerItem("biomass_shield", properties -> new TieredShield(BSToolMaterial.BIOMASS,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 1, BSToolMaterial.BIOMASS.durability() / 2));
+    public static DeferredItem<Item> GILDED_BIOMASS_SHIELD = ITEMS.registerItem("gilded_biomass_shield", properties -> new TieredShield(BSToolMaterial.BIOMASS,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 2));
+    public static DeferredItem<Item> LIVINGMETAL_SHIELD = ITEMS.registerItem("livingmetal_shield", properties -> new TieredShield(BSToolMaterial.LIVINGMETAL,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 1));
+    public static DeferredItem<Item> GILDED_LIVINGMETAL_SHIELD = ITEMS.registerItem("gilded_livingmetal_shield", properties -> new TieredShield(BSToolMaterial.LIVINGMETAL,
+            properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(
+                    0.25F,
+                    1.0F,
+                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                    Optional.of(DamageTypeTags.BYPASSES_SHIELD),
+                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                    Optional.of(SoundEvents.SHIELD_BREAK)
+            )), 2, BSToolMaterial.LIVINGMETAL.durability() / 2));
 
     // Register
     public static DeferredItem<BlockItem> registerSimpleBlockItem(String name, Supplier<? extends Block> block) {

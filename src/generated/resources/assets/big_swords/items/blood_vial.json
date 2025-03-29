@@ -1,78 +1,69 @@
 {
   "model": {
-    "type": "minecraft:range_dispatch",
-    "entries": [
-      {
-        "model": {
-          "type": "minecraft:model",
-          "model": "big_swords:item/vial"
-        },
-        "threshold": 0.0
-      },
+    "type": "minecraft:select",
+    "cases": [
       {
         "model": {
           "type": "minecraft:model",
           "model": "big_swords:item/blood_vial_1"
         },
-        "threshold": 1.0
+        "when": 1
       },
       {
         "model": {
           "type": "minecraft:model",
           "model": "big_swords:item/blood_vial_2"
         },
-        "threshold": 2.0
+        "when": 2
       },
       {
         "model": {
           "type": "minecraft:model",
           "model": "big_swords:item/blood_vial_3"
         },
-        "threshold": 3.0
+        "when": 3
       },
       {
         "model": {
           "type": "minecraft:model",
           "model": "big_swords:item/blood_vial_4"
         },
-        "threshold": 4.0
+        "when": 4
       },
       {
         "model": {
           "type": "minecraft:model",
           "model": "big_swords:item/blood_vial_5"
         },
-        "threshold": 5.0
+        "when": 5
       },
       {
         "model": {
           "type": "minecraft:model",
           "model": "big_swords:item/blood_vial_6"
         },
-        "threshold": 6.0
+        "when": 6
       },
       {
         "model": {
           "type": "minecraft:model",
           "model": "big_swords:item/blood_vial_7"
         },
-        "threshold": 7.0
+        "when": 7
       },
       {
         "model": {
           "type": "minecraft:model",
           "model": "big_swords:item/blood_vial_8"
         },
-        "threshold": 8.0
-      },
-      {
-        "model": {
-          "type": "minecraft:model",
-          "model": "big_swords:item/blood_vial_9"
-        },
-        "threshold": 9.0
+        "when": 8
       }
     ],
-    "property": "big_swords:blood_level"
+    "component": "big_swords:blood_level",
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "big_swords:item/vial"
+    },
+    "property": "minecraft:component"
   }
 }

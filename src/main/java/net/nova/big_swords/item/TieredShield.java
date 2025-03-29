@@ -1,41 +1,39 @@
 package net.nova.big_swords.item;
 
-import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.chat.Component;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.ToolMaterial;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.level.Level;
 import net.nova.big_swords.init.BSItems;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
 public class TieredShield extends ShieldItem {
-    public final ToolMaterial toolMaterial;
-
     public TieredShield(ToolMaterial toolMaterial, Properties properties) {
-        this(toolMaterial, properties, 1, 0);
+        this(toolMaterial, properties.enchantable(toolMaterial.enchantmentValue())
+                .repairable(toolMaterial.repairItems())
+                .equippableUnswappable(EquipmentSlot.OFFHAND)
+                .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK), 1, 0);
     }
 
     public TieredShield(ToolMaterial toolMaterial, Properties properties, int durabilityMultiplier) {
-        super(properties.durability(toolMaterial.durability() * durabilityMultiplier));
-        this.toolMaterial = toolMaterial;
+        super(properties.durability(toolMaterial.durability() * durabilityMultiplier)
+                .enchantable(toolMaterial.enchantmentValue())
+                .repairable(toolMaterial.repairItems())
+                .equippableUnswappable(EquipmentSlot.OFFHAND)
+                .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK));
     }
 
     public TieredShield(ToolMaterial toolMaterial, Properties properties, int durabilityMultiplier, int additionalDurability) {
         super(properties.durability(toolMaterial.durability() * durabilityMultiplier + additionalDurability)
                 .enchantable(toolMaterial.enchantmentValue())
-                .repairable(toolMaterial.repairItems()));
-        this.toolMaterial = toolMaterial;
+                .repairable(toolMaterial.repairItems())
+                .equippableUnswappable(EquipmentSlot.OFFHAND)
+                .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK));
     }
 
 /*    @Override

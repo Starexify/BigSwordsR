@@ -4,8 +4,8 @@ import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
-import net.minecraft.client.renderer.item.RangeSelectItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
+import net.minecraft.client.renderer.item.properties.select.ComponentContents;
 import net.minecraft.client.renderer.item.properties.select.TrimMaterialProperty;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceKey;
@@ -13,34 +13,34 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.EquipmentAsset;
-import net.minecraft.world.item.equipment.EquipmentAssets;
+import net.minecraft.world.item.equipment.trim.MaterialAssetGroup;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimMaterials;
 import net.nova.big_swords.BigSwordsR;
-import net.nova.big_swords.client.renderer.item.BloodLevelModelProperty;
 import net.nova.big_swords.data.BSTrimMaterials;
 import net.nova.big_swords.equipment.BSEquipmentAssets;
+import net.nova.big_swords.equipment.BSMaterialAssetGroup;
+import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class BSItemModelGenerator extends ItemModelGenerators {
     public static final List<BSItemModelGenerator.TrimMaterialData> TRIM_MATERIAL_MODELS = List.of(
-            new BSItemModelGenerator.TrimMaterialData("quartz", TrimMaterials.QUARTZ, Map.of()),
-            new BSItemModelGenerator.TrimMaterialData("iron", TrimMaterials.IRON, Map.of(EquipmentAssets.IRON, "iron_darker")),
-            new BSItemModelGenerator.TrimMaterialData("netherite", TrimMaterials.NETHERITE, Map.of(EquipmentAssets.NETHERITE, "netherite_darker")),
-            new BSItemModelGenerator.TrimMaterialData("redstone", TrimMaterials.REDSTONE, Map.of()),
-            new BSItemModelGenerator.TrimMaterialData("copper", TrimMaterials.COPPER, Map.of()),
-            new BSItemModelGenerator.TrimMaterialData("gold", TrimMaterials.GOLD, Map.of(EquipmentAssets.GOLD, "gold_darker")),
-            new BSItemModelGenerator.TrimMaterialData("emerald", TrimMaterials.EMERALD, Map.of()),
-            new BSItemModelGenerator.TrimMaterialData("diamond", TrimMaterials.DIAMOND, Map.of(EquipmentAssets.DIAMOND, "diamond_darker")),
-            new BSItemModelGenerator.TrimMaterialData("lapis", TrimMaterials.LAPIS, Map.of()),
-            new BSItemModelGenerator.TrimMaterialData("amethyst", TrimMaterials.AMETHYST, Map.of()),
-            new BSItemModelGenerator.TrimMaterialData("resin", TrimMaterials.RESIN, Map.of()),
-            new BSItemModelGenerator.TrimMaterialData("livingmetal", BSTrimMaterials.LIVINGMETAL, Map.of(BSEquipmentAssets.LIVINGMETAL, "livingmetal_darker"))
+            new BSItemModelGenerator.TrimMaterialData(MaterialAssetGroup.QUARTZ, TrimMaterials.QUARTZ),
+            new BSItemModelGenerator.TrimMaterialData(MaterialAssetGroup.IRON, TrimMaterials.IRON),
+            new BSItemModelGenerator.TrimMaterialData(MaterialAssetGroup.NETHERITE, TrimMaterials.NETHERITE),
+            new BSItemModelGenerator.TrimMaterialData(MaterialAssetGroup.REDSTONE, TrimMaterials.REDSTONE),
+            new BSItemModelGenerator.TrimMaterialData(MaterialAssetGroup.COPPER, TrimMaterials.COPPER),
+            new BSItemModelGenerator.TrimMaterialData(MaterialAssetGroup.GOLD, TrimMaterials.GOLD),
+            new BSItemModelGenerator.TrimMaterialData(MaterialAssetGroup.EMERALD, TrimMaterials.EMERALD),
+            new BSItemModelGenerator.TrimMaterialData(MaterialAssetGroup.DIAMOND, TrimMaterials.DIAMOND),
+            new BSItemModelGenerator.TrimMaterialData(MaterialAssetGroup.LAPIS, TrimMaterials.LAPIS),
+            new BSItemModelGenerator.TrimMaterialData(MaterialAssetGroup.AMETHYST, TrimMaterials.AMETHYST),
+            new BSItemModelGenerator.TrimMaterialData(MaterialAssetGroup.RESIN, TrimMaterials.RESIN),
+            new BSItemModelGenerator.TrimMaterialData(BSMaterialAssetGroup.LIVINGMETAL, BSTrimMaterials.LIVINGMETAL)
     );
 
     public BSItemModelGenerator(ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
@@ -172,12 +172,12 @@ public class BSItemModelGenerator extends ItemModelGenerators {
             default -> "";
         };
 
-        for (BSItemModelGenerator.TrimMaterialData trimMaterial : TRIM_MATERIAL_MODELS) {
-            ResourceLocation trimModelName = modelLocation.withSuffix("_" + trimMaterial.name() + "_trim");
-            ResourceLocation layer1Location = ResourceLocation.withDefaultNamespace("trims/items/" + armorType + "_trim_" + trimMaterial.textureName(equipmentAsset));
+        for (BSItemModelGenerator.TrimMaterialData trimMaterialData : TRIM_MATERIAL_MODELS) {
+            ResourceLocation trimModelName = modelLocation.withSuffix("_" + trimMaterialData.assets().base().suffix() + "_trim");
+            ResourceLocation layer1Location = ResourceLocation.withDefaultNamespace("trims/items/" + armorType + "_trim_" + trimMaterialData.assets().assetId(equipmentAsset).suffix());
 
             generateLayeredItem(trimModelName, textureLocation, layer1Location);
-            list.add(ItemModelUtils.when(trimMaterial.materialKey, ItemModelUtils.plainModel(trimModelName)));
+            list.add(ItemModelUtils.when(trimMaterialData.materialKey, ItemModelUtils.plainModel(trimModelName)));
         }
 
         ItemModel.Unbaked basicItem = ItemModelUtils.plainModel(modelLocation);
@@ -186,28 +186,22 @@ public class BSItemModelGenerator extends ItemModelGenerators {
     }
 
     public void generateBloodVial(Item item) {
-        List<RangeSelectItemModel.Entry> list = new ArrayList<>();
+        List<SelectItemModel.SwitchCase<Integer>> list = new ArrayList<>();
         ItemModel.Unbaked basicModel = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(
-                BigSwordsR.rl("item/vial"),
-                TextureMapping.layer0(BigSwordsR.rl("item/vial")),
-                modelOutput
+                BigSwordsR.rl("item/vial"), TextureMapping.layer0(BigSwordsR.rl("item/vial")), modelOutput
         ));
-        list.add(ItemModelUtils.override(basicModel, 0.0F));
 
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i < 9; i++) {
             ItemModel.Unbaked bloodModel = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(
                     ModelLocationUtils.getModelLocation(item, "_" + i),
                     TextureMapping.layer0(TextureMapping.getItemTexture(item, "_" + (i - 1))),
                     modelOutput
             ));
-            list.add(ItemModelUtils.override(bloodModel, (float) i));
+            list.add(ItemModelUtils.when(i, bloodModel));
         }
-        itemModelOutput.accept(item, ItemModelUtils.rangeSelect(new BloodLevelModelProperty(), list));
+        itemModelOutput.accept(item, ItemModelUtils.select(new ComponentContents<>(BSDataComponents.BLOOD_LEVEL.get()), basicModel, list));
     }
 
-    record TrimMaterialData(String name, ResourceKey<TrimMaterial> materialKey, Map<ResourceKey<EquipmentAsset>, String> overrideArmorMaterials) {
-        public String textureName(ResourceKey<EquipmentAsset> key) {
-            return overrideArmorMaterials.getOrDefault(key, name);
-        }
+    record TrimMaterialData(MaterialAssetGroup assets, ResourceKey<TrimMaterial> materialKey) {
     }
 }
