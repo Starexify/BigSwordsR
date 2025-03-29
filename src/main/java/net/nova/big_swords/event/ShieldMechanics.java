@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -54,6 +55,7 @@ public class ShieldMechanics {
             double randomChance = Math.random();
             double randomChanceE = Math.random();
             Level level = player.level();
+            ServerLevel serverLevel = level instanceof ServerLevel ? (ServerLevel) level : null;
             RandomSource random = level.getRandom();
             int fireAspectLevel = attacker instanceof LivingEntity livingEntity ? livingEntity.getWeaponItem().getEnchantmentLevel(player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FIRE_ASPECT)) : 0;
             int soulFireAspectLevel = attacker instanceof LivingEntity livingEntity ?
@@ -75,9 +77,7 @@ public class ShieldMechanics {
                         arrow.remove(Entity.RemovalReason.DISCARDED);
 
                         ItemStack arrowStack = new ItemStack(Items.ARROW);
-                        if (!player.getInventory().add(arrowStack)) {
-                            player.drop(arrowStack, false);
-                        }
+                        if (!player.getInventory().add(arrowStack)) player.drop(arrowStack, false);
                     }
 
                     // Weakness
@@ -169,7 +169,7 @@ public class ShieldMechanics {
 
                 // Perk
                 if (randomChance < 0.5 && attacker != null) {
-                    attacker.hurt(damageSource, damageToReflect);
+                    attacker.hurtServer(serverLevel, damageSource, damageToReflect);
 
                     // Weakness
                     if (randomChanceE < cooldownChance) {
@@ -241,11 +241,9 @@ public class ShieldMechanics {
                 if (randomChance < perkChance && attacker instanceof LivingEntity livingAttacker)
                     livingAttacker.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 10 * 20, 0, false, false));
 
-
                 // Weakness
                 float weaknessChance = isGildedPatchworkShield ? 0.25f : 0.5f;
                 if (randomChanceE < weaknessChance) event.setBlocked(false);
-
             }
 
             // Skull Shields
