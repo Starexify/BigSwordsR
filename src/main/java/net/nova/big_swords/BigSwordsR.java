@@ -91,7 +91,7 @@ public class BigSwordsR implements ModInitializer {
 
     public static void playSound(Level level, LivingEntity livingEntity, SoundEvent sound) {
         if (!livingEntity.level().isClientSide) {
-            level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), sound, SoundCategory.PLAYERS, 1.0f, 1.0f);
+            level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f);
         }
     }
 

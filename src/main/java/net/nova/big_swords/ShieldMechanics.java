@@ -1,8 +1,6 @@
 package net.nova.big_swords;
 
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.BlocksAttacksComponent;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -20,17 +18,20 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.TeleportTarget;
 import net.minecraft.world.World;
 import net.nova.big_swords.init.BSItems;
+import net.nova.big_swords.mixin.ShieldDamageAccessor;
 
-import java.util.Random;
 import java.util.Set;
 
 import static net.nova.big_swords.BigSwordsR.playSound;
@@ -41,16 +42,22 @@ public class ShieldMechanics {
     public static void register() {
         ServerLivingEntityEvents.AFTER_DAMAGE.register((entity, damageSource, baseDamageTaken, damageTaken, blocked) -> {
             if (entity instanceof PlayerEntity player && player.isBlocking()) {
-                ItemStack shield = entity.getBlockingItem();
-                BlocksAttacksComponent blockingComponent = shield.get(DataComponentTypes.BLOCKS_ATTACKS);
-
+                ItemStack shield = player.getBlockingItem();
                 Entity attacker = damageSource.getAttacker();
                 Entity sourceEntity = damageSource.getSource();
                 double randomChance = Math.random();
                 double randomChanceE = Math.random();
-                Random random = new Random();
                 if (blockedDamage.get() == null) blockedDamage.set(0);
-                World level = entity.getWorld();
+                World level = player.getWorld();
+                Random random = level.getRandom();
+                int fireAspectLevel = attacker instanceof LivingEntity livingEntity ? livingEntity.getWeaponStack().getEnchantments().getLevel(level.getRegistryManager().getOrThrow(RegistryKeys.ENCHANTMENT).getOrThrow(Enchantments.FIRE_ASPECT)) : 0;
+                int soulFireAspectLevel = attacker instanceof LivingEntity livingEntity ?
+                        level.getRegistryManager()
+                                .getOrThrow(RegistryKeys.ENCHANTMENT)
+                                .getEntry(Identifier.of("soul_fire_aspect"))
+                                .map(enchantment -> livingEntity.getWeaponStack().getEnchantments().getLevel(enchantment))
+                                .orElse(0)
+                        : 0;
 
                 // Wooden Shields
                 boolean isWoodenShield = shield.isOf(BSItems.WOODEN_SHIELD);
@@ -63,31 +70,26 @@ public class ShieldMechanics {
                             arrow.remove(Entity.RemovalReason.DISCARDED);
 
                             ItemStack arrowStack = new ItemStack(Items.ARROW);
-                            if (!player.giveItemStack(arrowStack)) {
-                                player.dropItem(arrowStack, false);
-                            }
+                            if (!player.giveItemStack(arrowStack)) player.dropItem(arrowStack, false);
                         }
 
                         // Weakness
-                        if (arrow.isOnFire()) {
-                            //blockingComponent.onShieldHit(level, shield, entity, );
-                            //player.damageShield(blockedDamage.get() * 4);
-                        }
+                        if (arrow.isOnFire()) ((ShieldDamageAccessor) player).big_swords$damageShield(blockedDamage.get() * 4);
                     }
 
                     // Weakness
-                    if (attacker instanceof LivingEntity livingAttacker) {
-                        ItemStack attackerWeapon = livingAttacker.getWeaponStack();
-                        int fireAspectLevel = attackerWeapon.getEnchantments().getLevel(BigSwordsR.getEnchantment(level, Enchantments.FIRE_ASPECT));
-                        switch (fireAspectLevel) {
-                            case 1:
-                                //player.damageShield(blockedDamage.get() * 3);
-                                break;
-                            case 2:
-                                //player.damageShield(blockedDamage.get() * 5);
-                                break;
-                        }
-                    }
+                    if (fireAspectLevel > 0) ((ShieldDamageAccessor) player).big_swords$damageShield(blockedDamage.get() * switch (fireAspectLevel) {
+                        case 1 -> 3;
+                        case 2 -> 5;
+                        default -> 1;
+                    });
+
+                    if (soulFireAspectLevel > 0)
+                        ((ShieldDamageAccessor) player).big_swords$damageShield(blockedDamage.get() * switch (soulFireAspectLevel) {
+                            case 1 -> 6;
+                            case 2 -> 10;
+                            default -> 1;
+                        });
                 }
 
                 // Stone Shields
@@ -95,25 +97,20 @@ public class ShieldMechanics {
                 boolean isGildedStoneShield = shield.isOf(BSItems.GILDED_STONE_SHIELD);
                 if (isStoneShield || isGildedStoneShield) {
                     // Perk
-                    if (attacker instanceof LivingEntity livingAttacker) {
-                        ItemStack attackerWeapon = livingAttacker.getWeaponStack();
-                        int fireAspectLevel = attackerWeapon.getEnchantments().getLevel(BigSwordsR.getEnchantment(level, Enchantments.FIRE_ASPECT));
-                        if (fireAspectLevel > 0) {
-                            playSound(level, entity, SoundEvents.BLOCK_FIRE_EXTINGUISH);
-                        }
-                    }
+                    if (fireAspectLevel > 0) playSound(level, player, SoundEvents.BLOCK_FIRE_EXTINGUISH);
+
                     if (sourceEntity instanceof FireballEntity || (sourceEntity instanceof ProjectileEntity projectile && projectile.isOnFire())) {
                         sourceEntity.remove(Entity.RemovalReason.DISCARDED);
-                        playSound(level, entity, SoundEvents.BLOCK_FIRE_EXTINGUISH);
+                        playSound(level, player, SoundEvents.BLOCK_FIRE_EXTINGUISH);
                     }
 
                     // Weakness
                     if ((damageSource.isOf(DamageTypes.EXPLOSION) || damageSource.isOf(DamageTypes.PLAYER_EXPLOSION))) {
                         int damageToPlayer = blockedDamage.get() / 3;
                         if (level instanceof ServerWorld serverWorld) {
-                            entity.damage(serverWorld, damageSource, damageToPlayer);
+                            player.damage(serverWorld, damageSource, damageToPlayer);
                         }
-                        //player.damageShield(blockedDamage.get() + damageToPlayer);
+                        ((ShieldDamageAccessor) player).big_swords$damageShield(blockedDamage.get() + damageToPlayer);
                     }
                 }
 
@@ -122,8 +119,8 @@ public class ShieldMechanics {
                 boolean isGildedIronShield = shield.isOf(BSItems.GILDED_IRON_SHIELD);
                 if ((isIronShield || isGildedIronShield) && (damageSource.isOf(DamageTypes.EXPLOSION) || damageSource.isOf(DamageTypes.PLAYER_EXPLOSION))) {
                     // Perk
-                    int newShieldDamage = isGildedIronShield ? 0 : (isIronShield ? blockedDamage.get() / 2 : blockedDamage.get());
-                    // player.damageShield(newShieldDamage);
+                    int newShieldDamage = isGildedIronShield ? 0 : blockedDamage.get() / 2;
+                    ((ShieldDamageAccessor) player).big_swords$damageShield(newShieldDamage);
                 }
 
                 // Diamond Shields
@@ -139,14 +136,14 @@ public class ShieldMechanics {
                             ProjectileEntity newProjectile = (ProjectileEntity) originalProjectile.getType().create(level, SpawnReason.EVENT);
 
                             if (newProjectile != null && attacker != null) {
-                                newProjectile.setPos(entity.getX(), originalProjectile.getY(), entity.getZ());
-                                newProjectile.setOwner(entity);
+                                newProjectile.setPos(player.getX(), originalProjectile.getY(), player.getZ());
+                                newProjectile.setOwner(player);
 
                                 if (wasOnFire) {
                                     newProjectile.setOnFireFor(100);
                                 }
 
-                                Vec3d directionToAttacker = attacker.getPos().subtract(entity.getPos()).normalize();
+                                Vec3d directionToAttacker = attacker.getPos().subtract(player.getPos()).normalize();
 
                                 float velocity = 1.0f;
                                 newProjectile.setVelocity(directionToAttacker.x, directionToAttacker.y, directionToAttacker.z, velocity, 0.0f);
@@ -155,7 +152,7 @@ public class ShieldMechanics {
                             }
 
                             // Weakness
-                            // player.damageShield(blockedDamage.get() * 4);
+                            ((ShieldDamageAccessor) player).big_swords$damageShield(blockedDamage.get() * 4);
                         }
                     }
                 }
@@ -170,14 +167,13 @@ public class ShieldMechanics {
 
                     // Perk
                     if (randomChance < 0.5 && attacker != null) {
-                        if (level instanceof ServerWorld serverWorld) {
+                        if (level instanceof ServerWorld serverWorld)
                             attacker.damage(serverWorld, damageSource, damageToReflect);
-                        }
 
                         // Weakness
                         if (randomChanceE < cooldownChance) {
                             player.getItemCooldownManager().set(shield, cooldownTime);
-                            entity.stopUsingItem();
+                            player.stopUsingItem();
                         }
                     }
                 }
@@ -190,8 +186,8 @@ public class ShieldMechanics {
                     float teleportDisplaceChance = isGildedEnderShield ? 0.4f : 0.2f;
                     if (level instanceof ServerWorld serverWorld) {
                         if ((randomChance < teleportDisplaceChance) && attacker != null && !(attacker instanceof AbstractSkeletonEntity || attacker instanceof WitherEntity)) {
-                            Vec3d playerPos = entity.getPos();
-                            Vec3d playerFacing = entity.getRotationVector();
+                            Vec3d playerPos = player.getPos();
+                            Vec3d playerFacing = player.getRotationVector();
                             // Random angle between -45 and 45 degrees
                             double angle = (randomChance * 90 - 45) * Math.PI / 180;
 
@@ -224,7 +220,7 @@ public class ShieldMechanics {
                     // Perk
                     float quartzBarrierChance = isGildedQuartzShield ? 0.25f : 0.15f;
                     if (randomChance < quartzBarrierChance) {
-                        entity.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 30 * 20, 2, false, false));
+                        player.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 30 * 20, 2, false, false));
 
                         // Weakness
                         float hungerChance = isGildedQuartzShield ? 0.3f : 0.2f;
@@ -242,9 +238,8 @@ public class ShieldMechanics {
                 if ((isPatchworkShield || isGildedPatchworkShield)) {
                     // Perk
                     float perkChance = isGildedPatchworkShield ? 0.5f : 0.25f;
-                    if (randomChance < perkChance && attacker instanceof LivingEntity livingAttacker) {
+                    if (randomChance < perkChance && attacker instanceof LivingEntity livingAttacker)
                         livingAttacker.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 10 * 20, 0, false, false));
-                    }
                 }
 
                 // Skull Shields
@@ -253,16 +248,11 @@ public class ShieldMechanics {
                 if ((isSkullShield || isGildedSkullShield)) {
                     // Perk
                     float perkChance = isGildedPatchworkShield ? 0.25f : 0.15f;
-                    if (randomChance < perkChance && attacker instanceof MobEntity mob) {
-                        setNearestTarget(mob, player);
-
-                    }
+                    if (randomChance < perkChance && attacker instanceof MobEntity mob) setNearestTarget(mob, player);
 
                     // Weakness
                     float weaknessChance = isGildedPatchworkShield ? 0.15f : 0.35f;
-                    if (randomChance < weaknessChance) {
-                        //player.damageShield(blockedDamage.get() * 3);
-                    }
+                    if (randomChance < weaknessChance) ((ShieldDamageAccessor) player).big_swords$damageShield(blockedDamage.get() * 3);
                 }
 
                 // Biomass Shields
@@ -272,14 +262,14 @@ public class ShieldMechanics {
                     // Perk
                     if (randomChance < 0.45) {
                         float healthToRestore = blockedDamage.get() * 0.30f;
-                        entity.heal(healthToRestore);
+                        player.heal(healthToRestore);
                     }
 
                     // Weakness
                     if (randomChanceE < 0.15) {
                         float damagePercentage = isGildedBiomassShield ? 0.2f : 0.4f;
                         float healthToDamage = blockedDamage.get() - (blockedDamage.get() * damagePercentage);
-                        // player.damageShield(healthToDamage);
+                        ((ShieldDamageAccessor) player).big_swords$damageShield(healthToDamage);
                     }
                 }
 
@@ -299,8 +289,8 @@ public class ShieldMechanics {
                         float xpToHealthRatio = 2.0f;
                         float healthToHeal = xpToUse * xpToHealthRatio;
 
-                        if (player.experienceLevel >= xpToUse && entity.getMaxHealth() - 2 > player.getHealth()) {
-                            entity.heal(healthToHeal);
+                        if (player.experienceLevel >= xpToUse && player.getMaxHealth() - 2 > player.getHealth()) {
+                            player.heal(healthToHeal);
                             player.addExperienceLevels(-xpToUse);
                         }
                     }
@@ -311,7 +301,7 @@ public class ShieldMechanics {
         });
     }
 
-    private static void setNearestTarget(MobEntity mob, PlayerEntity blockingPlayer) {
+    public static void setNearestTarget(MobEntity mob, PlayerEntity blockingPlayer) {
         double SEARCH_RANGE = 16.0;
         World level = mob.getWorld();
         Box boundingBox = new Box(

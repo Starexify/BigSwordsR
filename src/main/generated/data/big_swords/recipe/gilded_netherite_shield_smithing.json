@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "addition": "#minecraft:netherite_tool_materials",
-  "base": "big_swords:gilded_diamond_shield",
-  "result": {
-    "id": "big_swords:gilded_netherite_shield"
-  },
-  "template": "minecraft:netherite_upgrade_smithing_template"
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "big_swords:item/template_shield_blocking",
-  "textures": {
-    "layer0": "big_swords:item/biomass_shield"
-  }
-}
