@@ -1,6 +1,9 @@
 package net.nova.big_swords.item;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
@@ -9,8 +12,12 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.nova.big_swords.init.BSItems;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.function.Consumer;
 
 public class TieredShield extends ShieldItem {
     public TieredShield(ToolMaterial toolMaterial, Properties properties) {
@@ -36,17 +43,17 @@ public class TieredShield extends ShieldItem {
                 .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK));
     }
 
-/*    @Override
-    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
-        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> textConsumer, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipDisplay, textConsumer, tooltipFlag);
 
-        String perk = BuiltInRegistries.ITEM.getKey(pStack.getItem()) + ".perk";
-        String weakness = BuiltInRegistries.ITEM.getKey(pStack.getItem()) + ".weakness";
+        String perk = BuiltInRegistries.ITEM.getKey(stack.getItem()) + ".perk";
+        String weakness = BuiltInRegistries.ITEM.getKey(stack.getItem()) + ".weakness";
 
-        pTooltipComponents.add(Component.translatable(perk).withStyle(ChatFormatting.GRAY));
-        pTooltipComponents.add(Component.translatable(weakness).withStyle(ChatFormatting.GRAY));
-        pTooltipComponents.add(Component.empty());
-    }*/
+        textConsumer.accept(Component.translatable(perk).withStyle(ChatFormatting.GRAY));
+        textConsumer.accept(Component.translatable(weakness).withStyle(ChatFormatting.GRAY));
+        textConsumer.accept(Component.empty());
+    }
 
     @Override
     public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slotId) {

@@ -57,6 +57,13 @@
           "model": "big_swords:item/blood_vial_8"
         },
         "when": 8
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "big_swords:item/blood_vial_9"
+        },
+        "when": 9
       }
     ],
     "component": "big_swords:blood_level",
