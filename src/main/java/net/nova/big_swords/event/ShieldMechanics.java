@@ -1,6 +1,7 @@
 package net.nova.big_swords.event;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -27,6 +28,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -47,6 +49,7 @@ public class ShieldMechanics {
     public static void onShieldBlock(LivingShieldBlockEvent event) {
         if (event.getEntity() instanceof Player player && event.getBlocked()) {
             ItemStack shield = player.getUseItem();
+            BlocksAttacks blocksattacks = shield != null ? shield.get(DataComponents.BLOCKS_ATTACKS) : null;
             Entity attacker = event.getDamageSource().getEntity();
             Entity sourceEntity = event.getDamageSource().getDirectEntity();
             DamageSource damageSource = event.getDamageSource();

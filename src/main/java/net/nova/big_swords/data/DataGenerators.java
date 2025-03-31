@@ -1,5 +1,7 @@
 package net.nova.big_swords.data;
 
+import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -13,6 +15,8 @@ import net.nova.big_swords.data.tags.BSBlockTagsProvider;
 import net.nova.big_swords.data.tags.BSEnchantmentTagsProvider;
 import net.nova.big_swords.data.tags.BSEntityTypeTagsProvider;
 import net.nova.big_swords.data.tags.BSItemTagsProvider;
+
+import java.util.Set;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
@@ -32,7 +36,10 @@ public class DataGenerators {
         event.createProvider(SoundsProvider::new);
         event.createProvider(BSAdvancementsProvider::create);
         event.createProvider(GlobalLootModifier::new);
-        event.createProvider(DatapackProvider::new);
         event.createProvider(AtlasesProvider::new);
+        event.createDatapackRegistryObjects(new RegistrySetBuilder()
+                        .add(Registries.ENCHANTMENT, BSEnchantments::bootstrap)
+                        .add(Registries.TRIM_MATERIAL, BSTrimMaterials::bootstrap),
+                Set.of(MODID));
     }
 }
