@@ -48,11 +48,11 @@ public class ShieldMechanics {
     @SubscribeEvent
     public static void onShieldBlock(LivingShieldBlockEvent event) {
         if (event.getEntity() instanceof Player player && event.getBlocked()) {
-            ItemStack shield = player.getUseItem();
-            BlocksAttacks blocksattacks = shield != null ? shield.get(DataComponents.BLOCKS_ATTACKS) : null;
-            Entity attacker = event.getDamageSource().getEntity();
-            Entity sourceEntity = event.getDamageSource().getDirectEntity();
+            ItemStack shield = player.getItemBlockingWith();
+            BlocksAttacks blocksAttacks = shield.get(DataComponents.BLOCKS_ATTACKS);
             DamageSource damageSource = event.getDamageSource();
+            Entity attacker = damageSource.getEntity();
+            Entity sourceEntity = damageSource.getDirectEntity();
             float blockedDamage = event.getBlockedDamage();
             int shieldDamage = event.shieldDamage();
             double randomChance = Math.random();
@@ -78,27 +78,30 @@ public class ShieldMechanics {
                     double catchChance = isGildedWoodenShield ? 0.7 : 0.4;
                     if (randomChance < catchChance) {
                         arrow.remove(Entity.RemovalReason.DISCARDED);
-
                         ItemStack arrowStack = new ItemStack(Items.ARROW);
                         if (!player.getInventory().add(arrowStack)) player.drop(arrowStack, false);
                     }
 
                     // Weakness
-                    if (arrow.isOnFire()) event.setShieldDamage(shieldDamage * 4);
+                    //event.setShieldDamage(blockedDamage * 4);
+                    if (arrow.isOnFire())
+                        blocksAttacks.hurtBlockingItem(level, shield, player, player.getUsedItemHand(), blockedDamage * 4);
                 }
 
                 // Weakness (Comp with Soul fire'd)
-                if (fireAspectLevel > 0) event.setShieldDamage(shieldDamage * switch (fireAspectLevel) {
-                    case 1 -> 3;
-                    case 2 -> 5;
-                    default -> 1;
-                });
+                if (fireAspectLevel > 0)
+                    blocksAttacks.hurtBlockingItem(level, shield, player, player.getUsedItemHand(), blockedDamage * switch (fireAspectLevel) {
+                        case 1 -> 3;
+                        case 2 -> 5;
+                        default -> 1;
+                    });
 
-                if (soulFireAspectLevel > 0) event.setShieldDamage(shieldDamage * switch (soulFireAspectLevel) {
-                    case 1 -> 6;
-                    case 2 -> 10;
-                    default -> 1;
-                });
+                if (soulFireAspectLevel > 0)
+                    blocksAttacks.hurtBlockingItem(level, shield, player, player.getUsedItemHand(), blockedDamage * switch (soulFireAspectLevel) {
+                        case 1 -> 6;
+                        case 2 -> 10;
+                        default -> 1;
+                    });
             }
 
             // Stone Shields
@@ -120,7 +123,7 @@ public class ShieldMechanics {
                 if ((damageSource.is(DamageTypes.EXPLOSION) || damageSource.is(DamageTypes.PLAYER_EXPLOSION))) {
                     int damageToPlayer = (int) blockedDamage / 3;
                     event.setBlockedDamage(blockedDamage - damageToPlayer);
-                    event.setShieldDamage(shieldDamage + damageToPlayer);
+                    blocksAttacks.hurtBlockingItem(level, shield, player, player.getUsedItemHand(), blockedDamage + damageToPlayer);
                 }
             }
 
@@ -128,7 +131,7 @@ public class ShieldMechanics {
             boolean isIronShield = shield.is(BSItems.IRON_SHIELD);
             boolean isGildedIronShield = shield.is(BSItems.GILDED_IRON_SHIELD);
             if ((isIronShield || isGildedIronShield) && (damageSource.is(DamageTypes.EXPLOSION) || damageSource.is(DamageTypes.PLAYER_EXPLOSION)))
-                event.setShieldDamage(isGildedIronShield ? 0 : shieldDamage / 2);
+                blocksAttacks.hurtBlockingItem(level, shield, player, player.getUsedItemHand(), isGildedIronShield ? 0 : blockedDamage / 2);
 
             // Diamond Shields
             boolean isDiamondShield = shield.is(BSItems.DIAMOND_SHIELD);
@@ -157,7 +160,7 @@ public class ShieldMechanics {
                         }
 
                         // Weakness
-                        event.setShieldDamage(shieldDamage * 4);
+                        blocksAttacks.hurtBlockingItem(level, shield, player, player.getUsedItemHand(), blockedDamage * 4);
                     }
                 }
             }
@@ -175,10 +178,8 @@ public class ShieldMechanics {
                     attacker.hurtServer(serverLevel, damageSource, damageToReflect);
 
                     // Weakness
-                    if (randomChanceE < cooldownChance) {
-                        player.getCooldowns().addCooldown(shield, cooldownTime);
-                        player.stopUsingItem();
-                    }
+                    if (randomChanceE < cooldownChance)
+                        blocksAttacks.disable(serverLevel, player, cooldownTime, shield);
                 }
             }
 
@@ -259,7 +260,8 @@ public class ShieldMechanics {
 
                 // Weakness
                 float weaknessChance = isGildedPatchworkShield ? 0.15f : 0.35f;
-                if (randomChance < weaknessChance) event.setShieldDamage(shieldDamage * 3);
+                if (randomChance < weaknessChance)
+                    blocksAttacks.hurtBlockingItem(level, shield, player, player.getUsedItemHand(), blockedDamage * 3);
             }
 
             // Biomass Shields
