@@ -24,8 +24,8 @@ public class CreepBall extends Item {
             return super.useOn(context);
         } else {
             level.playSound(null, blockpos, SoundEvents.SOUL_SAND_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
-            context.getItemInHand().shrink(1);
-            level.setBlock(blockpos, BSBlocks.CREEP_BLOCK.getDefaultState());
+            context.getItemInHand().consume(1, context.getPlayer());
+            level.setBlock(blockpos, BSBlocks.CREEP_BLOCK.defaultBlockState(), 3);
 
             return InteractionResult.SUCCESS;
         }

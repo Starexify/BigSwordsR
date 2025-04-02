@@ -1,14 +1,20 @@
 package net.nova.big_swords.item;
 
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
+
+import java.util.function.Consumer;
 
 public class BloodVial extends Item {
     public static final int MIN_BLOOD_LEVEL = 1;
@@ -18,12 +24,13 @@ public class BloodVial extends Item {
         super(properties.stacksTo(1));
     }
 
-/*    @Override
-    public void appendTooltip(TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
-        String bloodText = components.getOrDefault(BSDataComponents.BLOOD_LEVEL, 0) == 0 ? "Empty" : "Blood Level: " + components.getOrDefault(BSDataComponents.BLOOD_LEVEL, 0) + " / " + MAX_BLOOD_LEVEL;
-        textConsumer.accept(Text.empty());
-        textConsumer.accept(Text.literal(bloodText).formatted(Formatting.GRAY));
-    }*/
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> textConsumer, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipDisplay, textConsumer, tooltipFlag);
+        String bloodText = stack.getComponents().getOrDefault(BSDataComponents.BLOOD_LEVEL, 0) == 0 ? "Empty" : "Blood Level: " + stack.getComponents().getOrDefault(BSDataComponents.BLOOD_LEVEL, 0) + " / " + MAX_BLOOD_LEVEL;
+        textConsumer.accept(Component.empty());
+        textConsumer.accept(Component.literal(bloodText).withStyle(ChatFormatting.GRAY));
+    }
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
@@ -54,9 +61,7 @@ public class BloodVial extends Item {
     }
 
     public void incrementBloodLevel(ItemStack stack) {
-        if (getBloodLevel(stack) < MAX_BLOOD_LEVEL) {
-            stack.set(BSDataComponents.BLOOD_LEVEL, getBloodLevel(stack) + 1);
-        }
+        if (getBloodLevel(stack) < MAX_BLOOD_LEVEL) stack.set(BSDataComponents.BLOOD_LEVEL, getBloodLevel(stack) + 1);
     }
 
     public static void incrementBloodVialInBothHands(Player player) {
@@ -66,9 +71,7 @@ public class BloodVial extends Item {
 
     public static void incrementBloodVialInHand(Player player, InteractionHand hand) {
         ItemStack handStack = player.getItemInHand(hand);
-        if (handStack.getItem() instanceof BloodVial bloodVialItem) {
-            bloodVialItem.incrementBloodLevel(handStack);
-        }
+        if (handStack.getItem() instanceof BloodVial bloodVialItem) bloodVialItem.incrementBloodLevel(handStack);
     }
 
     public static int getBloodLevel(ItemStack stack) {

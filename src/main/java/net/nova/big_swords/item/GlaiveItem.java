@@ -1,29 +1,22 @@
 package net.nova.big_swords.item;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.consume.UseAction;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.RaycastContext;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.*;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.block.CreepBlock;
 import net.nova.big_swords.init.BSToolMaterial;
@@ -37,10 +30,10 @@ import java.util.function.Predicate;
 public class GlaiveItem extends Item {
     public final Random random = new Random();
     public final float range = 5.0f; // 5 block range
-    public List<AttributeModifiersComponent.Entry> modifiers = getComponents().get(DataComponentTypes.ATTRIBUTE_MODIFIERS).modifiers();
+    public List<ItemAttributeModifiers.Entry> modifiers = components().get(DataComponents.ATTRIBUTE_MODIFIERS).modifiers();
 
-    public GlaiveItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Settings settings) {
-        super(BSToolMaterial.applyChargedProperties(settings, toolMaterial, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage));
+    public GlaiveItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Properties properties) {
+        super(BSToolMaterial.applyChargedProperties(properties, toolMaterial, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage));
     }
 
     public float minChargedDamage() {
@@ -53,62 +46,61 @@ public class GlaiveItem extends Item {
 
     // Tilling Creep
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        BlockPos blockpos = context.getBlockPos();
-        World level = context.getWorld();
+    public InteractionResult useOn(UseOnContext context) {
+        BlockPos blockpos = context.getClickedPos();
+        Level level = context.getLevel();
         BlockState state = level.getBlockState(blockpos);
-        PlayerEntity player = context.getPlayer();
-        ItemStack itemStack = context.getStack();
+        Player player = context.getPlayer();
+        ItemStack itemStack = context.getItemInHand();
 
-        if (state.getBlock() instanceof CreepBlock creepBlock && !state.get(CreepBlock.TILLED)) {
-            level.playSound(null, blockpos, SoundEvents.PARTICLE_SOUL_ESCAPE.value(), SoundCategory.PLAYERS, 1.0F, 1.0F);
+        if (state.getBlock() instanceof CreepBlock creepBlock && !state.getValue(CreepBlock.TILLED)) {
+            level.playSound(null, blockpos, SoundEvents.SOUL_ESCAPE.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
             creepBlock.tillBlock(level, blockpos, state);
-            itemStack.damage(1, player);
+            itemStack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(itemStack));
 
-            return ActionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
-        return super.useOnBlock(context);
+        return super.useOn(context);
     }
 
     // Glaive Mechanic
     @Override
-    public ActionResult use(World level, PlayerEntity player, Hand usedHand) {
+    public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
         // Check if the player is looking at a CreepBlock and pass if a CreepBlock is hit
-        BlockHitResult blockHit = level.raycast(new RaycastContext(
-                player.getCameraPosVec(1.0F),
-                player.getRotationVec(1.0F).multiply(5.0), // 5 block range
-                RaycastContext.ShapeType.OUTLINE,
-                RaycastContext.FluidHandling.NONE,
+        BlockHitResult blockHit = level.clip(new ClipContext(
+                player.getEyePosition(1.0F),
+                player.getEyePosition(1.0F).add(player.getLookAngle().scale(5.0)), // 5 block range
+                ClipContext.Block.OUTLINE,
+                ClipContext.Fluid.NONE,
                 player
         ));
 
-        if (blockHit.getType() == HitResult.Type.BLOCK && level.getBlockState(blockHit.getBlockPos()).getBlock() instanceof CreepBlock) {
-            return ActionResult.PASS;
-        }
+        if (blockHit.getType() == HitResult.Type.BLOCK && level.getBlockState(blockHit.getBlockPos()).getBlock() instanceof CreepBlock)
+            return InteractionResult.PASS;
 
-        player.setCurrentHand(usedHand);
-        return ActionResult.CONSUME;
+        player.startUsingItem(usedHand);
+        return InteractionResult.CONSUME;
     }
 
     @Override
-    public boolean onStoppedUsing(ItemStack stack, World level, LivingEntity entity, int timeLeft) {
-        if (entity instanceof PlayerEntity player) {
+    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+        if (entity instanceof Player player) {
             int i = this.getMaxUseTime(stack, entity) - timeLeft;
             if (i < 20) return false; // Require a minimum charge time
 
-            if (!level.isClient) {
-                Vec3d startVec = player.getCameraPosVec(1.0F);
-                Vec3d endVec = startVec.add(player.getRotationVec(1.0F).multiply(range));
-                Box boundingBox = new Box(startVec, endVec).expand(1.0);
+            if (!level.isClientSide) {
+                Vec3 startVec = player.getEyePosition(1.0F);
+                Vec3 endVec = startVec.add(player.getLookAngle().scale(range));
+                AABB boundingBox = new AABB(startVec, endVec).inflate(1.0);
                 Predicate<LivingEntity> predicate = livingEntity -> livingEntity != player && livingEntity.isAttackable();
-                List<LivingEntity> entities = level.getEntitiesByClass(LivingEntity.class, boundingBox, predicate);
+                List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, boundingBox, predicate);
 
                 EntityHitResult entityHitResult = getEntityHitResult(startVec, endVec, entities);
 
-                player.swingHand(Hand.MAIN_HAND, true);
+                player.swing(InteractionHand.MAIN_HAND, true);
                 if (entityHitResult != null && entityHitResult.getType() == HitResult.Type.ENTITY) {
                     LivingEntity target = (LivingEntity) entityHitResult.getEntity();
-                    BlockHitResult blockHit = level.raycast(new RaycastContext(startVec, target.getCameraPosVec(1.0F), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, player));
+                    BlockHitResult blockHit = level.clip(new ClipContext(startVec, target.getEyePosition(1.0F), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
 
                     if (blockHit.getType() == HitResult.Type.MISS) {
                         glaiveHits(stack, level, player, target);
@@ -123,7 +115,7 @@ public class GlaiveItem extends Item {
         return false;
     }
 
-    public boolean glaiveHits(ItemStack stack, World level, PlayerEntity player, LivingEntity target) {
+    public boolean glaiveHits(ItemStack stack, Level level, Player player, LivingEntity target) {
         float damage = minChargedDamage() + random.nextFloat() * (maxChargedDamage() - minChargedDamage());
         damage = Math.round(damage * 10.0f) / 10.0f;
         if (level instanceof ServerWorld serverWorld)
