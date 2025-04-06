@@ -92,14 +92,11 @@ public class ScytheItem extends HoeItem {
 
                         if (blockHit.getType() == HitResult.Type.MISS) {
                             scytheHits(serverLevel, player, target);
-                            EnchantedItemInUse enchantedItemInUse = new EnchantmentEffectContext(stack, player.getPreferredEquipmentSlot(stack), entity);
-                            EnchantmentHelper.apply(stack, enchantmentHolder -> {
-                                enchantmentHolder.getEnchantments().iterator().forEachRemaining(registryEntry -> {
-                                    if (registryEntry.value().effects().get(BSDataComponents.POST_DEATH) != null) {
-                                        registryEntry.value().effects().get(BSDataComponents.POST_DEATH).forEach(targetedEffect ->
-                                                targetedEffect.effect().apply(serverLevel, enchantmentHolder.getLevel(registryEntry), enchantedItemInUse, target, target.getPos())
-                                        );
-                                    }
+                            EnchantedItemInUse enchantedItemInUse = new EnchantedItemInUse(stack, player.getEquipmentSlotForItem(stack), entity);
+                            EnchantmentHelper.updateEnchantments(stack, enchantmentHolder -> {
+                                enchantmentHolder.keySet().iterator().forEachRemaining(registryEntry -> {
+                                    if (registryEntry.value().effects().get(BSDataComponents.POST_DEATH) != null)
+                                        registryEntry.value().effects().get(BSDataComponents.POST_DEATH).forEach(targetedEffect -> targetedEffect.effect().apply(serverLevel, enchantmentHolder.getLevel(registryEntry), enchantedItemInUse, target, target.position()));
                                 });
                             });
                             entitiesHit++;
@@ -111,18 +108,12 @@ public class ScytheItem extends HoeItem {
                     int durabilityDamage = entitiesHit * 2;
                     stack.hurtAndBreak(durabilityDamage, player, EquipmentSlot.MAINHAND);
                     player.getCooldowns().addCooldown(stack, 40);
-
                     // player.sendSystemMessage(Component.literal("Hit entities with dmg: " + entitiesHit)); // Debug output
                     // player.sendSystemMessage(Component.literal("Damage dealt to Item: " + durabilityDamage)); // Debug output
-                } else {
-                    player.getCooldowns().addCooldown(stack, 10);
-                }
+                } else player.getCooldowns().addCooldown(stack, 10);
 
-                if (stack.is(BSItems.SOUL_REAPER)) {
-                    BigSwordsR.playSound(serverLevel, player, Sounds.REAPER_SLASH);
-                } else {
-                    BigSwordsR.playSound(serverLevel, player, Sounds.SCYTHE_SLASH);
-                }
+                if (stack.is(BSItems.SOUL_REAPER)) BigSwordsR.playSound(serverLevel, player, Sounds.REAPER_SLASH);
+                else BigSwordsR.playSound(serverLevel, player, Sounds.SCYTHE_SLASH);
             }
         }
         return false;

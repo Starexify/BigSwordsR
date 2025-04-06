@@ -1,83 +1,66 @@
 package net.nova.big_swords.item;
 
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.BlocksAttacksComponent;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShieldItem;
-import net.minecraft.item.ToolMaterial;
-import net.minecraft.registry.tag.DamageTypeTags;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.World;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.nova.big_swords.init.BSItems;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.function.Consumer;
 
 public class TieredShield extends ShieldItem {
-    public TieredShield(ToolMaterial toolMaterial, Settings properties) {
+    public TieredShield(ToolMaterial toolMaterial, Properties properties) {
         this(toolMaterial, properties, 1, 0);
     }
 
-    public TieredShield(ToolMaterial toolMaterial, Settings properties, int durabilityMultiplier) {
+    public TieredShield(ToolMaterial toolMaterial, Properties properties, int durabilityMultiplier) {
         super(properties
-                .maxDamage(toolMaterial.durability() * durabilityMultiplier)
+                .durability(toolMaterial.durability() * durabilityMultiplier)
                 .enchantable(toolMaterial.enchantmentValue())
                 .repairable(toolMaterial.repairItems())
                 .equippableUnswappable(EquipmentSlot.OFFHAND)
-                .component(DataComponentTypes.BLOCKS_ATTACKS, new BlocksAttacksComponent(
-                        0.25F,
-                        1.0F,
-                        List.of(new BlocksAttacksComponent.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
-                        new BlocksAttacksComponent.ItemDamage(3.0F, 1.0F, 1.0F),
-                        Optional.of(DamageTypeTags.BYPASSES_SHIELD),
-                        Optional.of(SoundEvents.ITEM_SHIELD_BLOCK),
-                        Optional.of(SoundEvents.ITEM_SHIELD_BREAK)
-                ))
-                .component(DataComponentTypes.BREAK_SOUND, SoundEvents.ITEM_SHIELD_BREAK)
+                .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK)
         );
     }
 
-    public TieredShield(ToolMaterial toolMaterial, Settings properties, int durabilityMultiplier, int additionalDurability) {
+    public TieredShield(ToolMaterial toolMaterial, Properties properties, int durabilityMultiplier, int additionalDurability) {
         super(properties
-                .maxDamage(toolMaterial.durability() * durabilityMultiplier + additionalDurability)
+                .durability(toolMaterial.durability() * durabilityMultiplier + additionalDurability)
                 .enchantable(toolMaterial.enchantmentValue())
                 .repairable(toolMaterial.repairItems())
                 .equippableUnswappable(EquipmentSlot.OFFHAND)
-                .component(DataComponentTypes.BLOCKS_ATTACKS, new BlocksAttacksComponent(
-                        0.25F,
-                        1.0F,
-                        List.of(new BlocksAttacksComponent.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
-                        new BlocksAttacksComponent.ItemDamage(3.0F, 1.0F, 1.0F),
-                        Optional.of(DamageTypeTags.BYPASSES_SHIELD),
-                        Optional.of(SoundEvents.ITEM_SHIELD_BLOCK),
-                        Optional.of(SoundEvents.ITEM_SHIELD_BREAK)
-                ))
-                .component(DataComponentTypes.BREAK_SOUND, SoundEvents.ITEM_SHIELD_BREAK)
+                .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK)
         );
     }
 
     @Override
-    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
-        // Iron Shields Weakness
-        if (entity instanceof LivingEntity livingEntity && livingEntity.isTouchingWater()) {
-            if (stack.getItem() == BSItems.IRON_SHIELD || stack.getItem() == BSItems.GILDED_IRON_SHIELD) {
-                boolean isIronShieldInMainHand = livingEntity.getBlockingItem() == stack;
-                boolean isIronShieldInOffHand = livingEntity.getBlockingItem() == stack;
+    public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, TooltipDisplay tooltipDisplay, Consumer<Component> consumer, TooltipFlag tooltipFlag) {
+        consumer.accept(Component.translatable(this + ".perk").withStyle(ChatFormatting.GRAY));
+        consumer.accept(Component.translatable(this + ".weakness").withStyle(ChatFormatting.GRAY));
+        consumer.accept(Component.empty());
+    }
 
-                if ((isIronShieldInMainHand || isIronShieldInOffHand) && stack.isDamageable()) {
-                    stack.damage(1, livingEntity, livingEntity.getPreferredEquipmentSlot(stack));
-                }
+    @Override
+    public void inventoryTick(ItemStack stack, ServerLevel serverLevel, Entity entity, @Nullable EquipmentSlot equipmentSlot) {
+        // Iron Shields Weakness
+        if (entity instanceof LivingEntity livingEntity && livingEntity.isInWater()) {
+            if (stack.getItem() == BSItems.IRON_SHIELD || stack.getItem() == BSItems.GILDED_IRON_SHIELD) {
+                boolean isIronShieldInMainHand = livingEntity.getItemBlockingWith() == stack;
+                boolean isIronShieldInOffHand = livingEntity.getItemBlockingWith() == stack;
+
+                if ((isIronShieldInMainHand || isIronShieldInOffHand) && stack.isDamageableItem())
+                    stack.hurtAndBreak(1, livingEntity, livingEntity.getEquipmentSlotForItem(stack));
             }
         }
     }
-
-/*    @Override
-    public void appendTooltip(TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
-        textConsumer.accept(Text.translatable(this + ".perk").formatted(Formatting.GRAY));
-        textConsumer.accept(Text.translatable(this + ".weakness").formatted(Formatting.GRAY));
-        textConsumer.accept(Text.empty());
-    }*/
 }

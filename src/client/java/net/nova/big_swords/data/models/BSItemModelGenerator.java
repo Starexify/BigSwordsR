@@ -1,6 +1,5 @@
 package net.nova.big_swords.data.models;
 
-import net.minecraft.client.data.*;
 import net.minecraft.client.render.item.model.ItemModel;
 import net.minecraft.client.render.item.model.SelectItemModel;
 import net.minecraft.client.render.item.property.bool.UsingItemProperty;
@@ -18,7 +17,7 @@ import net.minecraft.util.Identifier;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.equipment.BSEquipmentAssets;
 import net.nova.big_swords.equipment.BSTrimMaterials;
-import net.nova.big_swords.equipment.BSArmorTrimAssets;
+import net.nova.big_swords.equipment.BSMaterialAssetGroup;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 
@@ -39,7 +38,7 @@ public class BSItemModelGenerator extends ItemModelGenerator {
             new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.LAPIS, ArmorTrimMaterials.LAPIS),
             new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.AMETHYST, ArmorTrimMaterials.AMETHYST),
             new BSItemModelGenerator.TrimMaterial(ArmorTrimAssets.RESIN, ArmorTrimMaterials.RESIN),
-            new BSItemModelGenerator.TrimMaterial(BSArmorTrimAssets.LIVINGMETAL, BSTrimMaterials.LIVINGMETAL)
+            new BSItemModelGenerator.TrimMaterial(BSMaterialAssetGroup.LIVINGMETAL, BSTrimMaterials.LIVINGMETAL)
     );
 
     public BSItemModelGenerator(ItemModelOutput output, BiConsumer<Identifier, ModelSupplier> modelCollector) {

@@ -1,15 +1,15 @@
 package net.nova.big_swords.equipment;
 
-import net.minecraft.item.equipment.EquipmentAsset;
-import net.minecraft.item.equipment.EquipmentAssetKeys;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.nova.big_swords.BigSwordsR;
 
 public interface BSEquipmentAssets {
-    RegistryKey<EquipmentAsset> LIVINGMETAL = register("livingmetal");
-    RegistryKey<EquipmentAsset> BIOMASS = register("biomass");
+    ResourceKey<EquipmentAsset> LIVINGMETAL = register("livingmetal");
+    ResourceKey<EquipmentAsset> BIOMASS = register("biomass");
 
-    static RegistryKey<EquipmentAsset> register(String name) {
-        return RegistryKey.of(EquipmentAssetKeys.REGISTRY_KEY, BigSwordsR.rl(name));
+    static ResourceKey<EquipmentAsset> register(String name) {
+        return ResourceKey.create(EquipmentAssets.ROOT_ID, BigSwordsR.rl(name));
     }
 }

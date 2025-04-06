@@ -2,38 +2,37 @@ package net.nova.big_swords.equipment;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.minecraft.item.equipment.trim.ArmorTrimAssets;
-import net.minecraft.item.equipment.trim.ArmorTrimMaterial;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
-import net.minecraft.util.Util;
+import net.minecraft.Util;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.equipment.trim.MaterialAssetGroup;
+import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.nova.big_swords.BigSwordsR;
 
 import java.util.concurrent.CompletableFuture;
 
 public class BSTrimMaterials extends FabricDynamicRegistryProvider {
-    public static RegistryKey<ArmorTrimMaterial> LIVINGMETAL = of("livingmetal");
+    public static ResourceKey<TrimMaterial> LIVINGMETAL = of("livingmetal");
 
-    public BSTrimMaterials(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+    public BSTrimMaterials(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup wrapperLookup, Entries entries) {
-        register(entries, LIVINGMETAL, Style.EMPTY.withColor(TextColor.parse("#e0f9ff").getOrThrow()), BSArmorTrimAssets.LIVINGMETAL);
+    protected void configure(HolderLookup.Provider provider, Entries context) {
+        register(context, LIVINGMETAL, Style.EMPTY.withColor(TextColor.parseColor("#e0f9ff").getOrThrow()), BSMaterialAssetGroup.LIVINGMETAL);
     }
 
-    private static void register(Entries entries, RegistryKey<ArmorTrimMaterial> key, Style style, ArmorTrimAssets armorTrimAssets) {
-        Text text = Text.translatable(Util.createTranslationKey("trim_material", key.getValue())).fillStyle(style);
-        entries.add(key, new ArmorTrimMaterial(armorTrimAssets, text));
+    public static void register(Entries context, ResourceKey<TrimMaterial> materialKey, Style style, MaterialAssetGroup overrideArmorMaterials) {
+        context.add(materialKey, new TrimMaterial(overrideArmorMaterials, Component.translatable(Util.makeDescriptionId("trim_material", materialKey.location())).withStyle(style)));
     }
 
-    private static RegistryKey<ArmorTrimMaterial> of(String id) {
-        return RegistryKey.of(RegistryKeys.TRIM_MATERIAL, BigSwordsR.rl(id));
+    private static ResourceKey<TrimMaterial> of(String id) {
+        return ResourceKey.create(Registries.TRIM_MATERIAL, BigSwordsR.rl(id));
     }
 
     @Override

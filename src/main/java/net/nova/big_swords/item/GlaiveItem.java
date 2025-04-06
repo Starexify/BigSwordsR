@@ -2,14 +2,17 @@ package net.nova.big_swords.item;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.context.UseOnContext;
@@ -118,56 +121,46 @@ public class GlaiveItem extends Item {
     public boolean glaiveHits(ItemStack stack, Level level, Player player, LivingEntity target) {
         float damage = minChargedDamage() + random.nextFloat() * (maxChargedDamage() - minChargedDamage());
         damage = Math.round(damage * 10.0f) / 10.0f;
-        if (level instanceof ServerWorld serverWorld)
-            target.damage(serverWorld, level.getDamageSources().playerAttack(player), damage);
+        if (level instanceof ServerLevel serverLevel)
+            target.hurtServer(serverLevel, level.damageSources().playerAttack(player), damage);
 
-        stack.damage(3, player, EquipmentSlot.MAINHAND);
-        player.getItemCooldownManager().set(stack, 40);
+        stack.hurtAndBreak(3, player, EquipmentSlot.MAINHAND);
+        player.getCooldowns().addCooldown(stack, 40);
         BigSwordsR.playSound(level, player, Sounds.GLAIVE_HIT);
 
         // Blood Vial Mechanics
-        if (target.isDead() && !target.getType().isIn(Tags.EntityTypeTags.BLOODLESS)) {
+        if (target.isDeadOrDying() && !target.getType().is(Tags.EntityTypeTags.BLOODLESS))
             BloodVial.incrementBloodVialInBothHands(player);
-        }
 
         return true;
     }
 
-    public boolean glaiveMiss(ItemStack stack, PlayerEntity player, World level) {
-        player.getItemCooldownManager().set(stack, 10);
+    public boolean glaiveMiss(ItemStack stack, Player player, Level level) {
+        player.getCooldowns().addCooldown(stack, 10);
         BigSwordsR.playSound(level, player, Sounds.GLAIVE_SWING);
         return false;
     }
 
-    public EntityHitResult getEntityHitResult(Vec3d startVec, Vec3d endVec, List<LivingEntity> entities) {
-        for (LivingEntity entity : entities) {
-            Box entityBoundingBox = entity.getBoundingBox();
-            if (entityBoundingBox.raycast(startVec, endVec).isPresent()) {
-                return new EntityHitResult(entity);
-            }
-        }
+    public EntityHitResult getEntityHitResult(Vec3 startVec, Vec3 endVec, List<LivingEntity> entities) {
+        for (LivingEntity entity : entities)
+            if (entity.getBoundingBox().clip(startVec, endVec).isPresent()) return new EntityHitResult(entity);
         return null;
     }
 
     // Bow-like Item Stuff
     @Override
-    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
+    public int getUseDuration(ItemStack stack, LivingEntity user) {
         return 72000;
     }
 
     @Override
-    public UseAction getUseAction(ItemStack stack) {
-        return UseAction.BOW;
+    public ItemUseAnimation getUseAnimation(ItemStack stack) {
+        return ItemUseAnimation.BOW;
     }
 
     // Sword-like Item Stuff
     @Override
-    public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.damage(1, attacker, EquipmentSlot.MAINHAND);
-    }
-
-    @Override
-    public boolean canMine(ItemStack stack, BlockState state, World world, BlockPos pos, LivingEntity user) {
-        return !user.isInCreativeMode();
+    public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
     }
 }

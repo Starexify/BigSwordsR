@@ -18,6 +18,7 @@ import net.minecraft.world.item.component.Weapon;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.nova.big_swords.BigSwordsR;
+import net.nova.big_swords.mixin.ToolMaterialAccessor;
 
 import java.util.List;
 
@@ -34,35 +35,31 @@ public class BSToolMaterial {
     public static final ResourceLocation MIN_CHARGED_DAMAGE_ID = BigSwordsR.rl("min_charged_damage");
     public static final ResourceLocation MAX_CHARGED_DAMAGE_ID = BigSwordsR.rl("max_charged_damage");
 
-    public static Item.Properties applyBaseSettings(Item.Properties properties, ToolMaterial material) {
-        return properties.durability(material.durability()).repairable(material.repairItems()).enchantable(material.enchantmentValue());
-    }
-
-    public static Item.Properties applyToolSettings(Item.Properties settings, ToolMaterial material, TagKey<Block> effectiveBlocks, float attackDamage, float attackSpeed, float minChargedDamage, float maxDamage) {
+    public static Item.Properties applyToolSettings(Item.Properties settings, ToolMaterial toolMaterial, TagKey<Block> effectiveBlocks, float attackDamage, float attackSpeed, float minChargedDamage, float maxDamage) {
         HolderGetter<Block> registryEntryLookup = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
-        return applyBaseSettings(settings, material)
+        return ((ToolMaterialAccessor) (Object) toolMaterial).big_swords$applyCommonProperties(settings)
                 .component(DataComponents.TOOL, new Tool(
-                        List.of(Tool.Rule.deniesDrops(registryEntryLookup.getOrThrow(material.incorrectBlocksForDrops())),
-                                Tool.Rule.minesAndDrops(registryEntryLookup.getOrThrow(effectiveBlocks), material.speed())),
+                        List.of(Tool.Rule.deniesDrops(registryEntryLookup.getOrThrow(toolMaterial.incorrectBlocksForDrops())),
+                                Tool.Rule.minesAndDrops(registryEntryLookup.getOrThrow(effectiveBlocks), toolMaterial.speed())),
                         1.0F, 1, true))
-                .attributes(createChargedWeaponAttributes(material, attackDamage, attackSpeed, minChargedDamage, maxDamage)).component(DataComponents.WEAPON, new Weapon(2, 0.0F));
+                .attributes(createChargedWeaponAttributes(toolMaterial, attackDamage, attackSpeed, minChargedDamage, maxDamage)).component(DataComponents.WEAPON, new Weapon(2, 0.0F));
     }
 
-    public static Item.Properties applyChargedProperties(Item.Properties properties, ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxDamage) {
+    public static Item.Properties applyChargedProperties(Item.Properties properties, ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxDamage) {
         HolderGetter<Block> registryEntryLookup = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
-        return applyBaseSettings(properties, material).component(DataComponents.TOOL, new Tool(
+        return ((ToolMaterialAccessor) (Object) toolMaterial).big_swords$applyCommonProperties(properties).component(DataComponents.TOOL, new Tool(
                         List.of(Tool.Rule.minesAndDrops(HolderSet.direct(Blocks.COBWEB.builtInRegistryHolder()), 15.0F),
                                 Tool.Rule.overrideSpeed(registryEntryLookup.getOrThrow(BlockTags.SWORD_INSTANTLY_MINES), Float.MAX_VALUE),
                                 Tool.Rule.overrideSpeed(registryEntryLookup.getOrThrow(BlockTags.SWORD_EFFICIENT), 1.5F)),
                         1.0F, 2, false))
-                .attributes(createChargedWeaponAttributes(material, attackDamage, attackSpeed, minChargedDamage, maxDamage))
+                .attributes(createChargedWeaponAttributes(toolMaterial, attackDamage, attackSpeed, minChargedDamage, maxDamage))
                 .component(DataComponents.WEAPON, new Weapon(1));
     }
 
-    public static ItemAttributeModifiers createChargedWeaponAttributes(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxDamage) {
+    public static ItemAttributeModifiers createChargedWeaponAttributes(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxDamage) {
         return ItemAttributeModifiers.builder().add(
                 Attributes.ATTACK_DAMAGE,
-                new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attackDamage + material.attackDamageBonus(), AttributeModifier.Operation.ADD_VALUE),
+                new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attackDamage + toolMaterial.attackDamageBonus(), AttributeModifier.Operation.ADD_VALUE),
                 EquipmentSlotGroup.MAINHAND
         ).add(
                 Attributes.ATTACK_SPEED,

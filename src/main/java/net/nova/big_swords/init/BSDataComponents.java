@@ -1,32 +1,32 @@
 package net.nova.big_swords.init;
 
-import net.minecraft.component.ComponentType;
-import net.minecraft.enchantment.effect.EnchantmentEntityEffect;
-import net.minecraft.enchantment.effect.TargetedEnchantmentEffect;
-import net.minecraft.loot.context.LootContextTypes;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.util.dynamic.Codecs;
+import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.world.item.enchantment.TargetedConditionalEffect;
+import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.nova.big_swords.BigSwordsR;
 
 import java.util.List;
 import java.util.function.UnaryOperator;
 
 public class BSDataComponents {
-    public static final ComponentType<Integer> BLOOD_LEVEL = register(
-            "blood_level", builder -> builder.codec(Codecs.rangedInt(0, 9)).packetCodec(PacketCodecs.VAR_INT)
-    );
+    public static final DataComponentType<Integer> BLOOD_LEVEL = register(
+            "blood_level", builder -> builder.persistent(ExtraCodecs.intRange(0, 9)).networkSynchronized(ByteBufCodecs.VAR_INT));
 
-    public static final ComponentType<List<TargetedEnchantmentEffect<EnchantmentEntityEffect>>> POST_DEATH = registerEnchantment("post_death", builder -> builder.codec(TargetedEnchantmentEffect.createPostAttackCodec(EnchantmentEntityEffect.CODEC, LootContextTypes.ENCHANTED_DAMAGE).listOf()));
+    public static final DataComponentType<List<TargetedConditionalEffect<EnchantmentEntityEffect>>> POST_DEATH = registerEnchantment(
+            "post_death", builder -> builder.persistent(TargetedConditionalEffect.codec(EnchantmentEntityEffect.CODEC, LootContextParamSets.ENCHANTED_DAMAGE).listOf()));
 
     // Registers
-    public static <T> ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
-        return Registry.register(Registries.DATA_COMPONENT_TYPE, BigSwordsR.rl(name), builderOperator.apply(ComponentType.builder()).build());
+    public static <T> DataComponentType<T> register(String name, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
+        return Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, BigSwordsR.rl(name), builderOperator.apply(DataComponentType.builder()).build());
     }
 
-    public static <T> ComponentType<T> registerEnchantment(String id, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
-        return Registry.register(Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE, id, builderOperator.apply(ComponentType.builder()).build());
+    public static <T> DataComponentType<T> registerEnchantment(String id, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
+        return Registry.register(BuiltInRegistries.ENCHANTMENT_EFFECT_COMPONENT_TYPE, id, builderOperator.apply(DataComponentType.builder()).build());
     }
 
     public static void initialize() {
