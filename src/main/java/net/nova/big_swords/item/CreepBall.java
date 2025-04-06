@@ -13,20 +13,20 @@ import net.minecraft.world.level.block.Blocks;
 import net.nova.big_swords.init.BSBlocks;
 
 public class CreepBall extends Item {
-    public CreepBall(Properties pProperties) {
-        super(pProperties);
+    public CreepBall(Properties properties) {
+        super(properties);
     }
 
     @Override
-    public InteractionResult useOn(UseOnContext pContext) {
-        BlockPos blockpos = pContext.getClickedPos();
-        Level level = pContext.getLevel();
+    public InteractionResult useOn(UseOnContext context) {
+        BlockPos blockpos = context.getClickedPos();
+        Level level = context.getLevel();
         if (!level.getBlockState(blockpos).is(Blocks.SOUL_SAND)) {
-            return super.useOn(pContext);
+            return super.useOn(context);
         } else {
             level.playSound(null, blockpos, SoundEvents.SOUL_SAND_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
-            Player player = pContext.getPlayer();
-            ItemStack itemstack = pContext.getItemInHand();
+            Player player = context.getPlayer();
+            ItemStack itemstack = context.getItemInHand();
 
             itemstack.consume(1, player);
 

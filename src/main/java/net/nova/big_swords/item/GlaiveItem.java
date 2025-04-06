@@ -2,6 +2,7 @@ package net.nova.big_swords.item;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -78,9 +79,8 @@ public class GlaiveItem extends Item {
                 ClipContext.Fluid.NONE,
                 player
         ));
-        if (blockHit.getType() == HitResult.Type.BLOCK && level.getBlockState(blockHit.getBlockPos()).getBlock() instanceof CreepBlock) {
+        if (blockHit.getType() == HitResult.Type.BLOCK && level.getBlockState(blockHit.getBlockPos()).getBlock() instanceof CreepBlock)
             return InteractionResult.PASS;
-        }
 
         player.startUsingItem(usedHand);
         return InteractionResult.CONSUME;
@@ -106,14 +106,10 @@ public class GlaiveItem extends Item {
                     LivingEntity target = (LivingEntity) entityHitResult.getEntity();
                     BlockHitResult blockHit = level.clip(new ClipContext(startVec, target.getEyePosition(1.0F), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
 
-                    if (blockHit.getType() == HitResult.Type.MISS) {
-                        glaiveHits(stack, level, player, target);
-                    } else {
-                        glaiveMiss(stack, player, level);
-                    }
-                } else {
-                    glaiveMiss(stack, player, level);
-                }
+                    if (blockHit.getType() == HitResult.Type.MISS) glaiveHits(stack, level, player, target);
+                    else glaiveMiss(stack, player, level);
+
+                } else glaiveMiss(stack, player, level);
             }
         }
         return false;
@@ -122,19 +118,18 @@ public class GlaiveItem extends Item {
     public boolean glaiveHits(ItemStack stack, Level level, Player player, LivingEntity target) {
         float damage = minChargedDamage() + random.nextFloat() * (maxChargedDamage() - minChargedDamage());
         damage = Math.round(damage * 10.0f) / 10.0f;
-        target.hurt(player.damageSources().playerAttack(player), damage);
+        if (level instanceof ServerLevel serverLevel)
+            target.hurtServer(serverLevel, player.damageSources().playerAttack(player), damage);
 
         stack.hurtAndBreak(3, player, EquipmentSlot.MAINHAND);
         player.getCooldowns().addCooldown(stack, 40);
         playSound(level, player, Sounds.GLAIVE_HIT.get());
 
         // Blood Vial Mechanics
-        if (target.isDeadOrDying() && !target.getType().is(Tags.EntityTypeTags.BLOODLESS)) {
+        if (target.isDeadOrDying() && !target.getType().is(Tags.EntityTypeTags.BLOODLESS))
             BloodVial.incrementBloodVialInBothHands(player);
-        }
 
         return true;
-        // player.sendSystemMessage(Component.literal("Hit entity with dmg: " + damage)); // Debug output
     }
 
     public boolean glaiveMiss(ItemStack stack, Player player, Level level) {
@@ -144,12 +139,8 @@ public class GlaiveItem extends Item {
     }
 
     public EntityHitResult getEntityHitResult(Vec3 startVec, Vec3 endVec, List<LivingEntity> entities) {
-        for (LivingEntity entity : entities) {
-            AABB entityBoundingBox = entity.getBoundingBox();
-            if (entityBoundingBox.clip(startVec, endVec).isPresent()) {
-                return new EntityHitResult(entity);
-            }
-        }
+        for (LivingEntity entity : entities)
+            if (entity.getBoundingBox().clip(startVec, endVec).isPresent()) return new EntityHitResult(entity);
         return null;
     }
 

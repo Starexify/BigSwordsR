@@ -7,22 +7,20 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.trim.MaterialAssetGroup;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.equipment.BSMaterialAssetGroup;
-import net.nova.big_swords.init.BSItems;
 
 public class BSTrimMaterials {
     public static final ResourceKey<TrimMaterial> LIVINGMETAL = createKey("livingmetal");
 
     public static void bootstrap(BootstrapContext<TrimMaterial> context) {
-        register(context, LIVINGMETAL, BSItems.LIVINGMETAL_INGOT.get(), Style.EMPTY.withColor(TextColor.parseColor("#e0f9ff").getOrThrow()), BSMaterialAssetGroup.LIVINGMETAL);
+        register(context, LIVINGMETAL, Style.EMPTY.withColor(TextColor.parseColor("#e0f9ff").getOrThrow()), BSMaterialAssetGroup.LIVINGMETAL);
     }
 
     // Registers
-    public static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> materialKey, Item ingredient, Style style, MaterialAssetGroup overrideArmorMaterials) {
+    public static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> materialKey, Style style, MaterialAssetGroup overrideArmorMaterials) {
         Component component = Component.translatable(Util.makeDescriptionId("trim_material", materialKey.location())).withStyle(style);
         context.register(materialKey, new TrimMaterial(overrideArmorMaterials, component));
     }

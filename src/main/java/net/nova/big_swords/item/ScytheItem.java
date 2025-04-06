@@ -51,7 +51,7 @@ public class ScytheItem extends HoeItem {
     public static Properties properties;
 
     public ScytheItem(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Properties properties) {
-        super(material, attackDamage,attackSpeed, properties(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage, properties));
+        super(material, attackDamage, attackSpeed, properties(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage, properties));
     }
 
     public static Properties properties(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Properties settings) {
@@ -110,11 +110,8 @@ public class ScytheItem extends HoeItem {
                             scytheHits(serverLevel, player, target);
                             EnchantedItemInUse enchantedItemInUse = new EnchantedItemInUse(stack, player.getEquipmentSlotForItem(stack), player);
                             EnchantmentHelper.runIterationOnItem(stack, (enchantmentHolder, enchantmentLevel) -> {
-                                if (enchantmentHolder.value().effects().get(BSDataComponents.POST_DEATH.get()) != null) {
-                                    enchantmentHolder.value().effects().get(BSDataComponents.POST_DEATH.get()).forEach(targetedEffect ->
-                                            targetedEffect.effect().apply(serverLevel, enchantmentLevel, enchantedItemInUse, target, target.position())
-                                    );
-                                }
+                                if (enchantmentHolder.value().effects().get(BSDataComponents.POST_DEATH.get()) != null)
+                                    enchantmentHolder.value().effects().get(BSDataComponents.POST_DEATH.get()).forEach(targetedEffect -> targetedEffect.effect().apply(serverLevel, enchantmentLevel, enchantedItemInUse, target, target.position()));
                             });
                             entitiesHit++;
                         }
@@ -125,9 +122,8 @@ public class ScytheItem extends HoeItem {
                     int durabilityDamage = entitiesHit * 2;
                     stack.hurtAndBreak(durabilityDamage, player, EquipmentSlot.MAINHAND);
                     player.getCooldowns().addCooldown(stack, 40);
-                } else {
-                    player.getCooldowns().addCooldown(stack, 10);
-                }
+                } else player.getCooldowns().addCooldown(stack, 10);
+
                 player.swing(InteractionHand.MAIN_HAND, true);
                 if (stack.is(BSItems.SOUL_REAPER)) playSound(level, player, Sounds.REAPER_SLASH.get());
                 else playSound(level, player, Sounds.SCYTHE_SLASH.get());

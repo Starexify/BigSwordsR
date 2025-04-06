@@ -18,12 +18,11 @@ public class Soul extends Item {
     @Override
     public boolean onEntityItemUpdate(ItemStack stack, ItemEntity entity) {
         Level level = entity.level();
-        if (!level.isClientSide()) {
+        if (!level.isClientSide) {
             BlockPos pos = entity.blockPosition();
             BlockState stateBelow = level.getBlockState(pos.below());
 
             if (entity.getDeltaMovement().y() == 0 && stateBelow.is(Blocks.SAND)) {
-
                 level.setBlock(pos.below(), Blocks.SOUL_SAND.defaultBlockState(), 3);
                 level.playSound(null, pos.below(), SoundEvents.SOUL_SAND_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
                 stack.shrink(1);
