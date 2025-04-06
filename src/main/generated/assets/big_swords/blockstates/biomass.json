@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "big_swords:block/biomass_stage0"
+    },
+    "age=1": {
+      "model": "big_swords:block/biomass_stage1"
+    },
+    "age=2": {
+      "model": "big_swords:block/biomass_stage2"
+    },
+    "age=3": {
+      "model": "big_swords:block/biomass_stage3"
+    }
+  }
+}

@@ -2,8 +2,8 @@ package net.nova.big_swords.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.item.Item;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.world.item.Item;
 import net.nova.big_swords.BSClient;
 import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.BSItems;
@@ -16,12 +16,12 @@ import java.util.concurrent.CompletableFuture;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class LangProvider extends FabricLanguageProvider {
-    public LangProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+    public LangProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(dataOutput, registryLookup);
     }
 
     @Override
-    public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
+    public void generateTranslations(HolderLookup.Provider provider, TranslationBuilder translationBuilder) {
         // Items
         translationBuilder.add(BSItems.GIANT_WOODEN_STICK, "Giant Wooden Stick");
         translationBuilder.add(BSItems.GIANT_BLAZE_ROD, "Giant Blaze Rod");

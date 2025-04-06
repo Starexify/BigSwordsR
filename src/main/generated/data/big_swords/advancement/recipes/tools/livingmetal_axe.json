@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_livingmetal_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "big_swords:livingmetal_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "big_swords:livingmetal_axe"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_livingmetal_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "big_swords:livingmetal_axe"
+    ]
+  }
+}

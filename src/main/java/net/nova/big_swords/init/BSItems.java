@@ -22,7 +22,7 @@ import java.util.function.Function;
 
 public class BSItems {
     // Extra
-    public static Item BIOMASS_SEED = registerItem("biomass_seed", createBlockItemWithUniqueName(BSBlocks.BIOMASS));
+    public static Item BIOMASS_SEED = registerItem("biomass_seed", createBlockItemWithCustomItemName(BSBlocks.BIOMASS));
     public static Item CREEP_BALL = registerItem("creep_ball", CreepBall::new);
     public static Item SOUL = registerItem("soul", Item::new);
     public static Item BLOOD_VIAL = registerItem("blood_vial", BloodVial::new);
@@ -275,20 +275,16 @@ public class BSItems {
             )), 2, BSToolMaterial.LIVINGMETAL.durability() / 2));
 
     // Methods
-    public static <T extends Item> T registerItem(String name, Function<Item.Properties, T> factory) {
-        return register(name, factory, new Item.Properties());
+    public static <T extends Item> T registerItem(String name, Function<Item.Properties, T> function) {
+        return register(name, function, new Item.Properties());
     }
 
-    public static Item registerItem(String name, Item.Properties properties) {
-        return register(name, Item::new, properties);
-    }
-
-    public static <T extends Item> T register(String name, Function<Item.Properties, T> factory, Item.Properties properties) {
+    public static <T extends Item> T register(String name, Function<Item.Properties, T> function, Item.Properties properties) {
         ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, BigSwordsR.rl(name));
-        return Registry.register(BuiltInRegistries.ITEM, key, factory.apply(properties.setId(key)));
+        return Registry.register(BuiltInRegistries.ITEM, key, function.apply(properties.setId(key)));
     }
 
-    public static Function<Item.Properties, Item> createBlockItemWithUniqueName(Block block) {
+    public static Function<Item.Properties, Item> createBlockItemWithCustomItemName(Block block) {
         return properties -> new BlockItem(block, properties.useBlockDescriptionPrefix());
     }
 

@@ -19,7 +19,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.nova.big_swords.init.*;
@@ -49,10 +49,10 @@ public class BigSwordsR implements ModInitializer {
         // Loot Table Modifier
         LootTableEvents.MODIFY.register((resourceKey, builder, lootTableSource, wrapperLookup) -> {
             if (lootTableSource.isBuiltin() && BuiltInLootTables.END_CITY_TREASURE.equals(resourceKey)) {
-                LootTable.Builder poolBuilder = LootTable.lootTable()
-                        .apply(LootItemRandomChanceCondition.randomChance(0.35f))
-                        .withPool(LootItem.lootTableItem(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE));
-                builder.pool(poolBuilder);
+                LootPool.Builder poolBuilder = LootPool.lootPool()
+                        .when(LootItemRandomChanceCondition.randomChance(0.35f))
+                        .add(LootItem.lootTableItem(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE));
+                builder.pool(poolBuilder.build());
             }
         });
 
@@ -84,15 +84,13 @@ public class BigSwordsR implements ModInitializer {
     }
 
     public static void playSound(Level level, Player player, SoundEvent sound) {
-        if (!player.level().isClientSide) {
+        if (!player.level().isClientSide)
             level.playSound(null, player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f);
-        }
     }
 
     public static void playSound(Level level, LivingEntity livingEntity, SoundEvent sound) {
-        if (!livingEntity.level().isClientSide) {
+        if (!livingEntity.level().isClientSide)
             level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f);
-        }
     }
 
     public static ResourceLocation rl(String path) {

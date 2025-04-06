@@ -1,7 +1,10 @@
 package net.nova.big_swords.block;
 
-
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 public class CreepBlock extends Block {
@@ -9,15 +12,15 @@ public class CreepBlock extends Block {
 
     public CreepBlock(Properties properties) {
         super(properties);
-        this.setDefaultState(this.stateManager.getDefaultState().with(TILLED, Boolean.valueOf(false)));
+        this.registerDefaultState(this.stateDefinition.any().setValue(TILLED, Boolean.valueOf(false)));
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(TILLED);
     }
 
-    public void tillBlock(World level, BlockPos pos, BlockState state) {
-        level.setBlockState(pos, state.with(TILLED, true));
+    public void tillBlock(Level level, BlockPos pos, BlockState state) {
+        level.setBlock(pos, state.setValue(TILLED, true), 3);
     }
 }

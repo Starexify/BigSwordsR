@@ -88,7 +88,7 @@ public class GlaiveItem extends Item {
     @Override
     public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
         if (entity instanceof Player player) {
-            int i = this.getMaxUseTime(stack, entity) - timeLeft;
+            int i = this.getUseDuration(stack, entity) - timeLeft;
             if (i < 20) return false; // Require a minimum charge time
 
             if (!level.isClientSide) {

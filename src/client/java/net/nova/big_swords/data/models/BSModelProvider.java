@@ -2,8 +2,8 @@ package net.nova.big_swords.data.models;
 
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.client.data.ItemModelGenerator;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
 
 public class BSModelProvider extends FabricModelProvider {
     public BSModelProvider(FabricDataOutput output) {
@@ -11,12 +11,12 @@ public class BSModelProvider extends FabricModelProvider {
     }
 
     @Override
-    public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
-        new BSBlockModelGenerator(blockStateModelGenerator.blockStateCollector, blockStateModelGenerator.itemModelOutput, blockStateModelGenerator.modelCollector).register();
+    public void generateBlockStateModels(BlockModelGenerators blockModels) {
+        new BSBlockModelGenerator(blockModels.blockStateOutput, blockModels.itemModelOutput, blockModels.modelOutput).run();
     }
 
     @Override
-    public void generateItemModels(ItemModelGenerator itemModelGenerator) {
-        new BSItemModelGenerator(itemModelGenerator.output, itemModelGenerator.modelCollector).register();
+    public void generateItemModels(ItemModelGenerators itemModels) {
+        new BSItemModelGenerator(itemModels.itemModelOutput, itemModels.modelOutput).run();
     }
 }

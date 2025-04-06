@@ -1,49 +1,46 @@
 package net.nova.big_swords.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CropBlock;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.item.ItemConvertible;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.IntProperty;
-import net.minecraft.state.property.Properties;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.WorldView;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CropBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.nova.big_swords.init.BSItems;
 
 public class BiomassCrop extends CropBlock {
     public static final int MAX_AGE = 3;
-    public static final IntProperty AGE = Properties.AGE_3;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
     public static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
-            Block.createCuboidShape(5.0, 0.0, 5.0, 11.0, 7.0, 11.0),
-            Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
-            Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
-            Block.createCuboidShape(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
+            Block.box(5.0, 0.0, 5.0, 11.0, 7.0, 11.0),
+            Block.box(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
+            Block.box(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
+            Block.box(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
     };
 
-    public BiomassCrop(Settings settings) {
-        super(settings);
-        this.setDefaultState(this.stateManager.getDefaultState().with(this.getAgeProperty(), Integer.valueOf(0)));
+    public BiomassCrop(Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(this.getAgeProperty(), Integer.valueOf(0)));
     }
 
     // Shape
     @Override
-    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+    protected VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
         return SHAPE_BY_AGE[this.getAge(state)];
     }
 
     // Crop Stuff
     @Override
-    protected boolean canPlantOnTop(BlockState floor, BlockView world, BlockPos pos) {
-        return floor.getBlock() instanceof CreepBlock && floor.get(CreepBlock.TILLED);
-    }
-
-    @Override
-    protected IntProperty getAgeProperty() {
-        return AGE;
+    protected boolean mayPlaceOn(BlockState floor, BlockGetter level, BlockPos pos) {
+        return floor.getBlock() instanceof CreepBlock && floor.getValue(CreepBlock.TILLED);
     }
 
     @Override
@@ -52,18 +49,28 @@ public class BiomassCrop extends CropBlock {
     }
 
     @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+    protected IntegerProperty getAgeProperty() {
+        return AGE;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AGE);
     }
 
     // Plant Seed
     @Override
-    protected ItemConvertible getSeedsItem() {
+    protected ItemLike getBaseSeedId() {
         return BSItems.BIOMASS_SEED;
     }
 
     @Override
-    public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state) {
+    public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+        return false;
+    }
+
+    @Override
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
         return false;
     }
 }

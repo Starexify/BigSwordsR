@@ -6,13 +6,13 @@ import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.AttributeModifiersComponent;
-import net.minecraft.item.Item;
-import net.minecraft.screen.ScreenTexts;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.nova.big_swords.init.BSAttributes;
 import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.BSToolMaterial;
@@ -35,14 +35,14 @@ public class BSClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         // RenderLayers
-        BlockRenderLayerMap.INSTANCE.putBlock(BSBlocks.BIOMASS, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(BSBlocks.BIOMASS, RenderType.cutout());
 
         // Resource Packs
         for (String packId : RESOURCE_PACKS) {
             ResourceManagerHelper.registerBuiltinResourcePack(
                     BigSwordsR.rl(packId),
                     FabricLoader.getInstance().getModContainer(MODID).orElseThrow(),
-                    Text.translatable("resourcePack." + MODID + "." + packId + ".name"),
+                    Component.translatable("resourcePack." + MODID + "." + packId + ".name"),
                     ResourcePackActivationType.NORMAL
             );
         }
@@ -51,27 +51,24 @@ public class BSClient implements ClientModInitializer {
         ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltipType, tooltip) -> {
             Item item = stack.getItem();
 
-            tooltip.removeIf(text -> text.getString().contains(BSAttributes.MAX_CHARGED_DAMAGE.value().getTranslationKey()));
-            Optional<Text> toModify = tooltip.stream()
-                    .filter(text -> text.getString().contains(BSAttributes.MIN_CHARGED_DAMAGE.value().getTranslationKey())).findFirst();
+            tooltip.removeIf(text -> text.getString().contains(BSAttributes.MAX_CHARGED_DAMAGE.value().getDescriptionId()));
+            Optional<Component> toModify = tooltip.stream()
+                    .filter(text -> text.getString().contains(BSAttributes.MIN_CHARGED_DAMAGE.value().getDescriptionId())).findFirst();
 
             if (toModify.isPresent()) {
-                List<AttributeModifiersComponent.Entry> modifiers = item.getComponents().get(DataComponentTypes.ATTRIBUTE_MODIFIERS).modifiers();
+                List<ItemAttributeModifiers.Entry> modifiers = item.components().get(DataComponents.ATTRIBUTE_MODIFIERS).modifiers();
                 double minChargedDamage = BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MIN_CHARGED_DAMAGE_ID);
                 double maxChargedDamage = BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
 
                 int index = tooltip.indexOf(toModify.get());
-                tooltip.set(index, ScreenTexts.space().append(Text.literal(
-                                AttributeModifiersComponent.DECIMAL_FORMAT.format(minChargedDamage) + "-" +
-                                        AttributeModifiersComponent.DECIMAL_FORMAT.format(maxChargedDamage) + " ")
-                        .append(Text.translatable("attribute.name.charged_damage")).formatted(Formatting.DARK_GREEN)
+                tooltip.set(index, CommonComponents.space().append(Component.literal(
+                                ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(minChargedDamage) + "-" +
+                                        ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(maxChargedDamage) + " ")
+                        .append(Component.translatable("attribute.name.charged_damage")).withStyle(ChatFormatting.DARK_GREEN)
                 ));
 
-                if (item instanceof GlaiveItem glaiveItem) {
-                    tooltip.add(index + 1,
-                            ScreenTexts.space().append(AttributeModifiersComponent.DECIMAL_FORMAT.format(glaiveItem.range) + " Charged Range").formatted(Formatting.DARK_GREEN)
-                    );
-                }
+                if (item instanceof GlaiveItem glaiveItem)
+                    tooltip.add(index + 1, CommonComponents.space().append(ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(glaiveItem.range) + " Charged Range").withStyle(ChatFormatting.DARK_GREEN));
             }
         });
     }

@@ -46,15 +46,15 @@ public class BSBlocks {
     );
 
     // Methods
-    public static <T extends Block> T registerBlockWithItem(String name, Function<BlockBehaviour.Properties, T> factory, BlockBehaviour.Properties properties) {
-        T block = registerBlock(name, factory, properties);
+    public static <T extends Block> T registerBlockWithItem(String name, Function<BlockBehaviour.Properties, T> function, BlockBehaviour.Properties properties) {
+        T block = registerBlock(name, function, properties);
         BSItems.registerItem(name, itemProperties -> new BlockItem(block, itemProperties.useBlockDescriptionPrefix()));
         return block;
     }
 
-    public static <T extends Block> T registerBlock(String name, Function<BlockBehaviour.Properties, T> factory, BlockBehaviour.Properties properties) {
+    public static <T extends Block> T registerBlock(String name, Function<BlockBehaviour.Properties, T> function, BlockBehaviour.Properties properties) {
         ResourceKey<Block> key = ResourceKey.create(Registries.BLOCK, BigSwordsR.rl(name));
-        return Registry.register(BuiltInRegistries.BLOCK, key, factory.apply(properties.setId(key)));
+        return Registry.register(BuiltInRegistries.BLOCK, key, function.apply(properties.setId(key)));
     }
 
     public static void initialize() {

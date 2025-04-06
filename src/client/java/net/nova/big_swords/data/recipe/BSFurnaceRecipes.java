@@ -1,29 +1,29 @@
 package net.nova.big_swords.data.recipe;
 
-import net.minecraft.data.recipe.CookingRecipeJsonBuilder;
-import net.minecraft.data.recipe.RecipeExporter;
-import net.minecraft.data.recipe.RecipeGenerator;
-import net.minecraft.item.Item;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.book.RecipeCategory;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.nova.big_swords.init.BSItems;
 
-public class BSFurnaceRecipes extends RecipeGenerator {
-    public final RegistryEntryLookup<Item> itemLookup;
+public class BSFurnaceRecipes extends RecipeProvider {
+    public final HolderGetter<Item> itemLookup;
 
-    protected BSFurnaceRecipes(RegistryWrapper.WrapperLookup registries, RecipeExporter exporter) {
-        super(registries, exporter);
-        this.itemLookup = registries.getOrThrow(RegistryKeys.ITEM);
+    protected BSFurnaceRecipes(HolderLookup.Provider provider, RecipeOutput recipeOutput) {
+        super(provider, recipeOutput);
+        this.itemLookup = registries.lookupOrThrow(Registries.ITEM);
     }
 
     @Override
-    public void generate() {
+    public void buildRecipes() {
         // Big Swords
-        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItem(
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(
                                 BSItems.IRON_BIG_SWORD
                         ),
                         RecipeCategory.MISC,
@@ -31,10 +31,10 @@ public class BSFurnaceRecipes extends RecipeGenerator {
                         0.1F,
                         200
                 )
-                .criterion(hasItem(BSItems.IRON_BIG_SWORD), conditionsFromItem(BSItems.IRON_BIG_SWORD))
-                .offerTo(exporter, getSmeltingItemPath(BSItems.IRON_BIG_SWORD));
+                .unlockedBy(getHasName(BSItems.IRON_BIG_SWORD), has(BSItems.IRON_BIG_SWORD))
+                .save(output, getSmeltingRecipeName(BSItems.IRON_BIG_SWORD));
 
-        CookingRecipeJsonBuilder.createBlasting(Ingredient.ofItem(
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(
                                 BSItems.IRON_BIG_SWORD
                         ),
                         RecipeCategory.MISC,
@@ -42,10 +42,10 @@ public class BSFurnaceRecipes extends RecipeGenerator {
                         0.1F,
                         100
                 )
-                .criterion(hasItem(BSItems.IRON_BIG_SWORD), conditionsFromItem(BSItems.IRON_BIG_SWORD))
-                .offerTo(exporter, getBlastingItemPath(BSItems.IRON_BIG_SWORD));
+                .unlockedBy(getHasName(BSItems.IRON_BIG_SWORD), has(BSItems.IRON_BIG_SWORD))
+                .save(output, getBlastingRecipeName(BSItems.IRON_BIG_SWORD));
 
-        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItem(
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(
                                 BSItems.GOLDEN_BIG_SWORD
                         ),
                         RecipeCategory.MISC,
@@ -53,10 +53,10 @@ public class BSFurnaceRecipes extends RecipeGenerator {
                         0.1F,
                         200
                 )
-                .criterion(hasItem(BSItems.GOLDEN_BIG_SWORD), conditionsFromItem(BSItems.GOLDEN_BIG_SWORD))
-                .offerTo(exporter, getSmeltingItemPath(BSItems.GOLDEN_BIG_SWORD));
+                .unlockedBy(getHasName(BSItems.GOLDEN_BIG_SWORD), has(BSItems.GOLDEN_BIG_SWORD))
+                .save(output, getSmeltingRecipeName(BSItems.GOLDEN_BIG_SWORD));
 
-        CookingRecipeJsonBuilder.createBlasting(Ingredient.ofItem(
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(
                                 BSItems.GOLDEN_BIG_SWORD
                         ),
                         RecipeCategory.MISC,
@@ -64,11 +64,11 @@ public class BSFurnaceRecipes extends RecipeGenerator {
                         0.1F,
                         100
                 )
-                .criterion(hasItem(BSItems.GOLDEN_BIG_SWORD), conditionsFromItem(BSItems.GOLDEN_BIG_SWORD))
-                .offerTo(exporter, getBlastingItemPath(BSItems.GOLDEN_BIG_SWORD));
+                .unlockedBy(getHasName(BSItems.GOLDEN_BIG_SWORD), has(BSItems.GOLDEN_BIG_SWORD))
+                .save(output, getBlastingRecipeName(BSItems.GOLDEN_BIG_SWORD));
 
         // Glaives & Scythes
-        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(
                                 BSItems.IRON_GLAIVE,
                                 BSItems.IRON_SCYTHE
                         ),
@@ -77,11 +77,11 @@ public class BSFurnaceRecipes extends RecipeGenerator {
                         0.1F,
                         200
                 )
-                .criterion(hasItem(BSItems.IRON_GLAIVE), conditionsFromItem(BSItems.IRON_GLAIVE))
-                .criterion(hasItem(BSItems.IRON_SCYTHE), conditionsFromItem(BSItems.IRON_SCYTHE))
-                .offerTo(exporter, getSmeltingItemPath(Items.IRON_NUGGET));
+                .unlockedBy(getHasName(BSItems.IRON_GLAIVE), has(BSItems.IRON_GLAIVE))
+                .unlockedBy(getHasName(BSItems.IRON_SCYTHE), has(BSItems.IRON_SCYTHE))
+                .save(output, getSmeltingRecipeName(Items.IRON_NUGGET));
 
-        CookingRecipeJsonBuilder.createBlasting(Ingredient.ofItems(
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(
                                 BSItems.IRON_GLAIVE,
                                 BSItems.IRON_SCYTHE
                         ),
@@ -90,11 +90,11 @@ public class BSFurnaceRecipes extends RecipeGenerator {
                         0.1F,
                         100
                 )
-                .criterion(hasItem(BSItems.IRON_GLAIVE), conditionsFromItem(BSItems.IRON_GLAIVE))
-                .criterion(hasItem(BSItems.IRON_SCYTHE), conditionsFromItem(BSItems.IRON_SCYTHE))
-                .offerTo(exporter, getBlastingItemPath(Items.IRON_NUGGET));
+                .unlockedBy(getHasName(BSItems.IRON_GLAIVE), has(BSItems.IRON_GLAIVE))
+                .unlockedBy(getHasName(BSItems.IRON_SCYTHE), has(BSItems.IRON_SCYTHE))
+                .save(output, getBlastingRecipeName(Items.IRON_NUGGET));
 
-        CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(
                                 BSItems.GOLDEN_GLAIVE,
                                 BSItems.GOLDEN_SCYTHE
                         ),
@@ -103,11 +103,11 @@ public class BSFurnaceRecipes extends RecipeGenerator {
                         0.1F,
                         200
                 )
-                .criterion(hasItem(BSItems.GOLDEN_GLAIVE), conditionsFromItem(BSItems.GOLDEN_GLAIVE))
-                .criterion(hasItem(BSItems.GOLDEN_SCYTHE), conditionsFromItem(BSItems.GOLDEN_SCYTHE))
-                .offerTo(exporter, getSmeltingItemPath(Items.GOLD_NUGGET));
+                .unlockedBy(getHasName(BSItems.GOLDEN_GLAIVE), has(BSItems.GOLDEN_GLAIVE))
+                .unlockedBy(getHasName(BSItems.GOLDEN_SCYTHE), has(BSItems.GOLDEN_SCYTHE))
+                .save(output, getSmeltingRecipeName(Items.GOLD_NUGGET));
 
-        CookingRecipeJsonBuilder.createBlasting(Ingredient.ofItems(
+        SimpleCookingRecipeBuilder.blasting(Ingredient.of(
                                 BSItems.GOLDEN_GLAIVE,
                                 BSItems.GOLDEN_SCYTHE
                         ),
@@ -116,8 +116,8 @@ public class BSFurnaceRecipes extends RecipeGenerator {
                         0.1F,
                         100
                 )
-                .criterion(hasItem(BSItems.GOLDEN_GLAIVE), conditionsFromItem(BSItems.GOLDEN_GLAIVE))
-                .criterion(hasItem(BSItems.GOLDEN_SCYTHE), conditionsFromItem(BSItems.GOLDEN_SCYTHE))
-                .offerTo(exporter, getBlastingItemPath(Items.GOLD_NUGGET));
+                .unlockedBy(getHasName(BSItems.GOLDEN_GLAIVE), has(BSItems.GOLDEN_GLAIVE))
+                .unlockedBy(getHasName(BSItems.GOLDEN_SCYTHE), has(BSItems.GOLDEN_SCYTHE))
+                .save(output, getBlastingRecipeName(Items.GOLD_NUGGET));
     }
 }
