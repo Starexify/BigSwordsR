@@ -189,7 +189,7 @@ public class BSItemModelGenerator extends ItemModelGenerators {
         List<SelectItemModel.SwitchCase<Integer>> list = new ArrayList<>();
         ItemModel.Unbaked basicModel = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(BigSwordsR.rl("item/vial"), TextureMapping.layer0(BigSwordsR.rl("item/vial")), modelOutput));
 
-        for (int i = 1; i < 9; i++) {
+        for (int i = 1; i <= 9; i++) {
             ItemModel.Unbaked bloodModel = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(ModelLocationUtils.getModelLocation(item, "_" + i), TextureMapping.layer0(TextureMapping.getItemTexture(item, "_" + (i - 1))), modelOutput));
             list.add(ItemModelUtils.when(i, bloodModel));
         }
