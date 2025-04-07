@@ -171,7 +171,7 @@ public class BSItems {
                     Optional.of(DamageTypeTags.BYPASSES_SHIELD),
                     Optional.of(SoundEvents.SHIELD_BLOCK),
                     Optional.of(SoundEvents.SHIELD_BREAK)
-            )), 1, -(ToolMaterial.NETHERITE.durability() / 2)));
+            )).fireResistant(), 1, -(ToolMaterial.NETHERITE.durability() / 2)));
     public static DeferredItem<Item> GILDED_NETHERITE_SHIELD = ITEMS.registerItem("gilded_netherite_shield", properties -> new TieredShield(ToolMaterial.NETHERITE,
             properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(0.25F, 1.0F,
                     List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
@@ -179,7 +179,7 @@ public class BSItems {
                     Optional.of(DamageTypeTags.BYPASSES_SHIELD),
                     Optional.of(SoundEvents.SHIELD_BLOCK),
                     Optional.of(SoundEvents.SHIELD_BREAK)
-            )), 1, -793));
+            )).fireResistant(), 1, -793));
     public static DeferredItem<Item> ENDER_SHIELD = ITEMS.registerItem("ender_shield", properties -> new TieredShield(BSToolMaterial.ENDER,
             properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(0.25F, 1.0F,
                     List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
@@ -187,7 +187,7 @@ public class BSItems {
                     Optional.of(DamageTypeTags.BYPASSES_SHIELD),
                     Optional.of(SoundEvents.SHIELD_BLOCK),
                     Optional.of(SoundEvents.SHIELD_BREAK)
-            )), 1, -(BSToolMaterial.ENDER.durability() / 2)));
+            )).fireResistant(), 1, -(BSToolMaterial.ENDER.durability() / 2)));
     public static DeferredItem<Item> GILDED_ENDER_SHIELD = ITEMS.registerItem("gilded_ender_shield", properties -> new TieredShield(BSToolMaterial.ENDER,
             properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(0.25F, 1.0F,
                     List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
@@ -195,7 +195,7 @@ public class BSItems {
                     Optional.of(DamageTypeTags.BYPASSES_SHIELD),
                     Optional.of(SoundEvents.SHIELD_BLOCK),
                     Optional.of(SoundEvents.SHIELD_BREAK)
-            )), 1, -1190));
+            )).fireResistant(), 1, -1190));
     public static DeferredItem<Item> QUARTZ_SHIELD = ITEMS.registerItem("quartz_shield", properties -> new TieredShield(BSToolMaterial.QUARTZ,
             properties.component(DataComponents.BLOCKS_ATTACKS, new BlocksAttacks(0.25F, 1.0F,
                     List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),

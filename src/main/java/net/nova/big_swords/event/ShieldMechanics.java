@@ -3,7 +3,6 @@ package net.nova.big_swords.event;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -54,7 +53,6 @@ public class ShieldMechanics {
             Entity attacker = damageSource.getEntity();
             Entity sourceEntity = damageSource.getDirectEntity();
             float blockedDamage = event.getBlockedDamage();
-            int shieldDamage = event.shieldDamage();
             double randomChance = Math.random();
             double randomChanceE = Math.random();
             Level level = player.level();
@@ -64,7 +62,7 @@ public class ShieldMechanics {
             int soulFireAspectLevel = attacker instanceof LivingEntity livingEntity ?
                     player.level().registryAccess()
                             .lookupOrThrow(Registries.ENCHANTMENT)
-                            .get(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.withDefaultNamespace("soul_fire_aspect")))
+                            .get(ResourceLocation.withDefaultNamespace("soul_fire_aspect"))
                             .map(enchantment -> livingEntity.getWeaponItem().getEnchantmentLevel(enchantment))
                             .orElse(0)
                     : 0;
@@ -79,11 +77,10 @@ public class ShieldMechanics {
                     if (randomChance < catchChance) {
                         arrow.remove(Entity.RemovalReason.DISCARDED);
                         ItemStack arrowStack = new ItemStack(Items.ARROW);
-                        if (!player.getInventory().add(arrowStack)) player.drop(arrowStack, false);
+                        if (!player.addItem(arrowStack)) player.drop(arrowStack, false);
                     }
 
                     // Weakness
-                    //event.setShieldDamage(blockedDamage * 4);
                     if (arrow.isOnFire())
                         blocksAttacks.hurtBlockingItem(level, shield, player, player.getUsedItemHand(), blockedDamage * 4);
                 }

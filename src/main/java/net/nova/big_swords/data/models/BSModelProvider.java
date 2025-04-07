@@ -14,7 +14,7 @@ public class BSModelProvider extends ModelProvider {
 
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        new BSBlockModelGenerator(blockModels.blockStateOutput, itemModels.itemModelOutput, blockModels.modelOutput).run();
+        new BSBlockModelGenerator(blockModels.blockStateOutput, blockModels.itemModelOutput, blockModels.modelOutput).run();
         new BSItemModelGenerator(itemModels.itemModelOutput, itemModels.modelOutput).run();
     }
 }

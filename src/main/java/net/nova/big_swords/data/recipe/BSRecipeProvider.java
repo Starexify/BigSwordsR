@@ -40,7 +40,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("XXX")
                 .pattern("X#X")
                 .pattern(" X ")
-                .unlockedBy("has_" + getItemName(shield), has(shield))
+                .unlockedBy(getHasName(shield), has(shield))
                 .save(output);
     }
 
@@ -51,7 +51,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("XXX")
                 .pattern("X#X")
                 .pattern(" X ")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -62,7 +62,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("XXX")
                 .pattern("X#X")
                 .pattern(" X ")
-                .unlockedBy("has_" + getItemName(Items.LEATHER), has(Items.LEATHER))
+                .unlockedBy(getHasName(Items.LEATHER), has(Items.LEATHER))
                 .save(output);
     }
 
@@ -72,7 +72,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern(" ##")
                 .pattern("###")
                 .pattern("## ")
-                .unlockedBy("has_" + getItemName(stick), has(stick))
+                .unlockedBy(getHasName(stick), has(stick))
                 .save(output);
     }
 
@@ -84,7 +84,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern(" XX")
                 .pattern("YXX")
                 .pattern("#Y ")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -95,7 +95,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("XX#")
                 .pattern(" #X")
                 .pattern("#  ")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -106,7 +106,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("XX#")
                 .pattern(" #X")
                 .pattern("#  ")
-                .unlockedBy("has_" + getItemName(handle), has(handle))
+                .unlockedBy(getHasName(handle), has(handle))
                 .save(output);
     }
 
@@ -117,7 +117,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("XX ")
                 .pattern("X#X")
                 .pattern(" X#")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -128,7 +128,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("XX ")
                 .pattern("X#X")
                 .pattern(" X#")
-                .unlockedBy("has_" + getItemName(handle), has(handle))
+                .unlockedBy(getHasName(handle), has(handle))
                 .save(output);
     }
 
@@ -139,7 +139,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern(" XX")
                 .pattern("XXX")
                 .pattern("#X ")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -150,7 +150,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern(" XX")
                 .pattern("XXX")
                 .pattern("#X ")
-                .unlockedBy("has_" + getItemName(handle), has(handle))
+                .unlockedBy(getHasName(handle), has(handle))
                 .save(output);
     }
 
@@ -159,7 +159,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .define('#', material)
                 .pattern("###")
                 .pattern("# #")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -169,7 +169,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("# #")
                 .pattern("###")
                 .pattern("###")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -179,7 +179,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("###")
                 .pattern("# #")
                 .pattern("# #")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -188,7 +188,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .define('#', material)
                 .pattern("###")
                 .pattern("# #")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -199,7 +199,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("X")
                 .pattern("X")
                 .pattern("#")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -210,7 +210,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("XXX")
                 .pattern(" # ")
                 .pattern(" # ")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -221,7 +221,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("XX")
                 .pattern("#X")
                 .pattern("# ")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -232,7 +232,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("X")
                 .pattern("#")
                 .pattern("#")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -243,7 +243,7 @@ public class BSRecipeProvider extends RecipeProvider {
                 .pattern("XX")
                 .pattern("# ")
                 .pattern("# ")
-                .unlockedBy("has_" + getItemName(material), has(material))
+                .unlockedBy(getHasName(material), has(material))
                 .save(output);
     }
 
@@ -251,7 +251,7 @@ public class BSRecipeProvider extends RecipeProvider {
         SmithingTransformRecipeBuilder.smithing(
                         Ingredient.of(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(pIngredientItem), Ingredient.of(Items.ENDER_EYE), pCategory, pResultItem
                 )
-                .unlocks("has_ender_eye", has(Items.ENDER_EYE))
+                .unlocks(getHasName(Items.ENDER_EYE), has(Items.ENDER_EYE))
                 .save(output, path + getItemName(pResultItem) + "_smithing");
     }
 
@@ -259,7 +259,7 @@ public class BSRecipeProvider extends RecipeProvider {
         SmithingTransformRecipeBuilder.smithing(
                         Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(pIngredientItem), Ingredient.of(Items.NETHERITE_INGOT), pCategory, pResultItem
                 )
-                .unlocks("has_netherite_ingot", has(Items.NETHERITE_INGOT))
+                .unlocks(getHasName(Items.NETHERITE_INGOT), has(Items.NETHERITE_INGOT))
                 .save(output, path + getItemName(pResultItem) + "_smithing");
     }
 
@@ -267,7 +267,7 @@ public class BSRecipeProvider extends RecipeProvider {
         SmithingTransformRecipeBuilder.smithing(
                         Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(pIngredientItem), Ingredient.of(Items.NETHERITE_BLOCK), pCategory, pResultItem
                 )
-                .unlocks("has_netherite_block", has(Items.NETHERITE_BLOCK))
+                .unlocks(getHasName(Items.NETHERITE_BLOCK), has(Items.NETHERITE_BLOCK))
                 .save(output, path + getItemName(pResultItem) + "_smithing");
     }
 

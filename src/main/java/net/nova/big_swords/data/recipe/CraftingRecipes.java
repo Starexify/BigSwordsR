@@ -21,7 +21,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("XXX")
                 .pattern("X X")
                 .pattern(" X ")
-                .unlockedBy("has_" + getItemName(Blocks.GLASS), has(Blocks.GLASS))
+                .unlockedBy(getHasName(Blocks.GLASS), has(Blocks.GLASS))
                 .save(output, path + getItemName(BSItems.BLOOD_VIAL) + "_recipe");
 
         // Sticks
@@ -33,7 +33,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern(" L#")
                 .pattern("L#L")
                 .pattern("#L ")
-                .unlockedBy("has_" + getItemName(BSItems.LIVINGMETAL_INGOT), has(BSItems.LIVINGMETAL_INGOT))
+                .unlockedBy(getHasName(BSItems.LIVINGMETAL_INGOT), has(BSItems.LIVINGMETAL_INGOT))
                 .save(output);
 
         // Livingmetal Recipes
@@ -43,7 +43,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern(" S ")
                 .pattern("SIS")
                 .pattern(" S ")
-                .unlockedBy("has_" + getItemName(BSItems.SOUL), has(BSItems.SOUL))
+                .unlockedBy(getHasName(BSItems.SOUL), has(BSItems.SOUL))
                 .save(output);
         nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, BSItems.LIVINGMETAL_INGOT, RecipeCategory.BUILDING_BLOCKS, BSBlocks.LIVINGMETAL_BLOCK, getItemName(BSItems.LIVINGMETAL_INGOT) + "_from_" + getItemName(BSBlocks.LIVINGMETAL_BLOCK), getItemName(BSItems.LIVINGMETAL_INGOT));
         basicHelmet(BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_HELMET);
@@ -91,7 +91,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern(" BB")
                 .pattern("XSB")
                 .pattern("#X ")
-                .unlockedBy("has_" + getItemName(Items.SKELETON_SKULL), has(Items.SKELETON_SKULL))
+                .unlockedBy(getHasName(Items.SKELETON_SKULL), has(Items.SKELETON_SKULL))
                 .save(output);
 
         shaped(RecipeCategory.COMBAT, BSItems.OBSIDIAN_BIG_SWORD)
@@ -101,7 +101,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern(" QQ")
                 .pattern("QDQ")
                 .pattern("#Q ")
-                .unlockedBy("has_" + getItemName(Items.OBSIDIAN), has(Items.OBSIDIAN))
+                .unlockedBy(getHasName(Items.OBSIDIAN), has(Items.OBSIDIAN))
                 .save(output);
 
         // Glaives
@@ -119,7 +119,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("XX ")
                 .pattern("X#Y")
                 .pattern(" Y#")
-                .unlockedBy("has_" + getItemName(BSItems.BIOMASS), has(BSItems.BIOMASS))
+                .unlockedBy(getHasName(BSItems.BIOMASS), has(BSItems.BIOMASS))
                 .save(output);
 
         // Scythes
@@ -137,7 +137,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("XX#")
                 .pattern(" #Y")
                 .pattern("#  ")
-                .unlockedBy("has_" + getItemName(BSItems.BIOMASS), has(BSItems.BIOMASS))
+                .unlockedBy(getHasName(BSItems.BIOMASS), has(BSItems.BIOMASS))
                 .save(output);
 
         shaped(RecipeCategory.COMBAT, BSItems.BONE_SCYTHE)
@@ -146,7 +146,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("###")
                 .pattern(" #Y")
                 .pattern("#  ")
-                .unlockedBy("has_" + getItemName(BSItems.BIOMASS), has(BSItems.BIOMASS))
+                .unlockedBy(getHasName(BSItems.BIOMASS), has(BSItems.BIOMASS))
                 .save(output);
 
         // Shields
@@ -163,7 +163,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("XXX")
                 .pattern("XXX")
                 .pattern(" X ")
-                .unlockedBy("has_" + getItemName(Items.ROTTEN_FLESH), has(Items.ROTTEN_FLESH))
+                .unlockedBy(getHasName(Items.ROTTEN_FLESH), has(Items.ROTTEN_FLESH))
                 .save(output);
 
         shaped(RecipeCategory.COMBAT, BSItems.SKULL_SHIELD)
@@ -173,7 +173,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("XSX")
                 .pattern("X#X")
                 .pattern(" X ")
-                .unlockedBy("has_" + getItemName(Items.BONE), has(Items.BONE))
+                .unlockedBy(getHasName(Items.BONE), has(Items.BONE))
                 .save(output);
 
         // Gilded Shields
@@ -195,7 +195,7 @@ public class CraftingRecipes extends BSRecipeProvider {
                 .pattern("XSX")
                 .pattern("X#X")
                 .pattern(" X ")
-                .unlockedBy("has_" + getItemName(BSItems.SKULL_SHIELD), has(BSItems.SKULL_SHIELD))
+                .unlockedBy(getHasName(BSItems.SKULL_SHIELD), has(BSItems.SKULL_SHIELD))
                 .save(output);
     }
 }

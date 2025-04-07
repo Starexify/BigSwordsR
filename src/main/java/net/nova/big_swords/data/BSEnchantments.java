@@ -42,7 +42,7 @@ public class BSEnchantments {
                         BSDataComponents.POST_DEATH.get(),
                         EnchantmentTarget.VICTIM,
                         EnchantmentTarget.ATTACKER,
-                        new SoulStealEffect(new AddValue(LevelBasedValue.perLevel(0.3F, 0.3F)).value(), new ItemStack(BSItems.SOUL.get()))
+                        new SoulStealEffect(new AddValue(LevelBasedValue.perLevel(0.3F)).value(), new ItemStack(BSItems.SOUL.get()))
                 )
         );
     }

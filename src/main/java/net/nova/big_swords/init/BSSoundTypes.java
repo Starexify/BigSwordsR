@@ -3,8 +3,8 @@ package net.nova.big_swords.init;
 import net.minecraft.sounds.SoundEvents;
 import net.neoforged.neoforge.common.util.DeferredSoundType;
 
-public class BSSoundTypes {
-    public static DeferredSoundType LIVINGMETAL_BLOCK = new DeferredSoundType(
+public interface BSSoundTypes {
+    DeferredSoundType LIVINGMETAL_BLOCK = new DeferredSoundType(
             1.0F, 1.0F,
             SoundEvents.SOUL_ESCAPE::value,
             () -> SoundEvents.SOUL_SAND_STEP,

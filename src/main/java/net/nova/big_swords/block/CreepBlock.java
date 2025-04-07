@@ -21,6 +21,6 @@ public class CreepBlock extends Block {
     }
 
     public void tillBlock(Level level, BlockPos pos, BlockState state) {
-        level.setBlock(pos, state.setValue(TILLED, true), 2);
+        level.setBlockAndUpdate(pos, state.setValue(TILLED, true));
     }
 }
