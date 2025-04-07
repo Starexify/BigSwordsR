@@ -12,7 +12,7 @@ public class CreepBlock extends Block {
 
     public CreepBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(TILLED, Boolean.valueOf(false)));
+        this.registerDefaultState(this.stateDefinition.any().setValue(TILLED, false));
     }
 
     @Override

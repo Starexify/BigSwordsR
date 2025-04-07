@@ -22,7 +22,7 @@ import java.util.function.Function;
 
 public class BSItems {
     // Extra
-    public static Item BIOMASS_SEED = registerItem("biomass_seed", createBlockItemWithCustomItemName(BSBlocks.BIOMASS));
+    public static Item BIOMASS_SEED = registerItem("biomass_seed", properties -> new BlockItem(BSBlocks.BIOMASS, properties.useItemDescriptionPrefix()));
     public static Item CREEP_BALL = registerItem("creep_ball", CreepBall::new);
     public static Item SOUL = registerItem("soul", Item::new);
     public static Item BLOOD_VIAL = registerItem("blood_vial", BloodVial::new);
@@ -282,10 +282,6 @@ public class BSItems {
     public static <T extends Item> T register(String name, Function<Item.Properties, T> function, Item.Properties properties) {
         ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, BigSwordsR.rl(name));
         return Registry.register(BuiltInRegistries.ITEM, key, function.apply(properties.setId(key)));
-    }
-
-    public static Function<Item.Properties, Item> createBlockItemWithCustomItemName(Block block) {
-        return properties -> new BlockItem(block, properties.useBlockDescriptionPrefix());
     }
 
     public static void initialize() {

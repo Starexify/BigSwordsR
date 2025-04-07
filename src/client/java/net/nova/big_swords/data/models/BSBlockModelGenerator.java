@@ -67,6 +67,6 @@ public class BSBlockModelGenerator extends BlockModelGenerators {
 
         MultiVariant normalModel = plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(BSBlocks.CREEP_BLOCK, normalMapping, this.modelOutput));
         MultiVariant tilledModel = plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK, "_tilled"), tilledMapping, this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(BSBlocks.CREEP_BLOCK).with(createEmptyOrFullDispatch(CreepBlock.TILLED, true, normalModel, tilledModel)));
+        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(BSBlocks.CREEP_BLOCK).with(createEmptyOrFullDispatch(CreepBlock.TILLED, true, tilledModel, normalModel)));
     }
 }

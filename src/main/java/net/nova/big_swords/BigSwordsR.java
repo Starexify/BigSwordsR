@@ -40,8 +40,8 @@ public class BigSwordsR implements ModInitializer {
         BSAttributes.initialize();
         BSDataComponents.initialize();
         BSEnchantmentEffects.initialize();
-        BSBlocks.initialize();
         BSItems.initialize();
+        BSBlocks.initialize();
         CreativeTab.initialize();
 
         ShieldMechanics.register();
