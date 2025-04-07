@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentTarget;
 import net.minecraft.world.item.enchantment.LevelBasedValue;
+import net.minecraft.world.item.enchantment.effects.AddValue;
 import net.nova.big_swords.enchantments.effects.SoulStealEffect;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSEnchantmentEffects;
@@ -30,24 +31,22 @@ public class BSEnchantments extends FabricDynamicRegistryProvider {
         HolderLookup<Enchantment> registryEntryLookup = provider.lookupOrThrow(Registries.ENCHANTMENT);
         HolderLookup<Item> registryEntryLookup1 = provider.lookupOrThrow(Registries.ITEM);
 
-        register(entries, BSEnchantmentEffects.SOUL_STEALER, Enchantment.enchantment(
-                        Enchantment.definition(
-                                registryEntryLookup1.getOrThrow(Tags.BSItemTags.SCYTHES),
-                                2,
-                                3,
-                                Enchantment.dynamicCost(17, 8),
-                                Enchantment.dynamicCost(36, 8),
-                                3,
-                                EquipmentSlotGroup.MAINHAND
-                        ))
+        register(entries, BSEnchantmentEffects.SOUL_STEALER, Enchantment.enchantment(Enchantment.definition(
+                        registryEntryLookup1.getOrThrow(Tags.BSItemTags.SCYTHES),
+                        2,
+                        3,
+                        Enchantment.dynamicCost(17, 8),
+                        Enchantment.dynamicCost(36, 8),
+                        3,
+                        EquipmentSlotGroup.MAINHAND
+                ))
                 .exclusiveWith(registryEntryLookup.getOrThrow(Tags.EnchantmentTags.SCYTHE_EXCLUSIVE))
                 .withEffect(
                         BSDataComponents.POST_DEATH,
                         EnchantmentTarget.ATTACKER,
                         EnchantmentTarget.VICTIM,
                         new SoulStealEffect(LevelBasedValue.perLevel(0.3F), new ItemStack(BSItems.SOUL))
-                )
-        );
+                ));
     }
 
     public void register(Entries entries, ResourceKey<Enchantment> key, Enchantment.Builder builder, ResourceCondition... resourceConditions) {

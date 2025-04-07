@@ -24,9 +24,10 @@ public abstract class EntityMixin {
     @Shadow
     public abstract boolean onGround();
 
+    @SuppressWarnings("ConstantValue")
     @Inject(method = "applyEffectsFromBlocks(Lnet/minecraft/world/phys/Vec3;Lnet/minecraft/world/phys/Vec3;)V", at = @At("HEAD"))
     private void onTickBlockCollision(Vec3 lastRenderPos, Vec3 pos, CallbackInfo ci) {
-        if ((Object) this instanceof ItemEntity itemEntity && this.isAffectedByBlocks() && this.onGround()) {
+        if ((Object) this instanceof ItemEntity itemEntity && isAffectedByBlocks() && onGround()) {
             if (!itemEntity.level().isClientSide) {
                 BlockPos blockPos = itemEntity.getOnPos();
                 BlockState stateBelow = itemEntity.level().getBlockState(blockPos);

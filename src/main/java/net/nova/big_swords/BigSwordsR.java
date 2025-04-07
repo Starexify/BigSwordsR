@@ -74,15 +74,6 @@ public class BigSwordsR implements ModInitializer {
         }
     }
 
-    public static int getItemEnchantmentLevel(ItemStack item, ResourceKey<Enchantment> enchantment) {
-        return item.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY)
-                .entrySet().stream()
-                .filter(entry -> entry.getKey().equals(enchantment))
-                .findAny()
-                .map(entry -> entry.getIntValue())
-                .orElse(0);
-    }
-
     public static void playSound(Level level, Player player, SoundEvent sound) {
         if (!player.level().isClientSide)
             level.playSound(null, player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f);

@@ -2,7 +2,7 @@
   "required": true,
   "package": "net.nova.big_swords.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": ["BlocksAttacksMixin", "EntityMixin", "HoeItemMixin", "LivingEntityMixin", "PlayerEntityMixin", "SmithingTemplateItemMixin", "ToolMaterialAccessor"],
+  "mixins": ["BlocksAttacksMixin", "EntityMixin", "HoeItemMixin", "LivingEntityMixin", "SmithingTemplateItemMixin", "ToolMaterialAccessor"],
   "injectors": {
     "defaultRequire": 1
   }
