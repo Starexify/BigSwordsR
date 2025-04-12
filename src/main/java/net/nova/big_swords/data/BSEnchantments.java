@@ -9,10 +9,8 @@ import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
 import net.minecraft.world.item.enchantment.EnchantmentTarget;
 import net.minecraft.world.item.enchantment.LevelBasedValue;
-import net.minecraft.world.item.enchantment.effects.AddValue;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.enchantments.effects.SoulStealEffect;
 import net.nova.big_swords.init.BSDataComponents;
@@ -42,7 +40,7 @@ public class BSEnchantments {
                         BSDataComponents.POST_DEATH.get(),
                         EnchantmentTarget.VICTIM,
                         EnchantmentTarget.ATTACKER,
-                        new SoulStealEffect(new AddValue(LevelBasedValue.perLevel(0.3F)).value(), new ItemStack(BSItems.SOUL.get()))
+                        new SoulStealEffect(LevelBasedValue.perLevel(0.3F), new ItemStack(BSItems.SOUL.get()))
                 )
         );
     }
