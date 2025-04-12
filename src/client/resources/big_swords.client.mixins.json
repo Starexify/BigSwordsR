@@ -2,7 +2,7 @@
   "required": true,
   "package": "net.nova.big_swords.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": ["ItemModelGeneratorsMixin"],
+  "client": ["ItemModelGeneratorsMixin"],
   "injectors": {
     "defaultRequire": 1
   }
