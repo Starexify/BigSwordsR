@@ -14,6 +14,7 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
+    maven { url 'https://jitpack.io' }
 }
 
 base {
@@ -71,7 +72,9 @@ configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
 
-dependencies {}
+dependencies {
+    implementation "com.github.ramixin:mixson-neoforge:v1.3.2"
+}
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
     var replaceProperties = [

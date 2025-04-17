@@ -6,16 +6,25 @@ import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.item.ItemModel;
 import net.minecraft.client.renderer.item.SelectItemModel;
 import net.minecraft.client.renderer.item.properties.select.ComponentContents;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.equipment.BSEquipmentAssets;
+import net.nova.big_swords.equipment.BSMaterialAssetGroup;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
+
+import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class BSItemModelGenerator extends ItemModelGenerators {
     public BSItemModelGenerator(ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
@@ -121,6 +130,37 @@ public class BSItemModelGenerator extends ItemModelGenerators {
         generateShield(BSItems.GILDED_BIOMASS_SHIELD.get());
         generateShield(BSItems.LIVINGMETAL_SHIELD.get());
         generateShield(BSItems.GILDED_LIVINGMETAL_SHIELD.get());
+
+        generateTrimMaterialArmorCompat();
+    }
+
+    // Vanilla Armor Method
+    public void generateTrimMaterialArmorCompat() {
+        for (Item item : BuiltInRegistries.ITEM) {
+            ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(item);
+            if (itemId.getNamespace().equals(MODID)) continue;
+            if (!item.components().has(DataComponents.EQUIPPABLE)) continue;
+            EquipmentSlot slot = item.components().get(DataComponents.EQUIPPABLE).slot();
+            if (slot != EquipmentSlot.HEAD && slot != EquipmentSlot.CHEST && slot != EquipmentSlot.LEGS && slot != EquipmentSlot.FEET)
+                continue;
+            if (!item.components().get(DataComponents.EQUIPPABLE).assetId().isPresent()) continue;
+            String armorType = switch (slot) {
+                case HEAD -> "helmet";
+                case CHEST -> "chestplate";
+                case LEGS -> "leggings";
+                case FEET -> "boots";
+                default -> "";
+            };
+
+            ResourceLocation textureLocation = TextureMapping.getItemTexture(item);
+            ResourceLocation overlayTexture = TextureMapping.getItemTexture(item, "_overlay");
+            ResourceLocation trimModelName = ModelLocationUtils.getModelLocation(item).withSuffix("_" + BSMaterialAssetGroup.LIVINGMETAL.base().suffix() + "_trim");
+            ResourceLocation layer1Location = ResourceLocation.withDefaultNamespace("trims/items/" + armorType + "_trim_" + BSMaterialAssetGroup.LIVINGMETAL.assetId(item.components().get(DataComponents.EQUIPPABLE).assetId().get()).suffix());
+
+            if (item.getDefaultInstance().is(ItemTags.DYEABLE))
+                generateLayeredItem(trimModelName, textureLocation, overlayTexture, layer1Location);
+            else generateLayeredItem(trimModelName, textureLocation, layer1Location);
+        }
     }
 
     // Methods

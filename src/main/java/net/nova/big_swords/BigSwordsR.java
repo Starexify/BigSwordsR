@@ -10,6 +10,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.nova.big_swords.init.*;
+import net.nova.big_swords.mixson.TrimMaterialMixson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,6 +33,7 @@ public class BigSwordsR {
         BSBlocks.BLOCKS.register(bus);
         CreativeTab.CREATIVE_TAB.register(bus);
         BSLootModifier.LOOT_MODIFIERS.register(bus);
+        TrimMaterialMixson.registerMixsons();
     }
 
     // Util
