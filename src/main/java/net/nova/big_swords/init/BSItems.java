@@ -4,6 +4,7 @@ import net.legacyfabric.fabric.api.registry.v1.RegistryHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.itemgroup.ItemGroup;
 import net.nova.big_swords.BigSwordsR;
+import net.nova.big_swords.item.BSItem;
 
 public class BSItems {
     // Extra
@@ -14,10 +15,9 @@ public class BSItems {
 
     // Sticks
     public static Item GIANT_WOODEN_STICK = RegistryHelper.getItem(BigSwordsR.rl("giant_wooden_stick"));
-/*    public static Item GIANT_BLAZE_ROD = registerItem("giant_blaze_rod", Item::new);
-    public static Item GIANT_LIVINGMETAL_HANDLE = registerItem("giant_livingmetal_handle", Item::new);
-
-    // Ender Template
+    public static Item GIANT_BLAZE_ROD = RegistryHelper.getItem(BigSwordsR.rl("giant_blaze_rod"));
+    public static Item GIANT_LIVINGMETAL_HANDLE = RegistryHelper.getItem(BigSwordsR.rl("giant_livingmetal_handle"));
+/*  // Ender Template
     public static Item ENDER_UPGRADE_SMITHING_TEMPLATE = registerItem("ender_upgrade_smithing_template", properties -> EnderSmithingTemplate.createEnderUpgradeTemplate(properties.rarity(Rarity.RARE)));
 
     // Livingmetal Stuff
@@ -261,7 +261,9 @@ public class BSItems {
 
     // Methods
     public static void initialize() {
-        RegistryHelper.registerItem(new Item().setItemGroup(ItemGroup.MISC), BigSwordsR.rl("giant_wooden_stick"));
+        RegistryHelper.registerItem(new BSItem("giant_wooden_stick").setItemGroup(ItemGroup.COMBAT), BigSwordsR.rl("giant_wooden_stick"));
+        RegistryHelper.registerItem(new BSItem("giant_blaze_rod"), BigSwordsR.rl("giant_blaze_rod"));
+        RegistryHelper.registerItem(new BSItem("giant_livingmetal_handle"), BigSwordsR.rl("giant_livingmetal_handle"));
         //BigSwordsR.LOGGER.trace("Registering Items");
 
 /*        FuelRegistryEvents.BUILD.register((builder, context) -> {
