@@ -3,6 +3,7 @@ package net.nova.big_swords;
 import net.fabricmc.api.ModInitializer;
 import net.legacyfabric.fabric.api.util.Identifier;
 import net.nova.big_swords.init.BSItems;
+import net.nova.big_swords.init.CreativeTabs;
 
 public class BigSwordsR implements ModInitializer {
     public static final String MODID = "big_swords";
@@ -14,8 +15,8 @@ public class BigSwordsR implements ModInitializer {
         BSDataComponents.initialize();
         BSEnchantmentEffects.initialize();*/
         BSItems.initialize();
-/*        BSBlocks.initialize();
-        CreativeTab.initialize();*/
+//       BSBlocks.initialize();
+        CreativeTabs.initialize();
 
         //ShieldMechanics.register();
 
@@ -59,6 +60,10 @@ public class BigSwordsR implements ModInitializer {
 
     public static Identifier rl(String path) {
         return new Identifier(MODID, path);
+    }
+
+    public static net.minecraft.util.Identifier vanillaRl(String path) {
+        return new net.minecraft.util.Identifier(MODID, path);
     }
 
 /*    public static double getModifierValue(List<ItemAttributeModifiers.Entry> modifiers, ResourceLocation modifierId) {

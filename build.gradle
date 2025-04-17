@@ -26,7 +26,6 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.legacyfabric.legacy-fabric-api:legacy-fabric-api:${project.fabric_version}"
-    modRuntimeOnly files("libs/MopMenu-1.0.6.jar")
 }
 
 processResources {
@@ -66,4 +65,10 @@ publishing {
 
     repositories {
     }
+}
+
+// Data Gen
+task generateLangFiles(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'net.nova.big_swords.data.LangProvider'
 }

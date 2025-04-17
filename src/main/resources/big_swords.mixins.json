@@ -1,8 +1,9 @@
 {
   "required": true,
+  "minVersion": "0.8",
   "package": "net.nova.big_swords.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [],
+  "mixins": ["FurnaceBlockEntityMixin"],
   "injectors": {
     "defaultRequire": 1
   }
