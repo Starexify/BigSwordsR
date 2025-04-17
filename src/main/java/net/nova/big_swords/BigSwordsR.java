@@ -1,62 +1,70 @@
 package net.nova.big_swords;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.level.Level;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.common.Mod;
-import net.nova.big_swords.init.*;
-import net.nova.big_swords.mixson.TrimMaterialMixson;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import net.fabricmc.api.ModInitializer;
+import net.legacyfabric.fabric.api.util.Identifier;
+import net.nova.big_swords.init.BSItems;
 
-import java.util.List;
-
-import static net.nova.big_swords.BigSwordsR.MODID;
-
-@Mod(MODID)
-public class BigSwordsR {
+public class BigSwordsR implements ModInitializer {
     public static final String MODID = "big_swords";
-    public static final Logger logger = LoggerFactory.getLogger(BigSwordsR.class);
 
-    public BigSwordsR(IEventBus bus) {
-        Sounds.SOUND_EVENTS.register(bus);
-        BSEnchantmentEntityEffects.ENTITY_EFFECT.register(bus);
-        BSAttributes.ATTRIBUTES.register(bus);
-        BSDataComponents.COMPONENTS.register(bus);
-        BSDataComponents.ENCHANTMENT_COMPONENTS.register(bus);
-        BSItems.ITEMS.register(bus);
-        BSBlocks.BLOCKS.register(bus);
-        CreativeTab.CREATIVE_TAB.register(bus);
-        BSLootModifier.LOOT_MODIFIERS.register(bus);
-        TrimMaterialMixson.registerMixsons();
+    @Override
+    public void onInitialize() {
+/*        Sounds.initialize();
+        BSAttributes.initialize();
+        BSDataComponents.initialize();
+        BSEnchantmentEffects.initialize();*/
+        BSItems.initialize();
+/*        BSBlocks.initialize();
+        CreativeTab.initialize();*/
+
+        //ShieldMechanics.register();
+
+        // Loot Table Modifier
+/*        LootTableEvents.MODIFY.register((resourceKey, builder, lootTableSource, wrapperLookup) -> {
+            if (lootTableSource.isBuiltin() && BuiltInLootTables.END_CITY_TREASURE.equals(resourceKey)) {
+                LootPool.Builder poolBuilder = LootPool.lootPool()
+                        .when(LootItemRandomChanceCondition.randomChance(0.35f))
+                        .add(LootItem.lootTableItem(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE));
+                builder.pool(poolBuilder.build());
+            }
+        });*/
+
+        // Halloween Stuff
+/*        ServerEntityEvents.ENTITY_LOAD.register((entity, serverWorld) -> {
+            if (entity.getType().is(Tags.EntityTypeTags.HALLOWEEN_MOB) && entity instanceof Mob mob)
+                halloweenDrop(mob, serverWorld, new ItemStack(BSItems.SOUL_REAPER));
+        });*/
     }
 
-    // Util
-    public static void playSound(Level level, Player player, SoundEvent sound) {
-        if (!player.level().isClientSide) {
+/*    public static void halloweenDrop(Mob entity, Level level, ItemStack stack) {
+        LocalDate localDate = LocalDate.now();
+        RandomSource random = level.getRandom();
+        int i = localDate.get(ChronoField.DAY_OF_MONTH);
+        int j = localDate.get(ChronoField.MONTH_OF_YEAR);
+        if (j == 10 && i == 31 && random.nextFloat() < 0.25F) {
+            entity.setItemSlot(EquipmentSlot.MAINHAND, stack);
+            entity.setDropChance(EquipmentSlot.MAINHAND, 0.05F);
+        }
+    }*/
+
+/*    public static void playSound(Level level, Player player, SoundEvent sound) {
+        if (!player.level().isClientSide)
             level.playSound(null, player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f);
-        }
-    }
+    }*/
 
-    public static void playSound(Level level, LivingEntity livingEntity, SoundEvent sound) {
-        if (!livingEntity.level().isClientSide) {
+/*    public static void playSound(Level level, LivingEntity livingEntity, SoundEvent sound) {
+        if (!livingEntity.level().isClientSide)
             level.playSound(null, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), sound, SoundSource.PLAYERS, 1.0f, 1.0f);
-        }
+    }*/
+
+    public static Identifier rl(String path) {
+        return new Identifier(MODID, path);
     }
 
-    public static ResourceLocation rl(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MODID, path);
-    }
-
-    public static double getModifierValue(List<ItemAttributeModifiers.Entry> modifiers, ResourceLocation modifierId) {
+/*    public static double getModifierValue(List<ItemAttributeModifiers.Entry> modifiers, ResourceLocation modifierId) {
         return modifiers.stream()
                 .filter(entry -> entry.modifier().is(modifierId))
                 .mapToDouble(entry -> entry.modifier().amount())
                 .findFirst().orElse(0.0);
-    }
+    }*/
 }

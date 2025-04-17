@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smithing_transform",
-  "addition": "minecraft:netherite_ingot",
-  "base": "big_swords:diamond_glaive",
-  "result": {
-    "id": "big_swords:netherite_glaive"
-  },
-  "template": "minecraft:netherite_upgrade_smithing_template"
-}
