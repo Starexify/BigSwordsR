@@ -26,11 +26,11 @@ public class CreativeTab {
                 output.add(new ItemStack(BSItems.LIVINGMETAL_CHESTPLATE));
                 output.add(new ItemStack(BSItems.LIVINGMETAL_LEGGINGS));
                 output.add(new ItemStack(BSItems.LIVINGMETAL_BOOTS));
-/*                output.add(new ItemStack(BSItems.LIVINGMETAL_SWORD));
+                output.add(new ItemStack(BSItems.LIVINGMETAL_SWORD));
                 output.add(new ItemStack(BSItems.LIVINGMETAL_PICKAXE));
                 output.add(new ItemStack(BSItems.LIVINGMETAL_AXE));
                 output.add(new ItemStack(BSItems.LIVINGMETAL_SHOVEL));
-                output.add(new ItemStack(BSItems.LIVINGMETAL_HOE));*/
+                output.add(new ItemStack(BSItems.LIVINGMETAL_HOE));
 
                 // Extra Stuff
                 output.add(new ItemStack(BSItems.CREEP_BALL));

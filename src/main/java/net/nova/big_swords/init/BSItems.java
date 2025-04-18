@@ -3,10 +3,9 @@ package net.nova.big_swords.init;
 import net.legacyfabric.fabric.api.registry.v1.RegistryHelper;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Item;
+import net.minecraft.item.ToolMaterial;
 import net.nova.big_swords.BigSwordsR;
-import net.nova.big_swords.item.BSArmorItem;
-import net.nova.big_swords.item.BSItem;
-import net.nova.big_swords.item.CreepBall;
+import net.nova.big_swords.item.*;
 
 public class BSItems {
     // Extra
@@ -23,6 +22,11 @@ public class BSItems {
     public static Item LIVINGMETAL_CHESTPLATE = registerItem("livingmetal_chestplate", id -> new BSArmorItem(id, ArmorMaterial.valueOf("LIVINGMETAL"), 5, 1));
     public static Item LIVINGMETAL_LEGGINGS = registerItem("livingmetal_leggings", id -> new BSArmorItem(id, ArmorMaterial.valueOf("LIVINGMETAL"), 5, 2));
     public static Item LIVINGMETAL_BOOTS = registerItem("livingmetal_boots", id -> new BSArmorItem(id, ArmorMaterial.valueOf("LIVINGMETAL"), 5, 3));
+    public static Item LIVINGMETAL_SWORD = registerItem("livingmetal_sword", id -> new BSSwordItem(id, ToolMaterial.valueOf("LIVINGMETAL")));
+    public static Item LIVINGMETAL_PICKAXE = registerItem("livingmetal_pickaxe", id -> new BSPickaxeItem(id, ToolMaterial.valueOf("LIVINGMETAL")));
+    public static Item LIVINGMETAL_AXE = registerItem("livingmetal_axe", id -> new BSAxeItem(id, ToolMaterial.valueOf("LIVINGMETAL")));
+    public static Item LIVINGMETAL_SHOVEL = registerItem("livingmetal_shovel", id -> new BSShovelItem(id, ToolMaterial.valueOf("LIVINGMETAL")));
+    public static Item LIVINGMETAL_HOE = registerItem("livingmetal_hoe", id -> new BSHoeItem(id, ToolMaterial.valueOf("LIVINGMETAL")));
 
     // Livingmetal Stuff
     public static Item LIVINGMETAL_INGOT = registerItem("livingmetal_ingot", BSItem::new);

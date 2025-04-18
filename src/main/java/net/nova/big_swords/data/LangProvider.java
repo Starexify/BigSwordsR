@@ -34,11 +34,11 @@ public class LangProvider {
         addItem("livingmetal_chestplate", "Livingmetal Chestplate");
         addItem("livingmetal_leggings", "Livingmetal Leggings");
         addItem("livingmetal_boots", "Livingmetal Boots");
-/*        translationBuilder.add(BSItems.LIVINGMETAL_SWORD, "Livingmetal Sword");
-        translationBuilder.add(BSItems.LIVINGMETAL_PICKAXE, "Livingmetal Pickaxe");
-        translationBuilder.add(BSItems.LIVINGMETAL_AXE, "Livingmetal Axe");
-        translationBuilder.add(BSItems.LIVINGMETAL_SHOVEL, "Livingmetal Shovel");
-        translationBuilder.add(BSItems.LIVINGMETAL_HOE, "Livingmetal Hoe");*/
+        addItem("livingmetal_sword", "Livingmetal Sword");
+        addItem("livingmetal_pickaxe", "Livingmetal Pickaxe");
+        addItem("livingmetal_axe", "Livingmetal Axe");
+        addItem("livingmetal_shovel", "Livingmetal Shovel");
+        addItem("livingmetal_hoe", "Livingmetal Hoe");
 
         // Biomass Lang
         //translationBuilder.add(BSItems.BIOMASS, "Biomass");
