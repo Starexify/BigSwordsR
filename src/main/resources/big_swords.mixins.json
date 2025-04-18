@@ -3,7 +3,8 @@
   "minVersion": "0.8",
   "package": "net.nova.big_swords.mixin",
   "compatibilityLevel": "JAVA_8",
-  "mixins": ["ArmorMaterialMixin", "BipedEntityRenderer", "FurnaceBlockEntityMixin", "RecipeDispatcherAccessor"],
+  "mixins": ["ArmorMaterialMixin", "FurnaceBlockEntityMixin", "RecipeDispatcherAccessor"],
+  "client": ["BipedEntityRendererMixin"],
   "injectors": {
     "defaultRequire": 1
   }

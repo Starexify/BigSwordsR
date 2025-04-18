@@ -3,6 +3,7 @@ package net.nova.big_swords.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.sound.BlockSoundGroup;
+import net.nova.big_swords.init.CreativeTab;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
@@ -15,6 +16,7 @@ public class BSBlock extends Block {
         super(material);
         this.strengthProperty = strength;
         this.soundGroup = soundGroup;
+        this.setItemGroup(CreativeTab.BIG_SWORDS_TAB);
     }
 
     public void setBlockName(String name) {

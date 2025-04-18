@@ -30,11 +30,11 @@ public class LangProvider {
         // Livingmetal Lang
         addItem("livingmetal_ingot", "Livingmetal Ingot");
         addBlock("livingmetal_block", "Livingmetal Block");
-        /*translationBuilder.add(BSItems.LIVINGMETAL_HELMET, "Livingmetal Helmet");
-        translationBuilder.add(BSItems.LIVINGMETAL_CHESTPLATE, "Livingmetal Chestplate");
-        translationBuilder.add(BSItems.LIVINGMETAL_LEGGINGS, "Livingmetal Leggings");
-        translationBuilder.add(BSItems.LIVINGMETAL_BOOTS, "Livingmetal Boots");
-        translationBuilder.add(BSItems.LIVINGMETAL_SWORD, "Livingmetal Sword");
+        addItem("livingmetal_helmet", "Livingmetal Helmet");
+        addItem("livingmetal_chestplate", "Livingmetal Chestplate");
+        addItem("livingmetal_leggings", "Livingmetal Leggings");
+        addItem("livingmetal_boots", "Livingmetal Boots");
+/*        translationBuilder.add(BSItems.LIVINGMETAL_SWORD, "Livingmetal Sword");
         translationBuilder.add(BSItems.LIVINGMETAL_PICKAXE, "Livingmetal Pickaxe");
         translationBuilder.add(BSItems.LIVINGMETAL_AXE, "Livingmetal Axe");
         translationBuilder.add(BSItems.LIVINGMETAL_SHOVEL, "Livingmetal Shovel");

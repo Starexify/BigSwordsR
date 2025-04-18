@@ -23,8 +23,4 @@ public class BigSwordsR implements ModInitializer {
     public static Identifier rl(String path) {
         return new Identifier(MODID, path);
     }
-
-    public static net.minecraft.util.Identifier vanillaRl(String path) {
-        return new net.minecraft.util.Identifier(MODID, path);
-    }
 }
