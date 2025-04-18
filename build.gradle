@@ -8,7 +8,9 @@ base.archivesName = project.mod_id
 version = project.mod_version
 group = project.maven_group
 
-repositories {}
+repositories {
+    maven { url 'https://jitpack.io' }
+}
 
 legacyLooming {}
 
@@ -26,6 +28,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.legacyfabric.legacy-fabric-api:legacy-fabric-api:${project.fabric_version}"
+    include implementation("com.github.Chocohead:Fabric-ASM:v2.3")
 }
 
 processResources {

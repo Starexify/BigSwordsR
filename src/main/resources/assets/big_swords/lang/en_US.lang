@@ -1,4 +1,12 @@
 item.big_swords.giant_blaze_rod.name=Giant Blaze Rod
+item.big_swords.blood_vial.name=Blood Vial
 item.big_swords.giant_livingmetal_handle.name=Giant Livingmetal Handle
-itemGroup.big_swords=Big Swords
+itemGroup.big_swords.big_swords=Big Swords
+tile.big_swords.creep_block.name=Creep Block
+tile.big_swords.livingmetal_block.name=Livingmetal Block
+item.big_swords.soul.name=Soul
 item.big_swords.giant_wooden_stick.name=Giant Wooden Stick
+item.big_swords.biomass_seed.name=Biomass Seeds
+item.big_swords.creep_ball.name=Creep Ball
+item.big_swords.livingmetal_ingot.name=Livingmetal Ingot
+tile.big_swords.biomass_block.name=Biomass Block

@@ -20,6 +20,9 @@
 		],
 		"client": [
 			"net.nova.big_swords.BSClient"
+		],
+		"mm:early_risers": [
+			"net.nova.big_swords.EarlyRiser"
 		]
 	},
 	"mixins": [
