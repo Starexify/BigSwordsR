@@ -18,6 +18,9 @@ public class BSItems {
     public static Item GIANT_WOODEN_STICK = registerItem("giant_wooden_stick", BSItem::new);
     public static Item GIANT_BLAZE_ROD = registerItem("giant_blaze_rod", BSItem::new);
     public static Item GIANT_LIVINGMETAL_HANDLE = registerItem("giant_livingmetal_handle", BSItem::new);
+
+    // Livingmetal Stuff
+    public static Item LIVINGMETAL_INGOT = registerItem("livingmetal_ingot", BSItem::new);
     public static Item LIVINGMETAL_HELMET = registerItem("livingmetal_helmet", id -> new BSArmorItem(id, ArmorMaterial.valueOf("LIVINGMETAL"), 5, 0));
     public static Item LIVINGMETAL_CHESTPLATE = registerItem("livingmetal_chestplate", id -> new BSArmorItem(id, ArmorMaterial.valueOf("LIVINGMETAL"), 5, 1));
     public static Item LIVINGMETAL_LEGGINGS = registerItem("livingmetal_leggings", id -> new BSArmorItem(id, ArmorMaterial.valueOf("LIVINGMETAL"), 5, 2));
@@ -28,8 +31,17 @@ public class BSItems {
     public static Item LIVINGMETAL_SHOVEL = registerItem("livingmetal_shovel", id -> new BSShovelItem(id, ToolMaterial.valueOf("LIVINGMETAL")));
     public static Item LIVINGMETAL_HOE = registerItem("livingmetal_hoe", id -> new BSHoeItem(id, ToolMaterial.valueOf("LIVINGMETAL")));
 
-    // Livingmetal Stuff
-    public static Item LIVINGMETAL_INGOT = registerItem("livingmetal_ingot", BSItem::new);
+    // Biomass Stuff
+    public static Item BIOMASS = registerItem("biomass", BSItem::new);
+    public static Item BIOMASS_HELMET = registerItem("biomass_helmet", id -> new BSArmorItem(id, ArmorMaterial.valueOf("BIOMASS"), 6, 0));
+    public static Item BIOMASS_CHESTPLATE = registerItem("biomass_chestplate", id -> new BSArmorItem(id, ArmorMaterial.valueOf("BIOMASS"), 6, 1));
+    public static Item BIOMASS_LEGGINGS = registerItem("biomass_leggings", id -> new BSArmorItem(id, ArmorMaterial.valueOf("BIOMASS"), 6, 2));
+    public static Item BIOMASS_BOOTS = registerItem("biomass_boots", id -> new BSArmorItem(id, ArmorMaterial.valueOf("BIOMASS"), 6, 3));
+    public static Item BIOMASS_SWORD = registerItem("biomass_sword", id -> new BSSwordItem(id, ToolMaterial.valueOf("BIOMASS")));
+    public static Item BIOMASS_PICKAXE = registerItem("biomass_pickaxe", id -> new BSPickaxeItem(id, ToolMaterial.valueOf("BIOMASS")));
+    public static Item BIOMASS_AXE = registerItem("biomass_axe", id -> new BSAxeItem(id, ToolMaterial.valueOf("BIOMASS")));
+    public static Item BIOMASS_SHOVEL = registerItem("biomass_shovel", id -> new BSShovelItem(id, ToolMaterial.valueOf("BIOMASS")));
+    public static Item BIOMASS_HOE = registerItem("biomass_hoe", id -> new BSHoeItem(id, ToolMaterial.valueOf("BIOMASS")));
 
     // Methods
     public static void initialize() {

@@ -11,7 +11,7 @@ public class CreativeTab {
             .iconWithItem(() -> BSItems.GIANT_WOODEN_STICK)
             .appendItems((output, group) -> {
                 // Biomass
-/*                output.add(new ItemStack(BSItems.BIOMASS_HELMET));
+                output.add(new ItemStack(BSItems.BIOMASS_HELMET));
                 output.add(new ItemStack(BSItems.BIOMASS_CHESTPLATE));
                 output.add(new ItemStack(BSItems.BIOMASS_LEGGINGS));
                 output.add(new ItemStack(BSItems.BIOMASS_BOOTS));
@@ -19,7 +19,7 @@ public class CreativeTab {
                 output.add(new ItemStack(BSItems.BIOMASS_PICKAXE));
                 output.add(new ItemStack(BSItems.BIOMASS_AXE));
                 output.add(new ItemStack(BSItems.BIOMASS_SHOVEL));
-                output.add(new ItemStack(BSItems.BIOMASS_HOE));*/
+                output.add(new ItemStack(BSItems.BIOMASS_HOE));
 
                 // Livingmetal
                 output.add(new ItemStack(BSItems.LIVINGMETAL_HELMET));
@@ -41,7 +41,7 @@ public class CreativeTab {
 
                 // Materials
                 output.add(new ItemStack(BSBlocks.getBlockItem(BSBlocks.BIOMASS_BLOCK)));
-                //output.add(new ItemStack(BSItems.BIOMASS));
+                output.add(new ItemStack(BSItems.BIOMASS));
                 output.add(new ItemStack(BSBlocks.getBlockItem(BSBlocks.LIVINGMETAL_BLOCK)));
                 output.add(new ItemStack(BSItems.LIVINGMETAL_INGOT));
 

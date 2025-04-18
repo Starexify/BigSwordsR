@@ -41,17 +41,17 @@ public class LangProvider {
         addItem("livingmetal_hoe", "Livingmetal Hoe");
 
         // Biomass Lang
-        //translationBuilder.add(BSItems.BIOMASS, "Biomass");
+        addItem("biomass", "Biomass");
         addBlock("biomass_block", "Biomass Block");
-/*        translationBuilder.add(BSItems.BIOMASS_HELMET, "Biomass Helmet");
-        translationBuilder.add(BSItems.BIOMASS_CHESTPLATE, "Biomass Chestplate");
-        translationBuilder.add(BSItems.BIOMASS_LEGGINGS, "Biomass Leggings");
-        translationBuilder.add(BSItems.BIOMASS_BOOTS, "Biomass Boots");
-        translationBuilder.add(BSItems.BIOMASS_SWORD, "Biomass Sword");
-        translationBuilder.add(BSItems.BIOMASS_PICKAXE, "Biomass Pickaxe");
-        translationBuilder.add(BSItems.BIOMASS_AXE, "Biomass Axe");
-        translationBuilder.add(BSItems.BIOMASS_SHOVEL, "Biomass Shovel");
-        translationBuilder.add(BSItems.BIOMASS_HOE, "Biomass Hoe");*/
+        addItem("biomass_helmet", "Biomass Helmet");
+        addItem("biomass_chestplate", "Biomass Chestplate");
+        addItem("biomass_leggings", "Biomass Leggings");
+        addItem("biomass_boots", "Biomass Boots");
+        addItem("biomass_sword", "Biomass Sword");
+        addItem("biomass_pickaxe", "Biomass Pickaxe");
+        addItem("biomass_axe", "Biomass Axe");
+        addItem("biomass_shovel", "Biomass Shovel");
+        addItem("biomass_hoe", "Biomass Hoe");
 
         // Creative Tab
         translations.put("itemGroup.big_swords.big_swords", "Big Swords");

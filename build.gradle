@@ -1,3 +1,5 @@
+buildscript {}
+
 plugins {
     id 'fabric-loom' version '1.10-SNAPSHOT'
     id "legacy-looming" version "1.10-SNAPSHOT"

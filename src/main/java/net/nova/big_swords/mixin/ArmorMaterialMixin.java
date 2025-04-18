@@ -12,6 +12,7 @@ public abstract class ArmorMaterialMixin {
     @ModifyReturnValue(method = "method_6339", at = @At("RETURN"))
     private Item modifyRepairItem(Item original) {
         if ((Object) this == ArmorMaterial.valueOf("LIVINGMETAL")) return BSItems.LIVINGMETAL_INGOT;
+        if ((Object) this == ArmorMaterial.valueOf("BIOMASS")) return BSItems.BIOMASS;
         return original;
     }
 }

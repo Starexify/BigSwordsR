@@ -29,6 +29,7 @@
 		"big_swords.mixins.json"
 	],
 	"depends": {
+		"mm": ">=2.3",
 		"fabricloader": ">=0.16.14",
 		"minecraft": "1.7.10",
 		"java": ">=8",

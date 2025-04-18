@@ -11,4 +11,9 @@ public class BSBlockItem extends BlockItem {
         this.setTranslationKey(id);
         this.field_6941 = MODID + ":" + id;
     }
+
+    @Override
+    public int method_5463() {
+        return 0;
+    }
 }
