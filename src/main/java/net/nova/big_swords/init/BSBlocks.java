@@ -3,12 +3,12 @@ package net.nova.big_swords.init;
 import net.legacyfabric.fabric.api.registry.v1.RegistryHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.block.BSBlock;
 import net.nova.big_swords.block.BiomassCrop;
 import net.nova.big_swords.block.CreepBlock;
-import net.nova.big_swords.item.BSBlockItem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +34,7 @@ public class BSBlocks {
      * @return The registered block
      */
     public static <T extends BSBlock> T registerBlock(String name, T block) {
-        block.setBlockName(name); // Set the name in the block
+        block.setBlockName(name);
         RegistryHelper.registerBlock(block, BigSwordsR.rl(name));
         return block;
     }
@@ -48,8 +48,8 @@ public class BSBlocks {
      */
     public static <T extends BSBlock> T registerBlockWithItem(String name, T block) {
         T blockRef = registerBlock(name, block);
-        Item blockItem = BSItems.registerItem(name, id -> new BSBlockItem(id, blockRef));
-        BLOCK_ITEMS.put(name, blockItem); // Store the item for later retrieval
+        Item blockItem = BSItems.registerItem(name, () -> new BlockItem(blockRef));
+        BLOCK_ITEMS.put(name, blockItem);
         return blockRef;
     }
 

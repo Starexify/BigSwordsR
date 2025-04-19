@@ -2,16 +2,16 @@ package net.nova.big_swords.init;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.nova.big_swords.item.BSItem;
 
-public class BiomassSeed extends BSItem {
+public class BiomassSeed extends Item {
     private Block crop;
     private Block soil;
 
-    public BiomassSeed(String name, Block crop, Block soil) {
-        super(name);
+    public BiomassSeed(Block crop, Block soil) {
+        super();
         this.crop = crop;
         this.soil = soil;
     }

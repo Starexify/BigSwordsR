@@ -16,15 +16,13 @@ public class BSBlock extends Block {
         super(material);
         this.strengthProperty = strength;
         this.soundGroup = soundGroup;
-        this.setItemGroup(CreativeTab.BIG_SWORDS_TAB);
+        super.setStrength(strengthProperty);
+        super.setBlockSoundGroup(soundGroup);
     }
 
     public void setBlockName(String name) {
         this.name = name;
-        this.setTranslationKey(name);
         this.field_6259 = MODID + ":" + name;
-        super.setStrength(strengthProperty);
-        super.setBlockSoundGroup(soundGroup);
     }
 
     @Override
