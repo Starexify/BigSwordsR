@@ -5,7 +5,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.nova.big_swords.block.BSBlock;
 import net.nova.big_swords.init.BSBlocks;
 
 public class CreepBall extends BSItem {
