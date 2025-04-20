@@ -19,16 +19,16 @@ import static net.nova.big_swords.BigSwordsR.MODID;
 public class BipedEntityRendererMixin {
     @Shadow @Final private static String[] field_5195;
 
-    @ModifyArg(method = "method_5759", at = @At(value = "INVOKE", target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;"), index = 0)
-    private static String modifyArmorLayerLocation(String format, @Local(argsOnly = true) ArmorItem armorItem) {
-        if (armorItem.materialId == 5 || armorItem.materialId == 6) return MODID + ":textures/models/armor/%s_layer_%d%s.png";
-        return format;
-    }
-
     static {
         List<String> armorModelList = new ArrayList<>(Arrays.asList(field_5195));
         armorModelList.add("livingmetal");
         armorModelList.add("biomass");
         field_5195 = armorModelList.toArray(new String[0]);
+    }
+
+    @ModifyArg(method = "method_5759", at = @At(value = "INVOKE", target = "Ljava/lang/String;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;"), index = 0)
+    private static String modifyArmorLayerLocation(String format, @Local(argsOnly = true) ArmorItem armorItem) {
+        if (armorItem.materialId == 5 || armorItem.materialId == 6) return MODID + ":textures/models/armor/%s_layer_%d%s.png";
+        return format;
     }
 }

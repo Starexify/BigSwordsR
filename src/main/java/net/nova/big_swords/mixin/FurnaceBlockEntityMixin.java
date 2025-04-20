@@ -12,8 +12,10 @@ import org.spongepowered.asm.mixin.injection.At;
 public abstract class FurnaceBlockEntityMixin {
     @ModifyReturnValue(method = "getBurnTime", at = @At("RETURN"))
     private static int modifyFuelValues(int original, @Local(argsOnly = true) ItemStack stack) {
-        if (stack != null && stack.getItem() == BSItems.GIANT_WOODEN_STICK) return 700;
-        else if (stack != null && stack.getItem() == BSItems.GIANT_BLAZE_ROD) return 16800;
-        else return original;
+        if (stack != null) {
+            if (stack.getItem() == BSItems.GIANT_WOODEN_STICK) return 700;
+            else if (stack.getItem() == BSItems.GIANT_BLAZE_ROD) return 16800;
+        }
+        return original;
     }
 }

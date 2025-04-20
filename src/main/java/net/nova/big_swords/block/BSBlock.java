@@ -22,7 +22,6 @@ public class BSBlock extends Block {
 
     public void setBlockName(String name) {
         this.name = name;
-        this.field_6259 = MODID + ":" + name;
     }
 
     @Override

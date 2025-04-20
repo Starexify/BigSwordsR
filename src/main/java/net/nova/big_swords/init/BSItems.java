@@ -5,6 +5,7 @@ import net.minecraft.item.*;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.item.BSAxeItem;
 import net.nova.big_swords.item.BSPickaxeItem;
+import net.nova.big_swords.item.BigSwordItem;
 import net.nova.big_swords.item.CreepBall;
 import net.nova.big_swords.mixin.ItemAccessor;
 
@@ -48,6 +49,20 @@ public class BSItems {
     public static Item BIOMASS_SHOVEL = registerItem("biomass_shovel", () -> new ShovelItem(ToolMaterial.valueOf("BIOMASS")));
     public static Item BIOMASS_HOE = registerItem("biomass_hoe", () -> new HoeItem(ToolMaterial.valueOf("BIOMASS")));
 
+    // Big Swords
+    public static Item WOODEN_BIG_SWORD = registerItem("wooden_big_sword", () -> new BigSwordItem(ToolMaterial.WOOD));
+    public static Item STONE_BIG_SWORD = registerItem("stone_big_sword", () -> new BigSwordItem(ToolMaterial.STONE));
+    public static Item IRON_BIG_SWORD = registerItem("iron_big_sword", () -> new BigSwordItem(ToolMaterial.IRON));
+    public static Item GOLDEN_BIG_SWORD = registerItem("golden_big_sword", () -> new BigSwordItem(ToolMaterial.GOLD));
+    public static Item DIAMOND_BIG_SWORD = registerItem("diamond_big_sword", () -> new BigSwordItem(ToolMaterial.DIAMOND));
+    public static Item PATCHWORK_BIG_SWORD = registerItem("patchwork_big_sword", () -> new BigSwordItem(ToolMaterial.valueOf("PATCHWORK")));
+    public static Item SKULL_BIG_SWORD = registerItem("skull_big_sword", () -> new BigSwordItem(ToolMaterial.valueOf("SKULL")));
+    public static Item QUARTZ_BIG_SWORD = registerItem("quartz_big_sword", () -> new BigSwordItem(ToolMaterial.valueOf("QUARTZ")));
+    public static Item OBSIDIAN_BIG_SWORD = registerItem("obsidian_big_sword", () -> new BigSwordItem(ToolMaterial.valueOf("OBSIDIAN")));
+    public static Item ENDER_BIG_SWORD = registerItem("ender_big_sword", () -> new BigSwordItem(ToolMaterial.valueOf("ENDER")));
+    public static Item LIVINGMETAL_BIG_SWORD = registerItem("livingmetal_big_sword", () -> new BigSwordItem(ToolMaterial.valueOf("LIVINGMETAL")));
+    public static Item BIOMASS_BIG_SWORD = registerItem("biomass_big_sword", () -> new BigSwordItem(ToolMaterial.valueOf("BIOMASS")));
+
     // Methods
     public static void initialize() {
         BigSwordsR.LOGGER.info("Registering Items");
@@ -63,6 +78,7 @@ public class BSItems {
     public static Item registerItem(String name, Supplier<Item> itemSupplier) {
         Item item = itemSupplier.get();
         ((ItemAccessor) item).big_swords$getFromId(MODID + ":" + name);
+        item.setItemGroup(CreativeTab.BIG_SWORDS_TAB);
         RegistryHelper.registerItem(item, BigSwordsR.rl(name));
         return item;
     }

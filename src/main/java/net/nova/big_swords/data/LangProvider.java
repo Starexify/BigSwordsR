@@ -53,6 +53,21 @@ public class LangProvider {
         addItem("biomass_shovel", "Biomass Shovel");
         addItem("biomass_hoe", "Biomass Hoe");
 
+        // Big Swords
+        addItem("wooden_big_sword", "Wooden Big Sword");
+        addItem("stone_big_sword", "Stone Big Sword");
+        addItem("iron_big_sword", "Iron Big Sword");
+        addItem("golden_big_sword", "Golden Big Sword");
+        addItem("diamond_big_sword", "Diamond Big Sword");
+        addItem("obsidian_big_sword", "Obsidian Big Sword");
+        addItem("ender_big_sword", "Ender Big Sword");
+        addItem("livingmetal_big_sword", "Livingmetal Big Sword");
+        addItem("biomass_big_sword", "Biomass Big Sword");
+        addItem("quartz_big_sword", "Quartz Big Sword");
+        addItem("skull_big_sword", "Skull Big Sword");
+        addItem("patchwork_big_sword", "Patchwork Big Sword");
+
+
         // Creative Tab
         translations.put("itemGroup.big_swords.big_swords", "Big Swords");
 

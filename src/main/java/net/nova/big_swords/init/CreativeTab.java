@@ -53,13 +53,12 @@ public class CreativeTab {
                 output.add(new ItemStack(BSItems.GIANT_BLAZE_ROD));
                 output.add(new ItemStack(BSItems.GIANT_LIVINGMETAL_HANDLE));
 
-/*                // Big Swords
+                // Big Swords
                 output.add(new ItemStack(BSItems.WOODEN_BIG_SWORD));
                 output.add(new ItemStack(BSItems.STONE_BIG_SWORD));
                 output.add(new ItemStack(BSItems.IRON_BIG_SWORD));
                 output.add(new ItemStack(BSItems.GOLDEN_BIG_SWORD));
                 output.add(new ItemStack(BSItems.DIAMOND_BIG_SWORD));
-                output.add(new ItemStack(BSItems.NETHERITE_BIG_SWORD));
                 output.add(new ItemStack(BSItems.OBSIDIAN_BIG_SWORD));
                 output.add(new ItemStack(BSItems.ENDER_BIG_SWORD));
                 output.add(new ItemStack(BSItems.BIOMASS_BIG_SWORD));
@@ -69,7 +68,7 @@ public class CreativeTab {
                 output.add(new ItemStack(BSItems.PATCHWORK_BIG_SWORD));
 
                 // Glaives
-                output.add(new ItemStack(BSItems.WOODEN_GLAIVE));
+/*                output.add(new ItemStack(BSItems.WOODEN_GLAIVE));
                 output.add(new ItemStack(BSItems.STONE_GLAIVE));
                 output.add(new ItemStack(BSItems.IRON_GLAIVE));
                 output.add(new ItemStack(BSItems.GOLDEN_GLAIVE));
