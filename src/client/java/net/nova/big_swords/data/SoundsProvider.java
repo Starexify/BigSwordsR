@@ -1,52 +1,27 @@
 package net.nova.big_swords.data;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataProvider;
+import net.fabricmc.fabric.api.client.datagen.v1.builder.SoundTypeBuilder;
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricSoundsProvider;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.init.Sounds;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
-public class SoundsProvider implements DataProvider {
-    public final FabricDataOutput output;
-    public final Map<ResourceLocation, JsonObject> sounds = new HashMap<>();
-
-    public SoundsProvider(FabricDataOutput output) {
-        this.output = output;
+public class SoundsProvider extends FabricSoundsProvider {
+    public SoundsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(output, registriesFuture);
     }
 
     @Override
-    public CompletableFuture<?> run(CachedOutput writer) {
-        addSound(Sounds.GLAIVE_SWING);
-        addSound(Sounds.GLAIVE_HIT);
-        addSound(Sounds.SCYTHE_SLASH);
-        addSound(Sounds.REAPER_SLASH);
-
-        JsonObject json = new JsonObject();
-        sounds.forEach((id, definition) -> json.add(id.getPath(), definition));
-
-        return DataProvider.saveStable(writer, json, output.createPathProvider(PackOutput.Target.RESOURCE_PACK, "").json(BigSwordsR.rl("sounds")));
-    }
-
-    public void addSound(SoundEvent soundEvent) {
-        JsonObject definition = new JsonObject();
-        JsonArray soundsArray = new JsonArray();
-
-        soundsArray.add(new JsonPrimitive(soundEvent.location().toString()));
-        definition.add("sounds", soundsArray);
-        definition.addProperty("subtitle", getSubtitle(soundEvent));
-        sounds.put(soundEvent.location(), definition);
+    protected void configure(HolderLookup.Provider provider, SoundExporter soundExporter) {
+        soundExporter.add(Sounds.GLAIVE_SWING, SoundTypeBuilder.of().subtitle(getSubtitle(Sounds.GLAIVE_SWING)).sound(SoundTypeBuilder.EntryBuilder.ofFile(Sounds.GLAIVE_SWING.location())));
+        soundExporter.add(Sounds.GLAIVE_HIT, SoundTypeBuilder.of().subtitle(getSubtitle(Sounds.GLAIVE_HIT)).sound(SoundTypeBuilder.EntryBuilder.ofFile(Sounds.GLAIVE_SWING.location())));
+        soundExporter.add(Sounds.SCYTHE_SLASH, SoundTypeBuilder.of().subtitle(getSubtitle(Sounds.SCYTHE_SLASH)).sound(SoundTypeBuilder.EntryBuilder.ofFile(Sounds.GLAIVE_SWING.location())));
+        soundExporter.add(Sounds.REAPER_SLASH, SoundTypeBuilder.of().subtitle(getSubtitle(Sounds.REAPER_SLASH)).sound(SoundTypeBuilder.EntryBuilder.ofFile(Sounds.GLAIVE_SWING.location())));
     }
 
     public static String getSubtitle(SoundEvent soundEvent) {
