@@ -67,9 +67,21 @@ public class LangProvider {
         addItem("skull_big_sword", "Skull Big Sword");
         addItem("patchwork_big_sword", "Patchwork Big Sword");
 
+        // Glaives
+        addItem("wooden_glaive", "Wooden Glaive");
+        addItem("stone_glaive", "Stone Glaive");
+        addItem("iron_glaive", "Iron Glaive");
+        addItem("golden_glaive", "Golden Glaive");
+        addItem("diamond_glaive", "Diamond Glaive");
+        addItem("biomass_glaive", "Biomass Glaive");
+        addItem("livingmetal_glaive", "Livingmetal Glaive");
 
         // Creative Tab
         translations.put("itemGroup.big_swords.big_swords", "Big Swords");
+
+        // Attributes
+        translations.put("attribute.name.min_charged_damage", "Min Charged Damage");
+        translations.put("attribute.name.max_charged_damage", "Max Charged Damage");
 
         writeToFile();
     }

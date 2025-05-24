@@ -1,4 +1,4 @@
-package net.nova.big_swords.init;
+package net.nova.big_swords.item;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.PlayerEntity;

@@ -4,15 +4,14 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Texture;
 import net.minecraft.client.TextureRegistry;
-import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.world.BlockView;
 
 public class CreepBlock extends BSBlock {
     private Texture tilledTexture;
     private Texture untilledTexture;
 
-    public CreepBlock(Material material, float strength, BlockSoundGroup soundGroup) {
-        super(material, strength, soundGroup);
+    public CreepBlock(Material material) {
+        super(material);
     }
 
     @Override

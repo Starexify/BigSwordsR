@@ -68,17 +68,16 @@ public class CreativeTab {
                 output.add(new ItemStack(BSItems.PATCHWORK_BIG_SWORD));
 
                 // Glaives
-/*                output.add(new ItemStack(BSItems.WOODEN_GLAIVE));
+                output.add(new ItemStack(BSItems.WOODEN_GLAIVE));
                 output.add(new ItemStack(BSItems.STONE_GLAIVE));
                 output.add(new ItemStack(BSItems.IRON_GLAIVE));
                 output.add(new ItemStack(BSItems.GOLDEN_GLAIVE));
                 output.add(new ItemStack(BSItems.DIAMOND_GLAIVE));
-                output.add(new ItemStack(BSItems.NETHERITE_GLAIVE));
                 output.add(new ItemStack(BSItems.BIOMASS_GLAIVE));
                 output.add(new ItemStack(BSItems.LIVINGMETAL_GLAIVE));
 
                 // Scythes
-                output.add(new ItemStack(BSItems.WOODEN_SCYTHE));
+/*                output.add(new ItemStack(BSItems.WOODEN_SCYTHE));
                 output.add(new ItemStack(BSItems.STONE_SCYTHE));
                 output.add(new ItemStack(BSItems.IRON_SCYTHE));
                 output.add(new ItemStack(BSItems.GOLDEN_SCYTHE));

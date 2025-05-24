@@ -1,13 +1,9 @@
 package net.nova.big_swords.init;
 
-import net.legacyfabric.fabric.api.registry.v1.RegistryHelper;
+import net.legacyfabric.fabric.api.registry.v2.RegistryHelper;
 import net.minecraft.item.*;
 import net.nova.big_swords.BigSwordsR;
-import net.nova.big_swords.item.BSAxeItem;
-import net.nova.big_swords.item.BSPickaxeItem;
-import net.nova.big_swords.item.BigSwordItem;
-import net.nova.big_swords.item.CreepBall;
-import net.nova.big_swords.mixin.ItemAccessor;
+import net.nova.big_swords.item.*;
 
 import java.util.function.Supplier;
 
@@ -63,6 +59,15 @@ public class BSItems {
     public static Item LIVINGMETAL_BIG_SWORD = registerItem("livingmetal_big_sword", () -> new BigSwordItem(ToolMaterial.valueOf("LIVINGMETAL")));
     public static Item BIOMASS_BIG_SWORD = registerItem("biomass_big_sword", () -> new BigSwordItem(ToolMaterial.valueOf("BIOMASS")));
 
+    // Glaives
+    public static Item WOODEN_GLAIVE = registerItem("wooden_glaive", () -> new GlaiveItem(ToolMaterial.WOOD, 3F, 4F));
+    public static Item STONE_GLAIVE = registerItem("stone_glaive", () -> new GlaiveItem(ToolMaterial.STONE, 3.5F, 4.5F));
+    public static Item IRON_GLAIVE = registerItem("iron_glaive", () -> new GlaiveItem(ToolMaterial.IRON, 4F, 5F));
+    public static Item GOLDEN_GLAIVE = registerItem("golden_glaive", () -> new GlaiveItem(ToolMaterial.GOLD, 3F, 4F));
+    public static Item DIAMOND_GLAIVE = registerItem("diamond_glaive", () -> new GlaiveItem(ToolMaterial.DIAMOND, 4.5F, 5.5F));
+    public static Item LIVINGMETAL_GLAIVE = registerItem("livingmetal_glaive", () -> new GlaiveItem(ToolMaterial.valueOf("LIVINGMETAL"), 4.5F, 5.5F));
+    public static Item BIOMASS_GLAIVE = registerItem("biomass_glaive", () -> new GlaiveItem(ToolMaterial.valueOf("BIOMASS"), 5.4F, 6.0F));
+
     // Methods
     public static void initialize() {
         BigSwordsR.LOGGER.info("Registering Items");
@@ -72,14 +77,12 @@ public class BSItems {
      * Helper method to register an item using a supplier
      *
      * @param name         The registry name
-     * @param itemSupplier The function to create the item instance
+     * @param itemSupplier The supplier for getting the item instance
      * @return The registered item
      */
     public static Item registerItem(String name, Supplier<Item> itemSupplier) {
-        Item item = itemSupplier.get();
-        ((ItemAccessor) item).big_swords$getFromId(MODID + ":" + name);
-        item.setItemGroup(CreativeTab.BIG_SWORDS_TAB);
-        RegistryHelper.registerItem(item, BigSwordsR.rl(name));
+        Item item = itemSupplier.get().setItemGroup(CreativeTab.BIG_SWORDS_TAB).getFromId(MODID + ":" + name);
+        RegistryHelper.register(Item.REGISTRY, BigSwordsR.rl(name), item);
         return item;
     }
 }
