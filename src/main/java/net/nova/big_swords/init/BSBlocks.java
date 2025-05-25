@@ -9,7 +9,6 @@ import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.block.BSBlock;
 import net.nova.big_swords.block.BiomassCrop;
 import net.nova.big_swords.block.CreepBlock;
-import net.nova.big_swords.mixin.BlockAccessor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +51,7 @@ public class BSBlocks {
      * @return The registered block
      */
     public static <T extends Block> T registerBlock(String name, T block) {
-        ((BlockAccessor) block).big_swords$method_5546(MODID + ":" + name);
+        block.method_5546(MODID + ":" + name);
         if (block instanceof BSBlock) ((BSBlock) block).setBlockName(name);
         RegistryHelper.register(Block.REGISTRY, BigSwordsR.rl(name), block);
         return block;
