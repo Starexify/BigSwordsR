@@ -51,9 +51,8 @@ public class BSBlocks {
      * @return The registered block
      */
     public static <T extends Block> T registerBlock(String name, T block) {
-        block.method_5546(MODID + ":" + name);
         if (block instanceof BSBlock) ((BSBlock) block).setBlockName(name);
-        RegistryHelper.register(Block.REGISTRY, BigSwordsR.rl(name), block);
+        RegistryHelper.register(Block.REGISTRY, BigSwordsR.rl(name), block.method_5546(MODID + ":" + name));
         return block;
     }
 
