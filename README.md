@@ -61,9 +61,6 @@ The mod also adds two new types of weapons, Glaives and Scythes. And the long aw
 
 ## ❓ Frequently Asked Questions
 
-**Q:** Will you port the mod to Fabric? \
-**A:** Maybe, if people really want, yes. But that will always be on the latest version of minecraft.
-
 **Q:** Why? \
 **A:** Because I want to bring the good old mods back.
 
