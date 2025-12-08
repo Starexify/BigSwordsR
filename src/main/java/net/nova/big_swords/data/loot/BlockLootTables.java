@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class BlockLootTables extends BlockLootSubProvider {
-    protected BlockLootTables(HolderLookup.Provider pProvider) {
+    public BlockLootTables(HolderLookup.Provider pProvider) {
         super(Set.of(), FeatureFlags.REGISTRY.allFlags(), pProvider);
     }
 

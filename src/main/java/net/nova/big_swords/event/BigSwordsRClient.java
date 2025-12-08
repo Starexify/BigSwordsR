@@ -19,7 +19,7 @@ import java.util.Optional;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
-@EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = MODID)
 public class BigSwordsRClient {
     public static final String[] RESOURCE_PACKS = {"big_swords_r_16x", "big_swords_r_old"};
     public static final String RP_16x = RESOURCE_PACKS[0];

@@ -16,16 +16,16 @@ public class BSBlockTagsProvider extends BlockTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider pProvider) {
-        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(BSBlocks.LIVINGMETAL_BLOCK.getKey());
-        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(BSBlocks.CREEP_BLOCK.getKey());
-        tag(BlockTags.MINEABLE_WITH_HOE).add(BSBlocks.BIOMASS_BLOCK.getKey());
+    protected void addTags(HolderLookup.Provider provider) {
+        tag(BlockTags.MINEABLE_WITH_PICKAXE).add(BSBlocks.LIVINGMETAL_BLOCK.get());
+        tag(BlockTags.MINEABLE_WITH_SHOVEL).add(BSBlocks.CREEP_BLOCK.get());
+        tag(BlockTags.MINEABLE_WITH_HOE).add(BSBlocks.BIOMASS_BLOCK.get());
 
-        tag(BlockTags.NEEDS_IRON_TOOL).add(BSBlocks.LIVINGMETAL_BLOCK.getKey());
+        tag(BlockTags.NEEDS_IRON_TOOL).add(BSBlocks.LIVINGMETAL_BLOCK.get());
 
-        tag(BlockTags.SOUL_SPEED_BLOCKS).add(BSBlocks.CREEP_BLOCK.getKey());
-        tag(BlockTags.SOUL_FIRE_BASE_BLOCKS).add(BSBlocks.CREEP_BLOCK.getKey());
+        tag(BlockTags.SOUL_SPEED_BLOCKS).add(BSBlocks.CREEP_BLOCK.get());
+        tag(BlockTags.SOUL_FIRE_BASE_BLOCKS).add(BSBlocks.CREEP_BLOCK.get());
 
-        tag(BlockTags.BEACON_BASE_BLOCKS).add(BSBlocks.LIVINGMETAL_BLOCK.getKey());
+        tag(BlockTags.BEACON_BASE_BLOCKS).add(BSBlocks.LIVINGMETAL_BLOCK.get());
     }
 }
