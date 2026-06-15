@@ -67,7 +67,3 @@ The mod also adds two new types of weapons, Glaives and Scythes. And the long aw
 
 **Q:** Why the new sword textures? \
 **A:** Because I find them way cooler than the old textures tbf and better look, but I integrated a 16x resourcepack for those who rather use the 16x textures.
-
-## 📜 License
-
-This mod is licensed under the MIT License, allowing for free use, modification, and distribution, meaning you can use my mod in your modpacks. For more details, please see the full license included with the mod.
