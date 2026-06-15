@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class BSEnchantmentEntityEffects {
-    public static final DeferredRegister<MapCodec<? extends EnchantmentEntityEffect>> ENTITY_EFFECT = DeferredRegister.create(BuiltInRegistries.ENCHANTMENT_ENTITY_EFFECT_TYPE, MODID);
+  public static final DeferredRegister<MapCodec<? extends EnchantmentEntityEffect>> ENTITY_EFFECT = DeferredRegister.create(BuiltInRegistries.ENCHANTMENT_ENTITY_EFFECT_TYPE, MODID);
 
-    public static final Supplier<MapCodec<? extends EnchantmentEntityEffect>> SOUL_STEAL = ENTITY_EFFECT.register("soul_steal", () -> SoulStealEffect.CODEC);
+  public static final Supplier<MapCodec<? extends EnchantmentEntityEffect>> SOUL_STEAL = ENTITY_EFFECT.register("soul_steal", () -> SoulStealEffect.CODEC);
 }

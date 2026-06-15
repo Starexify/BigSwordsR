@@ -11,13 +11,13 @@ import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(HoeItem.class)
 public class HoeItemMixin {
-    @WrapOperation(method = "<init>",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item$Properties;hoe(Lnet/minecraft/world/item/ToolMaterial;FF)Lnet/minecraft/world/item/Item$Properties;"))
-    private static Item.Properties scytheInit(Item.Properties properties, ToolMaterial toolMaterial, float attackDamage, float attackSpeed, Operation<Item.Properties> original) {
-        if (ScytheItem.isScythe.get()) {
-            ScytheItem.isScythe.set(false);
-            return properties;
-        }
-        return original.call(properties, toolMaterial, attackDamage, attackSpeed);
+  @WrapOperation(method = "<init>",
+      at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item$Properties;hoe(Lnet/minecraft/world/item/ToolMaterial;FF)Lnet/minecraft/world/item/Item$Properties;"))
+  private static Item.Properties scytheInit(Item.Properties properties, ToolMaterial toolMaterial, float attackDamage, float attackSpeed, Operation<Item.Properties> original) {
+    if (ScytheItem.isScythe.get()) {
+      ScytheItem.isScythe.set(false);
+      return properties;
     }
+    return original.call(properties, toolMaterial, attackDamage, attackSpeed);
+  }
 }

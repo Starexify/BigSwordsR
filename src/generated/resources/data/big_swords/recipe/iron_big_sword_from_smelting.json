@@ -5,7 +5,6 @@
   "experience": 0.1,
   "ingredient": "big_swords:iron_big_sword",
   "result": {
-    "count": 1,
     "id": "minecraft:iron_ingot"
   }
 }

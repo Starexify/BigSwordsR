@@ -2,8 +2,9 @@ package net.nova.big_swords.data;
 
 import net.minecraft.client.renderer.texture.atlas.sources.PalettedPermutations;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.AtlasIds;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.data.SpriteSourceProvider;
 import net.nova.big_swords.BigSwordsR;
 
@@ -14,77 +15,75 @@ import java.util.concurrent.CompletableFuture;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class AtlasesProvider extends SpriteSourceProvider {
-    protected static final ResourceLocation ARMOR_TRIMS = ResourceLocation.withDefaultNamespace("armor_trims");
+  public AtlasesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+    super(output, lookupProvider, MODID);
+  }
 
-    public AtlasesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider, MODID);
-    }
+  // Add here the palettes
+  public final Map<String, Identifier> permutations = Map.of(
+      "livingmetal", BigSwordsR.rl("trims/color_palettes/livingmetal"),
+      "livingmetal_darker", BigSwordsR.rl("trims/color_palettes/livingmetal_darker")
+  );
 
-    // Add here the palettes
-    public final Map<String, ResourceLocation> permutations = Map.of(
-            "livingmetal", BigSwordsR.rl("trims/color_palettes/livingmetal"),
-            "livingmetal_darker", BigSwordsR.rl("trims/color_palettes/livingmetal_darker")
-    );
+  // Just some lists of things idk
+  public final List<Identifier> textures = List.of(
+      Identifier.withDefaultNamespace("trims/items/leggings_trim"),
+      Identifier.withDefaultNamespace("trims/items/chestplate_trim"),
+      Identifier.withDefaultNamespace("trims/items/helmet_trim"),
+      Identifier.withDefaultNamespace("trims/items/boots_trim")
+  );
 
-    // Just some lists of things idk
-    public final List<ResourceLocation> textures = List.of(
-            ResourceLocation.withDefaultNamespace("trims/items/leggings_trim"),
-            ResourceLocation.withDefaultNamespace("trims/items/chestplate_trim"),
-            ResourceLocation.withDefaultNamespace("trims/items/helmet_trim"),
-            ResourceLocation.withDefaultNamespace("trims/items/boots_trim")
-    );
+  public final List<Identifier> trimTextures = List.of(
+      Identifier.withDefaultNamespace("trims/entity/humanoid/coast"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/coast"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/sentry"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/sentry"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/dune"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/dune"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/wild"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/wild"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/ward"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/ward"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/eye"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/eye"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/vex"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/vex"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/tide"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/tide"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/snout"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/snout"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/rib"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/rib"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/spire"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/spire"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/wayfinder"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/wayfinder"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/shaper"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/shaper"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/silence"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/silence"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/raiser"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/raiser"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/host"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/host"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/flow"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/flow"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid/bolt"),
+      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/bolt")
+  );
 
-    public final List<ResourceLocation> trimTextures = List.of(
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/coast"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/coast"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/sentry"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/sentry"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/dune"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/dune"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/wild"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/wild"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/ward"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/ward"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/eye"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/eye"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/vex"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/vex"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/tide"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/tide"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/snout"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/snout"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/rib"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/rib"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/spire"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/spire"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/wayfinder"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/wayfinder"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/shaper"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/shaper"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/silence"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/silence"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/raiser"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/raiser"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/host"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/host"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/flow"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/flow"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid/bolt"),
-            ResourceLocation.withDefaultNamespace("trims/entity/humanoid_leggings/bolt")
-    );
+  @Override
+  protected void gather() {
+    atlas(AtlasIds.BLOCKS).addSource(new PalettedPermutations(
+        textures,
+        Identifier.withDefaultNamespace("trims/color_palettes/trim_palette"),
+        permutations
+    ));
 
-    @Override
-    protected void gather() {
-        atlas(SpriteSourceProvider.BLOCKS_ATLAS).addSource(new PalettedPermutations(
-                textures,
-                ResourceLocation.withDefaultNamespace("trims/color_palettes/trim_palette"),
-                permutations
-        ));
-
-        atlas(ARMOR_TRIMS).addSource(new PalettedPermutations(
-                trimTextures,
-                ResourceLocation.withDefaultNamespace("trims/color_palettes/trim_palette"),
-                permutations
-        ));
-    }
+    atlas(AtlasIds.ARMOR_TRIMS).addSource(new PalettedPermutations(
+        trimTextures,
+        Identifier.withDefaultNamespace("trims/color_palettes/trim_palette"),
+        permutations
+    ));
+  }
 }

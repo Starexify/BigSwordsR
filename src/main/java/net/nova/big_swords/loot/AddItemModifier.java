@@ -15,31 +15,30 @@ import net.neoforged.neoforge.common.loot.LootModifier;
 import java.util.function.Supplier;
 
 public class AddItemModifier extends LootModifier {
-    public static Supplier<MapCodec<AddItemModifier>> CODEC = Suppliers.memoize(() -> RecordCodecBuilder.mapCodec(addItemModifierInstance -> AddItemModifier.codecStart(addItemModifierInstance)
-            .and(BuiltInRegistries.ITEM.byNameCodec().fieldOf("item").forGetter(addItemModifierInstance1 -> addItemModifierInstance1.item))
-            .apply(addItemModifierInstance, AddItemModifier::new)));
+  public static Supplier<MapCodec<AddItemModifier>> CODEC = Suppliers.memoize(() ->
+      RecordCodecBuilder.mapCodec(instance -> AddItemModifier.codecStart(instance)
+          .and(BuiltInRegistries.ITEM.byNameCodec().fieldOf("item").forGetter(instance2 -> instance2.item))
+          .apply(instance, AddItemModifier::new)));
 
-    public final Item item;
+  public final Item item;
 
-    public AddItemModifier(LootItemCondition[] conditionsIn, Item item) {
-        super(conditionsIn);
-        this.item = item;
+  public AddItemModifier(LootItemCondition[] conditionsIn, int priority, Item item) {
+    super(conditionsIn, priority);
+    this.item = item;
+  }
+
+  @Override
+  protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
+    for (LootItemCondition condition : this.conditions) {
+      if (!condition.test(context)) return generatedLoot;
     }
 
-    @Override
-    protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext context) {
-        for (LootItemCondition condition : this.conditions) {
-            if (!condition.test(context)) {
-                return generatedLoot;
-            }
-        }
+    generatedLoot.add(new ItemStack(this.item));
+    return generatedLoot;
+  }
 
-        generatedLoot.add(new ItemStack(this.item));
-        return generatedLoot;
-    }
-
-    @Override
-    public MapCodec<? extends IGlobalLootModifier> codec() {
-        return CODEC.get();
-    }
+  @Override
+  public MapCodec<? extends IGlobalLootModifier> codec() {
+    return CODEC.get();
+  }
 }

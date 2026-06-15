@@ -1,6 +1,6 @@
 package net.nova.big_swords.data;
 
-import net.minecraft.Util;
+import net.minecraft.util.Util;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
@@ -13,19 +13,19 @@ import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.equipment.BSMaterialAssetGroup;
 
 public class BSTrimMaterials {
-    public static final ResourceKey<TrimMaterial> LIVINGMETAL = createKey("livingmetal");
+  public static final ResourceKey<TrimMaterial> LIVINGMETAL = createKey("livingmetal");
 
-    public static void bootstrap(BootstrapContext<TrimMaterial> context) {
-        register(context, LIVINGMETAL, Style.EMPTY.withColor(TextColor.parseColor("#e0f9ff").getOrThrow()), BSMaterialAssetGroup.LIVINGMETAL);
-    }
+  public static void bootstrap(BootstrapContext<TrimMaterial> context) {
+    register(context, LIVINGMETAL, Style.EMPTY.withColor(TextColor.parseColor("#e0f9ff").getOrThrow()), BSMaterialAssetGroup.LIVINGMETAL);
+  }
 
-    // Registers
-    public static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> materialKey, Style style, MaterialAssetGroup overrideArmorMaterials) {
-        Component component = Component.translatable(Util.makeDescriptionId("trim_material", materialKey.location())).withStyle(style);
-        context.register(materialKey, new TrimMaterial(overrideArmorMaterials, component));
-    }
+  // Registers
+  public static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> materialKey, Style style, MaterialAssetGroup assets) {
+    Component component = Component.translatable(Util.makeDescriptionId("trim_material", materialKey.identifier())).withStyle(style);
+    context.register(materialKey, new TrimMaterial(assets, component));
+  }
 
-    public static ResourceKey<TrimMaterial> createKey(String name) {
-        return ResourceKey.create(Registries.TRIM_MATERIAL, BigSwordsR.rl(name));
-    }
+  public static ResourceKey<TrimMaterial> createKey(String name) {
+    return ResourceKey.create(Registries.TRIM_MATERIAL, BigSwordsR.rl(name));
+  }
 }

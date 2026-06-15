@@ -13,26 +13,26 @@ import net.minecraft.world.level.block.Blocks;
 import net.nova.big_swords.init.BSBlocks;
 
 public class CreepBall extends Item {
-    public CreepBall(Properties properties) {
-        super(properties);
+  public CreepBall(Properties properties) {
+    super(properties);
+  }
+
+  @Override
+  public InteractionResult useOn(UseOnContext context) {
+    BlockPos blockpos = context.getClickedPos();
+    Level level = context.getLevel();
+    if (!level.getBlockState(blockpos).is(Blocks.SOUL_SAND)) {
+      return super.useOn(context);
+    } else {
+      level.playSound(null, blockpos, SoundEvents.SOUL_SAND_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
+      Player player = context.getPlayer();
+      ItemStack itemstack = context.getItemInHand();
+
+      itemstack.consume(1, player);
+
+      level.setBlock(blockpos, BSBlocks.CREEP_BLOCK.get().defaultBlockState(), 3);
+
+      return InteractionResult.SUCCESS;
     }
-
-    @Override
-    public InteractionResult useOn(UseOnContext context) {
-        BlockPos blockpos = context.getClickedPos();
-        Level level = context.getLevel();
-        if (!level.getBlockState(blockpos).is(Blocks.SOUL_SAND)) {
-            return super.useOn(context);
-        } else {
-            level.playSound(null, blockpos, SoundEvents.SOUL_SAND_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
-            Player player = context.getPlayer();
-            ItemStack itemstack = context.getItemInHand();
-
-            itemstack.consume(1, player);
-
-            level.setBlock(blockpos, BSBlocks.CREEP_BLOCK.get().defaultBlockState(), 3);
-
-            return InteractionResult.SUCCESS;
-        }
-    }
+  }
 }

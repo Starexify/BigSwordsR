@@ -8,9 +8,9 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(ToolMaterial.class)
 public interface ToolMaterialAccessor {
-    @Invoker("createSwordAttributes")
-    ItemAttributeModifiers big_swords$createSwordAttributes(float attackDamage, float attackSpeed);
+  @Invoker("createSwordAttributes")
+  ItemAttributeModifiers big_swords$createSwordAttributes(float attackDamage, float attackSpeed);
 
-    @Invoker("applyCommonProperties")
-    Item.Properties big_swords$applyCommonProperties(Item.Properties properties);
+  @Invoker("applyCommonProperties")
+  Item.Properties big_swords$applyCommonProperties(Item.Properties properties);
 }

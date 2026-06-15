@@ -12,13 +12,13 @@ import java.util.concurrent.CompletableFuture;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class BSEnchantmentTagsProvider extends EnchantmentTagsProvider {
-    public BSEnchantmentTagsProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider) {
-        super(pOutput, pLookupProvider, MODID);
-    }
+  public BSEnchantmentTagsProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pLookupProvider) {
+    super(pOutput, pLookupProvider, MODID);
+  }
 
-    @Override
-    protected void addTags(HolderLookup.Provider pProvider) {
-        tag(EnchantmentTags.IN_ENCHANTING_TABLE).addOptional(BSEnchantments.SOUL_STEALER.location());
-        tag(Tags.EnchantmentTags.SCYTHE_EXCLUSIVE).addOptional(BSEnchantments.SOUL_STEALER.location());
-    }
+  @Override
+  protected void addTags(HolderLookup.Provider pProvider) {
+    tag(EnchantmentTags.IN_ENCHANTING_TABLE).addOptional(BSEnchantments.SOUL_STEALER);
+    tag(Tags.EnchantmentTags.SCYTHE_EXCLUSIVE).addOptional(BSEnchantments.SOUL_STEALER);
+  }
 }

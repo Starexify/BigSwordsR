@@ -20,53 +20,53 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Consumer;
 
 public class TieredShield extends ShieldItem {
-    public TieredShield(ToolMaterial toolMaterial, Properties properties) {
-        this(toolMaterial, properties.enchantable(toolMaterial.enchantmentValue())
-                .repairable(toolMaterial.repairItems())
-                .equippableUnswappable(EquipmentSlot.OFFHAND)
-                .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK), 1, 0);
-    }
+  public TieredShield(ToolMaterial toolMaterial, Properties properties) {
+    this(toolMaterial, properties.enchantable(toolMaterial.enchantmentValue())
+        .repairable(toolMaterial.repairItems())
+        .equippableUnswappable(EquipmentSlot.OFFHAND)
+        .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK), 1, 0);
+  }
 
-    public TieredShield(ToolMaterial toolMaterial, Properties properties, int durabilityMultiplier) {
-        super(properties.durability(toolMaterial.durability() * durabilityMultiplier)
-                .enchantable(toolMaterial.enchantmentValue())
-                .repairable(toolMaterial.repairItems())
-                .equippableUnswappable(EquipmentSlot.OFFHAND)
-                .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK));
-    }
+  public TieredShield(ToolMaterial toolMaterial, Properties properties, int durabilityMultiplier) {
+    super(properties.durability(toolMaterial.durability() * durabilityMultiplier)
+        .enchantable(toolMaterial.enchantmentValue())
+        .repairable(toolMaterial.repairItems())
+        .equippableUnswappable(EquipmentSlot.OFFHAND)
+        .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK));
+  }
 
-    public TieredShield(ToolMaterial toolMaterial, Properties properties, int durabilityMultiplier, int additionalDurability) {
-        super(properties.durability(toolMaterial.durability() * durabilityMultiplier + additionalDurability)
-                .enchantable(toolMaterial.enchantmentValue())
-                .repairable(toolMaterial.repairItems())
-                .equippableUnswappable(EquipmentSlot.OFFHAND)
-                .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK));
-    }
+  public TieredShield(ToolMaterial toolMaterial, Properties properties, int durabilityMultiplier, int additionalDurability) {
+    super(properties.durability(toolMaterial.durability() * durabilityMultiplier + additionalDurability)
+        .enchantable(toolMaterial.enchantmentValue())
+        .repairable(toolMaterial.repairItems())
+        .equippableUnswappable(EquipmentSlot.OFFHAND)
+        .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK));
+  }
 
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> textConsumer, TooltipFlag tooltipFlag) {
-        super.appendHoverText(stack, context, tooltipDisplay, textConsumer, tooltipFlag);
+  @Override
+  public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> textConsumer, TooltipFlag tooltipFlag) {
+    super.appendHoverText(stack, context, tooltipDisplay, textConsumer, tooltipFlag);
 
-        String perk = BuiltInRegistries.ITEM.getKey(stack.getItem()) + ".perk";
-        String weakness = BuiltInRegistries.ITEM.getKey(stack.getItem()) + ".weakness";
+    String perk = BuiltInRegistries.ITEM.getKey(stack.getItem()) + ".perk";
+    String weakness = BuiltInRegistries.ITEM.getKey(stack.getItem()) + ".weakness";
 
-        textConsumer.accept(Component.translatable(perk).withStyle(ChatFormatting.GRAY));
-        textConsumer.accept(Component.translatable(weakness).withStyle(ChatFormatting.GRAY));
-        textConsumer.accept(Component.empty());
-    }
+    textConsumer.accept(Component.translatable(perk).withStyle(ChatFormatting.GRAY));
+    textConsumer.accept(Component.translatable(weakness).withStyle(ChatFormatting.GRAY));
+    textConsumer.accept(Component.empty());
+  }
 
-    @Override
-    public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slotId) {
-        // Iron Shields Weakness
-        if (entity instanceof LivingEntity livingEntity && livingEntity.isInWater()) {
-            if (stack.getItem() == BSItems.IRON_SHIELD.get() || stack.getItem() == BSItems.GILDED_IRON_SHIELD.get()) {
-                boolean isIronShieldInMainHand = livingEntity.getMainHandItem() == stack;
-                boolean isIronShieldInOffHand = livingEntity.getOffhandItem() == stack;
+  @Override
+  public void inventoryTick(ItemStack stack, ServerLevel level, Entity entity, @Nullable EquipmentSlot slotId) {
+    // Iron Shields Weakness
+    if (entity instanceof LivingEntity livingEntity && livingEntity.isInWater()) {
+      if (stack.getItem() == BSItems.IRON_SHIELD.get() || stack.getItem() == BSItems.GILDED_IRON_SHIELD.get()) {
+        boolean isIronShieldInMainHand = livingEntity.getMainHandItem() == stack;
+        boolean isIronShieldInOffHand = livingEntity.getOffhandItem() == stack;
 
-                if ((isIronShieldInMainHand || isIronShieldInOffHand) && stack.isDamageableItem()) {
-                    stack.hurtAndBreak(1, livingEntity, livingEntity.getEquipmentSlotForItem(stack));
-                }
-            }
+        if ((isIronShieldInMainHand || isIronShieldInOffHand) && stack.isDamageableItem()) {
+          stack.hurtAndBreak(1, livingEntity, livingEntity.getEquipmentSlotForItem(stack));
         }
+      }
     }
+  }
 }

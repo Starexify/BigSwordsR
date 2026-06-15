@@ -10,5 +10,6 @@
       "condition": "minecraft:random_chance"
     }
   ],
-  "item": "big_swords:ender_upgrade_smithing_template"
+  "item": "big_swords:ender_upgrade_smithing_template",
+  "priority": 1
 }

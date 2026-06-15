@@ -12,20 +12,20 @@ import java.util.concurrent.CompletableFuture;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class BSEntityTypeTagsProvider extends EntityTypeTagsProvider {
-    public BSEntityTypeTagsProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> provider) {
-        super(pOutput, provider, MODID);
-    }
+  public BSEntityTypeTagsProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> provider) {
+    super(pOutput, provider, MODID);
+  }
 
-    @Override
-    protected void addTags(HolderLookup.Provider provider) {
-        tag(Tags.EntityTypeTags.SOULLESS)
-                .addTags(EntityTypeTags.UNDEAD)
-                .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GIANT);
-        tag(Tags.EntityTypeTags.BLOODLESS)
-                .addTags(EntityTypeTags.SKELETONS)
-                .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GHAST,
-                        EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.BREEZE, EntityType.WITHER, EntityType.VEX, EntityType.ALLAY);
+  @Override
+  protected void addTags(HolderLookup.Provider provider) {
+    tag(Tags.EntityTypeTags.SOULLESS)
+        .addTags(EntityTypeTags.UNDEAD)
+        .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GIANT);
+    tag(Tags.EntityTypeTags.BLOODLESS)
+        .addTags(EntityTypeTags.SKELETONS)
+        .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GHAST,
+            EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.BREEZE, EntityType.WITHER, EntityType.VEX, EntityType.ALLAY);
 
-        tag(Tags.EntityTypeTags.HALLOWEEN_MOB).addTags(EntityTypeTags.SKELETONS);
-    }
+    tag(Tags.EntityTypeTags.HALLOWEEN_MOB).addTags(EntityTypeTags.SKELETONS);
+  }
 }

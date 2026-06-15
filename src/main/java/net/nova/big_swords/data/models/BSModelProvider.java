@@ -8,13 +8,13 @@ import net.minecraft.data.PackOutput;
 import static net.nova.big_swords.BigSwordsR.MODID;
 
 public class BSModelProvider extends ModelProvider {
-    public BSModelProvider(PackOutput output) {
-        super(output, MODID);
-    }
+  public BSModelProvider(PackOutput output) {
+    super(output, MODID);
+  }
 
-    @Override
-    protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        new BSBlockModelGenerator(blockModels.blockStateOutput, blockModels.itemModelOutput, blockModels.modelOutput).run();
-        new BSItemModelGenerator(itemModels.itemModelOutput, itemModels.modelOutput).run();
-    }
+  @Override
+  protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+    new BSBlockModelGenerator(blockModels.blockStateOutput, blockModels.itemModelOutput, blockModels.modelOutput).run();
+    new BSItemModelGenerator(itemModels.itemModelOutput, itemModels.modelOutput).run();
+  }
 }

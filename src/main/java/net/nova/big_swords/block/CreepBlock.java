@@ -8,19 +8,19 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
 public class CreepBlock extends Block {
-    public static final BooleanProperty TILLED = BooleanProperty.create("tilled");
+  public static final BooleanProperty TILLED = BooleanProperty.create("tilled");
 
-    public CreepBlock(Properties properties) {
-        super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(TILLED, Boolean.valueOf(false)));
-    }
+  public CreepBlock(Properties properties) {
+    super(properties);
+    this.registerDefaultState(this.stateDefinition.any().setValue(TILLED, Boolean.valueOf(false)));
+  }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(TILLED);
-    }
+  @Override
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+    pBuilder.add(TILLED);
+  }
 
-    public void tillBlock(Level level, BlockPos pos, BlockState state) {
-        level.setBlockAndUpdate(pos, state.setValue(TILLED, true));
-    }
+  public void tillBlock(Level level, BlockPos pos, BlockState state) {
+    level.setBlockAndUpdate(pos, state.setValue(TILLED, true));
+  }
 }

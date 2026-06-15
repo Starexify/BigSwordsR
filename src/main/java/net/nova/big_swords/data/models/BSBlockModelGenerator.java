@@ -10,7 +10,7 @@ import net.minecraft.client.data.models.model.ModelInstance;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -22,48 +22,48 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class BSBlockModelGenerator extends BlockModelGenerators {
-    public BSBlockModelGenerator(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<ResourceLocation, ModelInstance> modelOutput) {
-        super(blockStateOutput, itemModelOutput, modelOutput);
-    }
+  public BSBlockModelGenerator(Consumer<BlockModelDefinitionGenerator> blockStateOutput, ItemModelOutput itemModelOutput, BiConsumer<Identifier, ModelInstance> modelOutput) {
+    super(blockStateOutput, itemModelOutput, modelOutput);
+  }
 
-    @Override
-    public void run() {
-        createCreepBlock();
-        createTrivialCube(BSBlocks.LIVINGMETAL_BLOCK.get());
-        createTrivialCube(BSBlocks.BIOMASS_BLOCK.get());
-        createCrossBlock(BSBlocks.BIOMASS.get(), BlockStateProperties.AGE_3, 0, 1, 2, 3);
-    }
+  @Override
+  public void run() {
+    createCreepBlock();
+    createTrivialCube(BSBlocks.LIVINGMETAL_BLOCK.get());
+    createTrivialCube(BSBlocks.BIOMASS_BLOCK.get());
+    createCrossBlock(BSBlocks.BIOMASS.get(), BlockStateProperties.AGE_3, 0, 1, 2, 3);
+  }
 
-    // Models
-    public void createCrossBlock(Block cropBlock, Property<Integer> ageProperty, int... ageToVisualStageMapping) {
-        this.registerSimpleFlatItemModel(cropBlock.asItem());
-        if (ageProperty.getPossibleValues().size() != ageToVisualStageMapping.length)
-            throw new IllegalArgumentException();
-        else {
-            Int2ObjectMap<ResourceLocation> int2objectmap = new Int2ObjectOpenHashMap<>();
-            this.blockStateOutput.accept(MultiVariantGenerator.dispatch(cropBlock).with(PropertyDispatch.initial(ageProperty).generate(
-                    p_408977_ -> {
-                        int i = ageToVisualStageMapping[p_408977_];
-                        return plainVariant(int2objectmap.computeIfAbsent(i, p_387308_ -> this.createSuffixedVariant(
-                                cropBlock, "_stage" + p_387308_, ModelTemplates.CROSS, TextureMapping::cross
-                        )));
-                    }))
-            );
-        }
+  // Models
+  public void createCrossBlock(Block cropBlock, Property<Integer> ageProperty, int... ageToVisualStageMapping) {
+    this.registerSimpleFlatItemModel(cropBlock.asItem());
+    if (ageProperty.getPossibleValues().size() != ageToVisualStageMapping.length)
+      throw new IllegalArgumentException();
+    else {
+      Int2ObjectMap<Identifier> int2objectmap = new Int2ObjectOpenHashMap<>();
+      this.blockStateOutput.accept(MultiVariantGenerator.dispatch(cropBlock).with(PropertyDispatch.initial(ageProperty).generate(
+          p_408977_ -> {
+            int i = ageToVisualStageMapping[p_408977_];
+            return plainVariant(int2objectmap.computeIfAbsent(i, mappingFunction -> this.createSuffixedVariant(
+                cropBlock, "_stage" + mappingFunction, ModelTemplates.CROSS, TextureMapping::cross
+            )));
+          }))
+      );
     }
+  }
 
-    public void createCreepBlock() {
-        TextureMapping normalMapping = new TextureMapping()
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_top"))
-                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(Blocks.SOUL_SAND))
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_side"));
-        TextureMapping tilledMapping = new TextureMapping()
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_top_tilled"))
-                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(Blocks.SOUL_SAND))
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_side"));
+  public void createCreepBlock() {
+    TextureMapping normalMapping = new TextureMapping()
+        .put(TextureSlot.TOP, TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_top"))
+        .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(Blocks.SOUL_SAND))
+        .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_side"));
+    TextureMapping tilledMapping = new TextureMapping()
+        .put(TextureSlot.TOP, TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_top_tilled"))
+        .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(Blocks.SOUL_SAND))
+        .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_side"));
 
-        MultiVariant normalModel = plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(BSBlocks.CREEP_BLOCK.get(), normalMapping, this.modelOutput));
-        MultiVariant tilledModel = plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_tilled"), tilledMapping, this.modelOutput));
-        this.blockStateOutput.accept(MultiVariantGenerator.dispatch(BSBlocks.CREEP_BLOCK.get()).with(createEmptyOrFullDispatch(CreepBlock.TILLED, true, normalModel, tilledModel)));
-    }
+    MultiVariant normalModel = plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(BSBlocks.CREEP_BLOCK.get(), normalMapping, this.modelOutput));
+    MultiVariant tilledModel = plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(TextureMapping.getBlockTexture(BSBlocks.CREEP_BLOCK.get(), "_tilled").sprite(), tilledMapping, this.modelOutput));
+    this.blockStateOutput.accept(MultiVariantGenerator.dispatch(BSBlocks.CREEP_BLOCK.get()).with(createEmptyOrFullDispatch(CreepBlock.TILLED, true, tilledModel, normalModel)));
+  }
 }
