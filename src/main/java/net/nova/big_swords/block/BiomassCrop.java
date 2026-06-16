@@ -61,7 +61,7 @@ public class BiomassCrop extends CropBlock {
   // Plant Seed
   @Override
   protected ItemLike getBaseSeedId() {
-    return BSItems.BIOMASS_SEED;
+    return BSItems.BIOMASS_SEEDS;
   }
 
   @Override

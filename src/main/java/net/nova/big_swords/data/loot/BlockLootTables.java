@@ -47,7 +47,7 @@ public class BlockLootTables extends BlockLootSubProvider {
     LootItemCondition.Builder scytheCondition = LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().equipment(
         EntityEquipmentPredicate.Builder.equipment().mainhand(ItemPredicate.Builder.item().of(itemHolder, Tags.BSItemTags.SCYTHES)).build()).build());
 
-    add(BSBlocks.BIOMASS.get(), createBiomassDrops(BSBlocks.BIOMASS.get(), BSItems.BIOMASS.get(), BSItems.BIOMASS_SEED.get(), lootitemcondition$builder1, scytheCondition));
+    add(BSBlocks.BIOMASS.get(), createBiomassDrops(BSBlocks.BIOMASS.get(), BSItems.BIOMASS.get(), BSItems.BIOMASS_SEEDS.get(), lootitemcondition$builder1, scytheCondition));
   }
 
   // Loot method

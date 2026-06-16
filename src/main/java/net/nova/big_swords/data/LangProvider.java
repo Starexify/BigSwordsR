@@ -3,7 +3,6 @@ package net.nova.big_swords.data;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.LanguageProvider;
-import net.nova.big_swords.event.BigSwordsRClient;
 import net.nova.big_swords.init.*;
 import net.nova.big_swords.item.EnderSmithingTemplate;
 
@@ -26,7 +25,7 @@ public class LangProvider extends LanguageProvider {
     // Extra Stuff
     addBlock(BSBlocks.CREEP_BLOCK, "Creep Block");
     addItem(BSItems.CREEP_BALL, "Creep Ball");
-    addItem(BSItems.BIOMASS_SEED, "Biomass Seed");
+    addItem(BSItems.BIOMASS_SEEDS, "Biomass Seeds");
     addItem(BSItems.SOUL, "Soul");
     addItem(BSItems.BLOOD_VIAL, "Blood Vial");
 

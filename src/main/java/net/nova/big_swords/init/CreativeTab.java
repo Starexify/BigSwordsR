@@ -5,10 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.function.Supplier;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
 
@@ -46,7 +43,7 @@ public class CreativeTab {
                 // Extra Stuff
                 output.accept(BSItems.CREEP_BALL);
                 output.accept(BSBlocks.CREEP_BLOCK);
-                output.accept(BSItems.BIOMASS_SEED);
+                output.accept(BSItems.BIOMASS_SEEDS);
                 output.accept(BSItems.SOUL);
                 output.accept(BSItems.BLOOD_VIAL);
 

@@ -42,7 +42,7 @@ public class BloodVial extends Item {
         return processInteraction(level, player, bloodVialStack, otherHandStack, BSItems.CREEP_BALL.get());
 
       if (otherHandStack.is(Items.TORCHFLOWER_SEEDS) && getBloodLevel(bloodVialStack) >= MIN_BLOOD_LEVEL)
-        return processInteraction(level, player, bloodVialStack, otherHandStack, BSItems.BIOMASS_SEED.get());
+        return processInteraction(level, player, bloodVialStack, otherHandStack, BSItems.BIOMASS_SEEDS.get());
     }
 
     return super.use(level, player, usedHand);
