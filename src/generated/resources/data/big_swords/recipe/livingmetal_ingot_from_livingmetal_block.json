@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "livingmetal_ingot",
   "ingredients": [
     "big_swords:livingmetal_block"

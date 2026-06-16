@@ -4,7 +4,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.EntityTypeTagsProvider;
 import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypeIds;
 import net.nova.big_swords.init.Tags;
 
 import java.util.concurrent.CompletableFuture;
@@ -20,13 +20,13 @@ public class BSEntityTypeTagsProvider extends EntityTypeTagsProvider {
   protected void addTags(HolderLookup.Provider provider) {
     tag(Tags.EntityTypeTags.SOULLESS)
         .addTags(EntityTypeTags.UNDEAD)
-        .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GIANT,
-            EntityType.BREEZE, EntityType.SHULKER);
+        .add(EntityTypeIds.IRON_GOLEM, EntityTypeIds.SNOW_GOLEM, EntityTypeIds.BLAZE, EntityTypeIds.GUARDIAN, EntityTypeIds.ELDER_GUARDIAN, EntityTypeIds.WARDEN, EntityTypeIds.GIANT,
+            EntityTypeIds.BREEZE, EntityTypeIds.SHULKER);
     tag(Tags.EntityTypeTags.BLOODLESS)
         .addTags(EntityTypeTags.SKELETONS)
-        .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GHAST,
-            EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.BREEZE, EntityType.WITHER, EntityType.VEX, EntityType.ALLAY, EntityType.CREEPER, EntityType.PHANTOM,
-            EntityType.SHULKER);
+        .add(EntityTypeIds.IRON_GOLEM, EntityTypeIds.SNOW_GOLEM, EntityTypeIds.BLAZE, EntityTypeIds.GUARDIAN, EntityTypeIds.ELDER_GUARDIAN, EntityTypeIds.WARDEN, EntityTypeIds.GHAST,
+            EntityTypeIds.SLIME, EntityTypeIds.MAGMA_CUBE, EntityTypeIds.BREEZE, EntityTypeIds.WITHER, EntityTypeIds.VEX, EntityTypeIds.ALLAY, EntityTypeIds.CREEPER, EntityTypeIds.PHANTOM,
+            EntityTypeIds.SHULKER);
 
     tag(Tags.EntityTypeTags.HALLOWEEN_MOB).addTags(EntityTypeTags.SKELETONS);
   }

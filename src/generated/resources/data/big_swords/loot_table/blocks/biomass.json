@@ -35,7 +35,7 @@
               "condition": "minecraft:entity_properties",
               "entity": "this",
               "predicate": {
-                "equipment": {
+                "minecraft:equipment": {
                   "mainhand": {
                     "items": "#big_swords:scythes"
                   }

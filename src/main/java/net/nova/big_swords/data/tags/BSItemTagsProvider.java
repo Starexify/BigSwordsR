@@ -2,8 +2,9 @@ package net.nova.big_swords.data.tags;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.references.BlockItemIds;
+import net.minecraft.references.ItemIds;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.BlockTagCopyingItemTagProvider;
 import net.nova.big_swords.init.BSItems;
@@ -21,41 +22,41 @@ public class BSItemTagsProvider extends BlockTagCopyingItemTagProvider {
   @Override
   protected void addTags(HolderLookup.Provider pProvider) {
     tag(Tags.BSItemTags.BIG_SWORDS).add(
-        BSItems.WOODEN_BIG_SWORD.get(), BSItems.STONE_BIG_SWORD.get(), BSItems.IRON_BIG_SWORD.get(), BSItems.GOLDEN_BIG_SWORD.get(),
-        BSItems.DIAMOND_BIG_SWORD.get(), BSItems.NETHERITE_BIG_SWORD.get(), BSItems.PATCHWORK_BIG_SWORD.get(), BSItems.SKULL_BIG_SWORD.get(),
-        BSItems.QUARTZ_BIG_SWORD.get(), BSItems.OBSIDIAN_BIG_SWORD.get(), BSItems.ENDER_BIG_SWORD.get(), BSItems.LIVINGMETAL_BIG_SWORD.get(),
-        BSItems.BIOMASS_BIG_SWORD.get()
+        BSItems.WOODEN_BIG_SWORD.getKey(), BSItems.STONE_BIG_SWORD.getKey(), BSItems.IRON_BIG_SWORD.getKey(), BSItems.GOLDEN_BIG_SWORD.getKey(),
+        BSItems.DIAMOND_BIG_SWORD.getKey(), BSItems.NETHERITE_BIG_SWORD.getKey(), BSItems.PATCHWORK_BIG_SWORD.getKey(), BSItems.SKULL_BIG_SWORD.getKey(),
+        BSItems.QUARTZ_BIG_SWORD.getKey(), BSItems.OBSIDIAN_BIG_SWORD.getKey(), BSItems.ENDER_BIG_SWORD.getKey(), BSItems.LIVINGMETAL_BIG_SWORD.getKey(),
+        BSItems.BIOMASS_BIG_SWORD.getKey()
     );
 
     tag(Tags.BSItemTags.GLAIVES).add(
-        BSItems.WOODEN_GLAIVE.get(), BSItems.STONE_GLAIVE.get(), BSItems.IRON_GLAIVE.get(), BSItems.GOLDEN_GLAIVE.get(), BSItems.DIAMOND_GLAIVE.get(),
-        BSItems.NETHERITE_GLAIVE.get(), BSItems.BIOMASS_GLAIVE.get(), BSItems.LIVINGMETAL_GLAIVE.get()
+        BSItems.WOODEN_GLAIVE.getKey(), BSItems.STONE_GLAIVE.getKey(), BSItems.IRON_GLAIVE.getKey(), BSItems.GOLDEN_GLAIVE.getKey(), BSItems.DIAMOND_GLAIVE.getKey(),
+        BSItems.NETHERITE_GLAIVE.getKey(), BSItems.BIOMASS_GLAIVE.getKey(), BSItems.LIVINGMETAL_GLAIVE.getKey()
     );
 
     tag(Tags.BSItemTags.SCYTHES).add(
-        BSItems.WOODEN_SCYTHE.get(), BSItems.STONE_SCYTHE.get(), BSItems.IRON_SCYTHE.get(), BSItems.GOLDEN_SCYTHE.get(), BSItems.DIAMOND_SCYTHE.get(),
-        BSItems.NETHERITE_SCYTHE.get(), BSItems.BIOMASS_SCYTHE.get(), BSItems.LIVINGMETAL_SCYTHE.get(), BSItems.BONE_SCYTHE.get(), BSItems.SOUL_REAPER.get()
+        BSItems.WOODEN_SCYTHE.getKey(), BSItems.STONE_SCYTHE.getKey(), BSItems.IRON_SCYTHE.getKey(), BSItems.GOLDEN_SCYTHE.getKey(), BSItems.DIAMOND_SCYTHE.getKey(),
+        BSItems.NETHERITE_SCYTHE.getKey(), BSItems.BIOMASS_SCYTHE.getKey(), BSItems.LIVINGMETAL_SCYTHE.getKey(), BSItems.BONE_SCYTHE.getKey(), BSItems.SOUL_REAPER.getKey()
     );
 
     tag(Tags.BSItemTags.SHIELDS).add(
-        BSItems.WOODEN_SHIELD.get(), BSItems.GILDED_WOODEN_SHIELD.get(), BSItems.STONE_SHIELD.get(), BSItems.GILDED_STONE_SHIELD.get(),
-        BSItems.IRON_SHIELD.get(), BSItems.GILDED_IRON_SHIELD.get(), BSItems.DIAMOND_SHIELD.get(), BSItems.GILDED_DIAMOND_SHIELD.get(),
-        BSItems.NETHERITE_SHIELD.get(), BSItems.GILDED_NETHERITE_SHIELD.get(), BSItems.ENDER_SHIELD.get(), BSItems.GILDED_ENDER_SHIELD.get(),
-        BSItems.QUARTZ_SHIELD.get(), BSItems.GILDED_QUARTZ_SHIELD.get(), BSItems.PATCHWORK_SHIELD.get(), BSItems.GILDED_PATCHWORK_SHIELD.get(),
-        BSItems.SKULL_SHIELD.get(), BSItems.GILDED_SKULL_SHIELD.get(), BSItems.BIOMASS_SHIELD.get(), BSItems.GILDED_BIOMASS_SHIELD.get(),
-        BSItems.LIVINGMETAL_SHIELD.get(), BSItems.GILDED_LIVINGMETAL_SHIELD.get()
+        BSItems.WOODEN_SHIELD.getKey(), BSItems.GILDED_WOODEN_SHIELD.getKey(), BSItems.STONE_SHIELD.getKey(), BSItems.GILDED_STONE_SHIELD.getKey(),
+        BSItems.IRON_SHIELD.getKey(), BSItems.GILDED_IRON_SHIELD.getKey(), BSItems.DIAMOND_SHIELD.getKey(), BSItems.GILDED_DIAMOND_SHIELD.getKey(),
+        BSItems.NETHERITE_SHIELD.getKey(), BSItems.GILDED_NETHERITE_SHIELD.getKey(), BSItems.ENDER_SHIELD.getKey(), BSItems.GILDED_ENDER_SHIELD.getKey(),
+        BSItems.QUARTZ_SHIELD.getKey(), BSItems.GILDED_QUARTZ_SHIELD.getKey(), BSItems.PATCHWORK_SHIELD.getKey(), BSItems.GILDED_PATCHWORK_SHIELD.getKey(),
+        BSItems.SKULL_SHIELD.getKey(), BSItems.GILDED_SKULL_SHIELD.getKey(), BSItems.BIOMASS_SHIELD.getKey(), BSItems.GILDED_BIOMASS_SHIELD.getKey(),
+        BSItems.LIVINGMETAL_SHIELD.getKey(), BSItems.GILDED_LIVINGMETAL_SHIELD.getKey()
     );
 
-    tag(ItemTags.HEAD_ARMOR).add(BSItems.LIVINGMETAL_HELMET.get(), BSItems.BIOMASS_HELMET.get());
-    tag(ItemTags.CHEST_ARMOR).add(BSItems.LIVINGMETAL_CHESTPLATE.get(), BSItems.BIOMASS_CHESTPLATE.get());
-    tag(ItemTags.LEG_ARMOR).add(BSItems.LIVINGMETAL_LEGGINGS.get(), BSItems.BIOMASS_LEGGINGS.get());
-    tag(ItemTags.FOOT_ARMOR).add(BSItems.LIVINGMETAL_BOOTS.get(), BSItems.BIOMASS_BOOTS.get());
+    tag(ItemTags.HEAD_ARMOR).add(BSItems.LIVINGMETAL_HELMET.getKey(), BSItems.BIOMASS_HELMET.getKey());
+    tag(ItemTags.CHEST_ARMOR).add(BSItems.LIVINGMETAL_CHESTPLATE.getKey(), BSItems.BIOMASS_CHESTPLATE.getKey());
+    tag(ItemTags.LEG_ARMOR).add(BSItems.LIVINGMETAL_LEGGINGS.getKey(), BSItems.BIOMASS_LEGGINGS.getKey());
+    tag(ItemTags.FOOT_ARMOR).add(BSItems.LIVINGMETAL_BOOTS.getKey(), BSItems.BIOMASS_BOOTS.getKey());
 
-    tag(ItemTags.SWORDS).addTag(Tags.BSItemTags.BIG_SWORDS).add(BSItems.LIVINGMETAL_SWORD.get(), BSItems.BIOMASS_SWORD.get());
-    tag(ItemTags.PICKAXES).add(BSItems.LIVINGMETAL_PICKAXE.get(), BSItems.LIVINGMETAL_PICKAXE.get());
-    tag(ItemTags.AXES).add(BSItems.LIVINGMETAL_AXE.get(), BSItems.BIOMASS_AXE.get());
-    tag(ItemTags.SHOVELS).add(BSItems.LIVINGMETAL_SHOVEL.get(), BSItems.BIOMASS_SHOVEL.get());
-    tag(ItemTags.HOES).addTag(Tags.BSItemTags.SCYTHES).add(BSItems.LIVINGMETAL_HOE.get(), BSItems.BIOMASS_HOE.get());
+    tag(ItemTags.SWORDS).addTag(Tags.BSItemTags.BIG_SWORDS).add(BSItems.LIVINGMETAL_SWORD.getKey(), BSItems.BIOMASS_SWORD.getKey());
+    tag(ItemTags.PICKAXES).add(BSItems.LIVINGMETAL_PICKAXE.getKey(), BSItems.LIVINGMETAL_PICKAXE.getKey());
+    tag(ItemTags.AXES).add(BSItems.LIVINGMETAL_AXE.getKey(), BSItems.BIOMASS_AXE.getKey());
+    tag(ItemTags.SHOVELS).add(BSItems.LIVINGMETAL_SHOVEL.getKey(), BSItems.BIOMASS_SHOVEL.getKey());
+    tag(ItemTags.HOES).addTag(Tags.BSItemTags.SCYTHES).add(BSItems.LIVINGMETAL_HOE.getKey(), BSItems.BIOMASS_HOE.getKey());
 
     tag(ItemTags.DURABILITY_ENCHANTABLE).addTag(Tags.BSItemTags.SHIELDS);
 
@@ -64,18 +65,18 @@ public class BSItemTagsProvider extends BlockTagCopyingItemTagProvider {
     tag(ItemTags.SHARP_WEAPON_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);
     tag(ItemTags.DURABILITY_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);
 
-    tag(ItemTags.TRIM_MATERIALS).add(BSItems.LIVINGMETAL_INGOT.get());
+    tag(ItemTags.TRIM_MATERIALS).add(BSItems.LIVINGMETAL_INGOT.getKey());
 
-    tag(Tags.BSItemTags.REPAIRS_LIVINGMETAL_ARMOR).add(BSItems.LIVINGMETAL_INGOT.get());
-    tag(Tags.BSItemTags.REPAIRS_BIOMASS_ARMOR).add(BSItems.BIOMASS.get());
+    tag(Tags.BSItemTags.REPAIRS_LIVINGMETAL_ARMOR).add(BSItems.LIVINGMETAL_INGOT.getKey());
+    tag(Tags.BSItemTags.REPAIRS_BIOMASS_ARMOR).add(BSItems.BIOMASS.getKey());
 
-    tag(Tags.BSItemTags.PATCHWORK_TOOL_MATERIALS).add(Items.ROTTEN_FLESH);
-    tag(Tags.BSItemTags.SKULL_TOOL_MATERIALS).add(Items.BONE);
-    tag(Tags.BSItemTags.QUARTZ_TOOL_MATERIALS).add(Items.QUARTZ);
-    tag(Tags.BSItemTags.OBSIDIAN_TOOL_MATERIALS).add(Items.OBSIDIAN);
-    tag(Tags.BSItemTags.ENDER_TOOL_MATERIALS).add(Items.ENDER_EYE);
-    tag(Tags.BSItemTags.LIVINGMETAL_TOOL_MATERIALS).add(BSItems.LIVINGMETAL_INGOT.get());
-    tag(Tags.BSItemTags.BIOMASS_TOOL_MATERIALS).add(BSItems.BIOMASS.get());
-    tag(Tags.BSItemTags.REAPER_TOOL_MATERIALS).add(Items.BONE);
+    tag(Tags.BSItemTags.PATCHWORK_TOOL_MATERIALS).add(ItemIds.ROTTEN_FLESH);
+    tag(Tags.BSItemTags.SKULL_TOOL_MATERIALS).add(ItemIds.BONE);
+    tag(Tags.BSItemTags.QUARTZ_TOOL_MATERIALS).add(ItemIds.QUARTZ);
+    tag(Tags.BSItemTags.OBSIDIAN_TOOL_MATERIALS).add(BlockItemIds.OBSIDIAN.item());
+    tag(Tags.BSItemTags.ENDER_TOOL_MATERIALS).add(ItemIds.ENDER_EYE);
+    tag(Tags.BSItemTags.LIVINGMETAL_TOOL_MATERIALS).add(BSItems.LIVINGMETAL_INGOT.getKey());
+    tag(Tags.BSItemTags.BIOMASS_TOOL_MATERIALS).add(BSItems.BIOMASS.getKey());
+    tag(Tags.BSItemTags.REAPER_TOOL_MATERIALS).add(ItemIds.BONE);
   }
 }
