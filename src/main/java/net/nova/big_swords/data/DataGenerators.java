@@ -40,6 +40,7 @@ public class DataGenerators {
     event.createProvider(SoundsProvider::new);
     event.createProvider(GlobalLootModifier::new);
     event.createBlockAndItemTags(BSBlockTagsProvider::new, BSItemTagsProvider::new);
+    event.createProvider(BSPackMetaGenerator::new);
 
     event.createProvider(((output, registries) ->
         new AdvancementProvider(output, registries, List.of(

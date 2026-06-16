@@ -1,0 +1,12 @@
+{
+  "pack": {
+    "description": {
+      "translate": "resourcePack.big_swords.big_swords_r_16x.description"
+    },
+    "max_format": [
+      84,
+      0
+    ],
+    "min_format": 84
+  }
+}
