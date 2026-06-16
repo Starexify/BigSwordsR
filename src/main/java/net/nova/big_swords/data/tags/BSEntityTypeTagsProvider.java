@@ -20,13 +20,13 @@ public class BSEntityTypeTagsProvider extends EntityTypeTagsProvider {
   protected void addTags(HolderLookup.Provider provider) {
     tag(Tags.EntityTypeTags.SOULLESS)
         .addTags(EntityTypeTags.UNDEAD)
-        .add(EntityTypeIds.IRON_GOLEM, EntityTypeIds.SNOW_GOLEM, EntityTypeIds.BLAZE, EntityTypeIds.GUARDIAN, EntityTypeIds.ELDER_GUARDIAN, EntityTypeIds.WARDEN, EntityTypeIds.GIANT,
-            EntityTypeIds.BREEZE, EntityTypeIds.SHULKER);
+        .add(EntityTypeIds.IRON_GOLEM, EntityTypeIds.SNOW_GOLEM, EntityTypeIds.BLAZE, EntityTypeIds.GUARDIAN, EntityTypeIds.ELDER_GUARDIAN, EntityTypeIds.WARDEN,
+            EntityTypeIds.GIANT, EntityTypeIds.BREEZE, EntityTypeIds.SHULKER);
     tag(Tags.EntityTypeTags.BLOODLESS)
         .addTags(EntityTypeTags.SKELETONS)
-        .add(EntityTypeIds.IRON_GOLEM, EntityTypeIds.SNOW_GOLEM, EntityTypeIds.BLAZE, EntityTypeIds.GUARDIAN, EntityTypeIds.ELDER_GUARDIAN, EntityTypeIds.WARDEN, EntityTypeIds.GHAST,
-            EntityTypeIds.SLIME, EntityTypeIds.MAGMA_CUBE, EntityTypeIds.BREEZE, EntityTypeIds.WITHER, EntityTypeIds.VEX, EntityTypeIds.ALLAY, EntityTypeIds.CREEPER, EntityTypeIds.PHANTOM,
-            EntityTypeIds.SHULKER);
+        .add(EntityTypeIds.IRON_GOLEM, EntityTypeIds.SNOW_GOLEM, EntityTypeIds.BLAZE, EntityTypeIds.GUARDIAN, EntityTypeIds.ELDER_GUARDIAN, EntityTypeIds.WARDEN,EntityTypeIds.GHAST,
+            EntityTypeIds.SLIME, EntityTypeIds.SULFUR_CUBE, EntityTypeIds.MAGMA_CUBE, EntityTypeIds.BREEZE, EntityTypeIds.WITHER, EntityTypeIds.VEX, EntityTypeIds.ALLAY,
+            EntityTypeIds.CREEPER, EntityTypeIds.PHANTOM, EntityTypeIds.SHULKER);
 
     tag(Tags.EntityTypeTags.HALLOWEEN_MOB).addTags(EntityTypeTags.SKELETONS);
   }
