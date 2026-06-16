@@ -20,11 +20,13 @@ public class BSEntityTypeTagsProvider extends EntityTypeTagsProvider {
   protected void addTags(HolderLookup.Provider provider) {
     tag(Tags.EntityTypeTags.SOULLESS)
         .addTags(EntityTypeTags.UNDEAD)
-        .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GIANT);
+        .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GIANT,
+            EntityType.BREEZE, EntityType.SHULKER);
     tag(Tags.EntityTypeTags.BLOODLESS)
         .addTags(EntityTypeTags.SKELETONS)
         .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GHAST,
-            EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.BREEZE, EntityType.WITHER, EntityType.VEX, EntityType.ALLAY);
+            EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.BREEZE, EntityType.WITHER, EntityType.VEX, EntityType.ALLAY, EntityType.CREEPER, EntityType.PHANTOM,
+            EntityType.SHULKER);
 
     tag(Tags.EntityTypeTags.HALLOWEEN_MOB).addTags(EntityTypeTags.SKELETONS);
   }
