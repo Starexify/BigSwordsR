@@ -28,6 +28,7 @@ public class CreativeTab {
                 output.accept(BSItems.BIOMASS_AXE);
                 output.accept(BSItems.BIOMASS_SHOVEL);
                 output.accept(BSItems.BIOMASS_HOE);
+                output.accept(BSItems.BIOMASS_SPEAR);
 
                 // Livingmetal
                 output.accept(BSItems.LIVINGMETAL_HELMET);
@@ -39,6 +40,7 @@ public class CreativeTab {
                 output.accept(BSItems.LIVINGMETAL_AXE);
                 output.accept(BSItems.LIVINGMETAL_SHOVEL);
                 output.accept(BSItems.LIVINGMETAL_HOE);
+                output.accept(BSItems.LIVINGMETAL_SPEAR);
 
                 // Extra Stuff
                 output.accept(BSItems.CREEP_BALL);

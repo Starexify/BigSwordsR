@@ -247,6 +247,17 @@ public class BSRecipeProvider extends RecipeProvider {
         .save(output);
   }
 
+  public void basicSpear(Item handle, Item material, DeferredItem<Item> result) {
+    shaped(RecipeCategory.TOOLS, result)
+        .define('#', handle)
+        .define('X', material)
+        .pattern("  X")
+        .pattern(" # ")
+        .pattern("#  ")
+        .unlockedBy(getHasName(material), has(material))
+        .save(output);
+  }
+
   public void enderSmithing(Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
     SmithingTransformRecipeBuilder.smithing(
             Ingredient.of(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(pIngredientItem), Ingredient.of(Items.ENDER_EYE), pCategory, pResultItem

@@ -41,6 +41,7 @@ public class LangProvider extends LanguageProvider {
     addItem(BSItems.LIVINGMETAL_AXE, "Livingmetal Axe");
     addItem(BSItems.LIVINGMETAL_SHOVEL, "Livingmetal Shovel");
     addItem(BSItems.LIVINGMETAL_HOE, "Livingmetal Hoe");
+    addItem(BSItems.LIVINGMETAL_SPEAR, "Livingmetal Spear");
 
     // Biomass Lang
     addItem(BSItems.BIOMASS, "Biomass");
@@ -54,6 +55,7 @@ public class LangProvider extends LanguageProvider {
     addItem(BSItems.BIOMASS_AXE, "Biomass Axe");
     addItem(BSItems.BIOMASS_SHOVEL, "Biomass Shovel");
     addItem(BSItems.BIOMASS_HOE, "Biomass Hoe");
+    addItem(BSItems.BIOMASS_SPEAR, "Biomass Spear");
 
     // Big Swords
     addItem(BSItems.WOODEN_BIG_SWORD, "Wooden Big Sword");

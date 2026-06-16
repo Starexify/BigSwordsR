@@ -46,6 +46,7 @@ public class BSItemModelGenerator extends ItemModelGenerators {
     generateFlatItem(BSItems.LIVINGMETAL_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(BSItems.LIVINGMETAL_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(BSItems.LIVINGMETAL_HOE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+    generateSpear(BSItems.LIVINGMETAL_SPEAR.get());
 
     // Biomass Models
     generateFlatItem(BSItems.BIOMASS.get(), ModelTemplates.FLAT_ITEM);
@@ -58,6 +59,7 @@ public class BSItemModelGenerator extends ItemModelGenerators {
     generateFlatItem(BSItems.BIOMASS_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(BSItems.BIOMASS_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(BSItems.BIOMASS_HOE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+    generateSpear(BSItems.BIOMASS_SPEAR.get());
 
     // Ender Upgrade
     generateFlatItem(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE.get(), ModelTemplates.FLAT_ITEM);

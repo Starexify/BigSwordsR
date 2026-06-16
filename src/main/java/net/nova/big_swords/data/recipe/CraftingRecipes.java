@@ -55,6 +55,7 @@ public class CraftingRecipes extends BSRecipeProvider {
     basicAxe(Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_AXE);
     basicShovel(Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_SHOVEL);
     basicHoe(Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_HOE);
+    basicSpear(Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_SPEAR);
 
     // Biomass Recipes
     nineBlockStorageRecipesRecipesWithCustomUnpacking(RecipeCategory.MISC, BSItems.BIOMASS, RecipeCategory.BUILDING_BLOCKS, BSBlocks.BIOMASS_BLOCK, getItemName(BSItems.BIOMASS) + "_from_" + getItemName(BSBlocks.BIOMASS_BLOCK), getItemName(BSItems.BIOMASS));
@@ -67,6 +68,7 @@ public class CraftingRecipes extends BSRecipeProvider {
     basicAxe(Items.STICK, BSItems.BIOMASS.get(), BSItems.BIOMASS_AXE);
     basicShovel(Items.STICK, BSItems.BIOMASS.get(), BSItems.BIOMASS_SHOVEL);
     basicHoe(Items.STICK, BSItems.BIOMASS.get(), BSItems.BIOMASS_HOE);
+    basicSpear(Items.STICK, BSItems.BIOMASS.get(), BSItems.BIOMASS_SPEAR);
 
     // Ender Upgrade
     copySmithingTemplate(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE, Items.ENDER_EYE, Items.OBSIDIAN);

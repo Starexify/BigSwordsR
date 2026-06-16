@@ -13,6 +13,9 @@
     "minecraft:breeze",
     "minecraft:wither",
     "minecraft:vex",
-    "minecraft:allay"
+    "minecraft:allay",
+    "minecraft:creeper",
+    "minecraft:phantom",
+    "minecraft:shulker"
   ]
 }
