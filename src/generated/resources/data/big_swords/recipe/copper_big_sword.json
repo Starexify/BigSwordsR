@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "#": "big_swords:giant_wooden_stick",
-    "X": "#minecraft:diamond_tool_materials"
+    "X": "#minecraft:copper_tool_materials"
   },
   "pattern": [
     " XX",
@@ -11,6 +11,6 @@
     "#X "
   ],
   "result": {
-    "id": "big_swords:diamond_big_sword"
+    "id": "big_swords:copper_big_sword"
   }
 }

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_giant_wooden_stick": {
+    "has_stick": {
       "conditions": {
         "items": [
           {
-            "items": "big_swords:giant_wooden_stick"
+            "items": "minecraft:stick"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "big_swords:golden_big_sword"
+        "recipe": "big_swords:copper_glaive"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_giant_wooden_stick"
+      "has_stick"
     ]
   ],
   "rewards": {
     "recipes": [
-      "big_swords:golden_big_sword"
+      "big_swords:copper_glaive"
     ]
   }
 }

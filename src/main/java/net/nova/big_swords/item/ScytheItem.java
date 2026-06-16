@@ -1,11 +1,7 @@
 package net.nova.big_swords.item;
 
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,13 +13,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.item.enchantment.EnchantedItemInUse;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -74,10 +67,10 @@ public class ScytheItem extends HoeItem {
     return InteractionResult.CONSUME;
   }
 
-  public float radius = 1.5f;  // Radius of the half-circle
-  public float width = 3.0f;   // Width of the attack area
-  public float height = 3.0f;  // Height of the attack area
-  public float depth = 3.0f;   // Depth of the attack area
+  public float radius = 1.5f;   // Radius of the half-circle
+  public float width = 3.0f;    // Width of the attack area
+  public float height = 3.0f;   // Height of the attack area
+  public float depth = 3.0f;    // Depth of the attack area
   public float distance = 0.5f; // Distance in front of the player
 
   @Override

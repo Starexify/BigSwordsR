@@ -77,9 +77,10 @@ public class CraftingRecipes extends BSRecipeProvider {
     // Big Swords
     basicBigSword(BSItems.GIANT_WOODEN_STICK.get(), ItemTags.PLANKS, BSItems.WOODEN_BIG_SWORD);
     basicBigSword(BSItems.GIANT_WOODEN_STICK.get(), ItemTags.STONE_TOOL_MATERIALS, BSItems.STONE_BIG_SWORD);
-    basicBigSword(BSItems.GIANT_WOODEN_STICK.get(), Items.IRON_INGOT, BSItems.IRON_BIG_SWORD);
-    basicBigSword(BSItems.GIANT_WOODEN_STICK.get(), Items.GOLD_INGOT, BSItems.GOLDEN_BIG_SWORD);
-    basicBigSword(BSItems.GIANT_WOODEN_STICK.get(), Items.DIAMOND, BSItems.DIAMOND_BIG_SWORD);
+    basicBigSword(BSItems.GIANT_WOODEN_STICK.get(), ItemTags.COPPER_TOOL_MATERIALS, BSItems.COPPER_BIG_SWORD);
+    basicBigSword(BSItems.GIANT_WOODEN_STICK.get(), ItemTags.IRON_TOOL_MATERIALS, BSItems.IRON_BIG_SWORD);
+    basicBigSword(BSItems.GIANT_WOODEN_STICK.get(), ItemTags.GOLD_TOOL_MATERIALS, BSItems.GOLDEN_BIG_SWORD);
+    basicBigSword(BSItems.GIANT_WOODEN_STICK.get(), ItemTags.DIAMOND_TOOL_MATERIALS, BSItems.DIAMOND_BIG_SWORD);
     basicBigSword(Items.BONE, Items.ROTTEN_FLESH, BSItems.PATCHWORK_BIG_SWORD);
     basicBigSword(BSItems.GIANT_LIVINGMETAL_HANDLE.get(), BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_BIG_SWORD);
     basicBigSwordTwoMat(BSItems.GIANT_BLAZE_ROD.get(), Items.QUARTZ, Items.QUARTZ_BLOCK, BSItems.QUARTZ_BIG_SWORD);
@@ -109,9 +110,10 @@ public class CraftingRecipes extends BSRecipeProvider {
     // Glaives
     basicGlaive(Items.STICK, ItemTags.PLANKS, BSItems.WOODEN_GLAIVE);
     basicGlaive(Items.STICK, ItemTags.STONE_TOOL_MATERIALS, BSItems.STONE_GLAIVE);
-    basicGlaive(Items.STICK, Items.IRON_INGOT, BSItems.IRON_GLAIVE);
-    basicGlaive(Items.STICK, Items.GOLD_INGOT, BSItems.GOLDEN_GLAIVE);
-    basicGlaive(Items.STICK, Items.DIAMOND, BSItems.DIAMOND_GLAIVE);
+    basicGlaive(Items.STICK, ItemTags.IRON_TOOL_MATERIALS, BSItems.IRON_GLAIVE);
+    basicGlaive(Items.STICK, ItemTags.COPPER_TOOL_MATERIALS, BSItems.COPPER_GLAIVE);
+    basicGlaive(Items.STICK, ItemTags.GOLD_TOOL_MATERIALS, BSItems.GOLDEN_GLAIVE);
+    basicGlaive(Items.STICK, ItemTags.DIAMOND_TOOL_MATERIALS, BSItems.DIAMOND_GLAIVE);
     basicGlaive(Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_GLAIVE);
 
     shaped(RecipeCategory.COMBAT, BSItems.BIOMASS_GLAIVE)
@@ -127,9 +129,10 @@ public class CraftingRecipes extends BSRecipeProvider {
     // Scythes
     basicScythe(Items.STICK, ItemTags.PLANKS, BSItems.WOODEN_SCYTHE);
     basicScythe(Items.STICK, ItemTags.STONE_TOOL_MATERIALS, BSItems.STONE_SCYTHE);
-    basicScythe(Items.STICK, Items.IRON_INGOT, BSItems.IRON_SCYTHE);
-    basicScythe(Items.STICK, Items.GOLD_INGOT, BSItems.GOLDEN_SCYTHE);
-    basicScythe(Items.STICK, Items.DIAMOND, BSItems.DIAMOND_SCYTHE);
+    basicScythe(Items.STICK, ItemTags.COPPER_TOOL_MATERIALS, BSItems.COPPER_SCYTHE);
+    basicScythe(Items.STICK, ItemTags.IRON_TOOL_MATERIALS, BSItems.IRON_SCYTHE);
+    basicScythe(Items.STICK, ItemTags.GOLD_TOOL_MATERIALS, BSItems.GOLDEN_SCYTHE);
+    basicScythe(Items.STICK, ItemTags.DIAMOND_TOOL_MATERIALS, BSItems.DIAMOND_SCYTHE);
     basicScythe(Items.STICK, BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_SCYTHE);
 
     shaped(RecipeCategory.COMBAT, BSItems.BIOMASS_SCYTHE)

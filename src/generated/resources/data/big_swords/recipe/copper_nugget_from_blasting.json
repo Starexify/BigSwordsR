@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "experience": 0.1,
+  "ingredient": [
+    "big_swords:copper_glaive",
+    "big_swords:copper_scythe"
+  ],
+  "result": {
+    "id": "minecraft:copper_nugget"
+  }
+}

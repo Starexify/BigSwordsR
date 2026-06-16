@@ -62,6 +62,7 @@ public class BSItems {
   // Big Swords
   public static DeferredItem<Item> WOODEN_BIG_SWORD = ITEMS.registerItem("wooden_big_sword", properties -> new Item(BSToolMaterial.applyBigSwordProperties(properties, ToolMaterial.WOOD, 7.0F, -2.8F)));
   public static DeferredItem<Item> STONE_BIG_SWORD = ITEMS.registerItem("stone_big_sword", properties -> new Item(BSToolMaterial.applyBigSwordProperties(properties, ToolMaterial.STONE, 7.0F, -2.8F)));
+  public static DeferredItem<Item> COPPER_BIG_SWORD = ITEMS.registerItem("copper_big_sword", properties -> new Item(BSToolMaterial.applyBigSwordProperties(properties, ToolMaterial.COPPER, 7.0F, -2.8F)));
   public static DeferredItem<Item> IRON_BIG_SWORD = ITEMS.registerItem("iron_big_sword", properties -> new Item(BSToolMaterial.applyBigSwordProperties(properties, ToolMaterial.IRON, 7.0F, -2.8F)));
   public static DeferredItem<Item> GOLDEN_BIG_SWORD = ITEMS.registerItem("golden_big_sword", properties -> new Item(BSToolMaterial.applyBigSwordProperties(properties, ToolMaterial.GOLD, 7.0F, -2.8F)));
   public static DeferredItem<Item> DIAMOND_BIG_SWORD = ITEMS.registerItem("diamond_big_sword", properties -> new Item(BSToolMaterial.applyBigSwordProperties(properties, ToolMaterial.DIAMOND, 7.0F, -2.8F)));
@@ -77,6 +78,7 @@ public class BSItems {
   // Glaives
   public static DeferredItem<Item> WOODEN_GLAIVE = ITEMS.registerItem("wooden_glaive", properties -> new GlaiveItem(ToolMaterial.WOOD, 2, -2.2F, 3F, 4F, properties));
   public static DeferredItem<Item> STONE_GLAIVE = ITEMS.registerItem("stone_glaive", properties -> new GlaiveItem(ToolMaterial.STONE, 2, -2.2F, 4.0F, 5.0F, properties));
+  public static DeferredItem<Item> COPPER_GLAIVE = ITEMS.registerItem("copper_glaive", properties -> new GlaiveItem(ToolMaterial.COPPER, 2, -2.2F, 4.0F, 5.0F, properties));
   public static DeferredItem<Item> IRON_GLAIVE = ITEMS.registerItem("iron_glaive", properties -> new GlaiveItem(ToolMaterial.IRON, 2, -2.2F, 4.0F, 5.0F, properties));
   public static DeferredItem<Item> GOLDEN_GLAIVE = ITEMS.registerItem("golden_glaive", properties -> new GlaiveItem(ToolMaterial.GOLD, 2, -2.2F, 3.0F, 4.0F, properties));
   public static DeferredItem<Item> DIAMOND_GLAIVE = ITEMS.registerItem("diamond_glaive", properties -> new GlaiveItem(ToolMaterial.DIAMOND, 2, -2.2F, 5.0F, 6.0F, properties));
@@ -87,11 +89,12 @@ public class BSItems {
   // Scythes
   public static DeferredItem<Item> WOODEN_SCYTHE = ITEMS.registerItem("wooden_scythe", properties -> new ScytheItem(ToolMaterial.WOOD, 1, -2.0F, 2F, 3F, properties));
   public static DeferredItem<Item> STONE_SCYTHE = ITEMS.registerItem("stone_scythe", properties -> new ScytheItem(ToolMaterial.STONE, 1, -2.0F, 3.0F, 4.0F, properties));
-  public static DeferredItem<Item> IRON_SCYTHE = ITEMS.registerItem("iron_scythe", properties -> new ScytheItem(ToolMaterial.IRON, 1, -2.0F, 3F, 4F, properties));
-  public static DeferredItem<Item> GOLDEN_SCYTHE = ITEMS.registerItem("golden_scythe", properties -> new ScytheItem(ToolMaterial.GOLD, 1, -2.0F, 2F, 3F, properties));
-  public static DeferredItem<Item> DIAMOND_SCYTHE = ITEMS.registerItem("diamond_scythe", properties -> new ScytheItem(ToolMaterial.DIAMOND, 1, -2.0F, 3.5F, 4.5F, properties));
-  public static DeferredItem<Item> NETHERITE_SCYTHE = ITEMS.registerItem("netherite_scythe", properties -> new ScytheItem(ToolMaterial.NETHERITE, 1, -2.0F, 4.5F, 5.5F, properties.fireResistant()));
-  public static DeferredItem<Item> BIOMASS_SCYTHE = ITEMS.registerItem("biomass_scythe", properties -> new ScytheItem(BSToolMaterial.BIOMASS, 1, -2.0F, 3F, 3.5F, properties));
+  public static DeferredItem<Item> COPPER_SCYTHE = ITEMS.registerItem("copper_scythe", properties -> new ScytheItem(ToolMaterial.COPPER, 1, -2.0F, 3.0F, 4.0F, properties));
+  public static DeferredItem<Item> IRON_SCYTHE = ITEMS.registerItem("iron_scythe", properties -> new ScytheItem(ToolMaterial.IRON, 1, -2.0F, 3.0F, 4.0F, properties));
+  public static DeferredItem<Item> GOLDEN_SCYTHE = ITEMS.registerItem("golden_scythe", properties -> new ScytheItem(ToolMaterial.GOLD, 1, -2.0F, 2.0F, 3.0F, properties));
+  public static DeferredItem<Item> DIAMOND_SCYTHE = ITEMS.registerItem("diamond_scythe", properties -> new ScytheItem(ToolMaterial.DIAMOND, 1, -2.0F, 4.0F, 5.0F, properties));
+  public static DeferredItem<Item> NETHERITE_SCYTHE = ITEMS.registerItem("netherite_scythe", properties -> new ScytheItem(ToolMaterial.NETHERITE, 1, -2.0F, 5.0F, 6.0F, properties.fireResistant()));
+  public static DeferredItem<Item> BIOMASS_SCYTHE = ITEMS.registerItem("biomass_scythe", properties -> new ScytheItem(BSToolMaterial.BIOMASS, 1, -2.0F, 3.0F, 5.0F, properties));
   public static DeferredItem<Item> LIVINGMETAL_SCYTHE = ITEMS.registerItem("livingmetal_scythe", properties -> new ScytheItem(BSToolMaterial.LIVINGMETAL, 2.0F, -2.0F, 5F, 6F, properties));
   public static DeferredItem<Item> BONE_SCYTHE = ITEMS.registerItem("bone_scythe", properties -> new ScytheItem(BSToolMaterial.SKULL, 1.5F, -2.0F, 2F, 2.06F, properties));
   public static DeferredItem<Item> SOUL_REAPER = ITEMS.registerItem("soul_reaper", properties -> new ScytheItem(BSToolMaterial.REAPER, 1.5F, -2.0F, 9F, 10F, properties.rarity(Rarity.EPIC).fireResistant()));

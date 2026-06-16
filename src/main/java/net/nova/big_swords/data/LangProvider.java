@@ -60,6 +60,7 @@ public class LangProvider extends LanguageProvider {
     // Big Swords
     addItem(BSItems.WOODEN_BIG_SWORD, "Wooden Big Sword");
     addItem(BSItems.STONE_BIG_SWORD, "Stone Big Sword");
+    addItem(BSItems.COPPER_BIG_SWORD, "Copper Big Sword");
     addItem(BSItems.IRON_BIG_SWORD, "Iron Big Sword");
     addItem(BSItems.GOLDEN_BIG_SWORD, "Golden Big Sword");
     addItem(BSItems.DIAMOND_BIG_SWORD, "Diamond Big Sword");
@@ -75,6 +76,7 @@ public class LangProvider extends LanguageProvider {
     // Glaives
     addItem(BSItems.WOODEN_GLAIVE, "Wooden Glaive");
     addItem(BSItems.STONE_GLAIVE, "Stone Glaive");
+    addItem(BSItems.COPPER_GLAIVE, "Copper Glaive");
     addItem(BSItems.IRON_GLAIVE, "Iron Glaive");
     addItem(BSItems.GOLDEN_GLAIVE, "Golden Glaive");
     addItem(BSItems.DIAMOND_GLAIVE, "Diamond Glaive");
@@ -85,6 +87,7 @@ public class LangProvider extends LanguageProvider {
     // Scythes
     addItem(BSItems.WOODEN_SCYTHE, "Wooden Scythe");
     addItem(BSItems.STONE_SCYTHE, "Stone Scythe");
+    addItem(BSItems.COPPER_SCYTHE, "Copper Scythe");
     addItem(BSItems.IRON_SCYTHE, "Iron Scythe");
     addItem(BSItems.GOLDEN_SCYTHE, "Golden Scythe");
     addItem(BSItems.DIAMOND_SCYTHE, "Diamond Scythe");

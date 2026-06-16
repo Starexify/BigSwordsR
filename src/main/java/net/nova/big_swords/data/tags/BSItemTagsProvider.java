@@ -22,20 +22,21 @@ public class BSItemTagsProvider extends BlockTagCopyingItemTagProvider {
   @Override
   protected void addTags(HolderLookup.Provider pProvider) {
     tag(Tags.BSItemTags.BIG_SWORDS).add(
-        BSItems.WOODEN_BIG_SWORD.getKey(), BSItems.STONE_BIG_SWORD.getKey(), BSItems.IRON_BIG_SWORD.getKey(), BSItems.GOLDEN_BIG_SWORD.getKey(),
-        BSItems.DIAMOND_BIG_SWORD.getKey(), BSItems.NETHERITE_BIG_SWORD.getKey(), BSItems.PATCHWORK_BIG_SWORD.getKey(), BSItems.SKULL_BIG_SWORD.getKey(),
-        BSItems.QUARTZ_BIG_SWORD.getKey(), BSItems.OBSIDIAN_BIG_SWORD.getKey(), BSItems.ENDER_BIG_SWORD.getKey(), BSItems.LIVINGMETAL_BIG_SWORD.getKey(),
-        BSItems.BIOMASS_BIG_SWORD.getKey()
+        BSItems.WOODEN_BIG_SWORD.getKey(), BSItems.STONE_BIG_SWORD.getKey(), BSItems.COPPER_BIG_SWORD.getKey(), BSItems.IRON_BIG_SWORD.getKey(),
+        BSItems.GOLDEN_BIG_SWORD.getKey(), BSItems.DIAMOND_BIG_SWORD.getKey(), BSItems.NETHERITE_BIG_SWORD.getKey(), BSItems.PATCHWORK_BIG_SWORD.getKey(),
+        BSItems.SKULL_BIG_SWORD.getKey(), BSItems.QUARTZ_BIG_SWORD.getKey(), BSItems.OBSIDIAN_BIG_SWORD.getKey(), BSItems.ENDER_BIG_SWORD.getKey(),
+        BSItems.LIVINGMETAL_BIG_SWORD.getKey(), BSItems.BIOMASS_BIG_SWORD.getKey()
     );
 
     tag(Tags.BSItemTags.GLAIVES).add(
-        BSItems.WOODEN_GLAIVE.getKey(), BSItems.STONE_GLAIVE.getKey(), BSItems.IRON_GLAIVE.getKey(), BSItems.GOLDEN_GLAIVE.getKey(), BSItems.DIAMOND_GLAIVE.getKey(),
-        BSItems.NETHERITE_GLAIVE.getKey(), BSItems.BIOMASS_GLAIVE.getKey(), BSItems.LIVINGMETAL_GLAIVE.getKey()
+        BSItems.WOODEN_GLAIVE.getKey(), BSItems.STONE_GLAIVE.getKey(), BSItems.COPPER_GLAIVE.getKey(), BSItems.IRON_GLAIVE.getKey(), BSItems.GOLDEN_GLAIVE.getKey(),
+        BSItems.DIAMOND_GLAIVE.getKey(), BSItems.NETHERITE_GLAIVE.getKey(), BSItems.BIOMASS_GLAIVE.getKey(), BSItems.LIVINGMETAL_GLAIVE.getKey()
     );
 
     tag(Tags.BSItemTags.SCYTHES).add(
-        BSItems.WOODEN_SCYTHE.getKey(), BSItems.STONE_SCYTHE.getKey(), BSItems.IRON_SCYTHE.getKey(), BSItems.GOLDEN_SCYTHE.getKey(), BSItems.DIAMOND_SCYTHE.getKey(),
-        BSItems.NETHERITE_SCYTHE.getKey(), BSItems.BIOMASS_SCYTHE.getKey(), BSItems.LIVINGMETAL_SCYTHE.getKey(), BSItems.BONE_SCYTHE.getKey(), BSItems.SOUL_REAPER.getKey()
+        BSItems.WOODEN_SCYTHE.getKey(), BSItems.STONE_SCYTHE.getKey(), BSItems.COPPER_SCYTHE.getKey(), BSItems.IRON_SCYTHE.getKey(), BSItems.GOLDEN_SCYTHE.getKey(),
+        BSItems.DIAMOND_SCYTHE.getKey(), BSItems.NETHERITE_SCYTHE.getKey(), BSItems.BIOMASS_SCYTHE.getKey(), BSItems.LIVINGMETAL_SCYTHE.getKey(),
+        BSItems.BONE_SCYTHE.getKey(), BSItems.SOUL_REAPER.getKey()
     );
 
     tag(Tags.BSItemTags.SHIELDS).add(

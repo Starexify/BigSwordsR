@@ -3,14 +3,14 @@
   "category": "equipment",
   "key": {
     "#": "minecraft:stick",
-    "X": "#minecraft:diamond_tool_materials"
+    "X": "#minecraft:copper_tool_materials"
   },
   "pattern": [
-    "XX ",
-    "X#X",
-    " X#"
+    "XX#",
+    " #X",
+    "#  "
   ],
   "result": {
-    "id": "big_swords:diamond_glaive"
+    "id": "big_swords:copper_scythe"
   }
 }

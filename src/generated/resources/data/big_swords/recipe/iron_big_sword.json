@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "#": "big_swords:giant_wooden_stick",
-    "X": "minecraft:iron_ingot"
+    "X": "#minecraft:iron_tool_materials"
   },
   "pattern": [
     " XX",

@@ -66,6 +66,7 @@ public class CreativeTab {
                 // Big Swords
                 output.accept(BSItems.WOODEN_BIG_SWORD);
                 output.accept(BSItems.STONE_BIG_SWORD);
+                output.accept(BSItems.COPPER_BIG_SWORD);
                 output.accept(BSItems.IRON_BIG_SWORD);
                 output.accept(BSItems.GOLDEN_BIG_SWORD);
                 output.accept(BSItems.DIAMOND_BIG_SWORD);
@@ -81,6 +82,7 @@ public class CreativeTab {
                 // Glaives
                 output.accept(BSItems.WOODEN_GLAIVE);
                 output.accept(BSItems.STONE_GLAIVE);
+                output.accept(BSItems.COPPER_GLAIVE);
                 output.accept(BSItems.IRON_GLAIVE);
                 output.accept(BSItems.GOLDEN_GLAIVE);
                 output.accept(BSItems.DIAMOND_GLAIVE);
@@ -91,6 +93,7 @@ public class CreativeTab {
                 // Scythes
                 output.accept(BSItems.WOODEN_SCYTHE);
                 output.accept(BSItems.STONE_SCYTHE);
+                output.accept(BSItems.COPPER_SCYTHE);
                 output.accept(BSItems.IRON_SCYTHE);
                 output.accept(BSItems.GOLDEN_SCYTHE);
                 output.accept(BSItems.DIAMOND_SCYTHE);
