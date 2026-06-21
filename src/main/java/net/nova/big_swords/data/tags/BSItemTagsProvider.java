@@ -58,6 +58,7 @@ public class BSItemTagsProvider extends BlockTagCopyingItemTagProvider {
     tag(ItemTags.AXES).add(BSItems.LIVINGMETAL_AXE.getKey(), BSItems.BIOMASS_AXE.getKey());
     tag(ItemTags.SHOVELS).add(BSItems.LIVINGMETAL_SHOVEL.getKey(), BSItems.BIOMASS_SHOVEL.getKey());
     tag(ItemTags.HOES).addTag(Tags.BSItemTags.SCYTHES).add(BSItems.LIVINGMETAL_HOE.getKey(), BSItems.BIOMASS_HOE.getKey());
+    tag(ItemTags.SPEARS).add(BSItems.LIVINGMETAL_SPEAR.getKey(), BSItems.BIOMASS_SPEAR.getKey());
 
     tag(ItemTags.DURABILITY_ENCHANTABLE).addTag(Tags.BSItemTags.SHIELDS);
 
