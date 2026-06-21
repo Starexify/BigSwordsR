@@ -11,12 +11,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntitySpawnReason;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.skeleton.AbstractSkeleton;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Endermite;
@@ -36,6 +34,8 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 
 import static net.nova.big_swords.BigSwordsR.MODID;
@@ -327,5 +327,32 @@ public class ShieldMechanics {
     }
 
     mob.setTarget(nearestEntity);
+  }
+
+  @SubscribeEvent
+  public static void onLivingTick(EntityTickEvent.Post event) {
+    final Entity entity = event.getEntity();
+    if (!(entity.level() instanceof ServerLevel serverLevel) || !entity.isInWater()) return;
+
+    // Handle water degradation component when used by living entities
+    if (entity instanceof LivingEntity livingEntity) {
+      handleEquippedDegradation(livingEntity, livingEntity.getMainHandItem(), EquipmentSlot.MAINHAND);
+      handleEquippedDegradation(livingEntity, livingEntity.getOffhandItem(), EquipmentSlot.OFFHAND);
+    }
+    // Handle water degradation for dropped item
+    else if (entity instanceof ItemEntity itemEntity) {
+      ItemStack stack = itemEntity.getItem();
+      if (!stack.isEmpty() && stack.isDamageableItem() && stack.has(BSDataComponents.DEGRADES_UNDERWATER.get())) {
+        stack.hurtAndBreak(1, serverLevel, (LivingEntity) null, brokenItem -> itemEntity.discard());
+      }
+    }
+  }
+
+  private static void handleEquippedDegradation(LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
+    if (stack.isEmpty() || !stack.isDamageableItem()) return;
+
+    if (stack.has(BSDataComponents.DEGRADES_UNDERWATER.get())) {
+      stack.hurtAndBreak(1, entity, slot);
+    }
   }
 }
