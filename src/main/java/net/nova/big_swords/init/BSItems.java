@@ -1,8 +1,8 @@
 package net.nova.big_swords.init;
 
+import net.minecraft.util.Unit;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.level.block.WeatheringCopper;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.nova.big_swords.data.BSTrimMaterials;
@@ -98,8 +98,8 @@ public class BSItems {
   public static DeferredItem<Item> GILDED_WOODEN_SHIELD = ITEMS.registerItem("gilded_wooden_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.WOOD, 4)));
   public static DeferredItem<Item> STONE_SHIELD = ITEMS.registerItem("stone_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.STONE)));
   public static DeferredItem<Item> GILDED_STONE_SHIELD = ITEMS.registerItem("gilded_stone_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.STONE, 2)));
-  public static DeferredItem<Item> IRON_SHIELD = ITEMS.registerItem("iron_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.IRON)));
-  public static DeferredItem<Item> GILDED_IRON_SHIELD = ITEMS.registerItem("gilded_iron_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.IRON, 1, ToolMaterial.IRON.durability() / 2)));
+  public static DeferredItem<Item> IRON_SHIELD = ITEMS.registerItem("iron_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.IRON).component(BSDataComponents.DEGRADES_UNDERWATER, Unit.INSTANCE)));
+  public static DeferredItem<Item> GILDED_IRON_SHIELD = ITEMS.registerItem("gilded_iron_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.IRON, 1, ToolMaterial.IRON.durability() / 2).component(BSDataComponents.DEGRADES_UNDERWATER, Unit.INSTANCE)));
   public static DeferredItem<Item> DIAMOND_SHIELD = ITEMS.registerItem("diamond_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.DIAMOND, 1, -(ToolMaterial.DIAMOND.durability() / 2))));
   public static DeferredItem<Item> GILDED_DIAMOND_SHIELD = ITEMS.registerItem("gilded_diamond_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.DIAMOND, 1, -653)));
   public static DeferredItem<Item> NETHERITE_SHIELD = ITEMS.registerItem("netherite_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.NETHERITE, 1, -(ToolMaterial.NETHERITE.durability() / 2)).fireResistant()));
