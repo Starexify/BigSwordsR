@@ -5,13 +5,17 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
+import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.component.Weapon;
@@ -21,6 +25,7 @@ import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.mixin.ToolMaterialAccessor;
 
 import java.util.List;
+import java.util.Optional;
 
 public class BSToolMaterial {
   public static final ToolMaterial PATCHWORK = new ToolMaterial(BlockTags.INCORRECT_FOR_STONE_TOOL, 30, 1.0F, -1.5F, 16, Tags.BSItemTags.PATCHWORK_TOOL_MATERIALS);
@@ -35,15 +40,49 @@ public class BSToolMaterial {
   public static final Identifier MIN_CHARGED_DAMAGE_ID = BigSwordsR.rl("min_charged_damage");
   public static final Identifier MAX_CHARGED_DAMAGE_ID = BigSwordsR.rl("max_charged_damage");
 
-  public static Item.Properties applyBigSwordProperties(Item.Properties properties, ToolMaterial toolMaterial, float attackDamage, float attackSpeed) {
+  public static Item.Properties shield(Item.Properties properties, ToolMaterial material) {
+    return applyShieldProperties(properties, material, 1, 0);
+  }
+
+  public static Item.Properties shield(Item.Properties properties, ToolMaterial material, int durabilityMultiplier) {
+    return applyShieldProperties(properties, material, durabilityMultiplier, 0);
+  }
+
+  public static Item.Properties shield(Item.Properties properties, ToolMaterial material, int durabilityMultiplier, int additionalDurability) {
+    return applyShieldProperties(properties, material, durabilityMultiplier, additionalDurability);
+  }
+
+  public static Item.Properties applyShieldProperties(Item.Properties properties, ToolMaterial material, int durabilityMultiplier, int additionalDurability) {
+    return properties
+        .durability(material.durability() * durabilityMultiplier + additionalDurability)
+        .enchantable(material.enchantmentValue())
+        .equippableUnswappable(EquipmentSlot.OFFHAND)
+        .repairable(material.repairItems())
+        .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK)
+        .delayedComponent(DataComponents.BLOCKS_ATTACKS, context -> new BlocksAttacks(
+        0.25F,
+        1.0F,
+        List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+        new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+        Optional.of(context.getOrThrow(DamageTypeTags.BYPASSES_SHIELD)),
+        Optional.of(SoundEvents.SHIELD_BLOCK),
+        Optional.of(SoundEvents.SHIELD_BREAK)
+    ));
+  }
+
+  public static Item.Properties bigSword(Item.Properties properties, ToolMaterial material, float attackDamage, float attackSpeed) {
+    return applyBigSwordProperties(properties, material, attackDamage, attackSpeed);
+  }
+
+  public static Item.Properties applyBigSwordProperties(Item.Properties properties, ToolMaterial material, float attackDamage, float attackSpeed) {
     HolderGetter<Block> holdergetter = BuiltInRegistries.acquireBootstrapRegistrationLookup(BuiltInRegistries.BLOCK);
-    return properties.durability(toolMaterial.durability() * 2).repairable(toolMaterial.repairItems()).enchantable(toolMaterial.enchantmentValue())
+    return properties.durability(material.durability() * 2).repairable(material.repairItems()).enchantable(material.enchantmentValue())
         .component(DataComponents.TOOL, new Tool(List.of(
             Tool.Rule.minesAndDrops(HolderSet.direct(Blocks.COBWEB.builtInRegistryHolder()), 15.0F),
             Tool.Rule.overrideSpeed(holdergetter.getOrThrow(BlockTags.SWORD_INSTANTLY_MINES), Float.MAX_VALUE),
             Tool.Rule.overrideSpeed(holdergetter.getOrThrow(BlockTags.SWORD_EFFICIENT), 1.5F)
         ), 1.0F, 2, false))
-        .attributes(((ToolMaterialAccessor) (Object) toolMaterial).big_swords$createSwordAttributes(attackDamage, attackSpeed))
+        .attributes(((ToolMaterialAccessor) (Object) material).big_swords$createSwordAttributes(attackDamage, attackSpeed))
         .component(DataComponents.WEAPON, new Weapon(1));
   }
 
