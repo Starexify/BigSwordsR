@@ -21,6 +21,7 @@ import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.component.Weapon;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.mixin.ToolMaterialAccessor;
 
@@ -40,34 +41,45 @@ public class BSToolMaterial {
   public static final Identifier MIN_CHARGED_DAMAGE_ID = BigSwordsR.rl("min_charged_damage");
   public static final Identifier MAX_CHARGED_DAMAGE_ID = BigSwordsR.rl("max_charged_damage");
 
+  public static Item.Properties copperShield(Item.Properties properties, int durabilityMultiplier, int additionalDurability, WeatheringCopper.WeatherState state, boolean isWaxed) {
+    applyBaseShieldProperties(properties, ToolMaterial.COPPER, durabilityMultiplier, additionalDurability);
+    if (state != WeatheringCopper.WeatherState.OXIDIZED) applyBlockingComponent(properties);
+    return properties.component(BSDataComponents.OXIDATION_STATE, state);
+  }
+
   public static Item.Properties shield(Item.Properties properties, ToolMaterial material) {
-    return applyShieldProperties(properties, material, 1, 0);
+    return shield(properties, material, 1, 0);
   }
 
   public static Item.Properties shield(Item.Properties properties, ToolMaterial material, int durabilityMultiplier) {
-    return applyShieldProperties(properties, material, durabilityMultiplier, 0);
+    return shield(properties, material, durabilityMultiplier, 0);
   }
 
   public static Item.Properties shield(Item.Properties properties, ToolMaterial material, int durabilityMultiplier, int additionalDurability) {
-    return applyShieldProperties(properties, material, durabilityMultiplier, additionalDurability);
+    applyBaseShieldProperties(properties, material, durabilityMultiplier, additionalDurability);
+    return applyBlockingComponent(properties);
   }
 
-  public static Item.Properties applyShieldProperties(Item.Properties properties, ToolMaterial material, int durabilityMultiplier, int additionalDurability) {
+  public static Item.Properties applyBlockingComponent(Item.Properties properties) {
+    return properties
+        .delayedComponent(DataComponents.BLOCKS_ATTACKS, context -> new BlocksAttacks(
+            0.25F,
+            1.0F,
+            List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+            new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+            Optional.of(context.getOrThrow(DamageTypeTags.BYPASSES_SHIELD)),
+            Optional.of(SoundEvents.SHIELD_BLOCK),
+            Optional.of(SoundEvents.SHIELD_BREAK)
+        ));
+  }
+
+  public static Item.Properties applyBaseShieldProperties(Item.Properties properties, ToolMaterial material, int durabilityMultiplier, int additionalDurability) {
     return properties
         .durability(material.durability() * durabilityMultiplier + additionalDurability)
         .enchantable(material.enchantmentValue())
         .equippableUnswappable(EquipmentSlot.OFFHAND)
         .repairable(material.repairItems())
-        .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK)
-        .delayedComponent(DataComponents.BLOCKS_ATTACKS, context -> new BlocksAttacks(
-        0.25F,
-        1.0F,
-        List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
-        new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
-        Optional.of(context.getOrThrow(DamageTypeTags.BYPASSES_SHIELD)),
-        Optional.of(SoundEvents.SHIELD_BLOCK),
-        Optional.of(SoundEvents.SHIELD_BREAK)
-    ));
+        .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK);
   }
 
   public static Item.Properties bigSword(Item.Properties properties, ToolMaterial material, float attackDamage, float attackSpeed) {

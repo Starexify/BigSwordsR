@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "#": "minecraft:leather",
-    "X": "minecraft:diamond"
+    "X": "#minecraft:diamond_tool_materials"
   },
   "pattern": [
     "XXX",

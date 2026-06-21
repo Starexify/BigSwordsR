@@ -23,6 +23,7 @@ public class BigSwordsR {
   public static final Logger logger = LoggerFactory.getLogger(BigSwordsR.class);
 
   public BigSwordsR(IEventBus bus) {
+    BSRecipeSerializers.RECIPE_SERIALIZERS.register(bus);
     Sounds.SOUND_EVENTS.register(bus);
     BSEnchantmentEntityEffects.ENTITY_EFFECT.register(bus);
     BSAttributes.ATTRIBUTES.register(bus);

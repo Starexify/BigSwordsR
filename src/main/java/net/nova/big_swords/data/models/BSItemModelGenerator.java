@@ -9,6 +9,9 @@ import net.minecraft.client.renderer.item.properties.select.ComponentContents;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.WeatheringCopperCollection;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.equipment.BSEquipmentAssets;
 import net.nova.big_swords.init.BSDataComponents;
@@ -109,6 +112,8 @@ public class BSItemModelGenerator extends ItemModelGenerators {
     generateShield(BSItems.GILDED_WOODEN_SHIELD.get());
     generateShield(BSItems.STONE_SHIELD.get());
     generateShield(BSItems.GILDED_STONE_SHIELD.get());
+    generateCopperShield(BSItems.COPPER_SHIELD);
+    generateCopperShield(BSItems.GILDED_COPPER_SHIELD);
     generateShield(BSItems.IRON_SHIELD.get());
     generateShield(BSItems.GILDED_IRON_SHIELD.get());
     generateShield(BSItems.DIAMOND_SHIELD.get());
@@ -142,6 +147,13 @@ public class BSItemModelGenerator extends ItemModelGenerators {
 
   public Identifier createFlatItemModel(Item item, String name, ModelTemplate modelTemplate) {
     return modelTemplate.create(ModelLocationUtils.getModelLocation(item, name), TextureMapping.layer0(TextureMapping.getItemTexture(item)), modelOutput);
+  }
+
+  public void generateCopperShield(WeatheringCopperCollection<DeferredItem<Item>> itemCollection) {
+    itemCollection.zipUnwaxedWaxed((unwaxed, waxed) -> {
+      generateShield(unwaxed.get());
+      this.itemModelOutput.copy(unwaxed.get(), waxed.get());
+    });
   }
 
   public void generateShield(Item item) {

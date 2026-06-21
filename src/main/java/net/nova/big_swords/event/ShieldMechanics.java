@@ -23,11 +23,15 @@ import net.minecraft.world.entity.projectile.arrow.Arrow;
 import net.minecraft.world.entity.projectile.arrow.ThrownTrident;
 import net.minecraft.world.entity.projectile.hurtingprojectile.Fireball;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.WeatheringCopperCollection;
+import net.minecraft.world.level.gamerules.GameRules;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -35,14 +39,17 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 
+import static net.minecraft.world.entity.EquipmentSlot.MAINHAND;
 import static net.nova.big_swords.BigSwordsR.MODID;
 import static net.nova.big_swords.BigSwordsR.playSound;
 
 @EventBusSubscriber(modid = MODID)
 public class ShieldMechanics {
+  public static final float ITEM_OXIDATION_CHANCE = 0.05688889F;
 
   @SubscribeEvent
   public static void onShieldBlock(LivingShieldBlockEvent event) {
@@ -332,14 +339,20 @@ public class ShieldMechanics {
   @SubscribeEvent
   public static void onLivingTick(EntityTickEvent.Post event) {
     final Entity entity = event.getEntity();
-    if (!(entity.level() instanceof ServerLevel serverLevel) || !entity.isInWater()) return;
+    if (!(entity.level() instanceof ServerLevel serverLevel)) return;
+    boolean inWater = entity.isInWater();
 
-    // Handle water degradation component when used by living entities
+    // Handle water degradation / oxidation component when used by living entities
     if (entity instanceof LivingEntity livingEntity) {
-      handleEquippedDegradation(livingEntity, livingEntity.getMainHandItem(), EquipmentSlot.MAINHAND);
-      handleEquippedDegradation(livingEntity, livingEntity.getOffhandItem(), EquipmentSlot.OFFHAND);
+      if (inWater) {
+        handleEquippedDegradation(livingEntity, livingEntity.getMainHandItem(), MAINHAND);
+        handleEquippedDegradation(livingEntity, livingEntity.getOffhandItem(), EquipmentSlot.OFFHAND);
+      }
+
+      handleEquipmentOxidation(serverLevel, livingEntity, livingEntity.getMainHandItem(), MAINHAND);
+      handleEquipmentOxidation(serverLevel, livingEntity, livingEntity.getOffhandItem(), EquipmentSlot.OFFHAND);
     }
-    // Handle water degradation for dropped item
+    // Handle water degradation and oxidation for dropped item
     else if (entity instanceof ItemEntity itemEntity) {
       ItemStack stack = itemEntity.getItem();
       if (!stack.isEmpty() && stack.isDamageableItem() && stack.has(BSDataComponents.DEGRADES_UNDERWATER.get())) {
@@ -348,11 +361,60 @@ public class ShieldMechanics {
     }
   }
 
-  private static void handleEquippedDegradation(LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
+  public static void handleEquippedDegradation(LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
     if (stack.isEmpty() || !stack.isDamageableItem()) return;
 
     if (stack.has(BSDataComponents.DEGRADES_UNDERWATER.get())) {
       stack.hurtAndBreak(1, entity, slot);
+    }
+  }
+
+  public static void handleEquipmentOxidation(ServerLevel level, LivingEntity entity, ItemStack stack, EquipmentSlot slot) {
+    if (entity.hasInfiniteMaterials() || stack.isEmpty() || !stack.has(BSDataComponents.OXIDATION_STATE.get())) return;
+    if (stack.getOrDefault(BSDataComponents.WAXED.get(), false)) return;
+
+    WeatheringCopperCollection<DeferredItem<Item>> activeCollection = null;
+    Item currentItem = stack.getItem();
+    if (BSItems.COPPER_SHIELD.asList().stream().anyMatch(holder -> holder.get() == currentItem)) {
+      activeCollection = BSItems.COPPER_SHIELD;
+    }
+    else if (BSItems.GILDED_COPPER_SHIELD.asList().stream().anyMatch(holder -> holder.get() == currentItem)) {
+      activeCollection = BSItems.GILDED_COPPER_SHIELD;
+    }
+    if (activeCollection == null) return;
+
+    WeatheringCopper.WeatherState currentState = stack.get(BSDataComponents.OXIDATION_STATE.get());
+
+    int tickSpeed = level.getGameRules().get(GameRules.RANDOM_TICK_SPEED);
+    if (tickSpeed <= 0) return;
+
+    if (stack.isDamaged()) {
+      float healChancePerTick = ((float) tickSpeed / 4096) * (ITEM_OXIDATION_CHANCE * 55);
+      if (level.getRandom().nextFloat() < healChancePerTick) {
+        assert currentState != null;
+        int healAmount = switch (currentState) {
+          case EXPOSED -> 2;
+          case WEATHERED -> 4;
+          case OXIDIZED -> 6;
+          default -> 0;
+        };
+        stack.setDamageValue(Math.max(0, stack.getDamageValue() - healAmount));
+      }
+    }
+
+    if (currentState == WeatheringCopper.WeatherState.OXIDIZED) return;
+    float vanillaBlockChancePerTick = ((float) tickSpeed / 4096) * ITEM_OXIDATION_CHANCE;
+
+    if (level.getRandom().nextFloat() < vanillaBlockChancePerTick) {
+      WeatheringCopper.WeatherState nextState = currentState.next();
+
+      Item nextTierItem = activeCollection.weathering().pick(nextState).get();
+      ItemStack nextStack = new ItemStack(nextTierItem, stack.getCount());
+
+      nextStack.applyComponents(stack.getComponentsPatch());
+      nextStack.set(BSDataComponents.OXIDATION_STATE.get(), nextState);
+
+      entity.setItemSlot(slot, nextStack);
     }
   }
 }

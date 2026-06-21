@@ -115,7 +115,8 @@ public class ScytheItem extends HoeItem {
           int durabilityDamage = entitiesHit * 2;
           stack.hurtAndBreak(durabilityDamage, player, EquipmentSlot.MAINHAND);
           player.getCooldowns().addCooldown(stack, 40);
-        } else player.getCooldowns().addCooldown(stack, 10);
+        }
+        else player.getCooldowns().addCooldown(stack, 10);
 
         player.swing(InteractionHand.MAIN_HAND, true);
         if (stack.is(BSItems.SOUL_REAPER)) playSound(level, player, Sounds.REAPER_SLASH.get());

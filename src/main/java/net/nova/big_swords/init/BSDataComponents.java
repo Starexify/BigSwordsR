@@ -9,6 +9,7 @@ import net.minecraft.util.Unit;
 import net.minecraft.util.context.ContextKeySet;
 import net.minecraft.world.item.enchantment.TargetedConditionalEffect;
 import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
+import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.storage.loot.Validatable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -25,6 +26,16 @@ public class BSDataComponents {
       "blood_level", b -> b
           .persistent(ExtraCodecs.intRange(0, 9))
           .networkSynchronized(ByteBufCodecs.VAR_INT)
+  );
+
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<WeatheringCopper.WeatherState>> OXIDATION_STATE = COMPONENTS.registerComponentType(
+      "oxidation_state", b -> b
+          .persistent(WeatheringCopper.WeatherState.CODEC)
+          .networkSynchronized(WeatheringCopper.WeatherState.STREAM_CODEC)
+  );
+
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> WAXED = COMPONENTS.registerComponentType(
+      "waxed", b -> b.persistent(Codec.BOOL)
   );
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<Unit>> DEGRADES_UNDERWATER = COMPONENTS.registerComponentType(

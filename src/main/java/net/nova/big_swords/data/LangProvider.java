@@ -2,6 +2,8 @@ package net.nova.big_swords.data;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.WeatheringCopperCollection;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.nova.big_swords.init.*;
 import net.nova.big_swords.item.EnderSmithingTemplate;
@@ -102,6 +104,18 @@ public class LangProvider extends LanguageProvider {
     addShield(BSItems.GILDED_WOODEN_SHIELD, "Gilded Wooden Shield", "Special Perk: Arrow Catch", "Weakness: Flammable");
     addShield(BSItems.STONE_SHIELD, "Stone Shield", "Special Perk: Fire Resistant", "Weakness: Shattered Defense");
     addShield(BSItems.GILDED_STONE_SHIELD, "Gilded Stone Shield", "Special Perk: Fire Resistant", "Weakness: Shattered Defense");
+    WeatheringCopperCollection.zipApply(WeatheringCopperCollection.STATES, BSItems.COPPER_SHIELD.weathering(), (state, unwaxed) -> {
+      String name = state.getSerializedName();
+      String statePrefix = state == WeatheringCopper.WeatherState.UNAFFECTED ? "" : name.substring(0, 1).toUpperCase() + name.substring(1) + " ";
+      addShield(unwaxed, statePrefix + "Copper Shield", "Special Perk: Patina Shell", "Weakness: Verdigris Grip");
+      addShield(BSItems.COPPER_SHIELD.waxed().pick(state), "Waxed " + statePrefix + "Copper Shield", "Special Perk: Patina Shell", "Weakness: Verdigris Grip");
+    });
+    WeatheringCopperCollection.zipApply(WeatheringCopperCollection.STATES, BSItems.GILDED_COPPER_SHIELD.weathering(), (state, unwaxed) -> {
+      String name = state.getSerializedName();
+      String statePrefix = state == WeatheringCopper.WeatherState.UNAFFECTED ? "" : name.substring(0, 1).toUpperCase() + name.substring(1) + " ";
+      addShield(unwaxed, statePrefix + "Gilded Copper Shield", "Special Perk: Patina Shell", "Weakness: Verdigris Grip");
+      addShield(BSItems.GILDED_COPPER_SHIELD.waxed().pick(state), "Waxed " + statePrefix + "Gilded Copper Shield", "Special Perk: Patina Shell", "Weakness: Verdigris Grip");
+    });
     addShield(BSItems.IRON_SHIELD, "Iron Shield", "Special Perk: Explosive Resistant", "Weakness: Rusting");
     addShield(BSItems.GILDED_IRON_SHIELD, "Gilded Iron Shield", "Special Perk: Explosive Resistant", "Weakness: Rusting");
     addShield(BSItems.DIAMOND_SHIELD, "Diamond Shield", "Special Perk: Counter Reflect", "Weakness: Reflective Impact");

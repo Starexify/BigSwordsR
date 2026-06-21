@@ -2,15 +2,13 @@ package net.nova.big_swords.data.recipe;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
+import net.minecraft.data.recipes.*;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.WeatheringCopperCollection;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.nova.big_swords.init.BSItems;
 
@@ -33,6 +31,19 @@ public class BSRecipeProvider extends RecipeProvider {
   }
 
   // Recipes
+  public void waxableShield(WeatheringCopperCollection<DeferredItem<Item>> item) {
+    item.zipUnwaxedWaxed((unwaxed, waxed) -> {
+      TransmuteRecipeBuilder.transmute(
+              RecipeCategory.COMBAT,
+              Ingredient.of(unwaxed),
+              Ingredient.of(Items.HONEYCOMB),
+              waxed.get()
+          )
+          .unlockedBy(getHasName(unwaxed), has(unwaxed))
+          .save(output, getConversionRecipeName(waxed, Items.HONEYCOMB));
+    });
+  }
+
   public void basicGildedShield(DeferredItem<Item> shield, DeferredItem<Item> result) {
     shaped(RecipeCategory.COMBAT, result)
         .define('#', shield)

@@ -3,11 +3,15 @@ package net.nova.big_swords.data.recipe;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RepairItemRecipe;
 import net.minecraft.world.level.block.Blocks;
+import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.BSItems;
+import net.nova.big_swords.recipe.CopperShieldAxingRecipe;
 
 public class CraftingRecipes extends BSRecipeProvider {
   public CraftingRecipes(HolderLookup.Provider lookupProvider, RecipeOutput recipeOutput) {
@@ -15,6 +19,8 @@ public class CraftingRecipes extends BSRecipeProvider {
   }
 
   public void build() {
+    SpecialRecipeBuilder.special(CopperShieldAxingRecipe::new).save(this.output, BigSwordsR.rl("unwax_copper_shield").getPath());
+
     // Extra Recipes
     shaped(RecipeCategory.MISC, BSItems.BLOOD_VIAL)
         .define('X', Blocks.GLASS)
@@ -23,6 +29,8 @@ public class CraftingRecipes extends BSRecipeProvider {
         .pattern(" X ")
         .unlockedBy(getHasName(Blocks.GLASS), has(Blocks.GLASS))
         .save(output, path + getItemName(BSItems.BLOOD_VIAL) + "_recipe");
+    waxableShield(BSItems.COPPER_SHIELD);
+    waxableShield(BSItems.GILDED_COPPER_SHIELD);
 
     // Sticks
     basicGiantStick(Items.STICK, BSItems.GIANT_WOODEN_STICK);
@@ -157,8 +165,9 @@ public class CraftingRecipes extends BSRecipeProvider {
     // Shields
     basicShield(ItemTags.PLANKS, BSItems.WOODEN_SHIELD);
     basicShield(ItemTags.STONE_TOOL_MATERIALS, BSItems.STONE_SHIELD);
-    basicShield(Items.IRON_INGOT, BSItems.IRON_SHIELD);
-    basicShield(Items.DIAMOND, BSItems.DIAMOND_SHIELD);
+    basicShield(ItemTags.COPPER_TOOL_MATERIALS, BSItems.COPPER_SHIELD.weathering().unaffected());
+    basicShield(ItemTags.IRON_TOOL_MATERIALS, BSItems.IRON_SHIELD);
+    basicShield(ItemTags.DIAMOND_TOOL_MATERIALS, BSItems.DIAMOND_SHIELD);
     basicShield(Items.QUARTZ, BSItems.QUARTZ_SHIELD);
     basicShield(BSItems.BIOMASS.get(), BSItems.BIOMASS_SHIELD);
     basicShield(BSItems.LIVINGMETAL_INGOT.get(), BSItems.LIVINGMETAL_SHIELD);
@@ -184,6 +193,7 @@ public class CraftingRecipes extends BSRecipeProvider {
     // Gilded Shields
     basicGildedShield(BSItems.WOODEN_SHIELD, BSItems.GILDED_WOODEN_SHIELD);
     basicGildedShield(BSItems.STONE_SHIELD, BSItems.GILDED_STONE_SHIELD);
+    basicGildedShield(BSItems.COPPER_SHIELD.weathering().unaffected(), BSItems.GILDED_COPPER_SHIELD.weathering().unaffected());
     basicGildedShield(BSItems.IRON_SHIELD, BSItems.GILDED_IRON_SHIELD);
     basicGildedShield(BSItems.DIAMOND_SHIELD, BSItems.GILDED_DIAMOND_SHIELD);
     basicGildedShield(BSItems.NETHERITE_SHIELD, BSItems.GILDED_NETHERITE_SHIELD);

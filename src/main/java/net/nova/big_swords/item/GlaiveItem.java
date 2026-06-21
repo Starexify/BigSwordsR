@@ -119,7 +119,8 @@ public class GlaiveItem extends Item {
           if (blockHit.getType() == HitResult.Type.MISS) glaiveHits(stack, level, player, target);
           else glaiveMiss(stack, player, level);
 
-        } else glaiveMiss(stack, player, level);
+        }
+        else glaiveMiss(stack, player, level);
       }
     }
     return false;

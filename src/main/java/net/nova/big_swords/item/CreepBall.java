@@ -23,7 +23,8 @@ public class CreepBall extends Item {
     Level level = context.getLevel();
     if (!level.getBlockState(blockpos).is(Blocks.SOUL_SAND)) {
       return super.useOn(context);
-    } else {
+    }
+    else {
       level.playSound(null, blockpos, SoundEvents.SOUL_SAND_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
       Player player = context.getPlayer();
       ItemStack itemstack = context.getItemInHand();

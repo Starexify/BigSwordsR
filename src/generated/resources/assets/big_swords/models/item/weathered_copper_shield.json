@@ -1,0 +1,6 @@
+{
+  "parent": "big_swords:item/template_shield",
+  "textures": {
+    "layer0": "big_swords:item/weathered_copper_shield"
+  }
+}

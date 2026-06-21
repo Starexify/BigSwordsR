@@ -41,11 +41,11 @@ public class BSItemTagsProvider extends BlockTagCopyingItemTagProvider {
 
     tag(Tags.BSItemTags.SHIELDS).add(
         BSItems.WOODEN_SHIELD.getKey(), BSItems.GILDED_WOODEN_SHIELD.getKey(), BSItems.STONE_SHIELD.getKey(), BSItems.GILDED_STONE_SHIELD.getKey(),
-        BSItems.IRON_SHIELD.getKey(), BSItems.GILDED_IRON_SHIELD.getKey(), BSItems.DIAMOND_SHIELD.getKey(), BSItems.GILDED_DIAMOND_SHIELD.getKey(),
-        BSItems.NETHERITE_SHIELD.getKey(), BSItems.GILDED_NETHERITE_SHIELD.getKey(), BSItems.ENDER_SHIELD.getKey(), BSItems.GILDED_ENDER_SHIELD.getKey(),
-        BSItems.QUARTZ_SHIELD.getKey(), BSItems.GILDED_QUARTZ_SHIELD.getKey(), BSItems.PATCHWORK_SHIELD.getKey(), BSItems.GILDED_PATCHWORK_SHIELD.getKey(),
-        BSItems.SKULL_SHIELD.getKey(), BSItems.GILDED_SKULL_SHIELD.getKey(), BSItems.BIOMASS_SHIELD.getKey(), BSItems.GILDED_BIOMASS_SHIELD.getKey(),
-        BSItems.LIVINGMETAL_SHIELD.getKey(), BSItems.GILDED_LIVINGMETAL_SHIELD.getKey()
+        BSItems.COPPER_SHIELD.weathering().unaffected().getKey(), BSItems.GILDED_COPPER_SHIELD.weathering().unaffected().getKey(), BSItems.IRON_SHIELD.getKey(), BSItems.GILDED_IRON_SHIELD.getKey(),
+        BSItems.DIAMOND_SHIELD.getKey(), BSItems.GILDED_DIAMOND_SHIELD.getKey(), BSItems.NETHERITE_SHIELD.getKey(), BSItems.GILDED_NETHERITE_SHIELD.getKey(),
+        BSItems.ENDER_SHIELD.getKey(), BSItems.GILDED_ENDER_SHIELD.getKey(), BSItems.QUARTZ_SHIELD.getKey(), BSItems.GILDED_QUARTZ_SHIELD.getKey(),
+        BSItems.PATCHWORK_SHIELD.getKey(), BSItems.GILDED_PATCHWORK_SHIELD.getKey(), BSItems.SKULL_SHIELD.getKey(), BSItems.GILDED_SKULL_SHIELD.getKey(),
+        BSItems.BIOMASS_SHIELD.getKey(), BSItems.GILDED_BIOMASS_SHIELD.getKey(), BSItems.LIVINGMETAL_SHIELD.getKey(), BSItems.GILDED_LIVINGMETAL_SHIELD.getKey()
     );
 
     tag(ItemTags.HEAD_ARMOR).add(BSItems.LIVINGMETAL_HELMET.getKey(), BSItems.BIOMASS_HELMET.getKey());
