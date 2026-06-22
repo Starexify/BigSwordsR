@@ -8,6 +8,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -15,7 +16,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
-import net.nova.big_swords.item.TieredShield;
 
 public class CopperShieldAxingRecipe extends CustomRecipe {
   public static final CopperShieldAxingRecipe INSTANCE = new CopperShieldAxingRecipe();
@@ -32,7 +32,7 @@ public class CopperShieldAxingRecipe extends CustomRecipe {
       ItemStack stack = input.getItem(i);
       if (stack.isEmpty()) continue;
 
-      if (stack.getItem() instanceof TieredShield) {
+      if (stack.getItem() instanceof ShieldItem) {
         WeatheringCopper.WeatherState state = stack.getOrDefault(BSDataComponents.OXIDATION_STATE.get(), WeatheringCopper.WeatherState.UNAFFECTED);
         boolean canScrape = stack.getOrDefault(BSDataComponents.WAXED.get(), false) || state != WeatheringCopper.WeatherState.UNAFFECTED;
 
@@ -55,7 +55,7 @@ public class CopperShieldAxingRecipe extends CustomRecipe {
 
     for (int i = 0; i < input.size(); i++) {
       ItemStack stack = input.getItem(i);
-      if (!stack.isEmpty() && stack.getItem() instanceof TieredShield) {
+      if (!stack.isEmpty() && stack.getItem() instanceof ShieldItem) {
         targetShield = stack;
         break;
       }

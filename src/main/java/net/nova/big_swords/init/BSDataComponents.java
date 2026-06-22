@@ -14,6 +14,7 @@ import net.minecraft.world.level.storage.loot.Validatable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.nova.big_swords.item.component.SpecialShield;
 
 import java.util.List;
 
@@ -40,6 +41,10 @@ public class BSDataComponents {
 
   public static final DeferredHolder<DataComponentType<?>, DataComponentType<Unit>> DEGRADES_UNDERWATER = COMPONENTS.registerComponentType(
       "degrades_underwater", b -> b.persistent(Unit.CODEC)
+  );
+
+  public static final DeferredHolder<DataComponentType<?>, DataComponentType<SpecialShield>> SPECIAL_SHIELD = COMPONENTS.registerComponentType(
+      "special_shield", b -> b.persistent(SpecialShield.CODEC).networkSynchronized(SpecialShield.STREAM_CODEC)
   );
 
   public static final DeferredRegister.DataComponents ENCHANTMENT_COMPONENTS = DeferredRegister.createDataComponents(Registries.ENCHANTMENT_EFFECT_COMPONENT_TYPE, MODID);

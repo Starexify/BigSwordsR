@@ -3,7 +3,6 @@ package net.nova.big_swords.init;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.WeatheringCopperCollection;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -96,30 +95,30 @@ public class BSItems {
   public static DeferredItem<Item> SOUL_REAPER = ITEMS.registerItem("soul_reaper", p -> new ScytheItem(BSToolMaterial.REAPER, 1.5F, -2.0F, 9F, 10F, p.rarity(Rarity.EPIC).fireResistant()));
 
   // Shields
-  public static DeferredItem<Item> WOODEN_SHIELD = ITEMS.registerItem("wooden_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.WOOD, 2)));
-  public static DeferredItem<Item> GILDED_WOODEN_SHIELD = ITEMS.registerItem("gilded_wooden_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.WOOD, 4)));
-  public static DeferredItem<Item> STONE_SHIELD = ITEMS.registerItem("stone_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.STONE)));
-  public static DeferredItem<Item> GILDED_STONE_SHIELD = ITEMS.registerItem("gilded_stone_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.STONE, 2)));
+  public static DeferredItem<Item> WOODEN_SHIELD = ITEMS.registerItem("wooden_shield", p -> new ShieldItem(BSToolMaterial.shield(p, ToolMaterial.WOOD, 2)));
+  public static DeferredItem<Item> GILDED_WOODEN_SHIELD = ITEMS.registerItem("gilded_wooden_shield", p -> new ShieldItem(BSToolMaterial.shield(p, ToolMaterial.WOOD, 4)));
+  public static DeferredItem<Item> STONE_SHIELD = ITEMS.registerItem("stone_shield", p -> new ShieldItem(BSToolMaterial.shield(p, ToolMaterial.STONE)));
+  public static DeferredItem<Item> GILDED_STONE_SHIELD = ITEMS.registerItem("gilded_stone_shield", p -> new ShieldItem(BSToolMaterial.shield(p, ToolMaterial.STONE, 2)));
   public static WeatheringCopperCollection<DeferredItem<Item>> COPPER_SHIELD = registerShieldCollection("copper_shield");
   public static WeatheringCopperCollection<DeferredItem<Item>> GILDED_COPPER_SHIELD = registerShieldCollection("gilded_copper_shield", 1, ToolMaterial.COPPER.durability() / 2);
-  public static DeferredItem<Item> IRON_SHIELD = ITEMS.registerItem("iron_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.IRON).component(BSDataComponents.DEGRADES_UNDERWATER, Unit.INSTANCE)));
-  public static DeferredItem<Item> GILDED_IRON_SHIELD = ITEMS.registerItem("gilded_iron_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.IRON, 1, ToolMaterial.IRON.durability() / 2).component(BSDataComponents.DEGRADES_UNDERWATER, Unit.INSTANCE)));
-  public static DeferredItem<Item> DIAMOND_SHIELD = ITEMS.registerItem("diamond_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.DIAMOND, 1, -(ToolMaterial.DIAMOND.durability() / 2))));
-  public static DeferredItem<Item> GILDED_DIAMOND_SHIELD = ITEMS.registerItem("gilded_diamond_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.DIAMOND, 1, -653)));
-  public static DeferredItem<Item> NETHERITE_SHIELD = ITEMS.registerItem("netherite_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.NETHERITE, 1, -(ToolMaterial.NETHERITE.durability() / 2)).fireResistant()));
-  public static DeferredItem<Item> GILDED_NETHERITE_SHIELD = ITEMS.registerItem("gilded_netherite_shield", p -> new TieredShield(BSToolMaterial.shield(p, ToolMaterial.NETHERITE, 1, -793).fireResistant()));
-  public static DeferredItem<Item> ENDER_SHIELD = ITEMS.registerItem("ender_shield", p -> new TieredShield(BSToolMaterial.shield(p, BSToolMaterial.ENDER, 1, -(BSToolMaterial.ENDER.durability() / 2)).fireResistant()));
-  public static DeferredItem<Item> GILDED_ENDER_SHIELD = ITEMS.registerItem("gilded_ender_shield", p -> new TieredShield(BSToolMaterial.shield(p, BSToolMaterial.ENDER, 1, -1190).fireResistant()));
-  public static DeferredItem<Item> QUARTZ_SHIELD = ITEMS.registerItem("quartz_shield", p -> new TieredShield(BSToolMaterial.shield(p, BSToolMaterial.QUARTZ)));
-  public static DeferredItem<Item> GILDED_QUARTZ_SHIELD = ITEMS.registerItem("gilded_quartz_shield", p -> new TieredShield(BSToolMaterial.shield(p, BSToolMaterial.QUARTZ, 2)));
-  public static DeferredItem<Item> PATCHWORK_SHIELD = ITEMS.registerItem("patchwork_shield", p -> new TieredShield(BSToolMaterial.shield(p, BSToolMaterial.PATCHWORK, 2)));
-  public static DeferredItem<Item> GILDED_PATCHWORK_SHIELD = ITEMS.registerItem("gilded_patchwork_shield", p -> new TieredShield(BSToolMaterial.shield(p, BSToolMaterial.PATCHWORK, 3)));
-  public static DeferredItem<Item> SKULL_SHIELD = ITEMS.registerItem("skull_shield", p -> new TieredShield(BSToolMaterial.shield(p, BSToolMaterial.SKULL, 2)));
-  public static DeferredItem<Item> GILDED_SKULL_SHIELD = ITEMS.registerItem("gilded_skull_shield", p -> new TieredShield(BSToolMaterial.shield(p, BSToolMaterial.SKULL, 3, BSToolMaterial.SKULL.durability() / 2)));
-  public static DeferredItem<Item> BIOMASS_SHIELD = ITEMS.registerItem("biomass_shield", p -> new TieredShield(BSToolMaterial.shield(p, BSToolMaterial.BIOMASS, 1, BSToolMaterial.BIOMASS.durability() / 2)));
-  public static DeferredItem<Item> GILDED_BIOMASS_SHIELD = ITEMS.registerItem("gilded_biomass_shield", p -> new TieredShield(BSToolMaterial.shield(p, BSToolMaterial.BIOMASS, 2)));
-  public static DeferredItem<Item> LIVINGMETAL_SHIELD = ITEMS.registerItem("livingmetal_shield", p -> new TieredShield(BSToolMaterial.shield(p, BSToolMaterial.LIVINGMETAL, 1)));
-  public static DeferredItem<Item> GILDED_LIVINGMETAL_SHIELD = ITEMS.registerItem("gilded_livingmetal_shield", p -> new TieredShield(BSToolMaterial.shield(p, BSToolMaterial.LIVINGMETAL, 2, BSToolMaterial.LIVINGMETAL.durability() / 2)));
+  public static DeferredItem<Item> IRON_SHIELD = ITEMS.registerItem("iron_shield", p -> new ShieldItem(BSToolMaterial.shield(p, ToolMaterial.IRON).component(BSDataComponents.DEGRADES_UNDERWATER, Unit.INSTANCE)));
+  public static DeferredItem<Item> GILDED_IRON_SHIELD = ITEMS.registerItem("gilded_iron_shield", p -> new ShieldItem(BSToolMaterial.shield(p, ToolMaterial.IRON, 1, ToolMaterial.IRON.durability() / 2).component(BSDataComponents.DEGRADES_UNDERWATER, Unit.INSTANCE)));
+  public static DeferredItem<Item> DIAMOND_SHIELD = ITEMS.registerItem("diamond_shield", p -> new ShieldItem(BSToolMaterial.shield(p, ToolMaterial.DIAMOND, 1, -(ToolMaterial.DIAMOND.durability() / 2))));
+  public static DeferredItem<Item> GILDED_DIAMOND_SHIELD = ITEMS.registerItem("gilded_diamond_shield", p -> new ShieldItem(BSToolMaterial.shield(p, ToolMaterial.DIAMOND, 1, -653)));
+  public static DeferredItem<Item> NETHERITE_SHIELD = ITEMS.registerItem("netherite_shield", p -> new ShieldItem(BSToolMaterial.shield(p, ToolMaterial.NETHERITE, 1, -(ToolMaterial.NETHERITE.durability() / 2)).fireResistant()));
+  public static DeferredItem<Item> GILDED_NETHERITE_SHIELD = ITEMS.registerItem("gilded_netherite_shield", p -> new ShieldItem(BSToolMaterial.shield(p, ToolMaterial.NETHERITE, 1, -793).fireResistant()));
+  public static DeferredItem<Item> ENDER_SHIELD = ITEMS.registerItem("ender_shield", p -> new ShieldItem(BSToolMaterial.shield(p, BSToolMaterial.ENDER, 1, -(BSToolMaterial.ENDER.durability() / 2)).fireResistant()));
+  public static DeferredItem<Item> GILDED_ENDER_SHIELD = ITEMS.registerItem("gilded_ender_shield", p -> new ShieldItem(BSToolMaterial.shield(p, BSToolMaterial.ENDER, 1, -1190).fireResistant()));
+  public static DeferredItem<Item> QUARTZ_SHIELD = ITEMS.registerItem("quartz_shield", p -> new ShieldItem(BSToolMaterial.shield(p, BSToolMaterial.QUARTZ)));
+  public static DeferredItem<Item> GILDED_QUARTZ_SHIELD = ITEMS.registerItem("gilded_quartz_shield", p -> new ShieldItem(BSToolMaterial.shield(p, BSToolMaterial.QUARTZ, 2)));
+  public static DeferredItem<Item> PATCHWORK_SHIELD = ITEMS.registerItem("patchwork_shield", p -> new ShieldItem(BSToolMaterial.shield(p, BSToolMaterial.PATCHWORK, 2)));
+  public static DeferredItem<Item> GILDED_PATCHWORK_SHIELD = ITEMS.registerItem("gilded_patchwork_shield", p -> new ShieldItem(BSToolMaterial.shield(p, BSToolMaterial.PATCHWORK, 3)));
+  public static DeferredItem<Item> SKULL_SHIELD = ITEMS.registerItem("skull_shield", p -> new ShieldItem(BSToolMaterial.shield(p, BSToolMaterial.SKULL, 2)));
+  public static DeferredItem<Item> GILDED_SKULL_SHIELD = ITEMS.registerItem("gilded_skull_shield", p -> new ShieldItem(BSToolMaterial.shield(p, BSToolMaterial.SKULL, 3, BSToolMaterial.SKULL.durability() / 2)));
+  public static DeferredItem<Item> BIOMASS_SHIELD = ITEMS.registerItem("biomass_shield", p -> new ShieldItem(BSToolMaterial.shield(p, BSToolMaterial.BIOMASS, 1, BSToolMaterial.BIOMASS.durability() / 2)));
+  public static DeferredItem<Item> GILDED_BIOMASS_SHIELD = ITEMS.registerItem("gilded_biomass_shield", p -> new ShieldItem(BSToolMaterial.shield(p, BSToolMaterial.BIOMASS, 2)));
+  public static DeferredItem<Item> LIVINGMETAL_SHIELD = ITEMS.registerItem("livingmetal_shield", p -> new ShieldItem(BSToolMaterial.shield(p, BSToolMaterial.LIVINGMETAL, 1)));
+  public static DeferredItem<Item> GILDED_LIVINGMETAL_SHIELD = ITEMS.registerItem("gilded_livingmetal_shield", p -> new ShieldItem(BSToolMaterial.shield(p, BSToolMaterial.LIVINGMETAL, 2, BSToolMaterial.LIVINGMETAL.durability() / 2)));
 
   private static WeatheringCopperCollection<DeferredItem<Item>> registerShieldCollection(String baseName) {
     return registerShieldCollection(baseName, 1, 0);
@@ -129,11 +128,11 @@ public class BSItems {
     return WeatheringCopperCollection.PREFIXES.apply(
         weatheringPrefixes -> WeatheringCopperCollection.zipMap(
             WeatheringCopperCollection.STATES, weatheringPrefixes,
-            (state, prefix) -> ITEMS.registerItem(prefix + baseName, p -> new TieredShield(BSToolMaterial.copperShield(p, durabilityMultiplier, additionalDurability, state, false)))
+            (state, prefix) -> ITEMS.registerItem(prefix + baseName, p -> new ShieldItem(BSToolMaterial.copperShield(p, durabilityMultiplier, additionalDurability, state, false)))
         ),
         waxedPrefixes -> WeatheringCopperCollection.zipMap(
             WeatheringCopperCollection.STATES, waxedPrefixes,
-            (state, prefix) -> ITEMS.registerItem(prefix + baseName, p -> new TieredShield(BSToolMaterial.copperShield(p, durabilityMultiplier, additionalDurability, state, true).component(BSDataComponents.WAXED, true)))
+            (state, prefix) -> ITEMS.registerItem(prefix + baseName, p -> new ShieldItem(BSToolMaterial.copperShield(p, durabilityMultiplier, additionalDurability, state, true)))
         )
     );
   }

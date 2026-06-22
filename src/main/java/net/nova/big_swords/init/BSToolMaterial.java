@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.nova.big_swords.BigSwordsR;
+import net.nova.big_swords.item.component.SpecialShield;
 import net.nova.big_swords.mixin.ToolMaterialAccessor;
 
 import java.util.List;
@@ -44,6 +45,9 @@ public class BSToolMaterial {
   public static Item.Properties copperShield(Item.Properties properties, int durabilityMultiplier, int additionalDurability, WeatheringCopper.WeatherState state, boolean isWaxed) {
     applyBaseShieldProperties(properties, ToolMaterial.COPPER, durabilityMultiplier, additionalDurability);
     if (state != WeatheringCopper.WeatherState.OXIDIZED) applyBlockingComponent(properties);
+    if (isWaxed) properties.component(BSDataComponents.WAXED, true);
+    properties.component(BSDataComponents.SPECIAL_SHIELD, new SpecialShield(ToolMaterial.COPPER));
+
     return properties.component(BSDataComponents.OXIDATION_STATE, state);
   }
 
@@ -57,6 +61,7 @@ public class BSToolMaterial {
 
   public static Item.Properties shield(Item.Properties properties, ToolMaterial material, int durabilityMultiplier, int additionalDurability) {
     applyBaseShieldProperties(properties, material, durabilityMultiplier, additionalDurability);
+    properties.component(BSDataComponents.SPECIAL_SHIELD, new SpecialShield(material));
     return applyBlockingComponent(properties);
   }
 
@@ -135,5 +140,52 @@ public class BSToolMaterial {
         new AttributeModifier(MAX_CHARGED_DAMAGE_ID, maxChargedDamage, AttributeModifier.Operation.ADD_VALUE),
         EquipmentSlotGroup.MAINHAND
     ).build();
+  }
+
+  public static ToolMaterial getMaterialFromId(String id) {
+    return switch (id) {
+      // BSR Tiers
+      case "patchwork" -> PATCHWORK;
+      case "skull" -> SKULL;
+      case "quartz" -> QUARTZ;
+      case "obsidian" -> OBSIDIAN;
+      case "ender" -> ENDER;
+      case "livingmetal" -> LIVINGMETAL;
+      case "biomass" -> BIOMASS;
+      case "reaper" -> REAPER;
+
+      // Vanilla Fallbacks
+      case "stone" -> ToolMaterial.STONE;
+      case "copper" -> ToolMaterial.COPPER;
+      case "iron" -> ToolMaterial.IRON;
+      case "diamond" -> ToolMaterial.DIAMOND;
+      case "gold" -> ToolMaterial.GOLD;
+      case "netherite" -> ToolMaterial.NETHERITE;
+      default -> ToolMaterial.WOOD;
+    };
+  }
+
+  public static String getIdFromMaterial(ToolMaterial material) {
+    return switch (material) {
+      // BSR Tiers
+      case ToolMaterial m when m == PATCHWORK -> "patchwork";
+      case ToolMaterial m when m == SKULL -> "skull";
+      case ToolMaterial m when m == QUARTZ -> "quartz";
+      case ToolMaterial m when m == OBSIDIAN -> "obsidian";
+      case ToolMaterial m when m == ENDER -> "ender";
+      case ToolMaterial m when m == LIVINGMETAL -> "livingmetal";
+      case ToolMaterial m when m == BIOMASS -> "biomass";
+      case ToolMaterial m when m == REAPER -> "reaper";
+
+      // Vanilla Tiers
+      case ToolMaterial m when m == ToolMaterial.STONE -> "stone";
+      case ToolMaterial m when m == ToolMaterial.COPPER -> "copper";
+      case ToolMaterial m when m == ToolMaterial.IRON -> "iron";
+      case ToolMaterial m when m == ToolMaterial.DIAMOND -> "diamond";
+      case ToolMaterial m when m == ToolMaterial.GOLD -> "gold";
+      case ToolMaterial m when m == ToolMaterial.NETHERITE -> "netherite";
+
+      default -> "wood";
+    };
   }
 }

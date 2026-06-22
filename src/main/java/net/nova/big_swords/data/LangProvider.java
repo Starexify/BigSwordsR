@@ -2,11 +2,13 @@ package net.nova.big_swords.data;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.WeatheringCopperCollection;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 import net.nova.big_swords.init.*;
 import net.nova.big_swords.item.EnderSmithingTemplate;
+import net.nova.big_swords.item.component.SpecialShield;
 
 import java.util.function.Supplier;
 
@@ -100,40 +102,56 @@ public class LangProvider extends LanguageProvider {
     addItem(BSItems.SOUL_REAPER, "Soul Reaper");
 
     // Shields
-    addShield(BSItems.WOODEN_SHIELD, "Wooden Shield", "Special Perk: Arrow Catch", "Weakness: Flammable");
-    addShield(BSItems.GILDED_WOODEN_SHIELD, "Gilded Wooden Shield", "Special Perk: Arrow Catch", "Weakness: Flammable");
-    addShield(BSItems.STONE_SHIELD, "Stone Shield", "Special Perk: Fire Resistant", "Weakness: Shattered Defense");
-    addShield(BSItems.GILDED_STONE_SHIELD, "Gilded Stone Shield", "Special Perk: Fire Resistant", "Weakness: Shattered Defense");
+    addShield(BSItems.WOODEN_SHIELD, BSItems.GILDED_WOODEN_SHIELD, "Wooden Shield", ToolMaterial.WOOD,
+        "Special Perk: Arrow Catch", "Has a chance to catch blocked arrows and add them to the wielder's inventory",
+        "Weakness: Flammable", "Consumes more durability when blocking fire damage");
+    addShield(BSItems.STONE_SHIELD, BSItems.GILDED_STONE_SHIELD, "Stone Shield", ToolMaterial.STONE,
+        "Special Perk: Fire Resistant", "Completely negates all fire damage, including burning projectiles",
+        "Weakness: Shattered Defense", "Vulnerable to blast damage, which pierces through blocking");
     WeatheringCopperCollection.zipApply(WeatheringCopperCollection.STATES, BSItems.COPPER_SHIELD.weathering(), (state, unwaxed) -> {
       String name = state.getSerializedName();
       String statePrefix = state == WeatheringCopper.WeatherState.UNAFFECTED ? "" : name.substring(0, 1).toUpperCase() + name.substring(1) + " ";
-      addShield(unwaxed, statePrefix + "Copper Shield", "Special Perk: Patina Shell", "Weakness: Verdigris Grip");
-      addShield(BSItems.COPPER_SHIELD.waxed().pick(state), "Waxed " + statePrefix + "Copper Shield", "Special Perk: Patina Shell", "Weakness: Verdigris Grip");
+      if (state != WeatheringCopper.WeatherState.UNAFFECTED) addItem(unwaxed, statePrefix + "Copper Shield");
+      addItem(BSItems.COPPER_SHIELD.waxed().pick(state), "Waxed " + statePrefix + "Copper Shield");
     });
     WeatheringCopperCollection.zipApply(WeatheringCopperCollection.STATES, BSItems.GILDED_COPPER_SHIELD.weathering(), (state, unwaxed) -> {
       String name = state.getSerializedName();
       String statePrefix = state == WeatheringCopper.WeatherState.UNAFFECTED ? "" : name.substring(0, 1).toUpperCase() + name.substring(1) + " ";
-      addShield(unwaxed, statePrefix + "Gilded Copper Shield", "Special Perk: Patina Shell", "Weakness: Verdigris Grip");
-      addShield(BSItems.GILDED_COPPER_SHIELD.waxed().pick(state), "Waxed " + statePrefix + "Gilded Copper Shield", "Special Perk: Patina Shell", "Weakness: Verdigris Grip");
+      if (state != WeatheringCopper.WeatherState.UNAFFECTED) addItem(unwaxed, statePrefix + "Gilded Copper Shield");
+      addItem(BSItems.GILDED_COPPER_SHIELD.waxed().pick(state), "Waxed " + statePrefix + "Gilded Copper Shield");
     });
-    addShield(BSItems.IRON_SHIELD, "Iron Shield", "Special Perk: Explosive Resistant", "Weakness: Rusting");
-    addShield(BSItems.GILDED_IRON_SHIELD, "Gilded Iron Shield", "Special Perk: Explosive Resistant", "Weakness: Rusting");
-    addShield(BSItems.DIAMOND_SHIELD, "Diamond Shield", "Special Perk: Counter Reflect", "Weakness: Reflective Impact");
-    addShield(BSItems.GILDED_DIAMOND_SHIELD, "Gilded Diamond Shield", "Special Perk: Counter Reflect", "Weakness: Reflective Impact");
-    addShield(BSItems.NETHERITE_SHIELD, "Netherite Shield", "Special Perk: Reflecting Guard", "Weakness: Reflecting Pause");
-    addShield(BSItems.GILDED_NETHERITE_SHIELD, "Gilded Netherite Shield", "Special Perk: Reflecting Guard", "Weakness: Reflecting Pause");
-    addShield(BSItems.ENDER_SHIELD, "Ender Shield", "Special Perk: Teleport Displace", "Weakness: Ender Damage");
-    addShield(BSItems.GILDED_ENDER_SHIELD, "Gilded Ender Shield", "Special Perk: Teleport Displace", "Weakness: Ender Damage");
-    addShield(BSItems.QUARTZ_SHIELD, "Quartz Shield", "Special Perk: Quartz Barrier", "Weakness: Hunger Toll");
-    addShield(BSItems.GILDED_QUARTZ_SHIELD, "Gilded Quartz Shield", "Special Perk: Quartz Barrier", "Weakness: Hunger Toll");
-    addShield(BSItems.PATCHWORK_SHIELD, "Patchwork Shield", "Special Perk: Necrotic Weaken", "Weakness: Rotten Defense");
-    addShield(BSItems.GILDED_PATCHWORK_SHIELD, "Gilded Patchwork Shield", "Special Perk: Necrotic Weaken", "Weakness: Rotten Defense");
-    addShield(BSItems.SKULL_SHIELD, "Skull Shield", "Special Perk: Fear", "Weakness: Brittle Bones");
-    addShield(BSItems.GILDED_SKULL_SHIELD, "Gilded Skull Shield", "Special Perk: Fear", "Weakness: Brittle Bones");
-    addShield(BSItems.BIOMASS_SHIELD, "Biomass Shield", "Special Perk: Vitality Transfer", "Weakness: Life Leech");
-    addShield(BSItems.GILDED_BIOMASS_SHIELD, "Gilded Biomass Shield", "Special Perk: Vitality Transfer", "Weakness: Life Leech");
-    addShield(BSItems.LIVINGMETAL_SHIELD, "Livingmetal Shield", "Special Perk: Experience Infusion", "Weakness: Experience Drain");
-    addShield(BSItems.GILDED_LIVINGMETAL_SHIELD, "Gilded Livingmetal Shield", "Special Perk: Experience Infusion", "Weakness: Experience Drain");
+    addShield(BSItems.COPPER_SHIELD.weathering().unaffected(), BSItems.GILDED_COPPER_SHIELD.weathering().unaffected(), "Copper Shield", ToolMaterial.COPPER,
+        "Special Perk: Patina Shell", "Restores durability at a rate that increases with higher oxidation levels, unless the shield is waxed",
+        "Weakness: Verdigris Grip", "Can no longer block when fully oxidized");
+    addShield(BSItems.IRON_SHIELD, BSItems.GILDED_IRON_SHIELD, "Iron Shield", ToolMaterial.IRON,
+        "Special Perk: Explosive Resistant", "Consumes less durability when blocking blast damage",
+        "Weakness: Rusting", "Durability drains if the shield is held or dropped underwater.");
+    addShield(BSItems.DIAMOND_SHIELD, BSItems.GILDED_DIAMOND_SHIELD, "Diamond Shield", ToolMaterial.DIAMOND,
+        "Special Perk: Counter Reflect", "Has a chance to reflect blocked projectiles back to the attacker",
+        "Weakness: Reflective Impact", "Blocked projectiles have a chance to deal double damage");
+    addShield(BSItems.NETHERITE_SHIELD, BSItems.GILDED_NETHERITE_SHIELD, "Netherite Shield", ToolMaterial.NETHERITE,
+        "Special Perk: Reflecting Guard", "Has a chance to reflect a portion of the blocked damage back at the attacker",
+        "Weakness: Reflecting Pause", "Has a chance to go on cooldown when the perk activates");
+    addShield(BSItems.ENDER_SHIELD, BSItems.GILDED_ENDER_SHIELD, "Ender Shield", BSToolMaterial.ENDER,
+        "Special Perk: Teleport Displace", "Has a chance to teleport melee attackers a short distance away from the wielder",
+        "Weakness: Ender Damage", "Ender entities bypass its blocking");
+    addShield(BSItems.QUARTZ_SHIELD, BSItems.GILDED_QUARTZ_SHIELD, "Quartz Shield", BSToolMaterial.QUARTZ,
+        "Special Perk: Quartz Barrier", "Has a chance to briefly apply absorption effect wielder",
+        "Weakness: Hunger Toll", "Has a chance to consume wielder's hunger in exchange for the perk's effect");
+    addShield(BSItems.PATCHWORK_SHIELD, BSItems.GILDED_PATCHWORK_SHIELD, "Patchwork Shield", BSToolMaterial.PATCHWORK,
+        "Special Perk: Necrotic Weaken", "Has a chance to briefly apply weakness effect to the attacker",
+        "Weakness: Rotten Defense", "Blocking has a chance to fail");
+    addShield(BSItems.SKULL_SHIELD, BSItems.GILDED_SKULL_SHIELD, "Skull Shield", BSToolMaterial.SKULL,
+        "Special Perk: Fear", "Has a chance to force the attacker to target the next closest entity",
+        "Weakness: Brittle Bones", "Blocking has a chance to consume three times the normal durability");
+    addShield(BSItems.BIOMASS_SHIELD, BSItems.GILDED_BIOMASS_SHIELD, "Biomass Shield", BSToolMaterial.BIOMASS,
+        "Special Perk: Vitality Transfer", "Has a chance to heal the wielder at the cost of 1 level of XP per heart",
+        "Weakness: Life Leech", "Has a chance to drain additional experience");
+    addShield(BSItems.LIVINGMETAL_SHIELD, BSItems.GILDED_LIVINGMETAL_SHIELD, "Livingmetal Shield", BSToolMaterial.LIVINGMETAL,
+        "Special Perk: Experience Infusion", "Has a chance to heal the wielder for a portion of the blocked damage",
+        "Weakness: Experience Drain", "Has a chance to damage the wielder for a portion of the blocked damage");
+
+    add(SpecialShield.SHIFT_HELP_TIP, "(Press SHIFT for more info)");
 
     // Creative Tab
     add(CreativeTab.BIG_SWORDS_TAB_TITLE, "Big Swords R");
@@ -197,9 +215,17 @@ public class LangProvider extends LanguageProvider {
     add("advancements." + MODID + "." + advancementName + ".description", description);
   }
 
-  public void addShield(Supplier<? extends Item> key, String name, String perk, String weakness) {
-    add(key.get(), name);
-    add(key.get() + ".perk", perk);
-    add(key.get() + ".weakness", weakness);
+  public void addShield(Supplier<? extends Item> item, Supplier<? extends Item> gildedItem, String name,
+                        ToolMaterial material, String basePerkLabel, String basePerkDesc, String baseWeaknessLabel, String baseWeaknessDesc) {
+    addItem(item, name);
+    addItem(gildedItem, "Gilded " + name);
+
+    String materialKey = BSToolMaterial.getIdFromMaterial(material);
+    add("tooltip.big_swords." + materialKey + ".perk", basePerkLabel);
+    add("tooltip.big_swords." + materialKey + ".weakness", baseWeaknessLabel);
+
+    // Shift description
+    add("tooltip.big_swords." + materialKey + ".perk.description", basePerkDesc);
+    add("tooltip.big_swords." + materialKey + ".weakness.description", baseWeaknessDesc);
   }
 }
