@@ -2,6 +2,7 @@ package net.nova.big_swords.item;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -11,6 +12,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.Level;
+import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 
@@ -50,17 +52,22 @@ public class BloodVial extends Item {
 
   // Methods
   public InteractionResult processInteraction(Level level, Player player, ItemStack bloodVialStack, ItemStack otherHandStack, Item resultItem) {
+    BigSwordsR.playSound(level, player, SoundEvents.BOTTLE_EMPTY);
     if (!level.isClientSide()) {
       otherHandStack.shrink(1);
       bloodVialStack.set(BSDataComponents.BLOOD_LEVEL, getBloodLevel(bloodVialStack) - 1);
+
       ItemStack resultStack = new ItemStack(resultItem);
       if (!player.addItem(resultStack)) player.drop(resultStack, false);
     }
     return InteractionResult.SUCCESS;
   }
 
-  public void incrementBloodLevel(ItemStack stack) {
-    if (getBloodLevel(stack) < MAX_BLOOD_LEVEL) stack.set(BSDataComponents.BLOOD_LEVEL, getBloodLevel(stack) + 1);
+  public void incrementBloodLevel(Player player, ItemStack stack) {
+    if (getBloodLevel(stack) < MAX_BLOOD_LEVEL) {
+      BigSwordsR.playSound(player.level(), player, SoundEvents.BOTTLE_FILL);
+      stack.set(BSDataComponents.BLOOD_LEVEL, getBloodLevel(stack) + 1);
+    }
   }
 
   public static void incrementBloodVialInBothHands(Player player) {
@@ -70,7 +77,7 @@ public class BloodVial extends Item {
 
   public static void incrementBloodVialInHand(Player player, InteractionHand hand) {
     ItemStack handStack = player.getItemInHand(hand);
-    if (handStack.getItem() instanceof BloodVial bloodVialItem) bloodVialItem.incrementBloodLevel(handStack);
+    if (handStack.getItem() instanceof BloodVial bloodVialItem) bloodVialItem.incrementBloodLevel(player, handStack);
   }
 
   public static int getBloodLevel(ItemStack stack) {
