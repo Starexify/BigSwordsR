@@ -21,8 +21,12 @@ public class DeferredRegister<T> {
     REGISTERS.add(this);
   }
 
-  public static <T> DeferredRegister<T> create(RegistryKey key, String namespace) {
-    return new DeferredRegister<>(key, namespace);
+  public static <T> DeferredRegister<T> create(RegistryKey key, String modid) {
+    return new DeferredRegister<>(key, modid);
+  }
+
+  public static DeferredRegister.Items createItems(String modid) {
+    return new Items(modid);
   }
 
   public <I extends T> Supplier<I> register(final String name, final Supplier<I> factory) {
@@ -30,30 +34,38 @@ public class DeferredRegister<T> {
     return factory;
   }
 
-  public <I extends T> Supplier<I> register(final String name, final Function<String, I> factory) {
-    Supplier<I> supplier = () -> factory.apply(name);
-    this.entries.put(name, supplier);
-    return supplier;
-  }
+  public static class Items extends DeferredRegister<Item> {
+    public static short ID = 2268; // Hardcoded so last registered ID is used bcz moiang
 
-  public static void registerItems(IdRegistry<Item> registry) {
-    RegistryKey targetKey = RegistryKey.of("minecraft:items");
-    short nextId = 2268; // Hardcoded so last registered ID is used bcz moiang
+    public Items(String namespace) {
+      super(RegistryKey.of("minecraft:items"), namespace);
+    }
 
-    for (DeferredRegister<?> register : REGISTERS) {
-      if (!register.registryKey.equals(targetKey)) continue;
+    public <I extends Item> Supplier<I> registerItem(final String name, final Supplier<I> factory) {
+      return register(name, () -> {
+        I item = factory.get();
+        item.setKey(name);
+        return item;
+      });
+    }
 
-      for (Map.Entry<String, Supplier<?>> entry : register.entries.entrySet()) {
-        if (nextId > 31999) throw new IllegalStateException("BigSwords registry has exhausted the 1.7.10 32000 short ID limit!");
+    public static void registerItems(IdRegistry<Item> registry) {
+      RegistryKey targetKey = RegistryKey.of("minecraft:items");
 
-        String rawID = entry.getKey();
-        Supplier<?> factory = entry.getValue();
+      for (DeferredRegister<?> register : REGISTERS) {
+        if (!register.registryKey.equals(targetKey)) continue;
 
-        String id = register.namespace + ":" + rawID;
-        Item createdItem = (Item) factory.get();
-        createdItem.setKey(rawID);
+        for (Map.Entry<String, Supplier<?>> entry : register.entries.entrySet()) {
+          if (ID > 31999) throw new IllegalStateException("BigSwords registry has exhausted the 1.7.10 32000 short ID limit!");
 
-        registry.register(nextId++, id, createdItem);
+          String rawID = entry.getKey();
+          Supplier<?> factory = entry.getValue();
+
+          String id = register.namespace + ":" + rawID;
+          Item createdItem = (Item) factory.get();
+
+          registry.register(ID++, id, createdItem);
+        }
       }
     }
   }

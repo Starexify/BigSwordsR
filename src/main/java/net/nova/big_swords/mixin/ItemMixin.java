@@ -18,6 +18,6 @@ public class ItemMixin {
   @Inject(method = "init", at = @At("TAIL"))
   private static void big_swords$init(CallbackInfo ci) {
     var trigger = BSItems.ITEMS;
-    DeferredRegister.registerItems(REGISTRY);
+    DeferredRegister.Items.registerItems(REGISTRY);
   }
 }
