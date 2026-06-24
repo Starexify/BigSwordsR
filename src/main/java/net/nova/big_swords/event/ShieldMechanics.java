@@ -6,6 +6,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -117,6 +118,12 @@ public class ShieldMechanics {
     boolean isStone = shield.is(BSItems.STONE_SHIELD);
     boolean isGildedStone = shield.is(BSItems.GILDED_STONE_SHIELD);
     if (isStone || isGildedStone) {
+      // Special
+      if (attacker instanceof LivingEntity livingAttacker) {
+        ItemStack weapon = livingAttacker.getMainHandItem();
+        if (weapon.is(ItemTags.PICKAXES)) blocksAttacks.hurtBlockingItem(level, shield, player, player.getUsedItemHand(), blockedDamage);
+      }
+
       // Perk
       if (fireAspectLevel > 0 || soulFireAspectLevel > 0) {
         event.setShieldDamage(0);
