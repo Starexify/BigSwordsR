@@ -53,7 +53,8 @@ public class BloodVial extends Item {
     if (!level.isClientSide()) {
       otherHandStack.shrink(1);
       bloodVialStack.set(BSDataComponents.BLOOD_LEVEL, getBloodLevel(bloodVialStack) - 1);
-      player.addItem(new ItemStack(resultItem));
+      ItemStack resultStack = new ItemStack(resultItem);
+      if (!player.addItem(resultStack)) player.drop(resultStack, false);
     }
     return InteractionResult.SUCCESS;
   }
