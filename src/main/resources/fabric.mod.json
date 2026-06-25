@@ -19,6 +19,9 @@
   "entrypoints": {
     "init": [
       "net.nova.big_swords.BigSwordsR"
+    ],
+    "client-init": [
+      "net.nova.big_swords.data.DataGenerator"
     ]
   },
   "mixins": [

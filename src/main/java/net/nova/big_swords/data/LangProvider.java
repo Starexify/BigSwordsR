@@ -2,6 +2,7 @@ package net.nova.big_swords.data;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.nova.big_swords.init.BSBlocks;
 import net.nova.big_swords.init.BSItems;
 
@@ -27,6 +28,7 @@ public class LangProvider {
     translations.clear();
 
     // Items
+    addItem(Items.BED, "Giant Handle");
     addItem(BSItems.GIANT_WOODEN_STICK.get(), "Giant Wooden Stick");
     addItem(BSItems.GIANT_BLAZE_ROD.get(), "Giant Blaze Rod");
     addItem(BSItems.GIANT_LIVINGMETAL_HANDLE.get(), "Giant Livingmetal Handle");

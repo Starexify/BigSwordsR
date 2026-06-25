@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.ornithemc.osl.blocks.api.BlockRegistry;
-import net.ornithemc.osl.core.api.registry.RegistryKey;
 import net.ornithemc.osl.core.api.util.NamespacedIdentifiers;
 import net.ornithemc.osl.items.api.ItemRegistry;
 
@@ -13,22 +12,16 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class DeferredRegister<T> {
-  private static final List<DeferredRegister<?>> REGISTERS = new ArrayList<>();
-
-  private static final Map<String, Integer> BLOCK_IDS = new HashMap<>();
   private static short START_ID = 2268; // Hardcoded so last registered ID is used bcz moiang
 
-  private final RegistryKey registryKey;
   public final String modid;
 
-  public DeferredRegister(RegistryKey registryKey, String namespace) {
-    this.registryKey = Objects.requireNonNull(registryKey);
+  public DeferredRegister(String namespace) {
     this.modid = Objects.requireNonNull(namespace);
-    REGISTERS.add(this);
   }
 
-  public static <T> DeferredRegister<T> create(RegistryKey key, String modid) {
-    return new DeferredRegister<>(key, modid);
+  public static <T> DeferredRegister<T> create(String modid) {
+    return new DeferredRegister<>(modid);
   }
 
   public static DeferredRegister.Items createItems(String modid) {
@@ -41,7 +34,7 @@ public class DeferredRegister<T> {
 
   public static class Blocks extends DeferredRegister<Block> {
     public Blocks(String namespace) {
-      super(RegistryKey.of("minecraft:blocks"), namespace);
+      super(namespace);
     }
 
     public <I extends Block> Supplier<I> registerBlock(final String name, final Supplier<I> factory) {
@@ -56,7 +49,7 @@ public class DeferredRegister<T> {
 
   public static class Items extends DeferredRegister<Item> {
     public Items(String namespace) {
-      super(RegistryKey.of("minecraft:items"), namespace);
+      super(namespace);
     }
 
     public <I extends Item> Supplier<I> registerItem(final String name, final Supplier<I> factory) {

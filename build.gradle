@@ -100,3 +100,8 @@ tasks.register('runDatagen', JavaExec) {
 
   args '--output', file('src/generated/resources').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
 }
+
+tasks.register('runDatagenClient', JavaExec) {
+  group = "build"
+  dependsOn tasks.named('runClient')
+}
