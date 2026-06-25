@@ -34,6 +34,8 @@ public class LangProvider {
 
     // Blocks
     addBlock(BSBlocks.LIVINGMETAL_BLOCK.get(), "Livingmetal Block");
+    addBlock(BSBlocks.BIOMASS_BLOCK.get(), "Biomass Block");
+    addBlock(BSBlocks.CREEP_BLOCK.get(), "Creep Block");
   }
 
   public static void addItem(Item item, String translation) {

@@ -1,5 +1,6 @@
 item.big_swords:giant_blaze_rod.name=Giant Blaze Rod
-item.bed.name=Giant Wooden Stick
+tile.big_swords:creep_block.name=Creep Block
+tile.big_swords:biomass_block.name=Biomass Block
 tile.big_swords:livingmetal_block.name=Livingmetal Block
 item.big_swords:giant_wooden_stick.name=Giant Wooden Stick
 item.big_swords:giant_livingmetal_handle.name=Giant Livingmetal Handle

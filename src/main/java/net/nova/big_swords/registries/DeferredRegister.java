@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public class DeferredRegister<T> {
+public class DeferredRegister {
   private static short START_ID = 2268; // Hardcoded so last registered ID is used bcz moiang
 
   public final String modid;
@@ -20,8 +20,8 @@ public class DeferredRegister<T> {
     this.modid = Objects.requireNonNull(namespace);
   }
 
-  public static <T> DeferredRegister<T> create(String modid) {
-    return new DeferredRegister<>(modid);
+  public static <T> DeferredRegister create(String modid) {
+    return new DeferredRegister(modid);
   }
 
   public static DeferredRegister.Items createItems(String modid) {
@@ -32,7 +32,7 @@ public class DeferredRegister<T> {
     return new Blocks(modid);
   }
 
-  public static class Blocks extends DeferredRegister<Block> {
+  public static class Blocks extends DeferredRegister {
     public Blocks(String namespace) {
       super(namespace);
     }
@@ -47,7 +47,7 @@ public class DeferredRegister<T> {
     }
   }
 
-  public static class Items extends DeferredRegister<Item> {
+  public static class Items extends DeferredRegister {
     public Items(String namespace) {
       super(namespace);
     }

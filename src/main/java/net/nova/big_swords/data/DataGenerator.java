@@ -15,31 +15,27 @@ public class DataGenerator implements ClientModInitializer {
     Bootstrap.init();
     File outputDir = init();
 
+    if (outputDir == null) {
+      return;
+    }
+
     new LangProvider(outputDir, MODID, "en_US").save();
 
     System.exit(0);
   }
 
   static File init() {
-    String outputPath = null;
-
     String command = System.getProperty("sun.java.command");
 
     if (command != null && command.contains("output")) {
       String[] args = command.split("\\s+");
       for (int i = 0; i < args.length; i++) {
         if (args[i].equals("output") && (i + 1) < args.length) {
-          outputPath = args[i + 1];
-          break;
+          return new File(args[i + 1]);
         }
       }
     }
 
-    if (outputPath == null || outputPath.isEmpty()) {
-      System.err.println("Output path is missing.");
-      System.exit(1);
-    }
-
-    return new File(outputPath);
+    return null;
   }
 }

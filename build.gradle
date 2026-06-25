@@ -33,8 +33,7 @@ loom {
     }
 
     datagen {
-      inherit client
-
+      client()
       programArguments.addAll 'output', file('src/generated/resources').getAbsolutePath()
     }
   }
