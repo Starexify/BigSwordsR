@@ -17,12 +17,12 @@ public class DeferredRegister<T> {
   private static short START_ID = 2268; // Hardcoded so last registered ID is used bcz moiang
 
   private final RegistryKey registryKey;
-  private final String namespace;
+  public final String modid;
   private final Map<String, Supplier<?>> entries = new LinkedHashMap<>();
 
   public DeferredRegister(RegistryKey registryKey, String namespace) {
     this.registryKey = Objects.requireNonNull(registryKey);
-    this.namespace = Objects.requireNonNull(namespace);
+    this.modid = Objects.requireNonNull(namespace);
     REGISTERS.add(this);
   }
 
@@ -53,7 +53,8 @@ public class DeferredRegister<T> {
     public <I extends Block> Supplier<I> registerBlock(final String name, final Supplier<I> factory) {
       return register(name, () -> {
         I block = factory.get();
-        block.setKey(name);
+        String blockName = this.modid + ":" + name;
+        block.setKey(blockName).setSpriteName(blockName);
         return block;
       });
     }
@@ -67,10 +68,8 @@ public class DeferredRegister<T> {
         for (Map.Entry<String, Supplier<?>> entry : register.entries.entrySet()) {
           if (START_ID > 31999) throw new IllegalStateException("BigSwords registry has exhausted the 1.7.10 32000 short ID limit!");
 
-          String rawID = entry.getKey();
+          String id = entry.getKey();
           Supplier<?> factory = entry.getValue();
-
-          String id = register.namespace + ":" + rawID;
           Block block = (Block) factory.get();
 
           int assignedId = START_ID++;
@@ -91,7 +90,8 @@ public class DeferredRegister<T> {
     public <I extends Item> Supplier<I> registerItem(final String name, final Supplier<I> factory) {
       return register(name, () -> {
         I item = factory.get();
-        item.setKey(name);
+        String itemName = this.modid + ":" + name;
+        item.setKey(itemName).setSpriteName(itemName);
         return item;
       });
     }
@@ -113,10 +113,8 @@ public class DeferredRegister<T> {
         for (Map.Entry<String, Supplier<?>> entry : register.entries.entrySet()) {
           if (START_ID > 31999) throw new IllegalStateException("BigSwords registry has exhausted the 1.7.10 32000 short ID limit!");
 
-          String rawID = entry.getKey();
+          String id = entry.getKey();
           Supplier<?> factory = entry.getValue();
-
-          String id = register.namespace + ":" + rawID;
           Item item = (Item) factory.get();
 
           if (BLOCK_IDS.containsKey(id)) {
