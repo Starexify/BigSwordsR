@@ -20,7 +20,7 @@ import net.minecraft.world.entity.monster.skeleton.AbstractSkeleton;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Endermite;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.arrow.Arrow;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.entity.projectile.arrow.ThrownTrident;
 import net.minecraft.world.entity.projectile.hurtingprojectile.Fireball;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -82,12 +82,20 @@ public class ShieldMechanics {
     boolean isWooden = shield.is(BSItems.WOODEN_SHIELD);
     boolean isGildedWooden = shield.is(BSItems.GILDED_WOODEN_SHIELD);
     if (isWooden || isGildedWooden) {
-      if (damageSource.is(DamageTypes.ARROW) && sourceEntity instanceof Arrow arrow) {
+      if (damageSource.is(DamageTypes.ARROW) && (sourceEntity instanceof AbstractArrow arrow && !(arrow instanceof ThrownTrident))) {
         // Perk
         double catchChance = isGildedWooden ? 0.7 : 0.4;
         if (randomChance < catchChance) {
           arrow.remove(Entity.RemovalReason.DISCARDED);
-          ItemStack arrowStack = new ItemStack(Items.ARROW);
+          ItemStack arrowStack = arrow.getPickupItemStackOrigin();
+          if (arrowStack.isEmpty()) {
+            arrowStack = new ItemStack(Items.ARROW);
+          }
+          else {
+            arrowStack.remove(DataComponents.INTANGIBLE_PROJECTILE);
+            arrowStack = arrowStack.copy();
+            arrowStack.setCount(1);
+          }
           if (!player.addItem(arrowStack)) player.drop(arrowStack, false);
         }
         // Weakness
