@@ -18,6 +18,8 @@ ploceus {
 repositories {}
 
 loom {
+  accessWidenerPath = file("src/main/resources/big_swords.classtweaker")
+
   runs {
     client {
       programArgs "--userProperties", "{}"

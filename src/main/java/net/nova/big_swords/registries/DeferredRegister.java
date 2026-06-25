@@ -1,5 +1,7 @@
 package net.nova.big_swords.registries;
 
+import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.registry.IdRegistry;
 import net.ornithemc.osl.core.api.registry.RegistryKey;
@@ -10,6 +12,9 @@ import java.util.function.Supplier;
 
 public class DeferredRegister<T> {
   private static final List<DeferredRegister<?>> REGISTERS = new ArrayList<>();
+
+  private static final Map<String, Integer> BLOCK_IDS = new HashMap<>();
+  private static short START_ID = 2268; // Hardcoded so last registered ID is used bcz moiang
 
   private final RegistryKey registryKey;
   private final String namespace;
@@ -29,9 +34,49 @@ public class DeferredRegister<T> {
     return new Items(modid);
   }
 
+  public static DeferredRegister.Blocks createBlocks(String modid) {
+    return new Blocks(modid);
+  }
+
   public <I extends T> Supplier<I> register(final String name, final Supplier<I> factory) {
     this.entries.put(name, factory);
     return factory;
+  }
+
+  public static class Blocks extends DeferredRegister<Block> {
+    public static short ID = 176; // Hardcoded so last registered ID is used bcz moiang
+
+    public Blocks(String namespace) {
+      super(RegistryKey.of("minecraft:blocks"), namespace);
+    }
+
+    public <I extends Block> Supplier<I> registerBlock(final String name, final Supplier<I> factory) {
+      return register(name, () -> {
+        I block = factory.get();
+        block.setKey(name);
+        return block;
+      });
+    }
+
+    public static void registerBlocks(IdRegistry<Block> registry) {
+      RegistryKey targetKey = RegistryKey.of("minecraft:blocks");
+
+      for (DeferredRegister<?> register : REGISTERS) {
+        if (!register.registryKey.equals(targetKey)) continue;
+
+        for (Map.Entry<String, Supplier<?>> entry : register.entries.entrySet()) {
+          String rawID = entry.getKey();
+          Supplier<?> factory = entry.getValue();
+
+          String id = register.namespace + ":" + rawID;
+          Block block = (Block) factory.get();
+
+          int assignedId = START_ID++;
+          BLOCK_IDS.put(id, assignedId);
+          registry.register(assignedId, id, block);
+        }
+      }
+    }
   }
 
   public static class Items extends DeferredRegister<Item> {
@@ -49,6 +94,14 @@ public class DeferredRegister<T> {
       });
     }
 
+    public <I extends BlockItem> Supplier<I> registerBlockItem(final String name, Supplier<? extends Block> block, Function<Block, I> blockBuilder) {
+      return registerItem(name, () -> blockBuilder.apply(block.get()));
+    }
+
+    public Supplier<BlockItem> registerSimpleBlockItem(final String name, Supplier<? extends Block> block) {
+      return this.registerBlockItem(name, block, BlockItem::new);
+    }
+
     public static void registerItems(IdRegistry<Item> registry) {
       RegistryKey targetKey = RegistryKey.of("minecraft:items");
 
@@ -56,15 +109,21 @@ public class DeferredRegister<T> {
         if (!register.registryKey.equals(targetKey)) continue;
 
         for (Map.Entry<String, Supplier<?>> entry : register.entries.entrySet()) {
-          if (ID > 31999) throw new IllegalStateException("BigSwords registry has exhausted the 1.7.10 32000 short ID limit!");
+//          if (ID > 31999) throw new IllegalStateException("BigSwords registry has exhausted the 1.7.10 32000 short ID limit!");
 
           String rawID = entry.getKey();
           Supplier<?> factory = entry.getValue();
 
           String id = register.namespace + ":" + rawID;
-          Item createdItem = (Item) factory.get();
+          Item item = (Item) factory.get();
 
-          registry.register(ID++, id, createdItem);
+          if (BLOCK_IDS.containsKey(id)) {
+            int blockId = BLOCK_IDS.get(id);
+            registry.register(blockId, id, item);
+          }
+          else {
+          registry.register(START_ID++, id, item);
+          }
         }
       }
     }
