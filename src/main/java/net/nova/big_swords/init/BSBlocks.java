@@ -12,11 +12,7 @@ import static net.nova.big_swords.BigSwordsR.MODID;
 public class BSBlocks {
   public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
 
-  public static Supplier<Block> LIVINGMETAL_BLOCK = registerBlockWithItem("livingmetal_block", () -> new Block(Material.STONE).setCreativeModeTab(CreativeModeTab.COMBAT));
+  public static Supplier<Block> LIVINGMETAL_BLOCK = BLOCKS.registerBlock("livingmetal_block", () -> new Block(Material.STONE).setCreativeModeTab(CreativeModeTab.COMBAT));
 
-  public static <T extends Block> Supplier<T> registerBlockWithItem(String name, Supplier<T> blockCreator) {
-    Supplier<T> block = BLOCKS.registerBlock(name, blockCreator);
-    BSItems.ITEMS.registerSimpleBlockItem(name, block);
-    return block;
-  }
+  public static void init() {}
 }

@@ -4,8 +4,6 @@
   "package": "net.nova.big_swords.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
-    "BlockMixin",
-    "ItemMixin"
   ],
   "client": [],
   "injectors": {

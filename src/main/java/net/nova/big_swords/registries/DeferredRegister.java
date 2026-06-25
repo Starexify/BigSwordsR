@@ -3,8 +3,10 @@ package net.nova.big_swords.registries;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
-import net.minecraft.util.registry.IdRegistry;
+import net.ornithemc.osl.blocks.api.BlockRegistry;
 import net.ornithemc.osl.core.api.registry.RegistryKey;
+import net.ornithemc.osl.core.api.util.NamespacedIdentifiers;
+import net.ornithemc.osl.items.api.ItemRegistry;
 
 import java.util.*;
 import java.util.function.Function;
@@ -18,7 +20,6 @@ public class DeferredRegister<T> {
 
   private final RegistryKey registryKey;
   public final String modid;
-  private final Map<String, Supplier<?>> entries = new LinkedHashMap<>();
 
   public DeferredRegister(RegistryKey registryKey, String namespace) {
     this.registryKey = Objects.requireNonNull(registryKey);
@@ -38,62 +39,33 @@ public class DeferredRegister<T> {
     return new Blocks(modid);
   }
 
-  public <I extends T> Supplier<I> register(final String name, final Supplier<I> factory) {
-    this.entries.put(name, factory);
-    return factory;
-  }
-
   public static class Blocks extends DeferredRegister<Block> {
-    public static short ID = 176; // Hardcoded so last registered ID is used bcz moiang
-
     public Blocks(String namespace) {
       super(RegistryKey.of("minecraft:blocks"), namespace);
     }
 
     public <I extends Block> Supplier<I> registerBlock(final String name, final Supplier<I> factory) {
-      return register(name, () -> {
-        I block = factory.get();
-        String blockName = this.modid + ":" + name;
-        block.setKey(blockName).setSpriteName(blockName);
-        return block;
-      });
-    }
+      I block = factory.get();
+      String blockName = this.modid + ":" + name;
+      block.setKey(blockName).setSpriteName(blockName);
 
-    public static void registerBlocks(IdRegistry<Block> registry) {
-      RegistryKey targetKey = RegistryKey.of("minecraft:blocks");
-
-      for (DeferredRegister<?> register : REGISTERS) {
-        if (!register.registryKey.equals(targetKey)) continue;
-
-        for (Map.Entry<String, Supplier<?>> entry : register.entries.entrySet()) {
-          if (START_ID > 31999) throw new IllegalStateException("BigSwords registry has exhausted the 1.7.10 32000 short ID limit!");
-
-          String id = entry.getKey();
-          Supplier<?> factory = entry.getValue();
-          Block block = (Block) factory.get();
-
-          int assignedId = START_ID++;
-          BLOCK_IDS.put(id, assignedId);
-          registry.register(assignedId, id, block);
-        }
-      }
+      BlockRegistry.register(START_ID++, NamespacedIdentifiers.from(this.modid, name), block);
+      return () -> block;
     }
   }
 
   public static class Items extends DeferredRegister<Item> {
-    public static short ID = 2268; // Hardcoded so last registered ID is used bcz moiang
-
     public Items(String namespace) {
       super(RegistryKey.of("minecraft:items"), namespace);
     }
 
     public <I extends Item> Supplier<I> registerItem(final String name, final Supplier<I> factory) {
-      return register(name, () -> {
-        I item = factory.get();
-        String itemName = this.modid + ":" + name;
-        item.setKey(itemName).setSpriteName(itemName);
-        return item;
-      });
+      I item = factory.get();
+      String itemName = this.modid + ":" + name;
+      item.setKey(itemName).setSpriteName(itemName);
+
+      ItemRegistry.register(START_ID++, NamespacedIdentifiers.from(this.modid, name), item);
+      return () -> item;
     }
 
     public <I extends BlockItem> Supplier<I> registerBlockItem(final String name, Supplier<? extends Block> block, Function<Block, I> blockBuilder) {
@@ -102,30 +74,6 @@ public class DeferredRegister<T> {
 
     public Supplier<BlockItem> registerSimpleBlockItem(final String name, Supplier<? extends Block> block) {
       return this.registerBlockItem(name, block, BlockItem::new);
-    }
-
-    public static void registerItems(IdRegistry<Item> registry) {
-      RegistryKey targetKey = RegistryKey.of("minecraft:items");
-
-      for (DeferredRegister<?> register : REGISTERS) {
-        if (!register.registryKey.equals(targetKey)) continue;
-
-        for (Map.Entry<String, Supplier<?>> entry : register.entries.entrySet()) {
-          if (START_ID > 31999) throw new IllegalStateException("BigSwords registry has exhausted the 1.7.10 32000 short ID limit!");
-
-          String id = entry.getKey();
-          Supplier<?> factory = entry.getValue();
-          Item item = (Item) factory.get();
-
-          if (BLOCK_IDS.containsKey(id)) {
-            int blockId = BLOCK_IDS.get(id);
-            registry.register(blockId, id, item);
-          }
-          else {
-          registry.register(START_ID++, id, item);
-          }
-        }
-      }
     }
   }
 }
