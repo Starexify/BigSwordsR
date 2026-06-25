@@ -1,1 +1,5 @@
-item.bed.name=Giant Handle
+item.big_swords:giant_blaze_rod.name=Giant Blaze Rod
+item.bed.name=Giant Wooden Stick
+tile.big_swords:livingmetal_block.name=Livingmetal Block
+item.big_swords:giant_wooden_stick.name=Giant Wooden Stick
+item.big_swords:giant_livingmetal_handle.name=Giant Livingmetal Handle

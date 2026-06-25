@@ -31,6 +31,12 @@ loom {
     client {
       programArguments.addAll "--userProperties", "{}"
     }
+
+    datagen {
+      inherit client
+
+      programArguments.addAll 'output', file('src/generated/resources').getAbsolutePath()
+    }
   }
 }
 
@@ -88,20 +94,4 @@ publishing {
   }
 
   repositories {}
-}
-
-tasks.register('runDatagen', JavaExec) {
-  group = "build"
-  workingDir = file("build/datagen")
-  doFirst { workingDir.mkdirs() }
-
-  classpath = sourceSets.main.runtimeClasspath
-  mainClass = "net.nova.big_swords.data.DataGenerator"
-
-  args '--output', file('src/generated/resources').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
-}
-
-tasks.register('runDatagenClient', JavaExec) {
-  group = "build"
-  dependsOn tasks.named('runClient')
 }

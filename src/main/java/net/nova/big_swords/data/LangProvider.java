@@ -28,7 +28,6 @@ public class LangProvider {
     translations.clear();
 
     // Items
-    addItem(Items.BED, "Giant Handle");
     addItem(BSItems.GIANT_WOODEN_STICK.get(), "Giant Wooden Stick");
     addItem(BSItems.GIANT_BLAZE_ROD.get(), "Giant Blaze Rod");
     addItem(BSItems.GIANT_LIVINGMETAL_HANDLE.get(), "Giant Livingmetal Handle");
