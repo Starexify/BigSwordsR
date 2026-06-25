@@ -65,6 +65,8 @@ public class DeferredRegister<T> {
         if (!register.registryKey.equals(targetKey)) continue;
 
         for (Map.Entry<String, Supplier<?>> entry : register.entries.entrySet()) {
+          if (START_ID > 31999) throw new IllegalStateException("BigSwords registry has exhausted the 1.7.10 32000 short ID limit!");
+
           String rawID = entry.getKey();
           Supplier<?> factory = entry.getValue();
 
@@ -109,7 +111,7 @@ public class DeferredRegister<T> {
         if (!register.registryKey.equals(targetKey)) continue;
 
         for (Map.Entry<String, Supplier<?>> entry : register.entries.entrySet()) {
-//          if (ID > 31999) throw new IllegalStateException("BigSwords registry has exhausted the 1.7.10 32000 short ID limit!");
+          if (START_ID > 31999) throw new IllegalStateException("BigSwords registry has exhausted the 1.7.10 32000 short ID limit!");
 
           String rawID = entry.getKey();
           Supplier<?> factory = entry.getValue();

@@ -2,11 +2,9 @@ package net.nova.big_swords.init;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.BlockItem;
 import net.minecraft.item.CreativeModeTab;
 import net.nova.big_swords.registries.DeferredRegister;
 
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static net.nova.big_swords.BigSwordsR.MODID;

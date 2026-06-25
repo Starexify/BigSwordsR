@@ -4,6 +4,13 @@ plugins {
   id 'ploceus' version '1.17-SNAPSHOT'
 }
 
+sourceSets.main.resources {
+  srcDir('src/generated/resources')
+
+  exclude("**/*.bbmodel")
+  exclude("src/generated/**/.cache")
+}
+
 base {
   archivesName = project.mod_id
 }
@@ -22,7 +29,7 @@ loom {
 
   runs {
     client {
-      programArgs "--userProperties", "{}"
+      programArguments.addAll "--userProperties", "{}"
     }
   }
 }
@@ -52,6 +59,14 @@ tasks.withType(JavaCompile).configureEach {
   it.options.release = 25
 }
 
+tasks.configureEach { task ->
+  if (task.name in ["processResources", "compileJava", "sourcesJar"]) {
+    task.doFirst {
+      file('src/generated/resources').mkdirs()
+    }
+  }
+}
+
 java {
   sourceCompatibility = JavaVersion.VERSION_25
   targetCompatibility = JavaVersion.VERSION_25
@@ -73,4 +88,15 @@ publishing {
   }
 
   repositories {}
+}
+
+tasks.register('runDatagen', JavaExec) {
+  group = "build"
+  workingDir = file("build/datagen")
+  doFirst { workingDir.mkdirs() }
+
+  classpath = sourceSets.main.runtimeClasspath
+  mainClass = "net.nova.big_swords.data.DataGenerator"
+
+  args '--output', file('src/generated/resources').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
 }
