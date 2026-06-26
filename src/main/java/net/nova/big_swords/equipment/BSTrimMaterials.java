@@ -1,14 +1,14 @@
 package net.nova.big_swords.equipment;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
-import net.minecraft.Util;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Util;
 import net.minecraft.world.item.equipment.trim.MaterialAssetGroup;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.nova.big_swords.BigSwordsR;
@@ -18,7 +18,7 @@ import java.util.concurrent.CompletableFuture;
 public class BSTrimMaterials extends FabricDynamicRegistryProvider {
     public static ResourceKey<TrimMaterial> LIVINGMETAL = of("livingmetal");
 
-    public BSTrimMaterials(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public BSTrimMaterials(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
@@ -28,7 +28,7 @@ public class BSTrimMaterials extends FabricDynamicRegistryProvider {
     }
 
     public static void register(Entries context, ResourceKey<TrimMaterial> materialKey, Style style, MaterialAssetGroup overrideArmorMaterials) {
-        context.add(materialKey, new TrimMaterial(overrideArmorMaterials, Component.translatable(Util.makeDescriptionId("trim_material", materialKey.location())).withStyle(style)));
+        context.add(materialKey, new TrimMaterial(overrideArmorMaterials, Component.translatable(Util.makeDescriptionId("trim_material", materialKey.identifier())).withStyle(style)));
     }
 
     private static ResourceKey<TrimMaterial> of(String id) {

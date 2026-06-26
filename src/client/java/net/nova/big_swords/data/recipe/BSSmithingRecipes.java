@@ -22,14 +22,14 @@ public class BSSmithingRecipes extends RecipeProvider {
 
     @Override
     public void buildRecipes() {
-        netheriteBlockSmithing(BSItems.DIAMOND_BIG_SWORD, RecipeCategory.COMBAT, BSItems.NETHERITE_BIG_SWORD);
-        enderSmithing(BSItems.OBSIDIAN_BIG_SWORD, RecipeCategory.COMBAT, BSItems.ENDER_BIG_SWORD);
-        netheriteSmithing(BSItems.DIAMOND_GLAIVE, RecipeCategory.COMBAT, BSItems.NETHERITE_GLAIVE);
-        netheriteSmithing(BSItems.DIAMOND_SCYTHE, RecipeCategory.COMBAT, BSItems.NETHERITE_SCYTHE);
-        netheriteSmithing(BSItems.DIAMOND_SHIELD, RecipeCategory.COMBAT, BSItems.NETHERITE_SHIELD);
-        netheriteSmithing(BSItems.GILDED_DIAMOND_SHIELD, RecipeCategory.COMBAT, BSItems.GILDED_NETHERITE_SHIELD);
-        enderSmithing(BSItems.NETHERITE_SHIELD, RecipeCategory.COMBAT, BSItems.ENDER_SHIELD);
-        enderSmithing(BSItems.GILDED_NETHERITE_SHIELD, RecipeCategory.COMBAT, BSItems.GILDED_ENDER_SHIELD);
+        netheriteBlockSmithing(BSItems.DIAMOND_BIG_SWORD.getFirst().value(), RecipeCategory.COMBAT, BSItems.NETHERITE_BIG_SWORD.getFirst().value());
+        enderSmithing(BSItems.OBSIDIAN_BIG_SWORD.getFirst().value(), RecipeCategory.COMBAT, BSItems.ENDER_BIG_SWORD.getFirst().value());
+        netheriteSmithing(BSItems.DIAMOND_GLAIVE.getFirst().value(), RecipeCategory.COMBAT, BSItems.NETHERITE_GLAIVE.getFirst().value());
+        netheriteSmithing(BSItems.DIAMOND_SCYTHE.getFirst().value(), RecipeCategory.COMBAT, BSItems.NETHERITE_SCYTHE.getFirst().value());
+        netheriteSmithing(BSItems.DIAMOND_SHIELD.getFirst().value(), RecipeCategory.COMBAT, BSItems.NETHERITE_SHIELD.getFirst().value());
+        netheriteSmithing(BSItems.GILDED_DIAMOND_SHIELD.getFirst().value(), RecipeCategory.COMBAT, BSItems.GILDED_NETHERITE_SHIELD.getFirst().value());
+        enderSmithing(BSItems.NETHERITE_SHIELD.getFirst().value(), RecipeCategory.COMBAT, BSItems.ENDER_SHIELD.getFirst().value());
+        enderSmithing(BSItems.GILDED_NETHERITE_SHIELD.getFirst().value(), RecipeCategory.COMBAT, BSItems.GILDED_ENDER_SHIELD.getFirst().value());
     }
 
     // Recipes
@@ -40,7 +40,7 @@ public class BSSmithingRecipes extends RecipeProvider {
     }
 
     public void enderSmithing(Item pIngredientItem, RecipeCategory pCategory, Item pResultItem) {
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(pIngredientItem), Ingredient.of(Items.ENDER_EYE), pCategory, pResultItem)
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(BSItems.ENDER_UPGRADE_SMITHING_TEMPLATE.getFirst().value()), Ingredient.of(pIngredientItem), Ingredient.of(Items.ENDER_EYE), pCategory, pResultItem)
                 .unlocks(getHasName(Items.ENDER_EYE), has(Items.ENDER_EYE))
                 .save(output, getItemName(pResultItem) + "_smithing");
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:biomass_from_biomass_block"
+        "recipe": "big_swords:biomass_from_biomass_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:biomass_from_biomass_block"
+      "big_swords:biomass_from_biomass_block"
     ]
   }
 }

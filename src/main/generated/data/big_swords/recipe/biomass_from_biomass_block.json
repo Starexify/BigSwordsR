@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "biomass",
   "ingredients": [
     "big_swords:biomass_block"

@@ -31,136 +31,142 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 public class GlaiveItem extends Item {
-    public final Random random = new Random();
-    public final float range = 5.0f; // 5 block range
-    public List<ItemAttributeModifiers.Entry> modifiers = components().get(DataComponents.ATTRIBUTE_MODIFIERS).modifiers();
+  public final Random random = new Random();
+  public final float range = 5.0f; // 5 block range
 
-    public GlaiveItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Properties properties) {
-        super(BSToolMaterial.applyChargedProperties(properties, toolMaterial, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage));
+  public GlaiveItem(ToolMaterial toolMaterial, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Properties properties) {
+    super(BSToolMaterial.applyChargedProperties(properties, toolMaterial, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage));
+  }
+
+  private List<ItemAttributeModifiers.Entry> getSafeModifiers() {
+    ItemAttributeModifiers attributeModifiers = this.components().get(DataComponents.ATTRIBUTE_MODIFIERS);
+    return attributeModifiers != null ? attributeModifiers.modifiers() : List.of();
+  }
+
+  public float minChargedDamage() {
+    return (float) BigSwordsR.getModifierValue(getSafeModifiers(), BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
+  }
+
+  public float maxChargedDamage() {
+    return (float) BigSwordsR.getModifierValue(getSafeModifiers(), BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
+  }
+
+  // Tilling Creep
+  @Override
+  public InteractionResult useOn(UseOnContext context) {
+    BlockPos blockpos = context.getClickedPos();
+    Level level = context.getLevel();
+    BlockState state = level.getBlockState(blockpos);
+    Player player = context.getPlayer();
+    ItemStack itemStack = context.getItemInHand();
+
+    if (state.getBlock() instanceof CreepBlock creepBlock && !state.getValue(CreepBlock.TILLED)) {
+      level.playSound(null, blockpos, SoundEvents.SOUL_ESCAPE.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+      creepBlock.tillBlock(level, blockpos, state);
+      itemStack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(itemStack));
+
+      return InteractionResult.SUCCESS;
     }
+    return super.useOn(context);
+  }
 
-    public float minChargedDamage() {
-        return (float) BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
-    }
+  // Glaive Mechanic
+  @Override
+  public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
+    // Check if the player is looking at a CreepBlock and pass if a CreepBlock is hit
+    BlockHitResult blockHit = level.clip(new ClipContext(
+        player.getEyePosition(1.0F),
+        player.getEyePosition(1.0F).add(player.getLookAngle().scale(5.0)), // 5 block range
+        ClipContext.Block.OUTLINE,
+        ClipContext.Fluid.NONE,
+        player
+    ));
 
-    public float maxChargedDamage() {
-        return (float) BigSwordsR.getModifierValue(modifiers, BSToolMaterial.MAX_CHARGED_DAMAGE_ID);
-    }
+    if (blockHit.getType() == HitResult.Type.BLOCK && level.getBlockState(blockHit.getBlockPos()).getBlock() instanceof CreepBlock)
+      return InteractionResult.PASS;
 
-    // Tilling Creep
-    @Override
-    public InteractionResult useOn(UseOnContext context) {
-        BlockPos blockpos = context.getClickedPos();
-        Level level = context.getLevel();
-        BlockState state = level.getBlockState(blockpos);
-        Player player = context.getPlayer();
-        ItemStack itemStack = context.getItemInHand();
+    player.startUsingItem(usedHand);
+    return InteractionResult.CONSUME;
+  }
 
-        if (state.getBlock() instanceof CreepBlock creepBlock && !state.getValue(CreepBlock.TILLED)) {
-            level.playSound(null, blockpos, SoundEvents.SOUL_ESCAPE.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
-            creepBlock.tillBlock(level, blockpos, state);
-            itemStack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(itemStack));
+  @Override
+  public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
+    if (entity instanceof Player player) {
+      int i = this.getUseDuration(stack, entity) - timeLeft;
+      if (i < 20) return false; // Require a minimum charge time
 
-            return InteractionResult.SUCCESS;
+      if (!level.isClientSide()) {
+        Vec3 startVec = player.getEyePosition(1.0F);
+        Vec3 endVec = startVec.add(player.getLookAngle().scale(range));
+        AABB boundingBox = new AABB(startVec, endVec).inflate(1.0);
+        Predicate<LivingEntity> predicate = livingEntity -> livingEntity != player && livingEntity.isAttackable();
+        List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, boundingBox, predicate);
+
+        EntityHitResult entityHitResult = getEntityHitResult(startVec, endVec, entities);
+
+        player.swing(InteractionHand.MAIN_HAND, true);
+        if (entityHitResult != null && entityHitResult.getType() == HitResult.Type.ENTITY) {
+          LivingEntity target = (LivingEntity) entityHitResult.getEntity();
+          BlockHitResult blockHit = level.clip(new ClipContext(startVec, target.getEyePosition(1.0F), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+
+          if (blockHit.getType() == HitResult.Type.MISS) {
+            glaiveHits(stack, level, player, target);
+          }
+          else {
+            glaiveMiss(stack, player, level);
+          }
         }
-        return super.useOn(context);
-    }
-
-    // Glaive Mechanic
-    @Override
-    public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
-        // Check if the player is looking at a CreepBlock and pass if a CreepBlock is hit
-        BlockHitResult blockHit = level.clip(new ClipContext(
-                player.getEyePosition(1.0F),
-                player.getEyePosition(1.0F).add(player.getLookAngle().scale(5.0)), // 5 block range
-                ClipContext.Block.OUTLINE,
-                ClipContext.Fluid.NONE,
-                player
-        ));
-
-        if (blockHit.getType() == HitResult.Type.BLOCK && level.getBlockState(blockHit.getBlockPos()).getBlock() instanceof CreepBlock)
-            return InteractionResult.PASS;
-
-        player.startUsingItem(usedHand);
-        return InteractionResult.CONSUME;
-    }
-
-    @Override
-    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
-        if (entity instanceof Player player) {
-            int i = this.getUseDuration(stack, entity) - timeLeft;
-            if (i < 20) return false; // Require a minimum charge time
-
-            if (!level.isClientSide) {
-                Vec3 startVec = player.getEyePosition(1.0F);
-                Vec3 endVec = startVec.add(player.getLookAngle().scale(range));
-                AABB boundingBox = new AABB(startVec, endVec).inflate(1.0);
-                Predicate<LivingEntity> predicate = livingEntity -> livingEntity != player && livingEntity.isAttackable();
-                List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, boundingBox, predicate);
-
-                EntityHitResult entityHitResult = getEntityHitResult(startVec, endVec, entities);
-
-                player.swing(InteractionHand.MAIN_HAND, true);
-                if (entityHitResult != null && entityHitResult.getType() == HitResult.Type.ENTITY) {
-                    LivingEntity target = (LivingEntity) entityHitResult.getEntity();
-                    BlockHitResult blockHit = level.clip(new ClipContext(startVec, target.getEyePosition(1.0F), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
-
-                    if (blockHit.getType() == HitResult.Type.MISS) {
-                        glaiveHits(stack, level, player, target);
-                    } else {
-                        glaiveMiss(stack, player, level);
-                    }
-                } else {
-                    glaiveMiss(stack, player, level);
-                }
-            }
+        else {
+          glaiveMiss(stack, player, level);
         }
-        return false;
+      }
     }
+    return false;
+  }
 
-    public boolean glaiveHits(ItemStack stack, Level level, Player player, LivingEntity target) {
-        float damage = minChargedDamage() + random.nextFloat() * (maxChargedDamage() - minChargedDamage());
-        damage = Math.round(damage * 10.0f) / 10.0f;
-        if (level instanceof ServerLevel serverLevel)
-            target.hurtServer(serverLevel, level.damageSources().playerAttack(player), damage);
+  public boolean glaiveHits(ItemStack stack, Level level, Player player, LivingEntity target) {
+    float damage = minChargedDamage() + random.nextFloat() * (maxChargedDamage() - minChargedDamage());
+    damage = Math.round(damage * 10.0f) / 10.0f;
+    if (level instanceof ServerLevel serverLevel)
+      target.hurtServer(serverLevel, level.damageSources().playerAttack(player), damage);
 
-        stack.hurtAndBreak(3, player, EquipmentSlot.MAINHAND);
-        player.getCooldowns().addCooldown(stack, 40);
-        BigSwordsR.playSound(level, player, Sounds.GLAIVE_HIT);
+    stack.hurtAndBreak(3, player, EquipmentSlot.MAINHAND);
+    player.getCooldowns().addCooldown(stack, 40);
+    BigSwordsR.playSound(level, player, Sounds.GLAIVE_HIT);
 
-        // Blood Vial Mechanics
-        if (target.isDeadOrDying() && !target.getType().is(Tags.EntityTypeTags.BLOODLESS))
-            BloodVial.incrementBloodVialInBothHands(player);
+    // Blood Vial Mechanics
+    if (target.isDeadOrDying() && !target.getType().equals(Tags.EntityTypeTags.BLOODLESS))
+      BloodVial.incrementBloodVialInBothHands(player);
 
-        return true;
-    }
+    return true;
+  }
 
-    public boolean glaiveMiss(ItemStack stack, Player player, Level level) {
-        player.getCooldowns().addCooldown(stack, 10);
-        BigSwordsR.playSound(level, player, Sounds.GLAIVE_SWING);
-        return false;
-    }
+  public boolean glaiveMiss(ItemStack stack, Player player, Level level) {
+    player.getCooldowns().addCooldown(stack, 10);
+    BigSwordsR.playSound(level, player, Sounds.GLAIVE_SWING);
+    return false;
+  }
 
-    public EntityHitResult getEntityHitResult(Vec3 startVec, Vec3 endVec, List<LivingEntity> entities) {
-        for (LivingEntity entity : entities)
-            if (entity.getBoundingBox().clip(startVec, endVec).isPresent()) return new EntityHitResult(entity);
-        return null;
-    }
+  public EntityHitResult getEntityHitResult(Vec3 startVec, Vec3 endVec, List<LivingEntity> entities) {
+    for (LivingEntity entity : entities)
+      if (entity.getBoundingBox().clip(startVec, endVec).isPresent()) return new EntityHitResult(entity);
+    return null;
+  }
 
-    // Bow-like Item Stuff
-    @Override
-    public int getUseDuration(ItemStack stack, LivingEntity user) {
-        return 72000;
-    }
+  // Bow-like Item Stuff
+  @Override
+  public int getUseDuration(ItemStack stack, LivingEntity user) {
+    return 72000;
+  }
 
-    @Override
-    public ItemUseAnimation getUseAnimation(ItemStack stack) {
-        return ItemUseAnimation.BOW;
-    }
+  @Override
+  public ItemUseAnimation getUseAnimation(ItemStack stack) {
+    return ItemUseAnimation.BOW;
+  }
 
-    // Sword-like Item Stuff
-    @Override
-    public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
-        stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
-    }
+  // Sword-like Item Stuff
+  @Override
+  public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+    stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
+  }
 }

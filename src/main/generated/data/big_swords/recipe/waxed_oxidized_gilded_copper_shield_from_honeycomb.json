@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_transmute",
+  "category": "equipment",
+  "input": "big_swords:oxidized_gilded_copper_shield",
+  "material": "minecraft:honeycomb",
+  "result": {
+    "id": "big_swords:waxed_oxidized_gilded_copper_shield"
+  }
+}

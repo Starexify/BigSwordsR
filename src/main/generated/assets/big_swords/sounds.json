@@ -1,27 +1,23 @@
 {
   "glaive_hit": {
-    "category": "neutral",
     "sounds": [
       "big_swords:glaive_swing"
     ],
     "subtitle": "sounds.big_swords.big_swords:glaive_hit"
   },
   "glaive_swing": {
-    "category": "neutral",
     "sounds": [
       "big_swords:glaive_swing"
     ],
     "subtitle": "sounds.big_swords.big_swords:glaive_swing"
   },
   "reaper_slash": {
-    "category": "neutral",
     "sounds": [
       "big_swords:glaive_swing"
     ],
     "subtitle": "sounds.big_swords.big_swords:reaper_slash"
   },
   "scythe_slash": {
-    "category": "neutral",
     "sounds": [
       "big_swords:glaive_swing"
     ],

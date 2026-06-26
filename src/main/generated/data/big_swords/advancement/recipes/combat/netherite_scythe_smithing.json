@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:netherite_scythe_smithing"
+        "recipe": "big_swords:netherite_scythe_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:netherite_scythe_smithing"
+      "big_swords:netherite_scythe_smithing"
     ]
   }
 }

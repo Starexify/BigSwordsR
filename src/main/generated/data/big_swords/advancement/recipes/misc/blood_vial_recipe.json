@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:blood_vial_recipe"
+        "recipe": "big_swords:blood_vial_recipe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:blood_vial_recipe"
+      "big_swords:blood_vial_recipe"
     ]
   }
 }

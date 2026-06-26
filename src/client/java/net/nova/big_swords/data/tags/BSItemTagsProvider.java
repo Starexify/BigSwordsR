@@ -1,78 +1,85 @@
 package net.nova.big_swords.data.tags;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.references.BlockItemIds;
+import net.minecraft.references.ItemIds;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Items;
 import net.nova.big_swords.init.BSItems;
 import net.nova.big_swords.init.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
-public class BSItemTagsProvider extends FabricTagProvider.ItemTagProvider {
-    public BSItemTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
-        super(output, completableFuture);
-    }
+public class BSItemTagsProvider extends FabricTagsProvider.ItemTagsProvider {
+  public BSItemTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
+    super(output, completableFuture);
+  }
 
-    @Override
-    protected void addTags(HolderLookup.Provider provider) {
-        getOrCreateTagBuilder(Tags.BSItemTags.BIG_SWORDS).add(
-                BSItems.WOODEN_BIG_SWORD, BSItems.STONE_BIG_SWORD, BSItems.IRON_BIG_SWORD, BSItems.GOLDEN_BIG_SWORD,
-                BSItems.DIAMOND_BIG_SWORD, BSItems.NETHERITE_BIG_SWORD, BSItems.PATCHWORK_BIG_SWORD, BSItems.SKULL_BIG_SWORD,
-                BSItems.QUARTZ_BIG_SWORD, BSItems.OBSIDIAN_BIG_SWORD, BSItems.ENDER_BIG_SWORD, BSItems.LIVINGMETAL_BIG_SWORD,
-                BSItems.BIOMASS_BIG_SWORD
-        );
+  @Override
+  protected void addTags(HolderLookup.Provider provider) {
+    builder(Tags.BSItemTags.BIG_SWORDS).add(
+        BSItems.WOODEN_BIG_SWORD.getSecond(), BSItems.STONE_BIG_SWORD.getSecond(), BSItems.IRON_BIG_SWORD.getSecond(),
+        BSItems.GOLDEN_BIG_SWORD.getSecond(), BSItems.DIAMOND_BIG_SWORD.getSecond(), BSItems.NETHERITE_BIG_SWORD.getSecond(),
+        BSItems.PATCHWORK_BIG_SWORD.getSecond(), BSItems.SKULL_BIG_SWORD.getSecond(), BSItems.QUARTZ_BIG_SWORD.getSecond(),
+        BSItems.OBSIDIAN_BIG_SWORD.getSecond(), BSItems.ENDER_BIG_SWORD.getSecond(), BSItems.LIVINGMETAL_BIG_SWORD.getSecond(),
+        BSItems.BIOMASS_BIG_SWORD.getSecond()
+    );
 
-        getOrCreateTagBuilder(Tags.BSItemTags.GLAIVES).add(
-                BSItems.WOODEN_GLAIVE, BSItems.STONE_GLAIVE, BSItems.IRON_GLAIVE, BSItems.GOLDEN_GLAIVE, BSItems.DIAMOND_GLAIVE,
-                BSItems.NETHERITE_GLAIVE, BSItems.BIOMASS_GLAIVE, BSItems.LIVINGMETAL_GLAIVE
-        );
+    builder(Tags.BSItemTags.GLAIVES).add(
+        BSItems.WOODEN_GLAIVE.getSecond(), BSItems.STONE_GLAIVE.getSecond(), BSItems.IRON_GLAIVE.getSecond(),
+        BSItems.GOLDEN_GLAIVE.getSecond(), BSItems.DIAMOND_GLAIVE.getSecond(), BSItems.NETHERITE_GLAIVE.getSecond(),
+        BSItems.BIOMASS_GLAIVE.getSecond(), BSItems.LIVINGMETAL_GLAIVE.getSecond()
+    );
 
-        getOrCreateTagBuilder(Tags.BSItemTags.SCYTHES).add(
-                BSItems.WOODEN_SCYTHE, BSItems.STONE_SCYTHE, BSItems.IRON_SCYTHE, BSItems.GOLDEN_SCYTHE, BSItems.DIAMOND_SCYTHE,
-                BSItems.NETHERITE_SCYTHE, BSItems.BIOMASS_SCYTHE, BSItems.LIVINGMETAL_SCYTHE, BSItems.BONE_SCYTHE, BSItems.SOUL_REAPER
-        );
+      builder(Tags.BSItemTags.SCYTHES).add(
+          BSItems.WOODEN_SCYTHE.getSecond(), BSItems.STONE_SCYTHE.getSecond(), BSItems.IRON_SCYTHE.getSecond(),
+          BSItems.GOLDEN_SCYTHE.getSecond(), BSItems.DIAMOND_SCYTHE.getSecond(), BSItems.NETHERITE_SCYTHE.getSecond(),
+          BSItems.BIOMASS_SCYTHE.getSecond(), BSItems.LIVINGMETAL_SCYTHE.getSecond(), BSItems.BONE_SCYTHE.getSecond(),
+          BSItems.SOUL_REAPER.getSecond()
+      );
 
-        getOrCreateTagBuilder(Tags.BSItemTags.SHIELDS).add(
-                BSItems.WOODEN_SHIELD, BSItems.GILDED_WOODEN_SHIELD, BSItems.STONE_SHIELD, BSItems.GILDED_STONE_SHIELD,
-                BSItems.IRON_SHIELD, BSItems.GILDED_IRON_SHIELD, BSItems.DIAMOND_SHIELD, BSItems.GILDED_DIAMOND_SHIELD,
-                BSItems.NETHERITE_SHIELD, BSItems.GILDED_NETHERITE_SHIELD, BSItems.ENDER_SHIELD, BSItems.GILDED_ENDER_SHIELD,
-                BSItems.QUARTZ_SHIELD, BSItems.GILDED_QUARTZ_SHIELD, BSItems.PATCHWORK_SHIELD, BSItems.GILDED_PATCHWORK_SHIELD,
-                BSItems.SKULL_SHIELD, BSItems.GILDED_SKULL_SHIELD, BSItems.BIOMASS_SHIELD, BSItems.GILDED_BIOMASS_SHIELD,
-                BSItems.LIVINGMETAL_SHIELD, BSItems.GILDED_LIVINGMETAL_SHIELD
-        );
+      builder(Tags.BSItemTags.SHIELDS).add(
+          BSItems.WOODEN_SHIELD.getSecond(), BSItems.GILDED_WOODEN_SHIELD.getSecond(), BSItems.STONE_SHIELD.getSecond(),
+          BSItems.GILDED_STONE_SHIELD.getSecond(), BSItems.IRON_SHIELD.getSecond(), BSItems.GILDED_IRON_SHIELD.getSecond(),
+          BSItems.DIAMOND_SHIELD.getSecond(), BSItems.GILDED_DIAMOND_SHIELD.getSecond(), BSItems.NETHERITE_SHIELD.getSecond(),
+          BSItems.GILDED_NETHERITE_SHIELD.getSecond(), BSItems.ENDER_SHIELD.getSecond(), BSItems.GILDED_ENDER_SHIELD.getSecond(),
+          BSItems.QUARTZ_SHIELD.getSecond(), BSItems.GILDED_QUARTZ_SHIELD.getSecond(), BSItems.PATCHWORK_SHIELD.getSecond(),
+          BSItems.GILDED_PATCHWORK_SHIELD.getSecond(), BSItems.SKULL_SHIELD.getSecond(), BSItems.GILDED_SKULL_SHIELD.getSecond(),
+          BSItems.BIOMASS_SHIELD.getSecond(), BSItems.GILDED_BIOMASS_SHIELD.getSecond(), BSItems.LIVINGMETAL_SHIELD.getSecond(),
+          BSItems.GILDED_LIVINGMETAL_SHIELD.getSecond()
+      );
 
-        getOrCreateTagBuilder(ItemTags.HEAD_ARMOR).add(BSItems.LIVINGMETAL_HELMET, BSItems.BIOMASS_HELMET);
-        getOrCreateTagBuilder(ItemTags.CHEST_ARMOR).add(BSItems.LIVINGMETAL_CHESTPLATE, BSItems.BIOMASS_CHESTPLATE);
-        getOrCreateTagBuilder(ItemTags.LEG_ARMOR).add(BSItems.LIVINGMETAL_LEGGINGS, BSItems.BIOMASS_LEGGINGS);
-        getOrCreateTagBuilder(ItemTags.FOOT_ARMOR).add(BSItems.LIVINGMETAL_BOOTS, BSItems.BIOMASS_BOOTS);
+      builder(ItemTags.HEAD_ARMOR).add(BSItems.LIVINGMETAL_HELMET.getSecond(), BSItems.BIOMASS_HELMET.getSecond());
+      builder(ItemTags.CHEST_ARMOR).add(BSItems.LIVINGMETAL_CHESTPLATE.getSecond(), BSItems.BIOMASS_CHESTPLATE.getSecond());
+      builder(ItemTags.LEG_ARMOR).add(BSItems.LIVINGMETAL_LEGGINGS.getSecond(), BSItems.BIOMASS_LEGGINGS.getSecond());
+      builder(ItemTags.FOOT_ARMOR).add(BSItems.LIVINGMETAL_BOOTS.getSecond(), BSItems.BIOMASS_BOOTS.getSecond());
 
-        getOrCreateTagBuilder(ItemTags.SWORDS).addTag(Tags.BSItemTags.BIG_SWORDS).add(BSItems.LIVINGMETAL_SWORD, BSItems.BIOMASS_SWORD);
-        getOrCreateTagBuilder(ItemTags.PICKAXES).add(BSItems.LIVINGMETAL_PICKAXE, BSItems.LIVINGMETAL_PICKAXE);
-        getOrCreateTagBuilder(ItemTags.AXES).add(BSItems.LIVINGMETAL_AXE, BSItems.BIOMASS_AXE);
-        getOrCreateTagBuilder(ItemTags.SHOVELS).add(BSItems.LIVINGMETAL_SHOVEL, BSItems.BIOMASS_SHOVEL);
-        getOrCreateTagBuilder(ItemTags.HOES).addTag(Tags.BSItemTags.SCYTHES).add(BSItems.LIVINGMETAL_HOE, BSItems.BIOMASS_HOE);
+      builder(ItemTags.SWORDS).addTag(Tags.BSItemTags.BIG_SWORDS).add(BSItems.LIVINGMETAL_SWORD.getSecond(), BSItems.BIOMASS_SWORD.getSecond());
+      builder(ItemTags.PICKAXES).add(BSItems.LIVINGMETAL_PICKAXE.getSecond(), BSItems.LIVINGMETAL_PICKAXE.getSecond());
+      builder(ItemTags.AXES).add(BSItems.LIVINGMETAL_AXE.getSecond(), BSItems.BIOMASS_AXE.getSecond());
+      builder(ItemTags.SHOVELS).add(BSItems.LIVINGMETAL_SHOVEL.getSecond(), BSItems.BIOMASS_SHOVEL.getSecond());
+      builder(ItemTags.HOES).addTag(Tags.BSItemTags.SCYTHES).add(BSItems.LIVINGMETAL_HOE.getSecond(), BSItems.BIOMASS_HOE.getSecond());
 
-        getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE).addTag(Tags.BSItemTags.SHIELDS);
+      builder(ItemTags.DURABILITY_ENCHANTABLE).addTag(Tags.BSItemTags.SHIELDS);
 
-        getOrCreateTagBuilder(ItemTags.BREAKS_DECORATED_POTS).addTag(Tags.BSItemTags.GLAIVES);
-        getOrCreateTagBuilder(ItemTags.SWORD_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);
-        getOrCreateTagBuilder(ItemTags.SHARP_WEAPON_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);
-        getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);
+      builder(ItemTags.BREAKS_DECORATED_POTS).addTag(Tags.BSItemTags.GLAIVES);
+      builder(ItemTags.WEAPON_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);
+      builder(ItemTags.SHARP_WEAPON_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);
+      builder(ItemTags.DURABILITY_ENCHANTABLE).addTag(Tags.BSItemTags.GLAIVES);
 
-        getOrCreateTagBuilder(ItemTags.TRIM_MATERIALS).add(BSItems.LIVINGMETAL_INGOT);
+      builder(ItemTags.TRIM_MATERIALS).add(BSItems.LIVINGMETAL_INGOT.getSecond());
 
-        getOrCreateTagBuilder(Tags.BSItemTags.REPAIRS_LIVINGMETAL_ARMOR).add(BSItems.LIVINGMETAL_INGOT);
-        getOrCreateTagBuilder(Tags.BSItemTags.REPAIRS_BIOMASS_ARMOR).add(BSItems.BIOMASS);
+      builder(Tags.BSItemTags.REPAIRS_LIVINGMETAL_ARMOR).add(BSItems.LIVINGMETAL_INGOT.getSecond());
+      builder(Tags.BSItemTags.REPAIRS_BIOMASS_ARMOR).add(BSItems.BIOMASS.getSecond());
 
-        getOrCreateTagBuilder(Tags.BSItemTags.PATCHWORK_TOOL_MATERIALS).add(Items.ROTTEN_FLESH);
-        getOrCreateTagBuilder(Tags.BSItemTags.SKULL_TOOL_MATERIALS).add(Items.BONE);
-        getOrCreateTagBuilder(Tags.BSItemTags.QUARTZ_TOOL_MATERIALS).add(Items.QUARTZ);
-        getOrCreateTagBuilder(Tags.BSItemTags.OBSIDIAN_TOOL_MATERIALS).add(Items.OBSIDIAN);
-        getOrCreateTagBuilder(Tags.BSItemTags.ENDER_TOOL_MATERIALS).add(Items.ENDER_EYE);
-        getOrCreateTagBuilder(Tags.BSItemTags.LIVINGMETAL_TOOL_MATERIALS).add(BSItems.LIVINGMETAL_INGOT);
-        getOrCreateTagBuilder(Tags.BSItemTags.BIOMASS_TOOL_MATERIALS).add(BSItems.BIOMASS);
-        getOrCreateTagBuilder(Tags.BSItemTags.REAPER_TOOL_MATERIALS).add(Items.BONE);
-    }
+      builder(Tags.BSItemTags.PATCHWORK_TOOL_MATERIALS).add(ItemIds.ROTTEN_FLESH);
+      builder(Tags.BSItemTags.SKULL_TOOL_MATERIALS).add(ItemIds.BONE);
+      builder(Tags.BSItemTags.QUARTZ_TOOL_MATERIALS).add(ItemIds.QUARTZ);
+      builder(Tags.BSItemTags.OBSIDIAN_TOOL_MATERIALS).add(BlockItemIds.OBSIDIAN);
+      builder(Tags.BSItemTags.ENDER_TOOL_MATERIALS).add(ItemIds.ENDER_EYE);
+      builder(Tags.BSItemTags.LIVINGMETAL_TOOL_MATERIALS).add(BSItems.LIVINGMETAL_INGOT.getSecond());
+      builder(Tags.BSItemTags.BIOMASS_TOOL_MATERIALS).add(BSItems.BIOMASS.getSecond());
+      builder(Tags.BSItemTags.REAPER_TOOL_MATERIALS).add(ItemIds.BONE);
+  }
 }

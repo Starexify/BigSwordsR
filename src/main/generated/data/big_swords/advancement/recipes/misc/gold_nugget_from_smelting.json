@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:gold_nugget_from_smelting"
+        "recipe": "big_swords:gold_nugget_from_smelting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:gold_nugget_from_smelting"
+      "big_swords:gold_nugget_from_smelting"
     ]
   }
 }

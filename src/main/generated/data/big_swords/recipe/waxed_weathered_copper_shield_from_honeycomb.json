@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:crafting_transmute",
+  "category": "equipment",
+  "input": "big_swords:weathered_copper_shield",
+  "material": "minecraft:honeycomb",
+  "result": {
+    "id": "big_swords:waxed_weathered_copper_shield"
+  }
+}

@@ -5,6 +5,11 @@
         "texture": "big_swords:livingmetal"
       }
     ],
+    "humanoid_baby": [
+      {
+        "texture": "big_swords:livingmetal"
+      }
+    ],
     "humanoid_leggings": [
       {
         "texture": "big_swords:livingmetal"

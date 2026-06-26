@@ -1,41 +1,42 @@
 {
-	"schemaVersion": 1,
-	"id": "big_swords",
-	"version": "${version}",
-	"name": "Big Swords R",
-	"description": "Big Swords R is trying to bring back the nostalgia of the Asgard Shield mod for modern Minecraft, adding BIG swords, scythes, glaives and shields to the game with special stuff.",
-	"authors": [
-		"ImVeryBad", "Foxirion"
-	],
-	"contact": {
-		"homepage": "https://github.com/Starexify/BigSwordsR/wiki",
-		"sources": "https://github.com/Starexify/BigSwordsR"
-	},
-	"license": "MIT",
-	"icon": "assets/big_swords/icon.png",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"net.nova.big_swords.BigSwordsR"
-		],
-		"client": [
-			"net.nova.big_swords.BSClient"
-		],
-		"fabric-datagen": [
-			"net.nova.big_swords.DataGenerators"
-		]
-	},
-	"mixins": [
-		"big_swords.mixins.json",
-		{
-			"config": "big_swords.client.mixins.json",
-			"environment": "client"
-		}
-	],
-	"depends": {
-		"fabricloader": ">=0.16.10",
-		"minecraft": "~1.21.5",
-		"java": ">=21",
-		"fabric-api": "*"
-	}
+  "schemaVersion": 1,
+  "id": "big_swords",
+  "version": "${version}",
+  "name": "Big Swords R",
+  "description": "Big Swords R is trying to bring back the nostalgia of the Asgard Shield mod for modern Minecraft, adding BIG swords, scythes, glaives and shields to the game with special stuff.",
+  "authors": [
+    "ImVeryBad",
+    "Foxirion"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Starexify/BigSwordsR/wiki",
+    "sources": "https://github.com/Starexify/BigSwordsR"
+  },
+  "license": "MIT",
+  "icon": "assets/big_swords/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.nova.big_swords.BigSwordsR"
+    ],
+    "client": [
+      "net.nova.big_swords.BSClient"
+    ],
+    "fabric-datagen": [
+      "net.nova.big_swords.DataGenerators"
+    ]
+  },
+  "mixins": [
+    "big_swords.mixins.json",
+    {
+      "config": "big_swords.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
 }

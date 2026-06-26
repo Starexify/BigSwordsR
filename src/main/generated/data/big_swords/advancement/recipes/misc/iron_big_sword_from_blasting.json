@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:iron_big_sword_from_blasting"
+        "recipe": "big_swords:iron_big_sword_from_blasting"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:iron_big_sword_from_blasting"
+      "big_swords:iron_big_sword_from_blasting"
     ]
   }
 }

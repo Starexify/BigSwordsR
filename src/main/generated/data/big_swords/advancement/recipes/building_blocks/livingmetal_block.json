@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:livingmetal_block"
+        "recipe": "big_swords:livingmetal_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:livingmetal_block"
+      "big_swords:livingmetal_block"
     ]
   }
 }

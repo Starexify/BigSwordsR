@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": "big_swords:giant_wooden_stick",
+    "X": "#minecraft:copper_tool_materials"
+  },
+  "pattern": [
+    " XX",
+    "XXX",
+    "#X "
+  ],
+  "result": {
+    "id": "big_swords:copper_big_sword"
+  }
+}

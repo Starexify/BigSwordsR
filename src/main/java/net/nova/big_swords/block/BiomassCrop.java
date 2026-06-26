@@ -17,60 +17,60 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.nova.big_swords.init.BSItems;
 
 public class BiomassCrop extends CropBlock {
-    public static final int MAX_AGE = 3;
-    public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
-    public static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
-            Block.box(5.0, 0.0, 5.0, 11.0, 7.0, 11.0),
-            Block.box(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
-            Block.box(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
-            Block.box(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
-    };
+  public static final int MAX_AGE = 3;
+  public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
+  public static final VoxelShape[] SHAPE_BY_AGE = new VoxelShape[]{
+      Block.box(5.0, 0.0, 5.0, 11.0, 7.0, 11.0),
+      Block.box(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
+      Block.box(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
+      Block.box(4.0, 0.0, 4.0, 12.0, 13.0, 12.0),
+  };
 
-    public BiomassCrop(Properties properties) {
-        super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(this.getAgeProperty(), Integer.valueOf(0)));
-    }
+  public BiomassCrop(Properties properties) {
+    super(properties);
+    this.registerDefaultState(this.stateDefinition.any().setValue(this.getAgeProperty(), 0));
+  }
 
-    // Shape
-    @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-        return SHAPE_BY_AGE[this.getAge(state)];
-    }
+  // Shape
+  @Override
+  protected VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+    return SHAPE_BY_AGE[this.getAge(state)];
+  }
 
-    // Crop Stuff
-    @Override
-    protected boolean mayPlaceOn(BlockState floor, BlockGetter level, BlockPos pos) {
-        return floor.getBlock() instanceof CreepBlock && floor.getValue(CreepBlock.TILLED);
-    }
+  // Crop Stuff
+  @Override
+  protected boolean mayPlaceOn(BlockState floor, BlockGetter level, BlockPos pos) {
+    return floor.getBlock() instanceof CreepBlock && floor.getValue(CreepBlock.TILLED);
+  }
 
-    @Override
-    public int getMaxAge() {
-        return MAX_AGE;
-    }
+  @Override
+  public int getMaxAge() {
+    return MAX_AGE;
+  }
 
-    @Override
-    protected IntegerProperty getAgeProperty() {
-        return AGE;
-    }
+  @Override
+  protected IntegerProperty getAgeProperty() {
+    return AGE;
+  }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(AGE);
-    }
+  @Override
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+    builder.add(AGE);
+  }
 
-    // Plant Seed
-    @Override
-    protected ItemLike getBaseSeedId() {
-        return BSItems.BIOMASS_SEED;
-    }
+  // Plant Seed
+  @Override
+  protected ItemLike getBaseSeedId() {
+    return BSItems.BIOMASS_SEED.getFirst().value();
+  }
 
-    @Override
-    public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-        return false;
-    }
+  @Override
+  public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
+    return false;
+  }
 
-    @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
-        return false;
-    }
+  @Override
+  public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+    return false;
+  }
 }

@@ -1,28 +1,28 @@
 package net.nova.big_swords.data.tags;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypeIds;
 import net.nova.big_swords.init.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
-public class BSEntityTypeTagsProvider extends FabricTagProvider.EntityTypeTagProvider {
-    public BSEntityTypeTagsProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
-        super(output, completableFuture);
-    }
+public class BSEntityTypeTagsProvider extends FabricTagsProvider.EntityTypeTagsProvider {
+  public BSEntityTypeTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> completableFuture) {
+    super(output, completableFuture);
+  }
 
-    @Override
-    protected void addTags(HolderLookup.Provider provider) {
-        getOrCreateTagBuilder(Tags.EntityTypeTags.SOULLESS)
-                .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GIANT)
-                .forceAddTag(EntityTypeTags.UNDEAD);
-        getOrCreateTagBuilder(Tags.EntityTypeTags.BLOODLESS)
-                .add(EntityType.IRON_GOLEM, EntityType.SNOW_GOLEM, EntityType.BLAZE, EntityType.GUARDIAN, EntityType.ELDER_GUARDIAN, EntityType.WARDEN, EntityType.GHAST,
-                        EntityType.SLIME, EntityType.MAGMA_CUBE, EntityType.BREEZE, EntityType.WITHER, EntityType.VEX, EntityType.ALLAY)
-                .forceAddTag(EntityTypeTags.SKELETONS);
-        getOrCreateTagBuilder(Tags.EntityTypeTags.HALLOWEEN_MOB).forceAddTag(EntityTypeTags.SKELETONS);
-    }
+  @Override
+  protected void addTags(HolderLookup.Provider provider) {
+    builder(Tags.EntityTypeTags.SOULLESS)
+        .add(EntityTypeIds.IRON_GOLEM, EntityTypeIds.SNOW_GOLEM, EntityTypeIds.BLAZE, EntityTypeIds.GUARDIAN, EntityTypeIds.ELDER_GUARDIAN, EntityTypeIds.WARDEN, EntityTypeIds.GIANT)
+        .forceAddTag(EntityTypeTags.UNDEAD);
+    builder(Tags.EntityTypeTags.BLOODLESS)
+        .add(EntityTypeIds.IRON_GOLEM, EntityTypeIds.SNOW_GOLEM, EntityTypeIds.BLAZE, EntityTypeIds.GUARDIAN, EntityTypeIds.ELDER_GUARDIAN, EntityTypeIds.WARDEN, EntityTypeIds.GHAST,
+            EntityTypeIds.SLIME, EntityTypeIds.MAGMA_CUBE, EntityTypeIds.BREEZE, EntityTypeIds.WITHER, EntityTypeIds.VEX, EntityTypeIds.ALLAY)
+        .forceAddTag(EntityTypeTags.SKELETONS);
+    builder(Tags.EntityTypeTags.HALLOWEEN_MOB).forceAddTag(EntityTypeTags.SKELETONS);
+  }
 }

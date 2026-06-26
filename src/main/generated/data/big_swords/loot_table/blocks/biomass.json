@@ -7,7 +7,6 @@
   ],
   "pools": [
     {
-      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -26,7 +25,6 @@
       "rolls": 1.0
     },
     {
-      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -35,7 +33,7 @@
               "condition": "minecraft:entity_properties",
               "entity": "this",
               "predicate": {
-                "equipment": {
+                "minecraft:equipment": {
                   "mainhand": {
                     "items": "#big_swords:scythes"
                   }
@@ -56,7 +54,6 @@
       "rolls": 1.0
     },
     {
-      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
