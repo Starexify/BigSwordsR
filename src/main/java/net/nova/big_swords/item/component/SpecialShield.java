@@ -11,6 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
+import net.nova.big_swords.BigSwordsR;
 import net.nova.big_swords.init.BSToolMaterial;
 
 import java.util.function.Consumer;
@@ -31,7 +32,7 @@ public record SpecialShield(ToolMaterial material) implements TooltipProvider {
   @Override
   public void addToTooltip(Item.TooltipContext context, Consumer<Component> consumer, TooltipFlag flag, DataComponentGetter components) {
     final String materialKey = BSToolMaterial.getIdFromMaterial(this.material);
-    if (false) {
+    if (BigSwordsR.shiftHandler.getShift()) {
       consumer.accept(Component.translatable("tooltip.big_swords." + materialKey + ".perk.description").withStyle(ChatFormatting.DARK_GREEN));
       consumer.accept(Component.translatable("tooltip.big_swords." + materialKey + ".weakness.description").withStyle(ChatFormatting.RED));
     }

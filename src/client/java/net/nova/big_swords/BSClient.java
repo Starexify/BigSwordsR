@@ -2,6 +2,7 @@ package net.nova.big_swords;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.fabricmc.fabric.api.item.v1.ItemComponentTooltipProviderRegistry;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.fabricmc.fabric.api.resource.v1.pack.PackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
@@ -12,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.nova.big_swords.init.BSAttributes;
+import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSToolMaterial;
 import net.nova.big_swords.item.GlaiveItem;
 
@@ -40,6 +42,9 @@ public class BSClient implements ClientModInitializer {
           PackActivationType.NORMAL
       );
     }
+
+    BigSwordsR.shiftHandler = new ClientShiftHandler();
+    ItemComponentTooltipProviderRegistry.addBefore(DataComponents.ENCHANTMENTS, BSDataComponents.SPECIAL_SHIELD);
 
     // Tooltip Stuff
     ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltipType, tooltip) -> {

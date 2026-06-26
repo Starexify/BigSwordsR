@@ -1,6 +1,7 @@
 package net.nova.big_swords;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.resources.Identifier;
@@ -29,6 +30,8 @@ import java.util.List;
 public class BigSwordsR implements ModInitializer {
   public static final String MODID = "big_swords";
   public static final Logger LOGGER = LoggerFactory.getLogger(BigSwordsR.class);
+
+  public static IShiftHandler shiftHandler = () -> false;
 
   @Override
   public void onInitialize() {
