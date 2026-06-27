@@ -42,10 +42,10 @@ public class BSItemModelGenerator extends ItemModelGenerators {
 
     // Livingmetal Models
     generateFlatItem(BSItems.LIVINGMETAL_INGOT.getFirst().value(), ModelTemplates.FLAT_ITEM);
-    generateArmor(BSItems.LIVINGMETAL_HELMET.getFirst().value(), BSEquipmentAssets.LIVINGMETAL, TRIM_PREFIX_HELMET);
-    generateArmor(BSItems.LIVINGMETAL_CHESTPLATE.getFirst().value(), BSEquipmentAssets.LIVINGMETAL, TRIM_PREFIX_CHESTPLATE);
-    generateArmor(BSItems.LIVINGMETAL_LEGGINGS.getFirst().value(), BSEquipmentAssets.LIVINGMETAL, TRIM_PREFIX_LEGGINGS);
-    generateArmor(BSItems.LIVINGMETAL_BOOTS.getFirst().value(), BSEquipmentAssets.LIVINGMETAL, TRIM_PREFIX_BOOTS);
+    generateTrimmableItem(BSItems.LIVINGMETAL_HELMET.getFirst().value(), BSEquipmentAssets.LIVINGMETAL, TRIM_PREFIX_HELMET, false);
+    generateTrimmableItem(BSItems.LIVINGMETAL_CHESTPLATE.getFirst().value(), BSEquipmentAssets.LIVINGMETAL, TRIM_PREFIX_CHESTPLATE, false);
+    generateTrimmableItem(BSItems.LIVINGMETAL_LEGGINGS.getFirst().value(), BSEquipmentAssets.LIVINGMETAL, TRIM_PREFIX_LEGGINGS, false);
+    generateTrimmableItem(BSItems.LIVINGMETAL_BOOTS.getFirst().value(), BSEquipmentAssets.LIVINGMETAL, TRIM_PREFIX_BOOTS, false);
     generateFlatItem(BSItems.LIVINGMETAL_SWORD.getFirst().value(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(BSItems.LIVINGMETAL_PICKAXE.getFirst().value(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(BSItems.LIVINGMETAL_AXE.getFirst().value(), ModelTemplates.FLAT_HANDHELD_ITEM);
@@ -55,10 +55,10 @@ public class BSItemModelGenerator extends ItemModelGenerators {
 
     // Biomass Models
     generateFlatItem(BSItems.BIOMASS.getFirst().value(), ModelTemplates.FLAT_ITEM);
-    generateArmor(BSItems.BIOMASS_HELMET.getFirst().value(), BSEquipmentAssets.BIOMASS, TRIM_PREFIX_HELMET);
-    generateArmor(BSItems.BIOMASS_CHESTPLATE.getFirst().value(), BSEquipmentAssets.BIOMASS, TRIM_PREFIX_CHESTPLATE);
-    generateArmor(BSItems.BIOMASS_LEGGINGS.getFirst().value(), BSEquipmentAssets.BIOMASS, TRIM_PREFIX_LEGGINGS);
-    generateArmor(BSItems.BIOMASS_BOOTS.getFirst().value(), BSEquipmentAssets.BIOMASS, TRIM_PREFIX_BOOTS);
+    generateTrimmableItem(BSItems.BIOMASS_HELMET.getFirst().value(), BSEquipmentAssets.BIOMASS, TRIM_PREFIX_HELMET, false);
+    generateTrimmableItem(BSItems.BIOMASS_CHESTPLATE.getFirst().value(), BSEquipmentAssets.BIOMASS, TRIM_PREFIX_CHESTPLATE, false);
+    generateTrimmableItem(BSItems.BIOMASS_LEGGINGS.getFirst().value(), BSEquipmentAssets.BIOMASS, TRIM_PREFIX_LEGGINGS, false);
+    generateTrimmableItem(BSItems.BIOMASS_BOOTS.getFirst().value(), BSEquipmentAssets.BIOMASS, TRIM_PREFIX_BOOTS, false);
     generateFlatItem(BSItems.BIOMASS_SWORD.getFirst().value(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(BSItems.BIOMASS_PICKAXE.getFirst().value(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(BSItems.BIOMASS_AXE.getFirst().value(), ModelTemplates.FLAT_HANDHELD_ITEM);
@@ -137,15 +137,6 @@ public class BSItemModelGenerator extends ItemModelGenerators {
   }
 
   // Methods
-  public void generateArmor(final Item armor, final ResourceKey<EquipmentAsset> equipmentAssetId, final Identifier slotTrimPrefix) {
-//    ModelTemplates.FLAT_ITEM.create(
-//        ModelLocationUtils.getModelLocation(armor),
-//        TextureMapping.layer0(TextureMapping.getItemTexture(armor)),
-//        this.modelOutput
-//    );
-    generateTrimmableItem(armor, equipmentAssetId, slotTrimPrefix, false);
-  }
-
   public Identifier createFlatItemModel2(Item item, String suffix, ModelTemplate model) {
     return model.create(ModelLocationUtils.getModelLocation(item, suffix), TextureMapping.layer0(TextureMapping.getItemTexture(item)), this.modelOutput);
   }
