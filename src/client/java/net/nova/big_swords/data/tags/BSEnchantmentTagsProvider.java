@@ -6,7 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.nova.big_swords.init.BSEnchantmentEffects;
+import net.nova.big_swords.data.BSEnchantments;
 import net.nova.big_swords.init.Tags;
 
 import java.util.concurrent.CompletableFuture;
@@ -18,7 +18,7 @@ public class BSEnchantmentTagsProvider extends FabricTagsProvider<Enchantment> {
 
   @Override
   protected void addTags(HolderLookup.Provider provider) {
-    builder(EnchantmentTags.IN_ENCHANTING_TABLE).addOptional(BSEnchantmentEffects.SOUL_STEALER);
-    builder(Tags.EnchantmentTags.SCYTHE_EXCLUSIVE).addOptional(BSEnchantmentEffects.SOUL_STEALER);
+    builder(EnchantmentTags.IN_ENCHANTING_TABLE).addOptional(BSEnchantments.SOUL_STEALER);
+    builder(Tags.EnchantmentTags.SCYTHE_EXCLUSIVE).addOptional(BSEnchantments.SOUL_STEALER);
   }
 }

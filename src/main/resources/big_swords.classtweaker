@@ -1,0 +1,4 @@
+classTweaker v2 official
+
+extend-enum net/minecraft/world/item/equipment/trim/TrimMaterials/Palette LIVINGMETAL
+extend-enum net/minecraft/world/item/equipment/trim/TrimMaterials/Palette LIVINGMETAL_DARKER

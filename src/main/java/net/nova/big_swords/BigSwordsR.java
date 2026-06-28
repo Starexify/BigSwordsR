@@ -1,7 +1,6 @@
 package net.nova.big_swords;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerEntityEvents;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.minecraft.resources.Identifier;
@@ -39,7 +38,7 @@ public class BigSwordsR implements ModInitializer {
     BSRecipeSerializers.initialize();
     BSAttributes.initialize();
     BSDataComponents.initialize();
-    BSEnchantmentEffects.initialize();
+    BSEnchantments.initialize();
     BSItems.initialize();
     BSBlocks.initialize();
     CreativeTab.initialize();

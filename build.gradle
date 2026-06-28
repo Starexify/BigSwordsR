@@ -10,6 +10,7 @@ repositories {
 }
 
 loom {
+  accessWidenerPath = file "src/main/resources/big_swords.classtweaker"
   splitEnvironmentSourceSets()
 
   runs {
@@ -61,7 +62,7 @@ jar {
   inputs.property "projectName", projectName
 
   from("LICENSE") {
-    rename { "${it}_$projectName"}
+    rename { "${it}_$projectName" }
   }
 }
 

@@ -2,10 +2,10 @@
   "sources": [
     {
       "type": "paletted_permutations",
-      "palette_key": "minecraft:trims/color_palettes/trim_palette",
+      "palette_key": "minecraft:trim_base",
       "permutations": {
-        "livingmetal": "big_swords:trims/color_palettes/livingmetal",
-        "livingmetal_darker": "big_swords:trims/color_palettes/livingmetal_darker"
+        "livingmetal": "minecraft:trim/livingmetal",
+        "livingmetal_darker": "minecraft:trim/livingmetal_darker"
       },
       "textures": [
         "minecraft:trims/items/leggings_trim",

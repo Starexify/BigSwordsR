@@ -8,6 +8,7 @@
     "HoeItemMixin",
     "ItemEntityMixin",
     "LivingEntityMixin",
+    "PaletteMixin",
     "SmithingTemplateItemMixin",
     "ToolMaterialAccessor"
   ],

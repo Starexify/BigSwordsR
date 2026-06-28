@@ -12,15 +12,15 @@ import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.equipment.EquipmentAsset;
+import net.minecraft.world.item.equipment.trim.TrimMaterials;
 import net.minecraft.world.level.block.WeatheringCopperCollection;
 import net.nova.big_swords.BigSwordsR;
-import net.nova.big_swords.equipment.BSEquipmentAssets;
 import net.nova.big_swords.init.BSDataComponents;
 import net.nova.big_swords.init.BSItems;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 
 public class BSItemModelGenerator extends ItemModelGenerators {
@@ -42,10 +42,11 @@ public class BSItemModelGenerator extends ItemModelGenerators {
 
     // Livingmetal Models
     generateFlatItem(BSItems.LIVINGMETAL_INGOT.getFirst().value(), ModelTemplates.FLAT_ITEM);
-    generateTrimmableItem(BSItems.LIVINGMETAL_HELMET.getFirst().value(), BSEquipmentAssets.LIVINGMETAL, TRIM_PREFIX_HELMET, false);
-    generateTrimmableItem(BSItems.LIVINGMETAL_CHESTPLATE.getFirst().value(), BSEquipmentAssets.LIVINGMETAL, TRIM_PREFIX_CHESTPLATE, false);
-    generateTrimmableItem(BSItems.LIVINGMETAL_LEGGINGS.getFirst().value(), BSEquipmentAssets.LIVINGMETAL, TRIM_PREFIX_LEGGINGS, false);
-    generateTrimmableItem(BSItems.LIVINGMETAL_BOOTS.getFirst().value(), BSEquipmentAssets.LIVINGMETAL, TRIM_PREFIX_BOOTS, false);
+    generateTrimmableArmorSet(
+        BSItems.LIVINGMETAL_HELMET.getFirst().value(), BSItems.LIVINGMETAL_CHESTPLATE.getFirst().value(), BSItems.LIVINGMETAL_LEGGINGS.getFirst().value(), BSItems.LIVINGMETAL_BOOTS.getFirst().value(),
+        false,
+        Map.of(TrimMaterials.Palette.valueOf("BIG_SWORDS_LIVINGMETAL"), TrimMaterials.Palette.valueOf("BIG_SWORDS_LIVINGMETAL_DARKER"))
+    );
     generateFlatItem(BSItems.LIVINGMETAL_SWORD.getFirst().value(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(BSItems.LIVINGMETAL_PICKAXE.getFirst().value(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(BSItems.LIVINGMETAL_AXE.getFirst().value(), ModelTemplates.FLAT_HANDHELD_ITEM);
@@ -55,10 +56,10 @@ public class BSItemModelGenerator extends ItemModelGenerators {
 
     // Biomass Models
     generateFlatItem(BSItems.BIOMASS.getFirst().value(), ModelTemplates.FLAT_ITEM);
-    generateTrimmableItem(BSItems.BIOMASS_HELMET.getFirst().value(), BSEquipmentAssets.BIOMASS, TRIM_PREFIX_HELMET, false);
-    generateTrimmableItem(BSItems.BIOMASS_CHESTPLATE.getFirst().value(), BSEquipmentAssets.BIOMASS, TRIM_PREFIX_CHESTPLATE, false);
-    generateTrimmableItem(BSItems.BIOMASS_LEGGINGS.getFirst().value(), BSEquipmentAssets.BIOMASS, TRIM_PREFIX_LEGGINGS, false);
-    generateTrimmableItem(BSItems.BIOMASS_BOOTS.getFirst().value(), BSEquipmentAssets.BIOMASS, TRIM_PREFIX_BOOTS, false);
+    generateTrimmableArmorSet(
+        BSItems.BIOMASS_HELMET.getFirst().value(), BSItems.BIOMASS_CHESTPLATE.getFirst().value(), BSItems.BIOMASS_LEGGINGS.getFirst().value(), BSItems.BIOMASS_BOOTS.getFirst().value(),
+        false, Map.of()
+    );
     generateFlatItem(BSItems.BIOMASS_SWORD.getFirst().value(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(BSItems.BIOMASS_PICKAXE.getFirst().value(), ModelTemplates.FLAT_HANDHELD_ITEM);
     generateFlatItem(BSItems.BIOMASS_AXE.getFirst().value(), ModelTemplates.FLAT_HANDHELD_ITEM);

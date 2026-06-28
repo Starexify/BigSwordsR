@@ -7,7 +7,6 @@ import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
-import net.nova.big_swords.BigSwordsR;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,8 +18,7 @@ public class AtlasesProvider implements DataProvider {
   public final FabricPackOutput output;
   public final Map<Identifier, JsonObject> atlas = new HashMap<>();
 
-  protected static final Identifier BLOCKS_ATLAS = Identifier.withDefaultNamespace("blocks");
-  protected static final Identifier ARMOR_TRIMS = Identifier.withDefaultNamespace("armor_trims");
+  protected static final Identifier ITEMS_ATLAS = Identifier.withDefaultNamespace("items");
 
   public AtlasesProvider(FabricPackOutput output) {
     this.output = output;
@@ -28,8 +26,8 @@ public class AtlasesProvider implements DataProvider {
 
   // Add here the palettes
   public final Map<String, Identifier> permutations = Map.of(
-      "livingmetal", BigSwordsR.rl("trims/color_palettes/livingmetal"),
-      "livingmetal_darker", BigSwordsR.rl("trims/color_palettes/livingmetal_darker")
+      "livingmetal", Identifier.withDefaultNamespace("trim/livingmetal"),
+      "livingmetal_darker", Identifier.withDefaultNamespace("trim/livingmetal_darker")
   );
 
   // Just some lists of things idk
@@ -40,53 +38,10 @@ public class AtlasesProvider implements DataProvider {
       Identifier.withDefaultNamespace("trims/items/boots_trim")
   );
 
-  public final List<Identifier> trimTextures = List.of(
-      Identifier.withDefaultNamespace("trims/entity/humanoid/coast"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/coast"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/sentry"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/sentry"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/dune"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/dune"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/wild"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/wild"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/ward"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/ward"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/eye"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/eye"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/vex"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/vex"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/tide"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/tide"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/snout"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/snout"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/rib"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/rib"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/spire"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/spire"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/wayfinder"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/wayfinder"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/shaper"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/shaper"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/silence"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/silence"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/raiser"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/raiser"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/host"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/host"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/flow"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/flow"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid/bolt"),
-      Identifier.withDefaultNamespace("trims/entity/humanoid_leggings/bolt")
-  );
-
   @Override
   public CompletableFuture<?> run(CachedOutput writer) {
-    JsonObject blocksAtlas = createAtlasDefinition(List.of(createPalettedPermutationsSource(textures, Identifier.withDefaultNamespace("trims/color_palettes/trim_palette"), permutations)));
-    JsonObject armorTrimsAtlas = createAtlasDefinition(List.of(createPalettedPermutationsSource(trimTextures, Identifier.withDefaultNamespace("trims/color_palettes/trim_palette"), permutations)));
-
-    // Add to atlas map
-    atlas.put(BLOCKS_ATLAS, blocksAtlas);
-    atlas.put(ARMOR_TRIMS, armorTrimsAtlas);
+    JsonObject itemsAtlas = createAtlasDefinition(List.of(createPalettedPermutationsSource(textures, Identifier.withDefaultNamespace("trim_base"), permutations)));
+    atlas.put(ITEMS_ATLAS, itemsAtlas);
 
     // Write each atlas to its own file
     List<CompletableFuture<?>> futures = new ArrayList<>();
