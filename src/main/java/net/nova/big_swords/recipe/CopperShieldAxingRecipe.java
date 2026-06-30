@@ -5,7 +5,6 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
@@ -39,7 +38,7 @@ public class CopperShieldAxingRecipe extends CustomRecipe {
         if (!canScrape || hasShield) return false;
         hasShield = true;
       }
-      else if (stack.is(ItemTags.AXES) || stack.getItem() instanceof AxeItem) {
+      else if (stack.is(ItemTags.AXES)) {
         if (hasTool) return false;
         hasTool = true;
       }
@@ -97,7 +96,7 @@ public class CopperShieldAxingRecipe extends CustomRecipe {
 
     for (int i = 0; i < input.size(); i++) {
       ItemStack stack = input.getItem(i);
-      if (stack.is(ItemTags.AXES) || stack.getItem() instanceof AxeItem) {
+      if (stack.is(ItemTags.AXES)) {
         ItemStack toolCopy = stack.copy();
         toolCopy.setDamageValue(toolCopy.getDamageValue() + 1);
 

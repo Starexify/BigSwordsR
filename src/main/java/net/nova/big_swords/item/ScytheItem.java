@@ -27,14 +27,14 @@ import net.nova.big_swords.init.Sounds;
 import java.util.List;
 import java.util.Random;
 
-public class ScytheItem extends HoeItem {
+public class ScytheItem extends Item {
   public final Random random = new Random();
 
   public static final ThreadLocal<Boolean> isScythe = ThreadLocal.withInitial(() -> false);
   public static Properties properties;
 
   public ScytheItem(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Properties properties) {
-    super(material, attackDamage, attackSpeed, properties(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage, properties));
+    super(properties(material, attackDamage, attackSpeed, minChargedDamage, maxChargedDamage, properties));
   }
 
   public static Item.Properties properties(ToolMaterial material, float attackDamage, float attackSpeed, float minChargedDamage, float maxChargedDamage, Item.Properties properties) {

@@ -5,7 +5,6 @@
   "mixins": [
     "BlocksAttacksMixin",
     "EntityMixin",
-    "HoeItemMixin",
     "ItemEntityMixin",
     "LivingEntityMixin",
     "PaletteMixin",

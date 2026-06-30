@@ -40,9 +40,9 @@ public class BSItems {
   public static Pair<Holder<Item>, ResourceKey<Item>> LIVINGMETAL_BOOTS = registerItem("livingmetal_boots", properties -> new Item(properties.humanoidArmor(BSArmorMaterial.LIVINGMETAL, ArmorType.BOOTS)));
   public static Pair<Holder<Item>, ResourceKey<Item>> LIVINGMETAL_SWORD = registerItem("livingmetal_sword", p -> new Item(p.sword(BSToolMaterial.LIVINGMETAL, 3.0F, -2.4F)));
   public static Pair<Holder<Item>, ResourceKey<Item>> LIVINGMETAL_PICKAXE = registerItem("livingmetal_pickaxe", p -> new Item(p.pickaxe(BSToolMaterial.LIVINGMETAL, 1.0F, -2.8F)));
-  public static Pair<Holder<Item>, ResourceKey<Item>> LIVINGMETAL_AXE = registerItem("livingmetal_axe", p -> new AxeItem(BSToolMaterial.LIVINGMETAL, 6.0F, -2.5F, p));
-  public static Pair<Holder<Item>, ResourceKey<Item>> LIVINGMETAL_SHOVEL = registerItem("livingmetal_shovel", p -> new ShovelItem(BSToolMaterial.LIVINGMETAL, 1.5F, -2.5F, p));
-  public static Pair<Holder<Item>, ResourceKey<Item>> LIVINGMETAL_HOE = registerItem("livingmetal_hoe", p -> new HoeItem(BSToolMaterial.LIVINGMETAL, -2.0F, 0.0F, p));
+  public static Pair<Holder<Item>, ResourceKey<Item>> LIVINGMETAL_AXE = registerItem("livingmetal_axe", p -> new Item(p.axe(BSToolMaterial.LIVINGMETAL, 6.0F, -2.5F)));
+  public static Pair<Holder<Item>, ResourceKey<Item>> LIVINGMETAL_SHOVEL = registerItem("livingmetal_shovel", p -> new Item(p.shovel(BSToolMaterial.LIVINGMETAL, 1.5F, -2.5F)));
+  public static Pair<Holder<Item>, ResourceKey<Item>> LIVINGMETAL_HOE = registerItem("livingmetal_hoe", p -> new Item(p.hoe(BSToolMaterial.LIVINGMETAL, -2.0F, 0.0F)));
   public static Pair<Holder<Item>, ResourceKey<Item>> LIVINGMETAL_SPEAR = registerItem("livingmetal_spear", p -> new Item(p.spear(BSToolMaterial.LIVINGMETAL, 1.00F, 1.00F, 0.5F, 2.5F, 10.5F, 6.5F, 5.1F, 10.75F, 4.6F)));
 
   // Biomass Stuff
@@ -53,9 +53,9 @@ public class BSItems {
   public static Pair<Holder<Item>, ResourceKey<Item>> BIOMASS_BOOTS = registerItem("biomass_boots", properties -> new Item(properties.humanoidArmor(BSArmorMaterial.BIOMASS, ArmorType.BOOTS)));
   public static Pair<Holder<Item>, ResourceKey<Item>> BIOMASS_SWORD = registerItem("biomass_sword", p -> new Item(p.sword(BSToolMaterial.BIOMASS, 3.0F, -2.4F)));
   public static Pair<Holder<Item>, ResourceKey<Item>> BIOMASS_PICKAXE = registerItem("biomass_pickaxe", p -> new Item(p.pickaxe(BSToolMaterial.BIOMASS, 1.0F, -2.8F)));
-  public static Pair<Holder<Item>, ResourceKey<Item>> BIOMASS_AXE = registerItem("biomass_axe", p -> new AxeItem(BSToolMaterial.BIOMASS, 6.0F, -3.0F, p));
-  public static Pair<Holder<Item>, ResourceKey<Item>> BIOMASS_SHOVEL = registerItem("biomass_shovel", p -> new ShovelItem(BSToolMaterial.BIOMASS, 1.5F, -3.0F, p));
-  public static Pair<Holder<Item>, ResourceKey<Item>> BIOMASS_HOE = registerItem("biomass_hoe", p -> new HoeItem(BSToolMaterial.BIOMASS, -2.0F, -0.5F, p));
+  public static Pair<Holder<Item>, ResourceKey<Item>> BIOMASS_AXE = registerItem("biomass_axe", p -> new Item(p.axe(BSToolMaterial.BIOMASS, 6.0F, -3.0F)));
+  public static Pair<Holder<Item>, ResourceKey<Item>> BIOMASS_SHOVEL = registerItem("biomass_shovel", p -> new Item(p.shovel(BSToolMaterial.BIOMASS, 1.5F, -3.0F)));
+  public static Pair<Holder<Item>, ResourceKey<Item>> BIOMASS_HOE = registerItem("biomass_hoe", p -> new Item(p.hoe(BSToolMaterial.BIOMASS, -2.0F, -0.5F)));
   public static Pair<Holder<Item>, ResourceKey<Item>> BIOMASS_SPEAR = registerItem("biomass_spear", p -> new Item(p.spear(BSToolMaterial.BIOMASS, 1.05F, 0.95F, 0.5F, 2.5F, 10.0F, 6.75F, 5.1F, 11.0F, 4.6F)));
 
   // Big Swords
