@@ -153,13 +153,5 @@ public class BSItems {
 
   public static void initialize() {
     BigSwordsR.LOGGER.info("Registering Items");
-
-    FuelValueEvents.BUILD.register((builder, context) -> {
-      builder.add(BSItems.GIANT_WOODEN_STICK.getFirst().value(), 700);
-      builder.add(BSItems.GIANT_BLAZE_ROD.getFirst().value(), 16800);
-      builder.add(BSItems.WOODEN_BIG_SWORD.getFirst().value(), 200);
-      builder.add(BSItems.WOODEN_SCYTHE.getFirst().value(), 200);
-      builder.add(BSItems.WOODEN_GLAIVE.getFirst().value(), 200);
-    });
   }
 }

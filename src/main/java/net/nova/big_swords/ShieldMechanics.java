@@ -26,6 +26,7 @@ import net.minecraft.world.entity.projectile.hurtingprojectile.Fireball;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.BlocksAttacks;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -58,12 +59,12 @@ public class ShieldMechanics {
       double randomChance = Math.random();
       double randomChanceE = Math.random();
 
-      int fireAspectLevel = attacker instanceof LivingEntity livingEntity ? livingEntity.getWeaponItem().getEnchantments().getLevel(level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FIRE_ASPECT)) : 0;
+      int fireAspectLevel = attacker instanceof LivingEntity livingEntity ? EnchantmentHelper.getItemEnchantmentLevel(level.registryAccess().getOrThrow(Enchantments.FIRE_ASPECT), livingEntity.getWeaponItem()) : 0;
       int soulFireAspectLevel = attacker instanceof LivingEntity livingEntity ?
           level.registryAccess()
               .lookupOrThrow(Registries.ENCHANTMENT)
               .get(Identifier.withDefaultNamespace("soul_fire_aspect"))
-              .map(enchantment -> livingEntity.getWeaponItem().getEnchantments().getLevel(enchantment))
+              .map(enchantment -> EnchantmentHelper.getItemEnchantmentLevel(enchantment, livingEntity.getWeaponItem()))
               .orElse(0) : 0;
 
       // Wooden Shields

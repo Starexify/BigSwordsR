@@ -44,7 +44,7 @@ public class BSBlocks {
       .randomTicks()
       .instabreak()
       .sound(SoundType.CROP)
-      .pushReaction(PushReaction.DESTROY)
+      .pushReaction(PushReaction.POPPED)
   );
 
   // Methods

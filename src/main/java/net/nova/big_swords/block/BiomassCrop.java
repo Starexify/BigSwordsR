@@ -63,14 +63,4 @@ public class BiomassCrop extends CropBlock {
   protected ItemLike getBaseSeedId() {
     return BSItems.BIOMASS_SEED.getFirst().value();
   }
-
-  @Override
-  public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
-    return false;
-  }
-
-  @Override
-  public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
-    return false;
-  }
 }
